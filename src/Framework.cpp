@@ -3,27 +3,43 @@
 //
 
 #include "Framework.h"
-
+#include "sdl/renderer/SDLRenderer.h"
 
 namespace mars {
+
     Framework::Framework(FrameworkOptions options){
-        windowManager = new WindowManager(WindowManagerOptions {
+
+        windowManager = std::make_unique<WindowManager>(WindowManagerOptions{
             options.windowBounds
         });
+
+        this->renderer = std::make_unique<SDLRenderer>(*this);
     };
 
-    void Framework::Initialize() {
-        windowManager->Initialize();
+    Framework::~Framework() = default;
 
-        // TODO: Other initialization code goes here.
+    void Framework::initialize() const {
 
-        windowManager->RunEventLoop();
+        // WINDOW MANAGER
+        windowManager->initialize();
+        windowManager->subscribeToRenderEvent([&] {
+            this->render();
+        });
+
+        // RENDERER
+        renderer->initialize();
+
+        windowManager->runEventLoop();
     }
 
-    void Framework::Destroy() {
+    void Framework::render() const {
+        renderer->beginRenderPass();
 
+        renderer->endRenderPass();
+    }
 
-        windowManager->Destroy();
-        delete windowManager;
+    void Framework::destroy() const {
+
+        windowManager->destroy();
     }
 }

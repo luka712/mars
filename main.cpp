@@ -8,8 +8,8 @@ int main(int argc, char* argv[]) {
     mars::Framework framework(mars::FrameworkOptions {
         mars::WindowBounds(1280, 720)
     });
-    framework.Initialize();
-    framework.Destroy();
+    framework.initialize();
+    framework.destroy();
     return 0;
 }
 

@@ -11,7 +11,11 @@ WindowManager::WindowManager(const WindowManagerOptions options)
     : windowBounds(options.windowBounds) {
 }
 
-void WindowManager::Initialize() {
+void WindowManager::subscribeToRenderEvent(const std::function<void()>& callback) {
+    renderEvents.push_back(callback);
+}
+
+void WindowManager::initialize() {
 
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cout << "Failed to initialize SDL" << std::endl;
@@ -24,7 +28,7 @@ void WindowManager::Initialize() {
         0);
 }
 
-void WindowManager::RunEventLoop() {
+void WindowManager::runEventLoop() {
     SDL_Event event;
     while (true) {
         if (SDL_PollEvent(&event)) {
@@ -39,9 +43,14 @@ void WindowManager::RunEventLoop() {
                 break;
             }
         }
+
+        // Render
+        for (auto& callback : renderEvents) {
+            callback();
+        }
     }
 }
 
-void WindowManager::Destroy() {
+void WindowManager::destroy() {
     SDL_DestroyWindow(window);
 }
