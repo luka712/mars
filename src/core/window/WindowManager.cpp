@@ -2,7 +2,7 @@
 // Created by lukaa on 22.11.2024..
 //
 
-#include "window/WindowManager.h"
+#include "core/window/WindowManager.h"
 #include <iostream>
 
 using namespace mars;

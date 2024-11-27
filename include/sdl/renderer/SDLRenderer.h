@@ -6,7 +6,7 @@
 #define SDLRENDERER_H
 
 #include <SDL.h>
-#include "renderer/Renderer.h"
+#include "core/renderer/Renderer.h"
 
 namespace mars {
 
@@ -15,6 +15,9 @@ namespace mars {
         public:
             //! Construct a new Renderer object.
             explicit SDLRenderer(Framework& framework);
+
+            //! Get the SDL renderer.
+            [[nodiscard]] SDL_Renderer* getRenderer() const { return renderer; }
 
             //! @copydoc Renderer::initialize()
             void initialize() override;

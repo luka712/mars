@@ -25,6 +25,12 @@ include_directories(
 )
 
 file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.cpp)
-add_executable(mars ${COMMON_SOURCES} main.cpp)
+
+
+# EXECUTABLE
+add_executable(mars ${COMMON_SOURCES} main.cpp
+        include/core/math/Color.h
+        include/core/math/Rect.h
+        include/sdl/sprite/SDLSpriteBatch.h)
 
 target_link_libraries(mars ${SDL2_LIBRARY} ${GLM_LIBRARY})

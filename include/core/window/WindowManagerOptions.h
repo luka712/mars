@@ -5,7 +5,7 @@
 #ifndef WINDOWMANAGEROPTIONS_H
 #define WINDOWMANAGEROPTIONS_H
 
-#include <window/WindowBounds.h>
+#include "core/window/WindowBounds.h"
 
 
 namespace mars {

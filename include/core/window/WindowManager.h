@@ -1,22 +1,24 @@
 //
-// Created by lukaa on 22.11.2024..
+// Created by lukaa on 22.11.2024
 //
 
 #ifndef WINDOWMANAGER_H
+
 #define WINDOWMANAGER_H
 
 #include <functional>
 #include <SDL.h>
 #include <vector>
-#include <window/WindowManagerOptions.h>
+#include "core/window/WindowManagerOptions.h"
 
 namespace mars {
+    //! The window manager.
     class WindowManager {
     private:
         SDL_Window *window{};
         WindowBounds windowBounds;
 
-        std::vector<std::function<void()>> renderEvents;
+        std::vector<std::function<void()> > renderEvents;
 
     public:
         //! Construct a new WindowManager object.
@@ -34,7 +36,7 @@ namespace mars {
 
         //! Subscribe to the render event.
         //! @param callback The callback to subscribe.
-        void subscribeToRenderEvent(const std::function<void()>& callback);
+        void subscribeToRenderEvent(const std::function<void()> &callback);
 
         //! Initialize the window.
         void initialize();

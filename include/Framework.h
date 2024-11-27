@@ -6,8 +6,9 @@
 #define FRAMEWORK_H
 
 #include <memory>
-#include "window/WindowManager.h"
-#include "renderer/Renderer.h"
+#include "core/window/WindowManager.h"
+#include "core/renderer/Renderer.h"
+#include "core/sprite/SpriteBatch.h"
 
 namespace mars {
 
@@ -23,9 +24,14 @@ namespace mars {
      * and entry point of the application.
      */
     class Framework {
-    private:
+
+        // FIELDS
         std::unique_ptr<WindowManager> windowManager;
         std::unique_ptr<Renderer> renderer;
+        std::unique_ptr<SpriteBatch> spriteBatch;
+
+        // EVENTS
+        std::vector<std::function<void()>> onRender;
 
     public:
         /**
@@ -33,17 +39,25 @@ namespace mars {
         *
         * @param options The options for the framework.
         */
-        Framework(FrameworkOptions options);
+        explicit Framework(FrameworkOptions options);
 
         ~Framework();
 
         //! Gets the @ref WindowManager instance.
         //! @return The @ref WindowManager instance.
-        inline WindowManager &getWindowManager() const { return *windowManager; }
+        [[nodiscard]] WindowManager &getWindowManager() const { return *windowManager; }
 
         //! Gets the @ref Renderer instance.
         //! @return The @ref Renderer instance.
-        inline Renderer &getRenderer() const { return *renderer; }
+        [[nodiscard]] Renderer &getRenderer() const { return *renderer; }
+
+        //! Gets the @ref SpriteBatch instance.
+        //! @return The @ref SpriteBatch instance.
+        [[nodiscard]] SpriteBatch &getSpriteBatch() const { return *spriteBatch; }
+
+        //! Subscribe to the render event.
+        //! @param callback The callback to subscribe.
+        void subscribeToRenderEvent(const std::function<void()>& callback);
 
         //! Initialize the framework.
         void initialize() const;

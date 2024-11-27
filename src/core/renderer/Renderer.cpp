@@ -2,7 +2,7 @@
 // Created by lukaa on 23.11.2024..
 //
 
-#include "renderer/Renderer.h"
+#include "core/renderer/Renderer.h"
 
 namespace mars {
 

@@ -5,7 +5,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "math/Color.h"
+#include "core/math/Color.h"
 
 namespace mars {
     class Framework;
@@ -14,7 +14,7 @@ namespace mars {
      class Renderer {
         public:
             //! The clear color of the renderer.
-            Color clearColor = Color::LightPink();
+            Color clearColor = Color::lightPink();
 
             //! Destroy the Renderer object.
             virtual ~Renderer() = default;

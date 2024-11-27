@@ -8,6 +8,13 @@ int main(int argc, char* argv[]) {
     mars::Framework framework(mars::FrameworkOptions {
         mars::WindowBounds(1280, 720)
     });
+    framework.subscribeToRenderEvent([&]() {
+
+        framework.getSpriteBatch().begin();
+        framework.getSpriteBatch().draw({ 100, 100, 200, 200}, mars::Color::red());
+        framework.getSpriteBatch().end();
+
+    });
     framework.initialize();
     framework.destroy();
     return 0;

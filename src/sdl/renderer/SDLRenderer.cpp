@@ -17,7 +17,6 @@ namespace mars {
         renderer = SDL_CreateRenderer(window, -1, 0);
         if(!renderer) {
             // TODO: log error
-
         }
     }
 
