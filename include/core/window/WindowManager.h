@@ -18,7 +18,8 @@ namespace mars {
         SDL_Window *window{};
         WindowBounds windowBounds;
 
-        std::vector<std::function<void()> > renderEvents;
+        std::vector<std::function<void()>> updateEvents;
+        std::vector<std::function<void()>> renderEvents;
 
     public:
         //! Construct a new WindowManager object.
@@ -33,6 +34,10 @@ namespace mars {
         //! Get the window bounds.
         //! @return The window bounds.
         [[nodiscard]] inline WindowBounds getWindowBounds() const { return windowBounds; }
+
+        //! Subscribe to the update event.
+        //! @param callback The callback to subscribe.
+        void subscribeToUpdateEvent(const std::function<void()> &callback);
 
         //! Subscribe to the render event.
         //! @param callback The callback to subscribe.

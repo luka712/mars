@@ -31,6 +31,13 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 add_executable(mars ${COMMON_SOURCES} main.cpp
         include/core/math/Color.h
         include/core/math/Rect.h
-        include/sdl/sprite/SDLSpriteBatch.h)
+        include/sdl/sprite/SDLSpriteBatch.h
+        include/core/mesh/Mesh.h
+        include/core/mesh/SpriteBatchMesh.h
+        include/core/sprite/SpriteBatchDrawable.h
+        include/core/time/Time.h
+        include/core/time/TimeManager.h
+        src/core/time/TimeManager.cpp
+)
 
 target_link_libraries(mars ${SDL2_LIBRARY} ${GLM_LIBRARY})

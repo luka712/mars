@@ -15,6 +15,10 @@ void WindowManager::subscribeToRenderEvent(const std::function<void()>& callback
     renderEvents.push_back(callback);
 }
 
+void WindowManager::subscribeToUpdateEvent(const std::function<void()> &callback) {
+    updateEvents.push_back(callback);
+}
+
 void WindowManager::initialize() {
 
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -42,6 +46,11 @@ void WindowManager::runEventLoop() {
             if (event.type == SDL_QUIT) {
                 break;
             }
+        }
+
+        // Update
+        for (auto& callback : updateEvents) {
+            callback();
         }
 
         // Render
