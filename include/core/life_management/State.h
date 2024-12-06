@@ -14,7 +14,6 @@ namespace mars {
         DESTROYING,
         DESTROYED
     };
-
 }
 
 #endif //FRAMEWORKSTATE_H

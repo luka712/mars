@@ -11,6 +11,7 @@
 #include "core/renderer/Renderer.h"
 #include "core/sprite/SpriteBatch.h"
 #include "core/time/TimeManager.h"
+#include "core/log/Logger.h"
 
 namespace mars {
 
@@ -53,6 +54,10 @@ namespace mars {
         //! @return The @ref TimeManager instance.
         [[nodiscard]] TimeManager& getTimeManager() const { return *timeManager; }
 
+        //! Gets the @ref Logger instance.
+        //! @return The @ref Logger instance.
+        [[nodiscard]] Logger& getLogger() const { return *logger; }
+
         //! Subscribe to the render event.
         //! @param callback The callback to subscribe.
         void subscribeToRenderEvent(const std::function<void()>& callback);
@@ -76,6 +81,7 @@ namespace mars {
         std::unique_ptr<Renderer> renderer;
         std::unique_ptr<SpriteBatch> spriteBatch;
         std::unique_ptr<TimeManager> timeManager;
+        std::unique_ptr<Logger> logger;
 
         // EVENTS
         std::vector<std::function<void()>> onRender;

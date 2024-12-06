@@ -7,6 +7,8 @@
 
 namespace mars {
     struct Color {
+        Color(float r, float g, float b, float a = 1.0f);
+
         //! The red component of the color.
         float r;
 

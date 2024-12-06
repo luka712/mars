@@ -6,25 +6,27 @@
 
 #define WINDOWMANAGER_H
 
+#include <Framework.h>
 #include <functional>
 #include <SDL.h>
 #include <vector>
 #include "core/window/WindowManagerOptions.h"
 
 namespace mars {
+
+    class Framework;
+
     //! The window manager.
     class WindowManager {
-    private:
-        SDL_Window *window{};
-        WindowBounds windowBounds;
-
+    public:
+        bool running = true;
         std::vector<std::function<void()>> updateEvents;
         std::vector<std::function<void()>> renderEvents;
 
-    public:
         //! Construct a new WindowManager object.
+        //! @param framework The @see Framework.
         //! @param options The options for the window manager.
-        explicit WindowManager(WindowManagerOptions options);
+        explicit WindowManager(Framework& framework, WindowManagerOptions options);
 
         //! Get the window.
         //! @return The window.
@@ -51,6 +53,11 @@ namespace mars {
 
         //! Destroy the window.
         void destroy();
+
+    private:
+        Framework& framework;
+        SDL_Window *window{};
+        WindowBounds windowBounds;
     };
 }
 

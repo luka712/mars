@@ -19,6 +19,8 @@ namespace mars {
         virtual void begin() = 0;
 
         //! Draw a sprite.
+        //! @param drawRect The region where to draw.
+        //! @param color The color of a rectangle that's drawn.
         virtual void draw(Rect drawRect, Color color) = 0;
 
         //! End the sprite batch.

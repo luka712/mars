@@ -1,9 +1,15 @@
 #include <iostream>
 #include "Framework.h"
+// #include "spdlog/spdlog.h"
+// #include "spdlog/sinks/basic_file_sink.h"
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main(int argc, char* argv[]) {
+
+    // spdlog::info("Sample Info output.", 1);
+    // spdlog::warn("Sample Warn output.");
+    // spdlog::error("Sample Error output.");
 
     mars::Framework framework(mars::FrameworkOptions {
         mars::WindowBounds(1280, 720)
@@ -17,6 +23,15 @@ int main(int argc, char* argv[]) {
     });
     framework.initialize();
     framework.destroy();
+
+    // auto filelog = spdlog::basic_logger_mt("sample-logger", "sample-log.txt");
+
+  //   filelog.get()->info("Sample Info output.");
+   // filelog.get()->warn("Sample Warn output.");
+   // filelog.get()->error("Sample Error output.");
+
+    // SPDLOG_TRACE("Sample Trace output.");
+
     return 0;
 }
 

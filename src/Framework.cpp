@@ -5,19 +5,29 @@
 #include "Framework.h"
 #include "sdl/renderer/SDLRenderer.h"
 #include "sdl/sprite/SDLSpriteBatch.h"
-
+#ifdef __EMSCRIPTEN__
+#include "core/log/BrowserLogger.h"
+#else
+#include "core/log/SpdLogger.h"
+#endif
 namespace mars {
-    Framework::Framework(FrameworkOptions options) {
+    Framework::Framework(FrameworkOptions options)
+    {
         currentState = State::CREATED;
         onRender.resize(0);
 
-        windowManager = std::make_unique<WindowManager>(WindowManagerOptions{
+        windowManager = std::make_unique<WindowManager>(*this, WindowManagerOptions{
             options.windowBounds
         });
 
         this->renderer = std::make_unique<SDLRenderer>(*this);
         this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         this->timeManager = std::make_unique<TimeManager>();
+#ifdef __EMSCRIPTEN__
+        this->logger = std::make_unique<BrowserLogger>();
+#else
+        this->logger = std::make_unique<SpdLogger>();
+#endif
     };
 
     Framework::~Framework() = default;
@@ -39,6 +49,8 @@ namespace mars {
         // RENDERER
         renderer->initialize();
         spriteBatch->initialize();
+
+        logger->info("Framework initialized");
 
         // Should be called right before the first frame starts.
         timeManager->prepareStart();

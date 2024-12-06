@@ -2,13 +2,19 @@
 // Created by lukaa on 22.11.2024..
 //
 
+#if __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
+#include "Framework.h"
 #include "core/window/WindowManager.h"
 #include <iostream>
+#include <core/log/Logger.h>
 
 using namespace mars;
 
-WindowManager::WindowManager(const WindowManagerOptions options)
-    : windowBounds(options.windowBounds) {
+WindowManager::WindowManager(Framework& framework, const WindowManagerOptions options)
+    : framework(framework), windowBounds(options.windowBounds) {
 }
 
 void WindowManager::subscribeToRenderEvent(const std::function<void()>& callback) {
@@ -21,10 +27,14 @@ void WindowManager::subscribeToUpdateEvent(const std::function<void()> &callback
 
 void WindowManager::initialize() {
 
-    if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        std::cout << "Failed to initialize SDL" << std::endl;
+    Logger& logger = framework.getLogger();
+
+    if(SDL_Init(SDL_INIT_VIDEO) != 0) {
+        logger.error( std::string("Failed to initialize SDL: ") + SDL_GetError());
         return;
     }
+
+    logger.info(std::string("Window initialized. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
 
     window = SDL_CreateWindow("Mars Framework",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -32,32 +42,50 @@ void WindowManager::initialize() {
         0);
 }
 
-void WindowManager::runEventLoop() {
+// Store a reference to the instance for the loop.
+// Done to support EMSCRIPTEN.
+static WindowManager* windowManagerInstance = nullptr;
+
+static void mainLoop() {
     SDL_Event event;
-    while (true) {
-        if (SDL_PollEvent(&event)) {
 
-            if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    break;
-                }
-            }
+    if (SDL_PollEvent(&event)) {
 
-            if (event.type == SDL_QUIT) {
-                break;
+        if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_ESCAPE) {
+                windowManagerInstance->running = false;
             }
         }
 
-        // Update
-        for (auto& callback : updateEvents) {
-            callback();
-        }
-
-        // Render
-        for (auto& callback : renderEvents) {
-            callback();
+        if (event.type == SDL_QUIT) {
+            windowManagerInstance->running = false;
         }
     }
+
+    // Update
+    for (auto& callback : windowManagerInstance->updateEvents) {
+        callback();
+    }
+
+    // Render
+    for (auto& callback : windowManagerInstance->renderEvents) {
+        callback();
+    }
+}
+
+
+void WindowManager::runEventLoop() {
+
+    windowManagerInstance = this;
+    running = true;
+
+#ifdef __EMSCRIPTEN__
+    emscripten_set_main_loop(mainLoop, 0, 1);
+#else
+    while (running) {
+        mainLoop();
+    }
+#endif
 }
 
 void WindowManager::destroy() {
