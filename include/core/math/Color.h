@@ -21,6 +21,9 @@ namespace mars {
         //! The alpha component of the color.
         float a;
 
+        //! Returns a new white color.
+        static Color white() { return Color(1.0f, 1.0f, 1.0f, 1.0f); }
+
         //! Returns a new red color.
         static Color red() { return Color(1.0f, 0.0f, 0.0f ,1.0f); }
 
