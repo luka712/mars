@@ -32,6 +32,10 @@ namespace mars {
 
     Framework::~Framework() = default;
 
+    void Framework::subscribeToUpdateEvent(const std::function<void(const Time)> &callback) {
+        onUpdate.push_back(callback);
+    }
+
     void Framework::subscribeToRenderEvent(const std::function<void()> &callback) {
         onRender.push_back(callback);
     }
@@ -68,6 +72,10 @@ namespace mars {
 
         // - FRAME START
         timeManager->frameStart();
+
+        for (auto& updateCallback: onUpdate) {
+            updateCallback(timeManager->getTime());
+        }
     }
 
     void Framework::render() const {

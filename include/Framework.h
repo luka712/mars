@@ -58,6 +58,10 @@ namespace mars {
         //! @return The @ref Logger instance.
         [[nodiscard]] Logger& getLogger() const { return *logger; }
 
+        //! Subscribe to the update event.
+        //! @param callback The callback to subscribe.
+        void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
+
         //! Subscribe to the render event.
         //! @param callback The callback to subscribe.
         void subscribeToRenderEvent(const std::function<void()>& callback);
@@ -84,6 +88,7 @@ namespace mars {
         std::unique_ptr<Logger> logger;
 
         // EVENTS
+        std::vector<std::function<void(const Time time)>> onUpdate;
         std::vector<std::function<void()>> onRender;
     };
 }

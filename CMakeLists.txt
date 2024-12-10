@@ -38,7 +38,9 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         include/core/log/SpdLogger.h
         src/core/log/Logger.cpp
         include/core/log/BrowserLogger.h
-        src/core/log/BrowserLogger.cpp)
+        src/core/log/BrowserLogger.cpp
+        include/ecs/transform/RectTransform.h
+        src/ecs/sprite/SpriteRendererSystem.cpp)
 
 # LINK
 target_link_libraries(mars ${SDL2_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
@@ -46,8 +48,8 @@ target_link_libraries(mars ${SDL2_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
 # COPY DLLS
 if(WIN32)
     add_custom_command(TARGET mars POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-           "${SDL2_PATH}/bin/SDL2.dll"
-           $<TARGET_FILE_DIR:mars>)
+           COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/shared_libs/SDL2.dll"
+            $<TARGET_FILE_DIR:mars>)
 endif()
 
