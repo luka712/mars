@@ -16,10 +16,6 @@ namespace mars {
     class ECSManager;
 
     class Entity {
-        ECSManager &ecsManager;
-        std::string name;
-        std::vector<std::shared_ptr<AComponent>> components;
-
     public:
         //! Construct a new Entity object.
         //! @param ecsManager The systems' manager.
@@ -62,6 +58,33 @@ namespace mars {
 
             return component;
         }
+
+        //! Remove a component from the entity.
+        template <typename T>
+        void removeComponent() {
+            for (int i = 0; i < components.size(); i++) {
+
+                // If the component is of the type T.
+                if (std::shared_ptr<T> component = std::dynamic_pointer_cast<T>(components[i])) {
+
+                    // Remove the component from the system.
+                    ecsManager.removeComponentFromSystem(component);
+
+                    // Remove the component from the entity.
+                    components.erase(components.begin() + i);
+                    break;
+                }
+            }
+        }
+
+        //! Get the information about the entity.
+        //! @return The information about the entity.
+        std::string toString();
+
+    private:
+        ECSManager &ecsManager;
+        std::string name;
+        std::vector<std::shared_ptr<AComponent>> components;
     };
 }
 

@@ -34,6 +34,14 @@ namespace mars {
         //! @param component The sprite renderer component.
         void passComponentToSystem(std::shared_ptr<SpriteRenderer> component);
 
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(std::shared_ptr<RectTransform> component);
+
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(std::shared_ptr<SpriteRenderer> component);
+
         //! Update the ECSManager and all the systems.
         //! @param time The game time.
         void update(const Time &time);
@@ -46,7 +54,6 @@ namespace mars {
         std::unique_ptr<EntityManager> entityManager;
         std::unique_ptr<RectTransformSystem> rectTransformSystem;
         std::unique_ptr<SpriteRendererSystem> spriteRendererSystem;
-
     };
 }
 

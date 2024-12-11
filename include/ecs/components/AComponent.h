@@ -6,6 +6,8 @@
 #define ACOMPONENT_H
 
 #include <memory>
+#include <core/life_management/State.h>
+
 #include "core/time/Time.h"
 
 namespace mars {
@@ -24,8 +26,7 @@ namespace mars {
         [[nodiscard]] Entity& getEntity() const;
 
         //! Initialize the component.
-        virtual void initialize() {
-        }
+        virtual void initialize();
 
         //! Update the component.
         //! @param time The game time.
@@ -36,7 +37,15 @@ namespace mars {
         virtual void render() {
         }
 
+        //! Destroy the component.
+        virtual void destroy();
+
+        //! Get the string representation of the component.
+        //! @return The string representation of the component.
+        virtual std::string toString();
+
     protected:
+        State state = State::CREATED;
         std::shared_ptr<Entity> entity;
 
     };

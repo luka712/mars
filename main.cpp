@@ -28,6 +28,13 @@ int main(int argc, char* argv[]) {
     transform->setDrawRectangle(mars::Rect { 100, 100, 200, 200 });
     std::shared_ptr<mars::SpriteRenderer> spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
 
+    std::cout << entity->toString() << std::endl;
+
+    entity->removeComponent<mars::SpriteRenderer>();
+
+    std::cout << entity->toString() << std::endl;
+
+
     std::shared_ptr<mars::Entity> entity2 = entityManager.createEntity("projectile");
     std::shared_ptr<mars::RectTransform> transform2 = entity2->addComponent<mars::RectTransform>();
     transform->setDrawRectangle(mars::Rect { 300, 300, 200, 200 });

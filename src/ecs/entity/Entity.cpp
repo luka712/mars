@@ -21,4 +21,14 @@ namespace  mars {
     void Entity::setName(const std::string &name) {
         this->name = name;
     }
+
+    std::string Entity::toString() {
+        std::string result;
+        result += "Entity: " + name + "\n";
+        result += "Components: \n";
+        for (const std::shared_ptr<AComponent>& component : components) {
+            result += "\t" + component->toString() + "\n";
+        }
+        return result;
+    }
 }

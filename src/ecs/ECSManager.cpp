@@ -26,6 +26,14 @@ namespace mars {
         spriteRendererSystem->add(spriteRenderer);
     }
 
+    void ECSManager::removeComponentFromSystem(std::shared_ptr<RectTransform> rectTransform) {
+        rectTransformSystem->remove(rectTransform.get());
+    }
+
+    void ECSManager::removeComponentFromSystem(std::shared_ptr<SpriteRenderer> spriteRenderer) {
+        spriteRendererSystem->remove(spriteRenderer.get());
+    }
+
     void ECSManager::update(const Time &time) {
         rectTransformSystem->update(time);
     }

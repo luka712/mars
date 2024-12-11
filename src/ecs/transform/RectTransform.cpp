@@ -3,10 +3,9 @@
 //
 
 #include <utility>
-
+#include <bits/stdc++.h>
 #include "ecs/transform/RectTransform.h"
 
-#include <iostream>
 
 namespace mars {
     RectTransform::RectTransform(std::shared_ptr<Entity> entity)
@@ -27,6 +26,18 @@ namespace mars {
             // Update the position of the entity.
             isDirty = false;
         }
+    }
+
+    std::string RectTransform::toString() {
+        std::stringstream result;
+        result << "RectTransform\n"
+            << "\t - drawRectangle("
+            << drawRectangle.x << ", "
+            << drawRectangle.y << ", "
+            << drawRectangle.width << ", "
+            << drawRectangle.height << ")\n"
+            << "\t - rotation("  << rotation << ")\n";
+        return result.str();
     }
 
 }

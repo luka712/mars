@@ -22,7 +22,6 @@ namespace mars {
 
         //! The height of the rectangle.
         int32_t height;
-
     };
 };
 

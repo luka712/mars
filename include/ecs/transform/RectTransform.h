@@ -28,6 +28,8 @@ namespace mars {
 
         bool operator==(const RectTransform & rect_transform) const = default;
 
+        std::string toString() override;
+
     private:
         Rect drawRectangle;
         float rotation;

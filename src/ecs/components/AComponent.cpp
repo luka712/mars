@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 8.12.2024..
+// Created by lukaa on 8.12.2024.
 //
 
 #include <utility>
@@ -16,4 +16,15 @@ namespace mars {
         return *entity;
     }
 
+    void AComponent::initialize() {
+        state = INITIALIZED;
+    }
+
+    void AComponent::destroy() {
+        state = DESTROYED;
+    }
+
+    std::string AComponent::toString() {
+        return typeid(*this).name();
+    }
 }

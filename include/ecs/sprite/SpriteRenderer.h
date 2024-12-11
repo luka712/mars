@@ -24,6 +24,8 @@ namespace mars {
 
         void initialize() override;
 
+        std::string toString() override;
+
         //! The color of the sprite.
         Color color;
     private:
