@@ -3,7 +3,6 @@
 //
 
 #include <utility>
-
 #include "ecs/components/AComponent.h"
 
 namespace mars {

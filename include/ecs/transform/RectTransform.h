@@ -26,8 +26,6 @@ namespace mars {
 
         void update(const Time &time) override;
 
-        bool operator==(const RectTransform & rect_transform) const = default;
-
         std::string toString() override;
 
     private:

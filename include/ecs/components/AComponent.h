@@ -6,8 +6,8 @@
 #define ACOMPONENT_H
 
 #include <memory>
+#include <string>
 #include <core/life_management/State.h>
-
 #include "core/time/Time.h"
 
 namespace mars {
