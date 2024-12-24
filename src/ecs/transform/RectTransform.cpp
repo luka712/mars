@@ -6,17 +6,16 @@
 #include <sstream>
 #include "ecs/transform/RectTransform.h"
 
-
 namespace mars {
-    RectTransform::RectTransform(std::shared_ptr<Entity> entity)
-        : AComponent(std::move(entity)) {
+    RectTransform::RectTransform(Entity* entity)
+        : AComponent(entity), drawRectangle(), rotation(0) {
     }
 
     Rect RectTransform::getDrawRectangle() const {
         return drawRectangle;
     }
 
-    void RectTransform::setDrawRectangle(const Rect &drawRectangle) {
+    void RectTransform::setDrawRectangle(Rect drawRectangle) {
         this->drawRectangle = drawRectangle;
         isDirty = true;
     }

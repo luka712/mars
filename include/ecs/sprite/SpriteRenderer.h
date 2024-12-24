@@ -6,6 +6,7 @@
 #define SPRITERENDERER_H
 
 #include "core/math/Color.h"
+#include "core/sprite/Sprite.h"
 #include "ecs/transform/RectTransform.h"
 
 namespace mars {
@@ -16,11 +17,19 @@ namespace mars {
     public:
         //! Construct a new SpriteRenderer object.
         //! @param entity The entity that the component is attached to.
-        explicit SpriteRenderer(std::shared_ptr<Entity> entity);
+        explicit SpriteRenderer(Entity* entity);
 
         //! Get the rect transform.
         //! @return The rect transform. If not set, returns nullptr.
-        const RectTransform* getRectTransform() const;
+        [[nodiscard]] const RectTransform* getRectTransform() const;
+
+        //! Gets the sprite.
+        //! @return The sprite.
+        [[nodiscard]] Sprite* getSprite() const;
+
+        //! Sets the sprite.
+        //! @param texture The sprite.
+        void setSprite(Sprite* sprite);
 
         void initialize() override;
 
@@ -29,7 +38,8 @@ namespace mars {
         //! The color of the sprite.
         Color color;
     private:
-          std::shared_ptr<RectTransform> rectTransform;
+          RectTransform* rectTransform{};
+          Sprite* sprite{};
     };
 
 }

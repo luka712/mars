@@ -10,13 +10,13 @@ namespace mars {
         : framework(framework) {
     }
 
-    void SpriteRendererSystem::add(const std::shared_ptr<SpriteRenderer> &spriteRenderer) {
+    void SpriteRendererSystem::add(SpriteRenderer *spriteRenderer) {
         sprites.emplace_back(spriteRenderer);
     }
 
     void SpriteRendererSystem::remove(SpriteRenderer *spriteRenderer) {
         for (int i = 0; i < sprites.size(); i++) {
-            if (sprites[i].get() == spriteRenderer) {
+            if (sprites[i] == spriteRenderer) {
                 sprites.erase(sprites.begin() + i);
                 break;
             }
@@ -26,10 +26,16 @@ namespace mars {
     void SpriteRendererSystem::render() {
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
         spriteBatch.begin();
-        for (const std::shared_ptr<SpriteRenderer> &spriteRenderer: sprites) {
-            Rect drawRect = spriteRenderer->getRectTransform()->getDrawRectangle();
-            spriteBatch.draw(drawRect, spriteRenderer->color);
+        for (SpriteRenderer* spriteRenderer: sprites) {
+            const RectTransform *rectTransform = spriteRenderer->getRectTransform();
+            Rect drawRect = rectTransform->getDrawRectangle();
+            Sprite *sprite = spriteRenderer->getSprite();
+            if (sprite != nullptr) {
+                spriteBatch.draw(&sprite->getTexture(), drawRect, spriteRenderer->color);
+            } else {
+                spriteBatch.draw(drawRect, spriteRenderer->color);
+            }
+            spriteBatch.end();
         }
-        spriteBatch.end();
     }
 }

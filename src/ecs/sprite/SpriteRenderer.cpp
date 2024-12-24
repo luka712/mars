@@ -8,12 +8,20 @@
 
 
 namespace mars {
-    SpriteRenderer::SpriteRenderer(std::shared_ptr<Entity> entity)
-        : AComponent(std::move(entity)), color(Color::white()) {
+    SpriteRenderer::SpriteRenderer(Entity* entity)
+        : AComponent(entity), color(Color::white()) {
     }
 
-    const RectTransform *SpriteRenderer::getRectTransform() const {
-        return rectTransform.get();
+    const RectTransform* SpriteRenderer::getRectTransform() const {
+        return rectTransform;
+    }
+
+    Sprite* SpriteRenderer::getSprite() const {
+        return sprite;
+    }
+
+    void SpriteRenderer::setSprite(Sprite* sprite) {
+        this->sprite = sprite;
     }
 
     void SpriteRenderer::initialize() {
@@ -27,7 +35,11 @@ namespace mars {
 
     std::string SpriteRenderer::toString() {
         std::stringstream result;
+
+        Sprite* sprite = getSprite();
+
         result << "SpriteRenderer\n"
+           //  << "\t - sprite(" << sprite->getTexture()->getLabel() << ")\n"
             << "\t - color(" << this->color.r << ", "
             << this->color.g << ", "
             << this->color.b << ", "

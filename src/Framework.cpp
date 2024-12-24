@@ -23,6 +23,8 @@ namespace mars {
         this->renderer = std::make_unique<SDLRenderer>(*this);
         this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         this->timeManager = std::make_unique<TimeManager>();
+        this->imageLoader = std::make_unique<ImageLoader>(*this);
+        this->textureFactory = std::make_unique<TextureFactory>(*this);
 #ifdef __EMSCRIPTEN__
         this->logger = std::make_unique<BrowserLogger>();
 #else
@@ -60,9 +62,12 @@ namespace mars {
         timeManager->prepareStart();
 
         currentState = State::INITIALIZED;
+    }
 
+    void Framework::runEventLoop() const {
         windowManager->runEventLoop();
     }
+
 
     void Framework::update() const {
 

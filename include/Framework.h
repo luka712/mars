@@ -12,6 +12,8 @@
 #include "core/sprite/SpriteBatch.h"
 #include "core/time/TimeManager.h"
 #include "core/log/Logger.h"
+#include "core/loaders/ImageLoader.h"
+#include "core/texture/TextureFactory.h"
 
 namespace mars {
 
@@ -58,6 +60,14 @@ namespace mars {
         //! @return The @ref Logger instance.
         [[nodiscard]] Logger& getLogger() const { return *logger; }
 
+        //! Gets the @ref ImageLoader instance.
+        //! @return The @ref ImageLoader instance.
+        [[nodiscard]] ImageLoader& getImageLoader() const { return *imageLoader; }
+
+        //! Gets the @ref TextureFactory instance.
+        //! @return The @ref TextureFactory instance.
+        [[nodiscard]] TextureFactory& getTextureFactory() const { return *textureFactory; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -68,6 +78,9 @@ namespace mars {
 
         //! Initialize the framework.
         void initialize();
+
+        //! Run the event loop.
+        void runEventLoop() const;
 
         //! Update the framework.
         void update() const;
@@ -86,6 +99,8 @@ namespace mars {
         std::unique_ptr<SpriteBatch> spriteBatch;
         std::unique_ptr<TimeManager> timeManager;
         std::unique_ptr<Logger> logger;
+        std::unique_ptr<ImageLoader> imageLoader;
+        std::unique_ptr<TextureFactory> textureFactory;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;

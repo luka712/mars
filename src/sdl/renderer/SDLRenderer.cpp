@@ -16,7 +16,9 @@ namespace mars {
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if(!renderer) {
-            // TODO: log error
+            std::string msg = "Failed to create renderer: " + std::string(SDL_GetError());
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
         }
     }
 

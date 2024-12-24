@@ -20,8 +20,8 @@ namespace mars {
         explicit SpriteRendererSystem(Framework& framework);
 
         //! Add a sprite component to the system.
-        //! @param sprite The sprite component.
-        void add(const std::shared_ptr<SpriteRenderer>& sprite);
+        //! @param spriteRenderer The sprite component.
+        void add(SpriteRenderer* spriteRenderer);
 
         //! Remove a sprite component from the system.
         //! @param sprite The sprite component.
@@ -31,7 +31,7 @@ namespace mars {
         void render();
      private:
         Framework& framework;
-        std::vector<std::shared_ptr<SpriteRenderer>> sprites;
+        std::vector<SpriteRenderer*> sprites;
     };
 }
 

@@ -17,7 +17,7 @@ namespace mars {
     public:
         //! The constructor of the AComponent object.
         //! @param entity The entity that the component is attached to.
-        explicit AComponent(std::shared_ptr<Entity> entity);
+        explicit AComponent(Entity* entity);
 
         //! Destroy the Component object.
         virtual ~AComponent() = default;
@@ -46,7 +46,7 @@ namespace mars {
 
     protected:
         State state = State::CREATED;
-        std::shared_ptr<Entity> entity;
+        Entity* entity;
 
     };
 }

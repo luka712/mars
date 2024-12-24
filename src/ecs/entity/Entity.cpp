@@ -22,12 +22,12 @@ namespace  mars {
         this->name = name;
     }
 
-    std::string Entity::toString() {
+    std::string Entity::toString() const {
         std::string result;
         result += "Entity: " + name + "\n";
         result += "Components: \n";
-        for (const std::shared_ptr<AComponent>& component : components) {
-            result += "\t" + component->toString() + "\n";
+        for (std::pair<std::string, std::shared_ptr<AComponent>> keyPair : componentsMap) {
+            result += "\t" + keyPair.second->toString() + "\n";
         }
         return result;
     }

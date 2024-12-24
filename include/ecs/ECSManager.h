@@ -28,19 +28,19 @@ namespace mars {
 
         //! Passes the rect transform component to the rect transform system.
         //! @param component The rect transform component.
-        void passComponentToSystem(std::shared_ptr<RectTransform> component);
+        void passComponentToSystem(RectTransform *component) const;
 
         //! Passes the sprite renderer component to the sprite renderer system.
         //! @param component The sprite renderer component.
-        void passComponentToSystem(std::shared_ptr<SpriteRenderer> component);
+        void passComponentToSystem(SpriteRenderer* component) const;
 
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(std::shared_ptr<RectTransform> component);
+        void removeComponentFromSystem(RectTransform* component) const;
 
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(std::shared_ptr<SpriteRenderer> component);
+        void removeComponentFromSystem(SpriteRenderer* component) const;
 
         //! Update the ECSManager and all the systems.
         //! @param time The game time.

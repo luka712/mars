@@ -6,7 +6,7 @@
 
 namespace mars {
 
-    void RectTransformSystem::add(const std::shared_ptr<RectTransform>& rectTransform) {
+    void RectTransformSystem::add(RectTransform* rectTransform) {
         rectTransforms.emplace_back(rectTransform);
     }
 

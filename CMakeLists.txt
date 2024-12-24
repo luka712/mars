@@ -15,16 +15,19 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 if(WIN32)
     # NOTE: SET DIFFERENT PATH FOR YOUR SDL2 INSTALLATION
     set(SDL2_PATH "D:/_Windows/Libs/SDL2-devel-2.30.9-mingw/SDL2/x86_64-w64-mingw32")
+    set(SDL2_IMAGE_PATH "D:/_Windows/Libs/SDL2_image-devel-2.8.3-mingw/SDL2_image-2.8.3/x86_64-w64-mingw32")
 endif()
 
 # PACKAGES
 find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
         ${SDL2_INCLUDE_DIR}
+        ${SDL2_IMAGE_INCLUDE_DIR}
         ${GLM_INCLUDE_DIR}
         ${SPDLOG_INCLUDE_DIR}
 )
@@ -40,16 +43,27 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         include/core/log/BrowserLogger.h
         src/core/log/BrowserLogger.cpp
         include/ecs/transform/RectTransform.h
-        src/ecs/sprite/SpriteRendererSystem.cpp)
+        src/ecs/sprite/SpriteRendererSystem.cpp
+        include/core/loaders/ImageLoader.h
+        include/core/data/SDLImageData.h
+        include/sdl/texture/SDLTexture2D.h
+        include/core/texture/TextureEnums.h
+        include/sdl/util/SDLConverter.h
+        src/sdl/util/SDLConverter.cpp
+        include/core/sprite/Sprite.h)
 
 # LINK
-target_link_libraries(mars ${SDL2_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
+target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
 
 # COPY DLLS
 if(WIN32)
     add_custom_command(TARGET mars POST_BUILD
            COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_SOURCE_DIR}/shared_libs/SDL2.dll"
+            $<TARGET_FILE_DIR:mars>)
+    add_custom_command(TARGET mars POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/shared_libs/SDL2_image.dll"
             $<TARGET_FILE_DIR:mars>)
 endif()
 

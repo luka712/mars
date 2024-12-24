@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "core/mesh/SpriteBatchMesh.h"
+#include "core/texture/Texture2D.h"
 
 namespace mars {
 
@@ -16,8 +17,9 @@ class SpriteBatchDrawable {
 public:
     //! Construct a new SpriteBatchDrawable object.
     //! @param framework The framework.
+    //! @param texture The texture.
     //! @param maxBatchSize The maximum batch size.
-    SpriteBatchDrawable(Framework& framework, size_t maxBatchSize);
+    SpriteBatchDrawable(Framework& framework, std::shared_ptr<Texture2D> texture, size_t maxBatchSize);
 
     //! Initialize the sprite batch.
     void initialize();
@@ -38,11 +40,12 @@ public:
 
 private:
     Framework& framework;
-    size_t maxBatchSize{};
-    bool needsResize{};
-    size_t fromInstance{};
-    size_t toInstance{};
+    std::shared_ptr<Texture2D> texture;
     std::unique_ptr<SpriteBatchMesh> drawingMesh;
+    size_t maxBatchSize;
+    bool needsResize;
+    size_t fromInstance;
+    size_t toInstance;
 };
 }
 

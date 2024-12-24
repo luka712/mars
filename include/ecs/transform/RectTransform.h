@@ -14,7 +14,7 @@ namespace mars {
     public:
         //! Construct a new RectTransform object.
         //! @param entity The entity that the component is attached to.
-        explicit RectTransform(std::shared_ptr<Entity> entity);
+        explicit RectTransform(Entity* entity);
 
         //! Get the drawing rectangle.
         //! @return The drawing rectangle.
@@ -22,15 +22,15 @@ namespace mars {
 
         //! Set the drawing rectangle.
         //! @param drawRectangle The drawing rectangle.
-        void setDrawRectangle(const Rect &drawRectangle);
+        void setDrawRectangle(Rect drawRectangle);
 
         void update(const Time &time) override;
 
         std::string toString() override;
 
     private:
-        Rect drawRectangle;
-        float rotation;
+        Rect drawRectangle{};
+        float rotation{};
         bool isDirty = true;
     };
 }

@@ -9,6 +9,8 @@
 #include "core/sprite/SpriteBatch.h"
 #include <array>
 
+#include "sdl/texture/SDLTexture2D.h"
+
 #define SDL_SPRITEBATCH_MAX_DRAW_ITEMS 1000
 
 namespace mars {
@@ -16,15 +18,10 @@ namespace mars {
 
     //! The SDL implementation of the SpriteBatch.
     class SDLSpriteBatch final : public SpriteBatch {
-        Framework &framework;
-        SDL_Renderer* renderer{};
-        int32_t currentItemIndex;
-        std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> drawRects{};
-        std::array<SDL_Color, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> colors{};
 
     public:
         //! Construct a new SDLSpriteBatch object.
-        SDLSpriteBatch(Framework &framework);
+        explicit SDLSpriteBatch(Framework &framework);
 
         //! @copydoc SpriteBatch::initialize()
         void initialize() override;
@@ -35,8 +32,19 @@ namespace mars {
         //! @copydoc SpriteBatch::draw()
         void draw(Rect drawRect, Color color) override;
 
+        //! @copydoc SpriteBatch::draw()
+        void draw(Texture2D* texture, Rect drawRect, Color color) override;
+
         //! @copydoc SpriteBatch::end()
         void end() override;
+
+    private:
+        Framework &framework;
+        SDL_Renderer* renderer{};
+        SDLTexture2D* currentTexture;
+        int32_t currentItemIndex;
+        std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> drawRects{};
+        std::array<SDL_Color, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> colors{};
     };
 }
 

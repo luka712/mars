@@ -5,6 +5,7 @@
 #ifndef SPRITEBATCH_H
 #define SPRITEBATCH_H
 
+#include "core/texture/Texture2D.h"
 #include "core/math/Math.h"
 
 namespace mars {
@@ -22,6 +23,12 @@ namespace mars {
         //! @param drawRect The region where to draw.
         //! @param color The color of a rectangle that's drawn.
         virtual void draw(Rect drawRect, Color color) = 0;
+
+        //! Draw a sprite.
+        //! @param texture The texture to draw.
+        //! @param drawRect The region where to draw.
+        //! @param color The color of a rectangle that's drawn.
+        virtual void draw(Texture2D* texture, Rect drawRect, Color color) = 0;
 
         //! End the sprite batch.
         virtual void end() = 0;

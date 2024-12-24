@@ -7,8 +7,8 @@
 
 namespace mars {
 
-    AComponent::AComponent(std::shared_ptr<Entity> entity)
-        : entity(std::move(entity)) {
+    AComponent::AComponent(Entity* entity)
+        : entity(entity) {
     }
 
     Entity& AComponent::getEntity() const {

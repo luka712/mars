@@ -18,20 +18,20 @@ namespace mars {
         return *entityManager;
     }
 
-    void ECSManager::passComponentToSystem(std::shared_ptr<RectTransform> rectTransform) {
+    void ECSManager::passComponentToSystem(RectTransform *rectTransform) const {
         rectTransformSystem->add(rectTransform);
      }
 
-    void ECSManager::passComponentToSystem(std::shared_ptr<SpriteRenderer> spriteRenderer) {
+    void ECSManager::passComponentToSystem(SpriteRenderer* spriteRenderer) const {
         spriteRendererSystem->add(spriteRenderer);
     }
 
-    void ECSManager::removeComponentFromSystem(std::shared_ptr<RectTransform> rectTransform) {
-        rectTransformSystem->remove(rectTransform.get());
+    void ECSManager::removeComponentFromSystem(RectTransform* rectTransform) const {
+        rectTransformSystem->remove(rectTransform);
     }
 
-    void ECSManager::removeComponentFromSystem(std::shared_ptr<SpriteRenderer> spriteRenderer) {
-        spriteRendererSystem->remove(spriteRenderer.get());
+    void ECSManager::removeComponentFromSystem(SpriteRenderer* spriteRenderer) const {
+        spriteRendererSystem->remove(spriteRenderer);
     }
 
     void ECSManager::update(const Time &time) {

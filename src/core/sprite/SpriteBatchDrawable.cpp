@@ -2,13 +2,15 @@
 // Created by lukaa on 29.11.2024..
 //
 
+#include <utility>
+
 #include "Framework.h"
 #include "core/sprite/SpriteBatchDrawable.h"
 
 namespace mars {
 
-	SpriteBatchDrawable::SpriteBatchDrawable(Framework& framework, size_t maxBatchSize)
-		: framework(framework), maxBatchSize(maxBatchSize){
+	SpriteBatchDrawable::SpriteBatchDrawable(Framework& framework, std::shared_ptr<Texture2D>  texture, size_t maxBatchSize)
+		: framework(framework), texture(std::move(texture)), maxBatchSize(maxBatchSize){
 
           }
 

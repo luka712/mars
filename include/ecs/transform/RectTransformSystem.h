@@ -15,7 +15,7 @@ namespace mars {
     public:
         //! Add a RectTransform component to the system.
         //! @param rectTransform The RectTransform component.
-        void add(const std::shared_ptr<RectTransform>& rectTransform);
+        void add(RectTransform* rectTransform);
 
         //! Remove a RectTransform component from the system.
         //! @param rectTransform The RectTransform component.

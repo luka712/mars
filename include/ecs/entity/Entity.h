@@ -5,7 +5,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <vector>
+#include <map>
 #include <string>
 
 #include "ecs/ECSManager.h"
@@ -31,29 +31,27 @@ namespace mars {
 
         //! Get a component of the entity.
         template<typename T>
-        std::shared_ptr<T> getComponent() {
-            for (const std::shared_ptr<AComponent>& component : components) {
-                if (std::dynamic_pointer_cast<T>(component)) {
-                    return std::dynamic_pointer_cast<T>(component);
-                }
+        T* getComponent() {
+            const std::string key = typeid(T).name();
+            if (componentsMap.contains(key)) {
+                return dynamic_cast<T*>(componentsMap[key].get());
             }
+
             return nullptr;
         }
 
         //! Add a new component to the entity.
         template<typename T>
-        std::shared_ptr<T> addComponent() {
+        T* addComponent() {
 
-            // Make a shared pointer to self, in order to pass to the component.
-            std::shared_ptr<Entity> self = std::make_shared<Entity>(*this);
-
-            // Create a component.
-            std::shared_ptr<T> component = std::make_shared<T>(self);
-            components.emplace_back(component);
+            std::string key = typeid(T).name();
+            componentsMap[key] = std::make_shared<T>(this);
+            T* component = dynamic_cast<T*>(componentsMap[key].get());
 
             // Pass the component to the system.
             ecsManager.passComponentToSystem(component);
 
+            // Initialize it.
             component->initialize();
 
             return component;
@@ -62,29 +60,22 @@ namespace mars {
         //! Remove a component from the entity.
         template <typename T>
         void removeComponent() {
-            for (int i = 0; i < components.size(); i++) {
-
-                // If the component is of the type T.
-                if (std::shared_ptr<T> component = std::dynamic_pointer_cast<T>(components[i])) {
-
-                    // Remove the component from the system.
-                    ecsManager.removeComponentFromSystem(component);
-
-                    // Remove the component from the entity.
-                    components.erase(components.begin() + i);
-                    break;
-                }
+            const std::string key = typeid(T).name();
+            if (componentsMap.contains(key)) {
+                T* component = dynamic_cast<T*>(componentsMap[key].get());
+                ecsManager.removeComponentFromSystem(component);
+                componentsMap.erase(key);
             }
         }
 
         //! Get the information about the entity.
         //! @return The information about the entity.
-        std::string toString();
+        std::string toString() const;
 
     private:
         ECSManager &ecsManager;
         std::string name;
-        std::vector<std::shared_ptr<AComponent>> components;
+        std::map<std::string, std::shared_ptr<AComponent>> componentsMap;
     };
 }
 
