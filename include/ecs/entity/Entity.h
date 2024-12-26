@@ -12,6 +12,7 @@
 #include "ecs/components/AComponent.h"
 
 namespace mars {
+    class Framework;
     class EntityManager;
     class ECSManager;
 
@@ -21,6 +22,10 @@ namespace mars {
         //! @param ecsManager The systems' manager.
         //! @param name The name of the entity.
         Entity(ECSManager& ecsManager, std::string name);
+
+        //! Gets the framework.
+        //! @return The framework.
+        Framework& getFramework() const;
 
         //! Get the name of the entity.
         [[nodiscard]] std::string getName() const;
@@ -73,6 +78,7 @@ namespace mars {
         std::string toString() const;
 
     private:
+        Framework& framework;
         ECSManager &ecsManager;
         std::string name;
         std::map<std::string, std::shared_ptr<AComponent>> componentsMap;

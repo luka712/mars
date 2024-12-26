@@ -3,15 +3,19 @@
 //
 
 #include <utility>
-
+#include "Framework.h"
 #include "ecs/entity/Entity.h"
 #include "ecs/ECSManager.h"
 
 namespace  mars {
 
     Entity::Entity(ECSManager& ecsManager, std::string name)
-        :  ecsManager(ecsManager), name(std::move(name))
+        : framework(ecsManager.getFramework()), ecsManager(ecsManager), name(std::move(name))
     {
+    }
+
+    Framework& Entity::getFramework() const {
+        return framework;
     }
 
     std::string Entity::getName() const {

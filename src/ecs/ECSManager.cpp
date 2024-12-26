@@ -14,6 +14,10 @@ namespace mars {
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(framework);
     }
 
+    Framework &ECSManager::getFramework() const {
+        return framework;
+    }
+
     EntityManager &ECSManager::getEntityManager() const {
         return *entityManager;
     }
@@ -34,11 +38,12 @@ namespace mars {
         spriteRendererSystem->remove(spriteRenderer);
     }
 
-    void ECSManager::update(const Time &time) {
+    void ECSManager::update(const Time &time) const {
         rectTransformSystem->update(time);
+        spriteRendererSystem->update(time);
     }
 
-    void ECSManager::render() {
+    void ECSManager::render() const {
         spriteRendererSystem->render();
     }
 

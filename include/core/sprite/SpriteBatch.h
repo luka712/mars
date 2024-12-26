@@ -30,6 +30,13 @@ namespace mars {
         //! @param color The color of a rectangle that's drawn.
         virtual void draw(Texture2D* texture, Rect drawRect, Color color) = 0;
 
+        //! Draw a sprite.
+        //! @param texture The texture to draw.
+        //! @param drawRect The region where to draw.
+        //! @param sourceRect The region of the texture to draw.
+        //! @param color The color of a rectangle that's drawn.
+        virtual void draw(Texture2D* texture, Rect drawRect, Rect sourceRect, Color color) = 0;
+
         //! End the sprite batch.
         virtual void end() = 0;
     };

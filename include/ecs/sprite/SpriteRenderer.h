@@ -25,10 +25,10 @@ namespace mars {
 
         //! Gets the sprite.
         //! @return The sprite.
-        [[nodiscard]] Sprite* getSprite() const;
+        [[nodiscard]] virtual Sprite* getSprite() const;
 
         //! Sets the sprite.
-        //! @param texture The sprite.
+        //! @param sprite The sprite.
         void setSprite(Sprite* sprite);
 
         void initialize() override;
@@ -37,7 +37,7 @@ namespace mars {
 
         //! The color of the sprite.
         Color color;
-    private:
+    protected:
           RectTransform* rectTransform{};
           Sprite* sprite{};
     };

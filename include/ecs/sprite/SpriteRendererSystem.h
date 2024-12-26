@@ -23,6 +23,10 @@ namespace mars {
         //! @param spriteRenderer The sprite component.
         void add(SpriteRenderer* spriteRenderer);
 
+        //! Update the sprite components.
+        //! @param time The game time.
+        void update(const Time &time);
+
         //! Remove a sprite component from the system.
         //! @param sprite The sprite component.
         void remove(SpriteRenderer *sprite);

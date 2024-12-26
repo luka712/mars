@@ -35,6 +35,9 @@ namespace mars {
         //! @copydoc SpriteBatch::draw()
         void draw(Texture2D* texture, Rect drawRect, Color color) override;
 
+        //! @copydoc SpriteBatch::draw()
+        void draw(Texture2D* texture, Rect drawRect, Rect srcRect, Color color) override;
+
         //! @copydoc SpriteBatch::end()
         void end() override;
 
@@ -44,6 +47,7 @@ namespace mars {
         SDLTexture2D* currentTexture;
         int32_t currentItemIndex;
         std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> drawRects{};
+        std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> srcRects{};
         std::array<SDL_Color, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> colors{};
     };
 }

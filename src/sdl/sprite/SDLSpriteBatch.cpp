@@ -38,9 +38,30 @@ namespace mars {
     void SDLSpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Color color) {
         if (currentTexture != texture || currentItemIndex >= SDL_SPRITEBATCH_MAX_DRAW_ITEMS) {
             end();
-            currentTexture = static_cast<SDLTexture2D *>(texture);
+            currentTexture = dynamic_cast<SDLTexture2D *>(texture);
         }
         drawRects[currentItemIndex] = {drawRect.x, drawRect.y, drawRect.width, drawRect.height};
+        srcRects[currentItemIndex] = {
+            0, 0,
+            static_cast<int>(texture->getWidth()),
+            static_cast<int>(texture->getHeight())
+        };
+        colors[currentItemIndex] = {
+            static_cast<uint8_t>(color.r * 255),
+            static_cast<uint8_t>(color.g * 255),
+            static_cast<uint8_t>(color.b * 255),
+            static_cast<uint8_t>(color.a * 255)
+        };
+        currentItemIndex++;
+    }
+
+    void SDLSpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Rect sourceRect, const Color color) {
+        if (currentTexture != texture || currentItemIndex >= SDL_SPRITEBATCH_MAX_DRAW_ITEMS) {
+            end();
+            currentTexture = dynamic_cast<SDLTexture2D *>(texture);
+        }
+        drawRects[currentItemIndex] = {drawRect.x, drawRect.y, drawRect.width, drawRect.height};
+        srcRects[currentItemIndex] = {sourceRect.x, sourceRect.y, sourceRect.width, sourceRect.height};
         colors[currentItemIndex] = {
             static_cast<uint8_t>(color.r * 255),
             static_cast<uint8_t>(color.g * 255),
@@ -54,7 +75,7 @@ namespace mars {
         for (int i = 0; i < currentItemIndex; i++) {
             SDL_SetRenderDrawColor(renderer, colors[i].r, colors[i].g, colors[i].b, colors[i].a);
             if (currentTexture != nullptr) {
-                SDL_RenderCopy(renderer, currentTexture->getTexture(), nullptr, &drawRects[i]);
+                SDL_RenderCopy(renderer, currentTexture->getTexture(), &srcRects[i], &drawRects[i]);
             } else {
                 SDL_RenderFillRect(renderer, &drawRects[i]);
             }

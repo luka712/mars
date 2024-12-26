@@ -50,7 +50,7 @@ namespace mars {
 		}
 
 		// Draw mesh.
-		int indicesOffset = fromInstance * 6;
+		int indicesOffset = static_cast<int>(fromInstance) * 6;
 		int indicesCount = toInstance * 6 - indicesOffset;
 		drawingMesh->applyChanges();
 		// renderPipeline.Render(drawingMesh.VertexBuffer, drawingMesh.IndexBuffer,

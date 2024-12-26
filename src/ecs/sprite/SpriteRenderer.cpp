@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 10.12.2024..
+// Created by Erkapic Luka on 10.12.2024.
 //
 
 #include <sstream>
@@ -28,7 +28,7 @@ namespace mars {
         rectTransform = entity->getComponent<RectTransform>();
         if (rectTransform == nullptr) {
             std::string msg = "SpriteRenderer component requires RectTransform component.";
-            // TODO: add logger somehow and log message.
+            framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }
     }
@@ -46,6 +46,5 @@ namespace mars {
             << this->color.a << ")\n";
 
         return result.str();
-
     }
 }

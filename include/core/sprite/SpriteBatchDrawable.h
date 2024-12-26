@@ -43,9 +43,9 @@ private:
     std::shared_ptr<Texture2D> texture;
     std::unique_ptr<SpriteBatchMesh> drawingMesh;
     size_t maxBatchSize;
-    bool needsResize;
-    size_t fromInstance;
-    size_t toInstance;
+    bool needsResize{};
+    size_t fromInstance{};
+    size_t toInstance{};
 };
 }
 

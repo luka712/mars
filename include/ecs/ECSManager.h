@@ -20,11 +20,15 @@ namespace mars {
 
       public:
         //! The constructor of the ECSManager object.
-        ECSManager(Framework& framework);
+        explicit ECSManager(Framework& framework);
+
+        //! Get the framework.
+        //! @return The framework.
+        [[nodiscard]] Framework& getFramework() const;
 
         //! Get the entity manager.
         //! @return The entity manager.
-        EntityManager &getEntityManager() const;
+        [[nodiscard]] EntityManager &getEntityManager() const;
 
         //! Passes the rect transform component to the rect transform system.
         //! @param component The rect transform component.
@@ -44,10 +48,10 @@ namespace mars {
 
         //! Update the ECSManager and all the systems.
         //! @param time The game time.
-        void update(const Time &time);
+        void update(const Time &time) const;
 
         //! Render the ECSManager and all the systems.
-        void render();
+        void render() const;
 
       private:
         Framework& framework;

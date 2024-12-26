@@ -11,6 +11,7 @@
 #include "core/time/Time.h"
 
 namespace mars {
+    class Framework;
     class Entity;
 
     class AComponent {
@@ -45,6 +46,7 @@ namespace mars {
         virtual std::string toString();
 
     protected:
+        Framework& framework;
         State state = State::CREATED;
         Entity* entity;
 

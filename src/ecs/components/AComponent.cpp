@@ -2,13 +2,15 @@
 // Created by lukaa on 8.12.2024.
 //
 
-#include <utility>
+#include "Framework.h"
 #include "ecs/components/AComponent.h"
+
+#include <ecs/entity/Entity.h>
 
 namespace mars {
 
     AComponent::AComponent(Entity* entity)
-        : entity(entity) {
+        : framework(entity->getFramework()), entity(entity) {
     }
 
     Entity& AComponent::getEntity() const {

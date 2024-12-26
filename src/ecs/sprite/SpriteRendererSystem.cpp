@@ -23,6 +23,12 @@ namespace mars {
         }
     }
 
+    void SpriteRendererSystem::update(const Time &time) {
+        for (SpriteRenderer* spriteRenderer: sprites) {
+            spriteRenderer->update(time);
+        }
+    }
+
     void SpriteRendererSystem::render() {
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
         spriteBatch.begin();
@@ -31,7 +37,7 @@ namespace mars {
             Rect drawRect = rectTransform->getDrawRectangle();
             Sprite *sprite = spriteRenderer->getSprite();
             if (sprite != nullptr) {
-                spriteBatch.draw(&sprite->getTexture(), drawRect, spriteRenderer->color);
+                spriteBatch.draw(&sprite->getTexture(), drawRect, sprite->getSourceRect(), spriteRenderer->color);
             } else {
                 spriteBatch.draw(drawRect, spriteRenderer->color);
             }

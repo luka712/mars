@@ -9,7 +9,11 @@
 namespace  mars {
 
     EntityManager::EntityManager(ECSManager& ecsManager)
-        : ecsManager(ecsManager) {
+        : ecsManager(ecsManager), framework(ecsManager.getFramework()) {
+    }
+
+    Framework& EntityManager::getFramework() const {
+        return framework;
     }
 
     std::shared_ptr<Entity> EntityManager::createEntity(std::string entityName) {

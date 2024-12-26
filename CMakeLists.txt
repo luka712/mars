@@ -50,7 +50,10 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         include/core/texture/TextureEnums.h
         include/sdl/util/SDLConverter.h
         src/sdl/util/SDLConverter.cpp
-        include/core/sprite/Sprite.h)
+        include/core/sprite/Sprite.h
+        src/core/sprite/Sprite.cpp
+        include/core/sprite/AnimatedSprite.h
+        src/core/sprite/AnimatedSprite.cpp)
 
 # LINK
 target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
