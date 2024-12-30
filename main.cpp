@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 
     framework.initialize();
 
-   auto texture = framework.getTextureFactory().createTextureFromImageFile("../assets/texture/uv_test.png");
+   auto texture = framework.getTextureFactory().createTextureFromImageFile("assets/texture/uv_test.png");
    mars::AnimatedSprite animatedSprite(texture);
     int hw  = texture->getWidth() * .5f;
     int hh  = texture->getHeight() * .5f;
