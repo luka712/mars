@@ -53,7 +53,8 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         include/core/sprite/Sprite.h
         src/core/sprite/Sprite.cpp
         include/core/sprite/AnimatedSprite.h
-        src/core/sprite/AnimatedSprite.cpp)
+        src/core/sprite/AnimatedSprite.cpp
+        include/core/content/ContentManager.h)
 
 # LINK
 target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
@@ -70,3 +71,8 @@ if(WIN32)
             $<TARGET_FILE_DIR:mars>)
 endif()
 
+# COPY ASSETS/CONTENT
+add_custom_command(TARGET mars POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/content"
+        $<TARGET_FILE_DIR:mars>/content)

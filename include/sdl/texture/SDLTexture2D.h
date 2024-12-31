@@ -23,7 +23,7 @@ namespace mars {
         SDLTexture2D(Framework& framework, ImageData& imageData);
 
         //! Destroy the texture.
-        ~SDLTexture2D() override;
+        ~SDLTexture2D();
 
         //! Get the texture.
         //! @return The texture.

@@ -1,17 +1,17 @@
 //
-// Created by lukaa on 21.12.2024..
+// Created by lukaa on 21.12.2024.
 //
 
 #ifndef TEXTURE2D_H
 #define TEXTURE2D_H
 
+#include "core/content/AContent.h"
+
 namespace mars {
     //! The Texture2D class.
     //! Represents a 2D texture.
-    class Texture2D {
+    class Texture2D : public AContent {
     public:
-        virtual ~Texture2D() = default;
-
         //! Get the width of the texture.
         //! @return The width of the texture.
         [[nodiscard]] uint32_t getWidth() const { return width; }

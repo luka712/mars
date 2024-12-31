@@ -12,7 +12,8 @@
 
 
 void createScene(mars::Framework& framework, mars::EntityManager& entityManager) {
-    std::shared_ptr<mars::Texture2D> uvTestTexture = framework.getTextureFactory().createTextureFromImageFile("../assets/texture/uv_test.png");
+    std::shared_ptr<mars::Texture2D> uvTestTexture = framework.getContentManager()
+        .load<mars::Texture2D>("texture/uv_test.png");
     std::shared_ptr<mars::Entity> entity = entityManager.createEntity("projectile");
     mars::RectTransform* transform = entity->addComponent<mars::RectTransform>();
     transform->setDrawRectangle(mars::Rect { 100, 100, 200, 200 });
@@ -49,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     framework.initialize();
 
-   auto texture = framework.getTextureFactory().createTextureFromImageFile("assets/texture/uv_test.png");
+   auto texture = framework.getContentManager().load<mars::Texture2D>("texture/uv_test.png");
    mars::AnimatedSprite animatedSprite(texture);
     int hw  = texture->getWidth() * .5f;
     int hh  = texture->getHeight() * .5f;
