@@ -10,6 +10,7 @@
 #include "ecs/entity/EntityManager.h"
 #include "ecs/transform/RectTransformSystem.h"
 #include "ecs/sprite/SpriteRendererSystem.h"
+#include "ecs/script/ScriptSystem.h"
 
 namespace mars {
 
@@ -38,6 +39,10 @@ namespace mars {
         //! @param component The sprite renderer component.
         void passComponentToSystem(SpriteRenderer* component) const;
 
+        //! Passes the script component to the script system.
+        //! @param component The script component.
+        void passComponentToSystem(AScript* component) const;
+
         //! Removes the component from the system.
         //! @param component The component to remove.
         void removeComponentFromSystem(RectTransform* component) const;
@@ -45,6 +50,10 @@ namespace mars {
         //! Removes the component from the system.
         //! @param component The component to remove.
         void removeComponentFromSystem(SpriteRenderer* component) const;
+
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(AScript* component) const;
 
         //! Update the ECSManager and all the systems.
         //! @param time The game time.
@@ -58,6 +67,7 @@ namespace mars {
         std::unique_ptr<EntityManager> entityManager;
         std::unique_ptr<RectTransformSystem> rectTransformSystem;
         std::unique_ptr<SpriteRendererSystem> spriteRendererSystem;
+        std::unique_ptr<ScriptSystem> scriptSystem;
     };
 }
 

@@ -10,23 +10,55 @@
 // #include "spdlog/spdlog.h"
 // #include "spdlog/sinks/basic_file_sink.h"
 
+class MovePlayer final : public mars::AScript{
+
+    mars::RectTransform* transform;
+
+public:
+    MovePlayer(mars::Entity *entity)
+        : AScript(entity){
+    }
+
+    void initialize() override {
+       transform = entity->getComponent<mars::RectTransform>();
+    }
+
+    void update(const mars::Time& time) override {
+        auto keyboardState = framework.getInputManager().getKeyboardState();
+        auto rect = transform->getDrawRectangle();
+
+        if (keyboardState.isKeyDown(mars::Key::A)) {
+            rect.x -= 1;
+        }
+        else if (keyboardState.isKeyDown(mars::Key::D)) {
+            rect.x += 1;
+        }
+
+        transform->setDrawRectangle(rect);
+    }
+};
+
 
 void createScene(mars::Framework& framework, mars::EntityManager& entityManager) {
     std::shared_ptr<mars::Texture2D> uvTestTexture = framework.getContentManager()
         .load<mars::Texture2D>("texture/uv_test.png");
+
+    std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
+    auto playerTransform = player->addComponent<mars::RectTransform>();
+    playerTransform->setDrawRectangle(mars::Rect { 300, 100, 200, 200 });
+    auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
+    playerSpriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
+    playerSpriteRenderer->addAnimation("left", { mars::Rect { 0, 0, 50, 50 }, mars::Rect { 50, 0, 50, 50 } });
+    playerSpriteRenderer->playAnimation("left");
+    auto playerMoveScript = player->addComponent<MovePlayer>();
+
     std::shared_ptr<mars::Entity> entity = entityManager.createEntity("projectile");
     mars::RectTransform* transform = entity->addComponent<mars::RectTransform>();
     transform->setDrawRectangle(mars::Rect { 100, 100, 200, 200 });
     mars::SpriteRenderer* spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
     spriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
 
-    std::shared_ptr<mars::Entity> entity2 = entityManager.createEntity("projectile");
-    mars::RectTransform* transform2 = entity2->addComponent<mars::RectTransform>();
-    transform2->setDrawRectangle(mars::Rect { 300, 100, 200, 200 });
-    mars::AnimatedSpriteRenderer* spriteRenderer2 = entity2->addComponent<mars::AnimatedSpriteRenderer>();
-    spriteRenderer2->setSprite(new mars::Sprite(uvTestTexture));
-    spriteRenderer2->addAnimation("left", { mars::Rect { 0, 0, 50, 50 }, mars::Rect { 50, 0, 50, 50 } });
-    spriteRenderer2->playAnimation("left");
+
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

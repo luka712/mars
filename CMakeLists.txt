@@ -54,7 +54,11 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         src/core/sprite/Sprite.cpp
         include/core/sprite/AnimatedSprite.h
         src/core/sprite/AnimatedSprite.cpp
-        include/core/content/ContentManager.h)
+        include/core/content/ContentManager.h
+        include/core/input/InputManager.h
+        src/core/input/InputManager.cpp
+        include/core/input/KeyboardState.h
+        src/core/input/KeyboardState.cpp)
 
 # LINK
 target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})

@@ -26,6 +26,7 @@ namespace mars {
         this->imageLoader = std::make_unique<ImageLoader>(*this);
         this->textureFactory = std::make_unique<TextureFactory>(*this);
         this->contentManager = std::make_unique<ContentManager>(*this);
+        this->inputManager = std::make_unique<InputManager>(*this);
 #ifdef __EMSCRIPTEN__
         this->logger = std::make_unique<BrowserLogger>();
 #else

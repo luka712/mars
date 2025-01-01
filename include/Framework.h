@@ -15,6 +15,7 @@
 #include "core/loaders/ImageLoader.h"
 #include "core/texture/TextureFactory.h"
 #include "core/content/ContentManager.h"
+#include "core/input/InputManager.h"
 
 namespace mars {
 
@@ -73,6 +74,10 @@ namespace mars {
         //! @return The @ref ContentManager instance.
         [[nodiscard]] ContentManager& getContentManager() const { return *contentManager; }
 
+        //! Gets the @ref InputManager instance.
+        //! @return The @ref InputManager instance.
+        [[nodiscard]] InputManager& getInputManager() const { return *inputManager; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -107,6 +112,7 @@ namespace mars {
         std::unique_ptr<ImageLoader> imageLoader;
         std::unique_ptr<TextureFactory> textureFactory;
         std::unique_ptr<ContentManager> contentManager;
+        std::unique_ptr<InputManager> inputManager;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;

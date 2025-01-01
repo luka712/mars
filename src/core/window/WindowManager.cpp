@@ -45,11 +45,13 @@ void WindowManager::initialize() {
 // Store a reference to the instance for the loop.
 // Done to support EMSCRIPTEN.
 static WindowManager* windowManagerInstance = nullptr;
+static Framework* frameworkInstance = nullptr;
 
 static void mainLoop() {
     SDL_Event event;
 
     if (SDL_PollEvent(&event)) {
+        frameworkInstance->getInputManager().processEvent(event);
 
         if (event.type == SDL_KEYDOWN) {
             if (event.key.keysym.sym == SDLK_ESCAPE) {
@@ -77,6 +79,8 @@ static void mainLoop() {
 void WindowManager::runEventLoop() {
 
     windowManagerInstance = this;
+    frameworkInstance = &framework;
+
     running = true;
 
 #ifdef __EMSCRIPTEN__

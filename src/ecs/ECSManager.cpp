@@ -12,6 +12,7 @@ namespace mars {
         entityManager = std::make_unique<EntityManager>(*this);
         rectTransformSystem = std::make_unique<RectTransformSystem>();
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(framework);
+        scriptSystem = std::make_unique<ScriptSystem>(framework);
     }
 
     Framework &ECSManager::getFramework() const {
@@ -30,6 +31,10 @@ namespace mars {
         spriteRendererSystem->add(spriteRenderer);
     }
 
+    void ECSManager::passComponentToSystem(AScript* script) const {
+        scriptSystem->add(script);
+    }
+
     void ECSManager::removeComponentFromSystem(RectTransform* rectTransform) const {
         rectTransformSystem->remove(rectTransform);
     }
@@ -38,12 +43,18 @@ namespace mars {
         spriteRendererSystem->remove(spriteRenderer);
     }
 
+    void ECSManager::removeComponentFromSystem(AScript* script) const {
+        scriptSystem->remove(script);
+    }
+
     void ECSManager::update(const Time &time) const {
+        scriptSystem->update(time);
         rectTransformSystem->update(time);
         spriteRendererSystem->update(time);
     }
 
     void ECSManager::render() const {
+        scriptSystem->render();
         spriteRendererSystem->render();
     }
 

@@ -31,11 +31,11 @@ namespace mars {
         //! Get the window.
         //! @return The window.
         [[nodiscard]]
-        inline SDL_Window *getWindow() const { return window; }
+        SDL_Window *getWindow() const { return window; }
 
         //! Get the window bounds.
         //! @return The window bounds.
-        [[nodiscard]] inline WindowBounds getWindowBounds() const { return windowBounds; }
+        [[nodiscard]] WindowBounds getWindowBounds() const { return windowBounds; }
 
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.

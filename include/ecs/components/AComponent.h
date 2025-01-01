@@ -31,12 +31,10 @@ namespace mars {
 
         //! Update the component.
         //! @param time The game time.
-        virtual void update(const Time &time) {
-        }
+        virtual void update(const Time &time) {}
 
         //! Render the component.
-        virtual void render() {
-        }
+        virtual void render() {}
 
         //! Destroy the component.
         virtual void destroy();
@@ -47,7 +45,7 @@ namespace mars {
 
     protected:
         Framework& framework;
-        State state = State::CREATED;
+        State state = CREATED;
         Entity* entity;
 
     };

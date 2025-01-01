@@ -53,11 +53,11 @@ namespace mars {
             componentsMap[key] = std::make_shared<T>(this);
             T* component = dynamic_cast<T*>(componentsMap[key].get());
 
-            // Pass the component to the system.
-            ecsManager.passComponentToSystem(component);
-
             // Initialize it.
             component->initialize();
+
+            // Pass the component to the system.
+            ecsManager.passComponentToSystem(component);
 
             return component;
         }
