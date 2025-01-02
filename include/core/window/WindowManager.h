@@ -46,7 +46,12 @@ namespace mars {
         void subscribeToRenderEvent(const std::function<void()> &callback);
 
         //! Initialize the window.
-        void initialize();
+        void initializeForSDL();
+
+        //! Initialize the window for OpenGLES.
+        //! @param major The major version of OpenGLES.
+        //! @param minor The minor version of OpenGLES.
+        void initializeForOpenGLES(int major = 3, int minor = 2);
 
         //! Run the event loop.
         void runEventLoop();

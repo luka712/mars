@@ -82,29 +82,20 @@ int main(int argc, char* argv[]) {
 
     framework.initialize();
 
-   auto texture = framework.getContentManager().load<mars::Texture2D>("texture/uv_test.png");
-   mars::AnimatedSprite animatedSprite(texture);
-    int hw  = texture->getWidth() * .5f;
-    int hh  = texture->getHeight() * .5f;
-    animatedSprite.setFrame(0, mars::Rect { 0, 0, hw, hh });
-    animatedSprite.setFrame(1, mars::Rect { 50, 0, hw, hh });
 
     framework.subscribeToUpdateEvent([&]( const mars::Time time) {
         ecsManager.update(time);
-        animatedSprite.update(time);
     });
 
     framework.subscribeToRenderEvent([&]() {
 
         framework.getSpriteBatch().begin();
-        const mars::Rect srcRect = animatedSprite.getSourceRect();
-        framework.getSpriteBatch().draw(&animatedSprite.getTexture(), { 100, 300, 200, 200}, srcRect, mars::Color::red());
         framework.getSpriteBatch().end();
 
         ecsManager.render();
     });
 
-    createScene(framework, entityManager);
+    // createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy();// SPDLOG_TRACE("Sample Trace output.");

@@ -4,7 +4,10 @@
 
 #include "Framework.h"
 #include "sdl/renderer/SDLRenderer.h"
+#include "opengles/renderer/OpenGLESRenderer.h"
 #include "sdl/sprite/SDLSpriteBatch.h"
+#include "opengles/sprite/OpenGLESSpriteBatch.h"
+
 #ifdef __EMSCRIPTEN__
 #include "core/log/BrowserLogger.h"
 #else
@@ -14,14 +17,22 @@ namespace mars {
     Framework::Framework(FrameworkOptions options)
     {
         currentState = State::CREATED;
+        renderingBackend = options.renderingBackend;
         onRender.resize(0);
 
         windowManager = std::make_unique<WindowManager>(*this, WindowManagerOptions{
             options.windowBounds
         });
 
-        this->renderer = std::make_unique<SDLRenderer>(*this);
-        this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
+        if (renderingBackend == RenderingBackend::SDL) {
+            this->renderer = std::make_unique<SDLRenderer>(*this);
+            this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
+        }
+        else {
+            this->renderer = std::make_unique<OpenGLESRenderer>(*this);
+            this->spriteBatch = std::make_unique<OpenGLESSpriteBatch>(*this);
+        }
+
         this->timeManager = std::make_unique<TimeManager>();
         this->imageLoader = std::make_unique<ImageLoader>(*this);
         this->textureFactory = std::make_unique<TextureFactory>(*this);
@@ -45,8 +56,15 @@ namespace mars {
     }
 
     void Framework::initialize() {
-        // WINDOW MANAGER
-        windowManager->initialize();
+
+        // Initialize window manager for appropriate rendering backend.
+        if (renderingBackend == RenderingBackend::SDL) {
+            windowManager->initializeForSDL();
+        }
+        else {
+            windowManager->initializeForOpenGLES();
+        }
+
         windowManager->subscribeToUpdateEvent([&] {
             this->update();
         });

@@ -16,14 +16,16 @@
 #include "core/texture/TextureFactory.h"
 #include "core/content/ContentManager.h"
 #include "core/input/InputManager.h"
+#include "core/renderer/enums.h"
 
 namespace mars {
 
     struct FrameworkOptions {
-        /**
-         * @brief The bounds of the window.
-         */
+        //! The window bounds.
         WindowBounds windowBounds;
+
+        //! The rendering backend.
+        RenderingBackend renderingBackend;
     };
 
     /**
@@ -33,14 +35,15 @@ namespace mars {
     class Framework {
 
     public:
-        /**
-        * Construct a new Framework object.
-        *
-        * @param options The options for the framework.
-        */
+        //! Construct a new Framework object.
+        //! @param options The options for the framework.
         explicit Framework(FrameworkOptions options);
 
         ~Framework();
+
+        //! Gets the used rendering backend.
+        //! @return The used rendering backend.
+        [[nodiscard]] RenderingBackend getRenderingBackend() const { return renderingBackend; }
 
         //! Gets the @ref WindowManager instance.
         //! @return The @ref WindowManager instance.
@@ -104,6 +107,7 @@ namespace mars {
     private:
         // FIELDS
         State currentState;
+        RenderingBackend renderingBackend;
         std::unique_ptr<WindowManager> windowManager;
         std::unique_ptr<Renderer> renderer;
         std::unique_ptr<SpriteBatch> spriteBatch;

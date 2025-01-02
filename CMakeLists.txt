@@ -23,6 +23,7 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
+find_package(glad REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -30,13 +31,14 @@ include_directories(
         ${SDL2_IMAGE_INCLUDE_DIR}
         ${GLM_INCLUDE_DIR}
         ${SPDLOG_INCLUDE_DIR}
+        ${GLAD_INCLUDE_DIR}
 )
 
 # SOURCES
 file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.cpp)
 
 # EXECUTABLE
-add_executable(mars main.cpp ${COMMON_SOURCES}
+add_executable(mars main.cpp ${COMMON_SOURCES} ${GLAD_SRC}
         src/core/log/SpdLogger.cpp
         include/core/log/SpdLogger.h
         src/core/log/Logger.cpp
@@ -58,25 +60,21 @@ add_executable(mars main.cpp ${COMMON_SOURCES}
         include/core/input/InputManager.h
         src/core/input/InputManager.cpp
         include/core/input/KeyboardState.h
-        src/core/input/KeyboardState.cpp)
+        src/core/input/KeyboardState.cpp
+        include/opengles/renderer/OpenGLESRenderer.h
+        src/opengles/renderer/OpenGLESRenderer.cpp)
 
 # LINK
-target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY})
+target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY} ${GLAD_LIBRARY})
 
 # COPY DLLS
 if(WIN32)
-    add_custom_command(TARGET mars POST_BUILD
-           COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_SOURCE_DIR}/shared_libs/SDL2.dll"
-            $<TARGET_FILE_DIR:mars>)
-    add_custom_command(TARGET mars POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_SOURCE_DIR}/shared_libs/SDL2_image.dll"
-            $<TARGET_FILE_DIR:mars>)
+    file(COPY shared_libs/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
+    file(COPY shared_libs/SDL2_image.dll DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
 # COPY ASSETS/CONTENT
-add_custom_command(TARGET mars POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_SOURCE_DIR}/content"
-        $<TARGET_FILE_DIR:mars>/content)
+file(COPY content DESTINATION ${CMAKE_BINARY_DIR})
+
+# COPY VENDOR
+file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})

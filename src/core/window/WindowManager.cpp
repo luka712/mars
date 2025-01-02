@@ -6,6 +6,8 @@
 #include <emscripten.h>
 #endif
 
+
+#include <glad/glad.h>
 #include "Framework.h"
 #include "core/window/WindowManager.h"
 #include <iostream>
@@ -25,8 +27,7 @@ void WindowManager::subscribeToUpdateEvent(const std::function<void()> &callback
     updateEvents.push_back(callback);
 }
 
-void WindowManager::initialize() {
-
+void WindowManager::initializeForSDL() {
     Logger& logger = framework.getLogger();
 
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
@@ -34,12 +35,42 @@ void WindowManager::initialize() {
         return;
     }
 
-    logger.info(std::string("Window initialized. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
+    logger.info(std::string("Window initialized for SDL. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
 
     window = SDL_CreateWindow("Mars Framework",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         windowBounds.width, windowBounds.height,
         0);
+}
+
+void WindowManager::initializeForOpenGLES(const int major, const int minor) {
+
+    Logger& logger = framework.getLogger();
+
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
+        std::string msg = "WindowManager::initializeForOpenGLES: Failed to initialize SDL.";
+        logger.error( msg);
+        throw std::runtime_error(msg);
+    }
+
+    // Set OpenGL ES version
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+
+    logger.info(std::string("Window initialized for Open GLES. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
+
+    window = SDL_CreateWindow("Mars Framework",
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        windowBounds.width, windowBounds.height,
+        SDL_WINDOW_OPENGL);
+
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+    if (context == nullptr) {
+        std::string msg = "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context.";
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
 }
 
 // Store a reference to the instance for the loop.

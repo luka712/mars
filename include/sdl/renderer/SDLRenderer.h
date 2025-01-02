@@ -5,7 +5,6 @@
 #ifndef SDLRENDERER_H
 #define SDLRENDERER_H
 
-#include <SDL.h>
 #include "core/renderer/Renderer.h"
 
 namespace mars {
