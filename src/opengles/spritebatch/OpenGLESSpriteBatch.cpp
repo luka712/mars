@@ -16,15 +16,13 @@ namespace mars {
     void OpenGLESSpriteBatch::begin() {
     }
 
-    //! @copydoc SpriteBatch::draw()
     void OpenGLESSpriteBatch::draw(Rect drawRect, Color color) {}
 
-    //! @copydoc SpriteBatch::draw()
     void OpenGLESSpriteBatch::draw(Texture2D* texture, Rect drawRect, Color color) {}
 
-    //! @copydoc SpriteBatch::draw()
     void OpenGLESSpriteBatch::draw(Texture2D* texture, Rect drawRect, Rect srcRect, Color color) {}
 
+    void OpenGLESSpriteBatch::drawString(SpriteFont *spriteFont, std::string text, glm::vec2 position, Color *color, float scale) {}
 
     void OpenGLESSpriteBatch::end() {
     }

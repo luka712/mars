@@ -38,6 +38,9 @@ namespace mars {
         //! @copydoc SpriteBatch::draw()
         void draw(Texture2D* texture, Rect drawRect, Rect srcRect, Color color) override;
 
+        //! @copydoc SpriteBatch::drawString()
+        void drawString(SpriteFont *spriteFont, std::string text, glm::vec2 position, Color *color, float scale) override;
+
         //! @copydoc SpriteBatch::end()
         void end() override;
 

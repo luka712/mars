@@ -24,6 +24,7 @@ find_package(SDL2_image REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
+find_package(tinyxml2 REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -32,13 +33,17 @@ include_directories(
         ${GLM_INCLUDE_DIR}
         ${SPDLOG_INCLUDE_DIR}
         ${GLAD_INCLUDE_DIR}
+        ${TINYXML2_INCLUDE_DIR}
 )
 
 # SOURCES
 file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.cpp)
 
 # EXECUTABLE
-add_executable(mars main.cpp ${COMMON_SOURCES} ${GLAD_SRC}
+add_executable(mars main.cpp
+        ${COMMON_SOURCES}
+        ${GLAD_SRC}
+        ${TINYXML2_SRC}
         src/core/log/SpdLogger.cpp
         include/core/log/SpdLogger.h
         src/core/log/Logger.cpp
@@ -62,10 +67,23 @@ add_executable(mars main.cpp ${COMMON_SOURCES} ${GLAD_SRC}
         include/core/input/KeyboardState.h
         src/core/input/KeyboardState.cpp
         include/opengles/renderer/OpenGLESRenderer.h
-        src/opengles/renderer/OpenGLESRenderer.cpp)
+        src/opengles/renderer/OpenGLESRenderer.cpp
+        src/core/fonts/SpriteFontManager.cpp
+        include/core/fonts/SpriteFontManager.h
+        include/core/fonts/SpriteFont.h
+        src/core/fonts/SpriteFontCharacter.cpp
+        include/core/fonts/SpriteFontCharacter.h
+        include/core/math/Quad.h
+        src/core/loaders/SpriteFontLoader.cpp)
 
 # LINK
-target_link_libraries(mars ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${GLM_LIBRARY} ${SPDLOG_LIBRARY} ${GLAD_LIBRARY})
+target_link_libraries(mars
+        ${SDL2_LIBRARY}
+        ${SDL2_IMAGE_LIBRARY}
+        ${GLM_LIBRARY}
+        ${SPDLOG_LIBRARY}
+        ${GLAD_LIBRARY}
+)
 
 # COPY DLLS
 if(WIN32)

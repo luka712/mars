@@ -57,8 +57,6 @@ void createScene(mars::Framework& framework, mars::EntityManager& entityManager)
     transform->setDrawRectangle(mars::Rect { 100, 100, 200, 200 });
     mars::SpriteRenderer* spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
     spriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
-
-
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -72,7 +70,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Hello, World!" << std::endl;
 
     mars::Framework framework(mars::FrameworkOptions {
-        mars::WindowBounds(1280, 720)
+        mars::WindowBounds(1280, 720),
+        mars::RenderingBackend::SDL
     });
 
 
@@ -82,6 +81,8 @@ int main(int argc, char* argv[]) {
 
     framework.initialize();
 
+    auto spriteFont = framework.getSpriteFontManager().getDefaultFont();
+
 
     framework.subscribeToUpdateEvent([&]( const mars::Time time) {
         ecsManager.update(time);
@@ -90,12 +91,13 @@ int main(int argc, char* argv[]) {
     framework.subscribeToRenderEvent([&]() {
 
         framework.getSpriteBatch().begin();
+        framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
         framework.getSpriteBatch().end();
 
         ecsManager.render();
     });
 
-    // createScene(framework, entityManager);
+    createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy();// SPDLOG_TRACE("Sample Trace output.");

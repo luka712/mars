@@ -17,6 +17,8 @@
 #include "core/content/ContentManager.h"
 #include "core/input/InputManager.h"
 #include "core/renderer/enums.h"
+#include "core/loaders/SpriteFontLoader.h"
+#include "core/fonts/SpriteFontManager.h"
 
 namespace mars {
 
@@ -81,6 +83,14 @@ namespace mars {
         //! @return The @ref InputManager instance.
         [[nodiscard]] InputManager& getInputManager() const { return *inputManager; }
 
+        //! Gets the @ref SpriteFontLoader instance.
+        //! @return The @ref SpriteFontLoader instance.
+        [[nodiscard]] SpriteFontLoader& getSpriteFontLoader() const { return *spriteFontLoader; }
+
+        //! Gets the @ref SpriteFontManager instance.
+        //! @return The @ref SpriteFontManager instance.
+        [[nodiscard]] SpriteFontManager& getSpriteFontManager() const { return *spriteFontManager; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -117,6 +127,8 @@ namespace mars {
         std::unique_ptr<TextureFactory> textureFactory;
         std::unique_ptr<ContentManager> contentManager;
         std::unique_ptr<InputManager> inputManager;
+        std::unique_ptr<SpriteFontLoader> spriteFontLoader;
+        std::unique_ptr<SpriteFontManager> spriteFontManager;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;
