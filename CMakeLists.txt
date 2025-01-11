@@ -43,38 +43,7 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
-        src/core/log/SpdLogger.cpp
-        include/core/log/SpdLogger.h
-        src/core/log/Logger.cpp
-        include/core/log/BrowserLogger.h
-        src/core/log/BrowserLogger.cpp
-        include/ecs/transform/RectTransform.h
-        src/ecs/sprite/SpriteRendererSystem.cpp
-        include/core/loaders/ImageLoader.h
-        include/core/data/SDLImageData.h
-        include/sdl/texture/SDLTexture2D.h
-        include/core/texture/TextureEnums.h
-        include/sdl/util/SDLConverter.h
-        src/sdl/util/SDLConverter.cpp
-        include/core/sprite/Sprite.h
-        src/core/sprite/Sprite.cpp
-        include/core/sprite/AnimatedSprite.h
-        src/core/sprite/AnimatedSprite.cpp
-        include/core/content/ContentManager.h
-        include/core/input/InputManager.h
-        src/core/input/InputManager.cpp
-        include/core/input/KeyboardState.h
-        src/core/input/KeyboardState.cpp
-        include/opengles/renderer/OpenGLESRenderer.h
-        src/opengles/renderer/OpenGLESRenderer.cpp
-        src/core/fonts/SpriteFontManager.cpp
-        include/core/fonts/SpriteFontManager.h
-        include/core/fonts/SpriteFont.h
-        src/core/fonts/SpriteFontCharacter.cpp
-        include/core/fonts/SpriteFontCharacter.h
-        include/core/math/Quad.h
-        src/core/loaders/SpriteFontLoader.cpp)
+        ${TINYXML2_SRC})
 
 # LINK
 target_link_libraries(mars

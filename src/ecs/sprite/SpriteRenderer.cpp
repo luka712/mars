@@ -4,10 +4,11 @@
 
 #include <sstream>
 #include "ecs/sprite/SpriteRenderer.h"
-#include <ecs/entity/Entity.h>
-
+#include "ecs/sprite/AnimatedSpriteRenderer.h"
+#include "ecs/entity/Entity.h"
 
 namespace mars {
+
     SpriteRenderer::SpriteRenderer(Entity* entity)
         : AComponent(entity), color(Color::white()) {
     }
@@ -25,6 +26,8 @@ namespace mars {
     }
 
     void SpriteRenderer::initialize() {
+
+        // Entity must have RectTransform component.
         rectTransform = entity->getComponent<RectTransform>();
         if (rectTransform == nullptr) {
             std::string msg = "SpriteRenderer component requires RectTransform component.";

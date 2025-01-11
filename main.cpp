@@ -7,6 +7,7 @@
 #include "Framework.h"
 #include "core/sprite/AnimatedSprite.h"
 #include "ecs/ECSManager.h"
+#include "ecs/tilemap/TileMap.h"
 // #include "spdlog/spdlog.h"
 // #include "spdlog/sinks/basic_file_sink.h"
 
@@ -39,9 +40,29 @@ public:
 };
 
 
-void createScene(mars::Framework& framework, mars::EntityManager& entityManager) {
-    std::shared_ptr<mars::Texture2D> uvTestTexture = framework.getContentManager()
+void createScene(const mars::Framework& framework, mars::EntityManager& entityManager) {
+
+
+    std::shared_ptr<mars::Texture2D> uvTestTexture = framework
+        .getContentManager()
         .load<mars::Texture2D>("texture/uv_test.png");
+
+    std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+        .getContentManager()
+        .load<mars::Texture2D>("tilemaps/jungle.png");
+
+    std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
+    tileMap->addComponent<mars::RectTransform>();
+    auto tileMapComponent = tileMap->addComponent<mars::TileMap>();
+    tileMapComponent->setTexture(tileMapTexture);
+    tileMapComponent->loadTiles(glm::vec2(32, 32),
+        {
+            {2, 2, 2, 2},
+            {1, 1, 1, 1},
+            {2, 2, 2, 2},
+            {3, 3, 3, 3},
+            {1, 2, 1, 1, 1, 1, 1}
+        });
 
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();
@@ -82,7 +103,6 @@ int main(int argc, char* argv[]) {
     framework.initialize();
 
     auto spriteFont = framework.getSpriteFontManager().getDefaultFont();
-
 
     framework.subscribeToUpdateEvent([&]( const mars::Time time) {
         ecsManager.update(time);

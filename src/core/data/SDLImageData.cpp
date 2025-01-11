@@ -28,6 +28,9 @@ namespace mars {
     }
 
     void SDLImageData::destroy() {
-        SDL_FreeSurface(surface);
+        if (surface != nullptr) {
+            SDL_FreeSurface(surface);
+            surface = nullptr;
+        }
     }
 }

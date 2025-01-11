@@ -14,7 +14,7 @@ namespace mars {
         sprites.emplace_back(spriteRenderer);
     }
 
-    void SpriteRendererSystem::remove(SpriteRenderer *spriteRenderer) {
+    void SpriteRendererSystem::remove(const SpriteRenderer *spriteRenderer) {
         for (int i = 0; i < sprites.size(); i++) {
             if (sprites[i] == spriteRenderer) {
                 sprites.erase(sprites.begin() + i);
@@ -31,7 +31,7 @@ namespace mars {
 
     void SpriteRendererSystem::render() {
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
-        spriteBatch.begin();
+
         for (SpriteRenderer* spriteRenderer: sprites) {
             const RectTransform *rectTransform = spriteRenderer->getRectTransform();
             Rect drawRect = rectTransform->getDrawRectangle();
@@ -41,7 +41,6 @@ namespace mars {
             } else {
                 spriteBatch.draw(drawRect, spriteRenderer->color);
             }
-            spriteBatch.end();
         }
     }
 }

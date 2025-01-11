@@ -29,7 +29,7 @@ namespace mars {
 
         //! Remove a sprite component from the system.
         //! @param sprite The sprite component.
-        void remove(SpriteRenderer *sprite);
+        void remove(const SpriteRenderer *sprite);
 
         //! Render the sprite components.
         void render();

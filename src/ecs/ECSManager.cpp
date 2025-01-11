@@ -13,6 +13,7 @@ namespace mars {
         rectTransformSystem = std::make_unique<RectTransformSystem>();
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(framework);
         scriptSystem = std::make_unique<ScriptSystem>(framework);
+        tileMapSystem = std::make_unique<TileMapSystem>(framework);
     }
 
     Framework &ECSManager::getFramework() const {
@@ -23,28 +24,36 @@ namespace mars {
         return *entityManager;
     }
 
-    void ECSManager::passComponentToSystem(RectTransform *rectTransform) const {
-        rectTransformSystem->add(rectTransform);
+    void ECSManager::passComponentToSystem(RectTransform *component) const {
+        rectTransformSystem->add(component);
      }
 
-    void ECSManager::passComponentToSystem(SpriteRenderer* spriteRenderer) const {
-        spriteRendererSystem->add(spriteRenderer);
+    void ECSManager::passComponentToSystem(SpriteRenderer* component) const {
+        spriteRendererSystem->add(component);
     }
 
-    void ECSManager::passComponentToSystem(AScript* script) const {
-        scriptSystem->add(script);
+    void ECSManager::passComponentToSystem(AScript* component) const {
+        scriptSystem->add(component);
     }
 
-    void ECSManager::removeComponentFromSystem(RectTransform* rectTransform) const {
-        rectTransformSystem->remove(rectTransform);
+    void ECSManager::passComponentToSystem(TileMap *component) const {
+        tileMapSystem->add(component);
     }
 
-    void ECSManager::removeComponentFromSystem(SpriteRenderer* spriteRenderer) const {
+    void ECSManager::removeComponentFromSystem(RectTransform* component) const {
+        rectTransformSystem->remove(component);
+    }
+
+    void ECSManager::removeComponentFromSystem(const SpriteRenderer* spriteRenderer) const {
         spriteRendererSystem->remove(spriteRenderer);
     }
 
-    void ECSManager::removeComponentFromSystem(AScript* script) const {
-        scriptSystem->remove(script);
+    void ECSManager::removeComponentFromSystem(AScript* component) const {
+        scriptSystem->remove(component);
+    }
+
+    void ECSManager::removeComponentFromSystem(TileMap *component) const {
+        tileMapSystem->remove(component);
     }
 
     void ECSManager::update(const Time &time) const {
@@ -54,8 +63,12 @@ namespace mars {
     }
 
     void ECSManager::render() const {
+        SpriteBatch& spriteBatch = framework.getSpriteBatch();
+        spriteBatch.begin();
         scriptSystem->render();
+        tileMapSystem->render();
         spriteRendererSystem->render();
+        spriteBatch.end();
     }
 
 }
