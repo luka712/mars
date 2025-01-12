@@ -49,11 +49,13 @@ namespace mars {
 
         std::string toString() override;
 
+        //! The size of tiles.
+        glm::vec2 tileSize;
+
         //! The tint color of tile map.
         Color color;
     protected:
         RectTransform* rectTransform{};
-        glm::vec2 tileSize;
         std::vector<TileMapChunk> chunks;
         std::shared_ptr<Texture2D> texture;
     };

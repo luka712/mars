@@ -53,7 +53,6 @@ namespace mars {
         this->tileSize = tileSize;
         this->texture = texture;
 
-        auto textureRows = static_cast<int32_t>(static_cast<float>(texture->getHeight()) / tileSize.y);
         auto textureColumns = static_cast<int32_t>(static_cast<float>(texture->getWidth()) / tileSize.x);
 
         const auto tw = static_cast<int32_t>(tileSize.x);
@@ -66,7 +65,7 @@ namespace mars {
 
                 Rect sourceRect{};
                 const int32_t tx = index % textureColumns;
-                const int32_t ty = index / textureRows;
+                const int32_t ty = index / textureColumns;
 
                 sourceRect.x = tx * tw;
                 sourceRect.y = ty * th;

@@ -63,6 +63,7 @@ void createScene(const mars::Framework& framework, mars::EntityManager& entityMa
             {3, 3, 3, 3},
             {1, 2, 1, 1, 1, 1, 1}
         });
+    tileMapComponent->tileSize = glm::vec2(64, 64);
 
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();

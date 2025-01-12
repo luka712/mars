@@ -19,6 +19,7 @@
 #include "core/renderer/enums.h"
 #include "core/loaders/SpriteFontLoader.h"
 #include "core/fonts/SpriteFontManager.h"
+#include "core/loaders/FIleLoader.h"
 
 namespace mars {
 
@@ -91,6 +92,10 @@ namespace mars {
         //! @return The @ref SpriteFontManager instance.
         [[nodiscard]] SpriteFontManager& getSpriteFontManager() const { return *spriteFontManager; }
 
+        //! Gets the @ref FileLoader instance.
+        //! @return The @ref FileLoader instance.
+        [[nodiscard]] FileLoader& getFileLoader() const { return *fileLoader; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -129,6 +134,7 @@ namespace mars {
         std::unique_ptr<InputManager> inputManager;
         std::unique_ptr<SpriteFontLoader> spriteFontLoader;
         std::unique_ptr<SpriteFontManager> spriteFontManager;
+        std::unique_ptr<FileLoader> fileLoader;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;
