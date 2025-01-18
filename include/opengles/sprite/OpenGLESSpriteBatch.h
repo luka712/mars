@@ -7,7 +7,6 @@
 
 
 #include "core/sprite/SpriteBatch.h"
-#include <array>
 
 #define SDL_SPRITEBATCH_MAX_DRAW_ITEMS 1000
 

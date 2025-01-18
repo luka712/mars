@@ -41,6 +41,7 @@ namespace mars {
         this->spriteFontLoader = std::make_unique<SpriteFontLoader>(*this);
         this->spriteFontManager = std::make_unique<SpriteFontManager>(*this);
         this->fileLoader = std::make_unique<FileLoader>(*this);
+        this->buffersFactory = std::make_unique<BuffersFactory>(*this);
 #ifdef __EMSCRIPTEN__
         this->logger = std::make_unique<BrowserLogger>();
 #else
@@ -78,7 +79,8 @@ namespace mars {
         // RENDERER
         renderer->initialize();
         spriteBatch->initialize();
-        spriteFontManager->initialize();
+        // TODO: uncomment
+        // spriteFontManager->initialize();
 
         logger->info("Framework initialized");
 

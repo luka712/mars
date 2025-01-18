@@ -6,6 +6,8 @@
 #define FRAMEWORK_H
 
 #include <memory>
+#include <opengles/renderer/OpenGLESRenderer.h>
+
 #include "core/life_management/State.h"
 #include "core/window/WindowManager.h"
 #include "core/renderer/Renderer.h"
@@ -20,6 +22,7 @@
 #include "core/loaders/SpriteFontLoader.h"
 #include "core/fonts/SpriteFontManager.h"
 #include "core/loaders/FIleLoader.h"
+#include "core/buffers/BuffersFactory.h"
 
 namespace mars {
 
@@ -54,7 +57,7 @@ namespace mars {
 
         //! Gets the @ref Renderer instance.
         //! @return The @ref Renderer instance.
-        [[nodiscard]] Renderer &getRenderer() const { return *renderer; }
+        [[nodiscard]] Renderer& getRenderer() const { return *renderer; }
 
         //! Gets the @ref SpriteBatch instance.
         //! @return The @ref SpriteBatch instance.
@@ -96,6 +99,10 @@ namespace mars {
         //! @return The @ref FileLoader instance.
         [[nodiscard]] FileLoader& getFileLoader() const { return *fileLoader; }
 
+        //! Gets the @ref BuffersFactory instance.
+        //! @return The @ref BuffersFactory instance.
+        [[nodiscard]] BuffersFactory& getBuffersFactory() const { return *buffersFactory; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -135,6 +142,7 @@ namespace mars {
         std::unique_ptr<SpriteFontLoader> spriteFontLoader;
         std::unique_ptr<SpriteFontManager> spriteFontManager;
         std::unique_ptr<FileLoader> fileLoader;
+        std::unique_ptr<BuffersFactory> buffersFactory;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;

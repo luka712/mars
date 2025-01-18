@@ -11,27 +11,25 @@
 // #include "spdlog/spdlog.h"
 // #include "spdlog/sinks/basic_file_sink.h"
 
-class MovePlayer final : public mars::AScript{
-
-    mars::RectTransform* transform;
+class MovePlayer final : public mars::AScript {
+    mars::RectTransform *transform;
 
 public:
     MovePlayer(mars::Entity *entity)
-        : AScript(entity){
+        : AScript(entity) {
     }
 
     void initialize() override {
-       transform = entity->getComponent<mars::RectTransform>();
+        transform = entity->getComponent<mars::RectTransform>();
     }
 
-    void update(const mars::Time& time) override {
+    void update(const mars::Time &time) override {
         auto keyboardState = framework.getInputManager().getKeyboardState();
         auto rect = transform->getDrawRectangle();
 
         if (keyboardState.isKeyDown(mars::Key::A)) {
             rect.x -= 1;
-        }
-        else if (keyboardState.isKeyDown(mars::Key::D)) {
+        } else if (keyboardState.isKeyDown(mars::Key::D)) {
             rect.x += 1;
         }
 
@@ -40,88 +38,93 @@ public:
 };
 
 
-void createScene(const mars::Framework& framework, mars::EntityManager& entityManager) {
-
-
+void createScene(const mars::Framework &framework, mars::EntityManager &entityManager) {
     std::shared_ptr<mars::Texture2D> uvTestTexture = framework
-        .getContentManager()
-        .load<mars::Texture2D>("texture/uv_test.png");
+            .getContentManager()
+            .load<mars::Texture2D>("texture/uv_test.png");
 
     std::shared_ptr<mars::Texture2D> tileMapTexture = framework
-        .getContentManager()
-        .load<mars::Texture2D>("tilemaps/jungle.png");
+            .getContentManager()
+            .load<mars::Texture2D>("tilemaps/jungle.png");
 
     std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
     tileMap->addComponent<mars::RectTransform>();
     auto tileMapComponent = tileMap->addComponent<mars::TileMap>();
     tileMapComponent->setTexture(tileMapTexture);
     tileMapComponent->loadTiles(glm::vec2(32, 32),
-        {
-            {2, 2, 2, 2},
-            {1, 1, 1, 1},
-            {2, 2, 2, 2},
-            {3, 3, 3, 3},
-            {1, 2, 1, 1, 1, 1, 1}
-        });
+                                {
+                                    {2, 2, 2, 2},
+                                    {1, 1, 1, 1},
+                                    {2, 2, 2, 2},
+                                    {3, 3, 3, 3},
+                                    {1, 2, 1, 1, 1, 1, 1}
+                                });
     tileMapComponent->tileSize = glm::vec2(64, 64);
 
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();
-    playerTransform->setDrawRectangle(mars::Rect { 300, 100, 200, 200 });
+    playerTransform->setDrawRectangle(mars::Rect{300, 100, 200, 200});
     auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
     playerSpriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
-    playerSpriteRenderer->addAnimation("left", { mars::Rect { 0, 0, 50, 50 }, mars::Rect { 50, 0, 50, 50 } });
+    playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 0, 50, 50}, mars::Rect{50, 0, 50, 50}});
     playerSpriteRenderer->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
 
     std::shared_ptr<mars::Entity> entity = entityManager.createEntity("projectile");
-    mars::RectTransform* transform = entity->addComponent<mars::RectTransform>();
-    transform->setDrawRectangle(mars::Rect { 100, 100, 200, 200 });
-    mars::SpriteRenderer* spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
+    mars::RectTransform *transform = entity->addComponent<mars::RectTransform>();
+    transform->setDrawRectangle(mars::Rect{100, 100, 200, 200});
+    mars::SpriteRenderer *spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
     spriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-int main(int argc, char* argv[]) {
-
+int main(int argc, char *argv[]) {
     // spdlog::info("Sample Info output.", 1);
     // spdlog::warn("Sample Warn output.");
     // spdlog::error("Sample Error output.");
 
     std::cout << "Hello, World!" << std::endl;
 
-    mars::Framework framework(mars::FrameworkOptions {
+    mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::SDL
+        mars::RenderingBackend::OpenGLES
     });
 
 
     mars::ECSManager ecsManager(framework);
 
-    mars::EntityManager& entityManager = ecsManager.getEntityManager();
+    mars::EntityManager &entityManager = ecsManager.getEntityManager();
 
     framework.initialize();
 
-    auto spriteFont = framework.getSpriteFontManager().getDefaultFont();
+    std::vector<float> vertex = {
+        0.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f
+    };
+    auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
+    auto indexBuffer = framework.getBuffersFactory().createindexBuffer({0, 1, 2, 2, 3, 0}, "Hello");
+    vertexBuffer->printInfo();
+    indexBuffer->printInfo();
 
-    framework.subscribeToUpdateEvent([&]( const mars::Time time) {
-        ecsManager.update(time);
+    framework.subscribeToUpdateEvent([&](const mars::Time time) {
+        // ecsManager.update(time);
     });
 
     framework.subscribeToRenderEvent([&]() {
+        // framework.getSpriteBatch().begin();
+        //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+        //framework.getSpriteBatch().end();
 
-        framework.getSpriteBatch().begin();
-        framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-        framework.getSpriteBatch().end();
-
-        ecsManager.render();
+        // ecsManager.render();
     });
 
-    createScene(framework, entityManager);
+    // createScene(framework, entityManager);
 
     framework.runEventLoop();
-    framework.destroy();// SPDLOG_TRACE("Sample Trace output.");
+    framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");
 
     return 0;
 }

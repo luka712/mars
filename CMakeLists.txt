@@ -73,7 +73,16 @@ add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
         ${TINYXML2_SRC}
-        game/chopper-shooter/move-player.h)
+        include/opengles/util/OpenGLESBufferUtil.h
+        include/opengles/util/OpenGLESUtil.h
+        include/opengles/buffers/OpenGLESVertexBuffer.h
+        include/core/buffers/BuffersFactory.h
+        src/core/buffers/BuffersFactory.cpp
+        src/opengles/util/OpenGLESBufferUtil.cpp
+        include/opengles/util/OpenGLESConverter.h
+        include/core/buffers/AIndexBuffer.h
+        include/opengles/buffers/OpenGLESIndexBuffer.h
+        src/opengles/buffers/OpenGLESIndexBuffer.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
