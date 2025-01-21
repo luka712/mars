@@ -3,12 +3,12 @@
 //
 
 #include "ecs/ECSManager.h"
+#include <ecs/entity/Entity.h>
 
 namespace mars {
-
-    ECSManager::ECSManager(Framework& framework)
-        : framework(framework)
-    {
+    ECSManager::ECSManager(Framework &framework)
+        : framework(framework) {
+        layerManager = std::make_unique<LayerManager>(framework);
         entityManager = std::make_unique<EntityManager>(*this);
         rectTransformSystem = std::make_unique<RectTransformSystem>();
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(framework);
@@ -26,13 +26,13 @@ namespace mars {
 
     void ECSManager::passComponentToSystem(RectTransform *component) const {
         rectTransformSystem->add(component);
-     }
+    }
 
-    void ECSManager::passComponentToSystem(SpriteRenderer* component) const {
+    void ECSManager::passComponentToSystem(SpriteRenderer *component) const {
         spriteRendererSystem->add(component);
     }
 
-    void ECSManager::passComponentToSystem(AScript* component) const {
+    void ECSManager::passComponentToSystem(AScript *component) const {
         scriptSystem->add(component);
     }
 
@@ -40,15 +40,15 @@ namespace mars {
         tileMapSystem->add(component);
     }
 
-    void ECSManager::removeComponentFromSystem(RectTransform* component) const {
+    void ECSManager::removeComponentFromSystem(RectTransform *component) const {
         rectTransformSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(const SpriteRenderer* spriteRenderer) const {
+    void ECSManager::removeComponentFromSystem(const SpriteRenderer *spriteRenderer) const {
         spriteRendererSystem->remove(spriteRenderer);
     }
 
-    void ECSManager::removeComponentFromSystem(AScript* component) const {
+    void ECSManager::removeComponentFromSystem(AScript *component) const {
         scriptSystem->remove(component);
     }
 
@@ -56,19 +56,36 @@ namespace mars {
         tileMapSystem->remove(component);
     }
 
+    void ECSManager::frameStart() const {
+        spriteRendererSystem->frameStart();
+        tileMapSystem->frameStart();
+    }
+
     void ECSManager::update(const Time &time) const {
+        const std::vector<std::shared_ptr<Layer> > &layers = layerManager->getLayers();
+
         scriptSystem->update(time);
         rectTransformSystem->update(time);
-        spriteRendererSystem->update(time);
+
+        for (auto &layer: layers) {
+            const uint32_t currentLayerOrder = layer->getOrder();
+            spriteRendererSystem->update(time, currentLayerOrder);
+        }
     }
 
     void ECSManager::render() const {
-        SpriteBatch& spriteBatch = framework.getSpriteBatch();
+        const std::vector<std::shared_ptr<Layer> > &layers = layerManager->getLayers();
+        SpriteBatch &spriteBatch = framework.getSpriteBatch();
+
         spriteBatch.begin();
+
         scriptSystem->render();
-        tileMapSystem->render();
-        spriteRendererSystem->render();
+        for (auto &layer: layers) {
+            const uint32_t currentLayerOrder = layer->getOrder();
+            tileMapSystem->render(currentLayerOrder);
+            spriteRendererSystem->render(currentLayerOrder);
+        }
+
         spriteBatch.end();
     }
-
 }

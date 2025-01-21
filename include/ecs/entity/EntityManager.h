@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 
+#include "ecs/layer/Layer.h"
+
 namespace mars {
 
     class Framework;
@@ -31,6 +33,10 @@ namespace mars {
         //! @param entityName The name of the entity.
         //! @return The reference to the @see Entity.
         std::shared_ptr<Entity> createEntity(std::string entityName);
+
+        //! Get all the entities.
+        //! @return The vector of entities.
+        [[nodiscard]] const std::vector<std::shared_ptr<Entity>>& getEntities() { return entities; }
 
     private:
         Framework& framework;

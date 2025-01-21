@@ -12,6 +12,7 @@
 #include "ecs/components/AComponent.h"
 
 namespace mars {
+    class Layer;
     class Framework;
     class EntityManager;
     class ECSManager;
@@ -25,10 +26,20 @@ namespace mars {
 
         //! Gets the framework.
         //! @return The framework.
-        Framework& getFramework() const;
+        [[nodiscard]] Framework& getFramework() const;
 
         //! Get the name of the entity.
         [[nodiscard]] std::string getName() const;
+
+        //! Get the layer of the entity.
+        [[nodiscard]] const Layer& getLayer() const { return *layer; }
+
+        //! Set the layer of the entity.
+        //! @param layer Set the layer of the entity.
+        void setLayer(const std::shared_ptr<Layer> &layer);
+
+        //! Unset the layer of the entity. This will create default layer.
+        void unsetLayer();
 
         //! Set the name of the entity.
         //! @param name The name of the entity.
@@ -75,13 +86,14 @@ namespace mars {
 
         //! Get the information about the entity.
         //! @return The information about the entity.
-        std::string toString() const;
+        [[nodiscard]] std::string toString() const;
 
     private:
         Framework& framework;
         ECSManager &ecsManager;
         std::string name;
         std::map<std::string, std::shared_ptr<AComponent>> componentsMap;
+        std::shared_ptr<Layer> layer;
     };
 }
 

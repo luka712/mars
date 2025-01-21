@@ -12,6 +12,7 @@
 #include "ecs/sprite/SpriteRendererSystem.h"
 #include "ecs/script/ScriptSystem.h"
 #include "ecs/tilemap/TileMapSystem.h"
+#include "ecs/layer/LayerManager.h"
 
 namespace mars {
 
@@ -31,6 +32,10 @@ namespace mars {
         //! Get the entity manager.
         //! @return The entity manager.
         [[nodiscard]] EntityManager &getEntityManager() const;
+
+        //! Get the layer manager.
+        //! @return The layer manager.
+        [[nodiscard]] LayerManager& getLayerManager() const {return *layerManager;}
 
         //! Passes the rect transform component to the rect transform system.
         //! @param component The rect transform component.
@@ -64,6 +69,9 @@ namespace mars {
         //! @param component The component to remove.
         void removeComponentFromSystem(TileMap* component) const;
 
+        //! Called when frame starts. Prepares the system for rendering, by sorting according to layer order.
+        void frameStart() const;
+
         //! Update the ECSManager and all the systems.
         //! @param time The game time.
         void update(const Time &time) const;
@@ -73,6 +81,7 @@ namespace mars {
 
       private:
         Framework& framework;
+        std::unique_ptr<LayerManager> layerManager;
         std::unique_ptr<EntityManager> entityManager;
         std::unique_ptr<RectTransformSystem> rectTransformSystem;
         std::unique_ptr<SpriteRendererSystem> spriteRendererSystem;

@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::OpenGLES
+        mars::RenderingBackend::SDL
     });
 
 
@@ -109,8 +109,11 @@ int main(int argc, char *argv[]) {
     vertexBuffer->printInfo();
     indexBuffer->printInfo();
 
+    // FRAME START EVENT?
+
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
-        // ecsManager.update(time);
+        ecsManager.frameStart();
+        ecsManager.update(time);
     });
 
     framework.subscribeToRenderEvent([&]() {
@@ -118,10 +121,10 @@ int main(int argc, char *argv[]) {
         //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
         //framework.getSpriteBatch().end();
 
-        // ecsManager.render();
+        ecsManager.render();
     });
 
-    // createScene(framework, entityManager);
+    createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

@@ -7,9 +7,12 @@
 
 #include "core/math/Color.h"
 #include "core/sprite/Sprite.h"
+#include "ecs/layer/Layer.h"
 #include "ecs/transform/RectTransform.h"
 
 namespace mars {
+
+    class SpriteRendererSystem;
 
     //! The SpriteRenderer class.
     //! Represents a sprite renderer component.
@@ -38,6 +41,7 @@ namespace mars {
         //! The color of the sprite.
         Color color;
     protected:
+          SpriteRendererSystem* system{};
           RectTransform* rectTransform{};
           Sprite* sprite{};
     };

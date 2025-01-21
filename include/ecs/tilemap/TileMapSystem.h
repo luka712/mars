@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "ecs/tilemap/TileMap.h"
+#include "ecs/layer/Layer.h"
 
 namespace mars {
 
@@ -23,15 +24,28 @@ namespace mars {
         //! @param tileMap The tile map component.
         void add(TileMap* tileMap);
 
+        //! Called when frame starts. Prepares the system for rendering, by sorting according to layer order.
+        void frameStart();
+
         //! Remove a tile map component from the system.
         //! @param tileMap The tile map component.
         void remove(const TileMap *tileMap);
 
         //! Render the tile map components.
-        void render();
+        //! @param currentLayerOrder The current layer order.
+        void render(uint32_t currentLayerOrder);
     private:
         Framework& framework;
         std::vector<TileMap*> tileMaps;
+
+        //! Layer order is key, while sprites to render are values.
+        std::map<uint32_t, std::vector<TileMap *> > layerOrderTileMapsMap;
+        //! Layer order is key, while sprites to render count is value.
+        std::map<uint32_t, uint32_t> layerOrderTileMapCountMap;
+
+        //! Move the tile map to the layer map.
+        //! @param tileMap The tile map.
+        void moveToLayerMap(TileMap *tileMap);
     };
 }
 

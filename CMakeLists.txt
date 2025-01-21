@@ -82,7 +82,11 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/opengles/util/OpenGLESConverter.h
         include/core/buffers/AIndexBuffer.h
         include/opengles/buffers/OpenGLESIndexBuffer.h
-        src/opengles/buffers/OpenGLESIndexBuffer.cpp)
+        src/opengles/buffers/OpenGLESIndexBuffer.cpp
+        include/ecs/layer/Layer.h
+        src/ecs/layer/Layer.cpp
+        include/ecs/layer/LayerManager.h
+        src/ecs/layer/LayerManager.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

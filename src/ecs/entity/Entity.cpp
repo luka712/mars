@@ -7,14 +7,15 @@
 #include "ecs/entity/Entity.h"
 #include "ecs/ECSManager.h"
 
-namespace  mars {
-
-    Entity::Entity(ECSManager& ecsManager, std::string name)
-        : framework(ecsManager.getFramework()), ecsManager(ecsManager), name(std::move(name))
-    {
+namespace mars {
+    Entity::Entity(ECSManager &ecsManager, std::string name)
+        : framework(ecsManager.getFramework()),
+          ecsManager(ecsManager),
+          name(std::move(name)),
+          layer(ecsManager.getLayerManager().getDefaultLayer()) {
     }
 
-    Framework& Entity::getFramework() const {
+    Framework &Entity::getFramework() const {
         return framework;
     }
 
@@ -26,11 +27,19 @@ namespace  mars {
         this->name = name;
     }
 
+    void Entity::setLayer(const std::shared_ptr<Layer> &layer) {
+        this->layer = layer;
+    }
+
+    void Entity::unsetLayer() {
+        this->layer = ecsManager.getLayerManager().getDefaultLayer();
+    }
+
     std::string Entity::toString() const {
         std::string result;
         result += "Entity: " + name + "\n";
         result += "Components: \n";
-        for (std::pair<std::string, std::shared_ptr<AComponent>> keyPair : componentsMap) {
+        for (std::pair<std::string, std::shared_ptr<AComponent> > keyPair: componentsMap) {
             result += "\t" + keyPair.second->toString() + "\n";
         }
         return result;

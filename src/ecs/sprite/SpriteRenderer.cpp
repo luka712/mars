@@ -25,6 +25,7 @@ namespace mars {
         this->sprite = sprite;
     }
 
+
     void SpriteRenderer::initialize() {
 
         // Entity must have RectTransform component.
