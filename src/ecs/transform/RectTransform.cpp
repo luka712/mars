@@ -15,7 +15,7 @@ namespace mars {
         return drawRectangle;
     }
 
-    void RectTransform::setDrawRectangle(Rect drawRectangle) {
+    void RectTransform::setDrawRectangle(const Rect drawRectangle) {
         this->drawRectangle = drawRectangle;
         isDirty = true;
     }

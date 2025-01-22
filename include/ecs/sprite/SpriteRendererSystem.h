@@ -9,6 +9,7 @@
 #include <map>
 #include "ecs/layer/Layer.h"
 #include "ecs/sprite/SpriteRenderer.h"
+#include "ecs/camera/Camera2D.h"
 
 namespace mars {
     class Framework;
@@ -38,7 +39,8 @@ namespace mars {
 
         //! Render the sprite components.
         //! @param currentLayerOrder The current layer order being rendered.
-        void render(uint32_t currentLayerOrder);
+        //! @param camera The camera.
+        void render(uint32_t currentLayerOrder, Camera2D& camera);
 
     private:
         Framework &framework;

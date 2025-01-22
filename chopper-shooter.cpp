@@ -61,6 +61,11 @@ void createScene(const mars::Framework &framework,
     tileMapComponent->loadTiles(glm::vec2(32, 32), map);
     tileMapComponent->tileSize = glm::vec2(64, 64);
 
+    // CAMERA
+    std::shared_ptr<mars::Entity> camera = entityManager.createEntity("camera");
+    camera->addComponent<mars::RectTransform>();
+    camera->addComponent<mars::Camera2D>();
+
     // PLAYER
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     player->setLayer(layers[1]);
@@ -74,12 +79,15 @@ void createScene(const mars::Framework &framework,
     playerSpriteRenderer->addAnimation("up", {mars::Rect{0, 96, 32, 32}, mars::Rect{32, 96, 32, 32}});
     playerSpriteRenderer->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
+    playerMoveScript->camera = camera.get();
 
+    // Radar
     std::shared_ptr<mars::Entity> radar = entityManager.createEntity("radar");
     radar->setLayer(layers[2]);
     mars::RectTransform *radarTransform = radar->addComponent<mars::RectTransform>();
     radarTransform->setDrawRectangle(mars::Rect{1200, 15, 64, 64});
     mars::AnimatedSpriteRenderer *radarSpriteRenderer = radar->addComponent<mars::AnimatedSpriteRenderer>();
+    radarSpriteRenderer->isFixed = true;
     radarSpriteRenderer->setSprite(new mars::Sprite(radarTexture));
     radarSpriteRenderer->addAnimation("play", {
                                           mars::Rect{64 * 0, 0, 64, 64},

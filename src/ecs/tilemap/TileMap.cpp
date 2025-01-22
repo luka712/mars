@@ -78,15 +78,17 @@ namespace mars {
         }
     }
 
-    void TileMap::render(SpriteBatch &spriteBatch) const {
+    void TileMap::render(SpriteBatch &spriteBatch, Camera2D& camera) const {
+
+        const Rect cameraDrawRect = camera.getRectTransform()->getDrawRectangle();
 
         for (auto& chunk : chunks) {
 
-            Rect drawRect;
-            drawRect.x = chunk.getX() * tileSize.x;
-            drawRect.y = chunk.getY() * tileSize.y;
-            drawRect.width = tileSize.x;
-            drawRect.height = tileSize.y;
+            Rect drawRect{};
+            drawRect.x = chunk.getX() * static_cast<int32_t>(tileSize.x) - cameraDrawRect.x;
+            drawRect.y = chunk.getY() * static_cast<int32_t>(tileSize.y) - cameraDrawRect.y;
+            drawRect.width = static_cast<int32_t>(tileSize.x);
+            drawRect.height = static_cast<int32_t>(tileSize.y);
 
             spriteBatch.draw(texture.get(), drawRect, chunk.getSourceRect(), color);
         }

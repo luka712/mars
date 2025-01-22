@@ -4,9 +4,7 @@
 
 #include "Framework.h"
 #include "ecs/tilemap/TileMapSystem.h"
-
 #include <ecs/entity/Entity.h>
-
 
 namespace mars {
     TileMapSystem::TileMapSystem(Framework &framework)
@@ -54,15 +52,15 @@ namespace mars {
         }
     }
 
-    void TileMapSystem::render(uint32_t layerOrder) {
+    void TileMapSystem::render(uint32_t layerOrder, Camera2D& camera) {
         if (!layerOrderTileMapsMap.contains(layerOrder)) {
             return;
         }
 
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
 
-        for (TileMap *tileMap: layerOrderTileMapsMap[layerOrder]) {
-            tileMap->render(spriteBatch);
+        for (const TileMap *tileMap: layerOrderTileMapsMap[layerOrder]) {
+            tileMap->render(spriteBatch, camera);
         }
     }
 }

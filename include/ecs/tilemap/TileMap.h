@@ -9,6 +9,7 @@
 #include "core/math/Color.h"
 #include "core/sprite/Sprite.h"
 #include "ecs/transform/RectTransform.h"
+#include "ecs/camera/Camera2D.h"
 
 namespace mars {
 
@@ -45,7 +46,8 @@ namespace mars {
 
         //! Render the tile map.
         //! @param spriteBatch The sprite batch.
-        void render(SpriteBatch& spriteBatch) const;
+        //! @param camera The camera.
+        void render(SpriteBatch& spriteBatch, Camera2D& camera) const;
 
         std::string toString() override;
 

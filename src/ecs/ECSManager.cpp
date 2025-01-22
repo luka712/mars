@@ -14,6 +14,7 @@ namespace mars {
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(framework);
         scriptSystem = std::make_unique<ScriptSystem>(framework);
         tileMapSystem = std::make_unique<TileMapSystem>(framework);
+        camera2DSystem = std::make_unique<Camera2DSystem>(framework);
     }
 
     Framework &ECSManager::getFramework() const {
@@ -40,20 +41,28 @@ namespace mars {
         tileMapSystem->add(component);
     }
 
+    void ECSManager::passComponentToSystem(Camera2D *component) const {
+        camera2DSystem->add(component);
+    }
+
     void ECSManager::removeComponentFromSystem(RectTransform *component) const {
         rectTransformSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(const SpriteRenderer *spriteRenderer) const {
-        spriteRendererSystem->remove(spriteRenderer);
+    void ECSManager::removeComponentFromSystem(const SpriteRenderer *component) const {
+        spriteRendererSystem->remove(component);
     }
 
     void ECSManager::removeComponentFromSystem(AScript *component) const {
         scriptSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(TileMap *component) const {
+    void ECSManager::removeComponentFromSystem(const TileMap *component) const {
         tileMapSystem->remove(component);
+    }
+
+    void ECSManager::removeComponentFromSystem(const Camera2D *camera) const {
+        camera2DSystem->remove(camera);
     }
 
     void ECSManager::frameStart() const {
@@ -80,10 +89,15 @@ namespace mars {
         spriteBatch.begin();
 
         scriptSystem->render();
-        for (auto &layer: layers) {
-            const uint32_t currentLayerOrder = layer->getOrder();
-            tileMapSystem->render(currentLayerOrder);
-            spriteRendererSystem->render(currentLayerOrder);
+
+        const std::vector<Camera2D*>& cameras = camera2DSystem->getCameraComponents();
+
+        for (auto& camera : cameras) {
+            for (auto &layer: layers) {
+                const uint32_t currentLayerOrder = layer->getOrder();
+                tileMapSystem->render(currentLayerOrder, *camera);
+                spriteRendererSystem->render(currentLayerOrder, *camera);
+            }
         }
 
         spriteBatch.end();

@@ -4,7 +4,6 @@
 
 #include "Framework.h"
 #include "ecs/sprite/SpriteRendererSystem.h"
-
 #include <ecs/entity/Entity.h>
 
 namespace mars {
@@ -65,22 +64,33 @@ namespace mars {
         }
     }
 
-    void SpriteRendererSystem::render(const uint32_t currentLayerOrder) {
+    void SpriteRendererSystem::render(const uint32_t currentLayerOrder, Camera2D& camera) {
 
+        // Check if he has layer to render.
         if (!layerOrderSpritesMap.contains(currentLayerOrder)) {
             return;
         }
 
+        // Get camera.
+        const Rect cameraRect = camera.getRectTransform()->getDrawRectangle();
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
 
-        // Update the sprite renderers.
+        // Get count of components and components.
         const uint32_t count = layerOrderSpriteCountMap[currentLayerOrder];
         const std::vector<SpriteRenderer*>& components = layerOrderSpritesMap[currentLayerOrder];
 
         for (uint32_t i = 0; i < count; i++) {
+
             const SpriteRenderer *spriteRenderer = components[i];
             const RectTransform *rectTransform = spriteRenderer->getRectTransform();
-            const Rect drawRect = rectTransform->getDrawRectangle();
+            Rect drawRect = rectTransform->getDrawRectangle();
+
+            if (spriteRenderer->isFixed == false) {
+                drawRect.x -= cameraRect.x;
+                drawRect.y -= cameraRect.y;
+            }
+
+            // If there is a sprite.
             if (const Sprite *sprite = spriteRenderer->getSprite(); sprite != nullptr) {
                 spriteBatch.draw(&sprite->getTexture(),
                                  drawRect,

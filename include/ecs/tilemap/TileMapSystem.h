@@ -8,6 +8,7 @@
 #include <vector>
 #include "ecs/tilemap/TileMap.h"
 #include "ecs/layer/Layer.h"
+#include "ecs/camera/Camera2D.h"
 
 namespace mars {
 
@@ -33,7 +34,8 @@ namespace mars {
 
         //! Render the tile map components.
         //! @param currentLayerOrder The current layer order.
-        void render(uint32_t currentLayerOrder);
+        //! @param camera The camera.
+        void render(uint32_t currentLayerOrder, Camera2D& camera);
     private:
         Framework& framework;
         std::vector<TileMap*> tileMaps;

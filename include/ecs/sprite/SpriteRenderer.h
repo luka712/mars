@@ -40,6 +40,9 @@ namespace mars {
 
         //! The color of the sprite.
         Color color;
+
+        //! Is fixed. If fixed, tile is not moving when camera changes position.
+        bool isFixed = false;
     protected:
           SpriteRendererSystem* system{};
           RectTransform* rectTransform{};

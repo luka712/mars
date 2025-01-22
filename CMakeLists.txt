@@ -86,7 +86,11 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/ecs/layer/Layer.h
         src/ecs/layer/Layer.cpp
         include/ecs/layer/LayerManager.h
-        src/ecs/layer/LayerManager.cpp)
+        src/ecs/layer/LayerManager.cpp
+        src/ecs/camera/Camera2D.cpp
+        include/ecs/camera/Camera2D.h
+        include/ecs/camera/Camera2DSystem.h
+        src/ecs/camera/Camera2DSystem.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

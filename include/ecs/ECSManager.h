@@ -13,6 +13,7 @@
 #include "ecs/script/ScriptSystem.h"
 #include "ecs/tilemap/TileMapSystem.h"
 #include "ecs/layer/LayerManager.h"
+#include "ecs/camera/Camera2DSystem.h"
 
 namespace mars {
 
@@ -53,6 +54,10 @@ namespace mars {
         //! @param component The tile map component.
         void passComponentToSystem(TileMap* component) const;
 
+        //! Passes the camera 2D component to the camera 2D system.
+        //! @param component The camera 2D component.
+        void passComponentToSystem(Camera2D* component) const;
+
         //! Removes the component from the system.
         //! @param component The component to remove.
         void removeComponentFromSystem(RectTransform* component) const;
@@ -67,7 +72,11 @@ namespace mars {
 
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(TileMap* component) const;
+        void removeComponentFromSystem(const TileMap* component) const;
+
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(const Camera2D* component) const;
 
         //! Called when frame starts. Prepares the system for rendering, by sorting according to layer order.
         void frameStart() const;
@@ -87,6 +96,7 @@ namespace mars {
         std::unique_ptr<SpriteRendererSystem> spriteRendererSystem;
         std::unique_ptr<ScriptSystem> scriptSystem;
         std::unique_ptr<TileMapSystem> tileMapSystem;
+        std::unique_ptr<Camera2DSystem> camera2DSystem;
     };
 }
 
