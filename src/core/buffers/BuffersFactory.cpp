@@ -26,7 +26,7 @@ namespace mars {
                 buffer = new OpenGLESVertexBuffer(framework, label);
                 break;
             default:
-                throw std::runtime_error("Rendering backend not supported.");
+                throw std::runtime_error("BuffersFactory::createVertexBuffer: Rendering backend not supported.");
         }
         void *dataPtr = data.data();
         uint32_t byteSize = data.size() * sizeof(float);
@@ -45,7 +45,7 @@ namespace mars {
                 buffer = new OpenGLESIndexBuffer(framework, label);
             break;
             default:
-                throw std::runtime_error("Rendering backend not supported.");
+                throw std::runtime_error("BuffersFactory::createindexBuffer: Rendering backend not supported.");
         }
         buffer->initialize(data);
 

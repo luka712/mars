@@ -21,7 +21,7 @@
 #include "core/renderer/enums.h"
 #include "core/loaders/SpriteFontLoader.h"
 #include "core/fonts/SpriteFontManager.h"
-#include "core/loaders/FIleLoader.h"
+#include "core/loaders/FileLoader.h"
 #include "core/buffers/BuffersFactory.h"
 
 namespace mars {

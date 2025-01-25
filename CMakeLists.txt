@@ -44,7 +44,7 @@ add_executable(mars main.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
         ${TINYXML2_SRC}
-        include/core/loaders/FIleLoader.h)
+        include/core/loaders/FileLoader.h)
 
 # LINK
 target_link_libraries(mars
@@ -90,7 +90,8 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/ecs/camera/Camera2D.cpp
         include/ecs/camera/Camera2D.h
         include/ecs/camera/Camera2DSystem.h
-        src/ecs/camera/Camera2DSystem.cpp)
+        src/ecs/camera/Camera2DSystem.cpp
+        include/opengles/opengles.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

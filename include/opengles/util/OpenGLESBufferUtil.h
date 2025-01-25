@@ -5,9 +5,8 @@
 #ifndef OPENGLESBUFFERUTIL_H
 #define OPENGLESBUFFERUTIL_H
 
-#include <stdexcept>
+#include "opengles/opengles.h"
 #include <string>
-#include <glad/glad.h>
 #include "core/log/Logger.h"
 
 namespace mars {

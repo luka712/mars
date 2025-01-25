@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::SDL
+        mars::RenderingBackend::OpenGLES,
     });
 
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
         ecsManager.render();
     });
 
-    createScene(framework, entityManager);
+    // createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

@@ -66,7 +66,11 @@ namespace mars {
             windowManager->initializeForSDL();
         }
         else {
+#if __EMSCRIPTEN__
+            windowManager->initializeForOpenGLES(3, 0);
+#else
             windowManager->initializeForOpenGLES();
+#endif
         }
 
         windowManager->subscribeToUpdateEvent([&] {

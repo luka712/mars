@@ -5,8 +5,8 @@
 #ifndef OPENGLESVERTEXBUFFER_H
 #define OPENGLESVERTEXBUFFER_H
 
+#include "opengles/opengles.h"
 #include <sstream>
-#include <glad/glad.h>
 #include "Framework.h"
 #include "core/log/Logger.h"
 #include "opengles/renderer/OpenGLESRenderer.h"

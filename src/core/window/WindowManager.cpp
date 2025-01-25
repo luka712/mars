@@ -7,7 +7,7 @@
 #endif
 
 
-#include <glad/glad.h>
+#include "opengles/opengles.h"
 #include "Framework.h"
 #include "core/window/WindowManager.h"
 #include <iostream>
@@ -15,11 +15,11 @@
 
 using namespace mars;
 
-WindowManager::WindowManager(Framework& framework, const WindowManagerOptions options)
+WindowManager::WindowManager(Framework &framework, const WindowManagerOptions options)
     : framework(framework), windowBounds(options.windowBounds) {
 }
 
-void WindowManager::subscribeToRenderEvent(const std::function<void()>& callback) {
+void WindowManager::subscribeToRenderEvent(const std::function<void()> &callback) {
     renderEvents.push_back(callback);
 }
 
@@ -28,28 +28,29 @@ void WindowManager::subscribeToUpdateEvent(const std::function<void()> &callback
 }
 
 void WindowManager::initializeForSDL() {
-    Logger& logger = framework.getLogger();
+    Logger &logger = framework.getLogger();
 
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
-        logger.error( std::string("Failed to initialize SDL: ") + SDL_GetError());
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
+        logger.error(std::string("Failed to initialize SDL: ") + SDL_GetError());
         return;
     }
 
-    logger.info(std::string("Window initialized for SDL. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
+    logger.info(
+        std::string("Window initialized for SDL. Client size: ") + std::to_string(windowBounds.width) + ", " +
+        std::to_string(windowBounds.height));
 
     window = SDL_CreateWindow("Mars Framework",
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        windowBounds.width, windowBounds.height,
-        0);
+                              SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                              windowBounds.width, windowBounds.height,
+                              0);
 }
 
 void WindowManager::initializeForOpenGLES(const int major, const int minor) {
+    Logger &logger = framework.getLogger();
 
-    Logger& logger = framework.getLogger();
-
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
         std::string msg = "WindowManager::initializeForOpenGLES: Failed to initialize SDL.";
-        logger.error( msg);
+        logger.error(msg);
         throw std::runtime_error(msg);
     }
 
@@ -58,16 +59,21 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
 
-    logger.info(std::string("Window initialized for Open GLES. Client size: ") + std::to_string(windowBounds.width) + ", " + std::to_string(windowBounds.height));
+    logger.info(
+        "WindowManager::initializeForOpenGLES: Window initialized for OpenGLES(" + std::to_string(major) + ", " +
+        std::to_string(minor) + ").");
+    logger.info(
+        "WindowManager::initializeForOpenGLES: Client size: " + std::to_string(windowBounds.width) + ", " +
+        std::to_string(windowBounds.height) + ".");
 
     window = SDL_CreateWindow("Mars Framework",
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        windowBounds.width, windowBounds.height,
-        SDL_WINDOW_OPENGL);
+                              SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                              windowBounds.width, windowBounds.height,
+                              SDL_WINDOW_OPENGL);
 
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
-        std::string msg = "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context.";
+        const std::string msg = "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context.";
         logger.error(msg);
         throw std::runtime_error(msg);
     }
@@ -75,8 +81,8 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
 
 // Store a reference to the instance for the loop.
 // Done to support EMSCRIPTEN.
-static WindowManager* windowManagerInstance = nullptr;
-static Framework* frameworkInstance = nullptr;
+static WindowManager *windowManagerInstance = nullptr;
+static Framework *frameworkInstance = nullptr;
 
 static void mainLoop() {
     SDL_Event event;
@@ -96,19 +102,18 @@ static void mainLoop() {
     }
 
     // Update
-    for (auto& callback : windowManagerInstance->updateEvents) {
+    for (auto &callback: windowManagerInstance->updateEvents) {
         callback();
     }
 
     // Render
-    for (auto& callback : windowManagerInstance->renderEvents) {
+    for (auto &callback: windowManagerInstance->renderEvents) {
         callback();
     }
 }
 
 
 void WindowManager::runEventLoop() {
-
     windowManagerInstance = this;
     frameworkInstance = &framework;
 

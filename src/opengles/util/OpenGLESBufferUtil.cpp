@@ -20,9 +20,12 @@ namespace mars {
         glBindBuffer(target, buffer);
         glBufferData(target, byteSize, data, bufferHint);
 
+        // WebGL does not have glObjectLabel.
+#ifndef __EMSCRIPTEN__
         if (!label.empty()) {
             glObjectLabel(GL_BUFFER, buffer, label.size(), label.c_str());
         }
+#endif
 
         return buffer;
     }

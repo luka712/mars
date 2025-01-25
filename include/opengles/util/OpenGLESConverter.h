@@ -5,7 +5,7 @@
 #ifndef OPENGLESCONVERTERUTIL_H
 #define OPENGLESCONVERTERUTIL_H
 
-#include <glad/glad.h>
+#include "opengles/opengles.h"
 #include "core/log/Logger.h"
 #include "core/buffers/BufferEnums.h"
 

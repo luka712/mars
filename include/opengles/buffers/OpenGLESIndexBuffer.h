@@ -5,7 +5,7 @@
 #ifndef OPENGLESINDEXBUFFER_H
 #define OPENGLESINDEXBUFFER_H
 
-#include <glad/glad.h>
+#include "opengles/opengles.h"
 #include "core/buffers/AIndexBuffer.h"
 
 namespace mars {

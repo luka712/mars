@@ -51,7 +51,6 @@ namespace mars {
         }
 
         this->tileSize = tileSize;
-        this->texture = texture;
 
         auto textureColumns = static_cast<int32_t>(static_cast<float>(texture->getWidth()) / tileSize.x);
 

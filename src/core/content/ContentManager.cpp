@@ -8,7 +8,7 @@
 namespace mars {
 
     ContentManager::ContentManager(Framework &framework)
-        : framework(framework) , rootDirectory("Content"){
+        : framework(framework) , rootDirectory("content"){
     }
 
     const std::string & ContentManager::getRootDirectory() {

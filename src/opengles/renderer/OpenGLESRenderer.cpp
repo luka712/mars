@@ -2,8 +2,8 @@
 // Created by Erkapic Luka on 2.1.2025.
 //
 
+#include "opengles/opengles.h"
 #include <SDL.h>
-#include <glad/glad.h>
 #include "Framework.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
 
@@ -56,8 +56,9 @@ namespace mars {
 
         OpenGLESUtil::initialize(logger);
 
+#ifndef __EMSCRIPTEN__
         gladLoadGLLoader(SDL_GL_GetProcAddress);
-
+#endif
         std::string msg = "Open GLES initialized.\n";
         msg += "Vendor  : " + std::string((char *) glGetString(GL_VENDOR)) + "\n";
         msg += "Renderer: " + std::string((char *) glGetString(GL_RENDERER)) + "\n";
@@ -75,9 +76,11 @@ namespace mars {
             logger.info(extension);
         }
 
-        // Debug
+        // Debug. Note WebGL does not have glDebugMessageCallbackKHR.
+#ifndef __EMSCRIPTEN__
         glEnable(GL_DEBUG_OUTPUT);
         glDebugMessageCallbackKHR(OpenGLESDebugCallback, nullptr);
+#endif
     }
 
     void OpenGLESRenderer::beginRenderPass() {
