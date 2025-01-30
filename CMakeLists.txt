@@ -25,6 +25,7 @@ find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
+find_package(Catch2 REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -34,6 +35,7 @@ include_directories(
         ${SPDLOG_INCLUDE_DIR}
         ${GLAD_INCLUDE_DIR}
         ${TINYXML2_INCLUDE_DIR}
+        ${CATCH2_INCLUDE_DIR}
 )
 
 # SOURCES
@@ -67,31 +69,25 @@ file(COPY content DESTINATION ${CMAKE_BINARY_DIR})
 # COPY VENDOR
 file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
 
+# TESTS
+add_executable(tests tests/tests.cpp
+        ${COMMON_SOURCES}
+        ${GLAD_SRC}
+        ${TINYXML2_SRC})
+target_link_libraries(tests
+        ${CATCH2_LIBRARY}
+        ${SDL2_LIBRARY}
+        ${SDL2_IMAGE_LIBRARY}
+        ${GLM_LIBRARY}
+        ${SPDLOG_LIBRARY}
+        ${GLAD_LIBRARY}
+)
 
 # GAMES
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
-        include/opengles/util/OpenGLESBufferUtil.h
-        include/opengles/util/OpenGLESUtil.h
-        include/opengles/buffers/OpenGLESVertexBuffer.h
-        include/core/buffers/BuffersFactory.h
-        src/core/buffers/BuffersFactory.cpp
-        src/opengles/util/OpenGLESBufferUtil.cpp
-        include/opengles/util/OpenGLESConverter.h
-        include/core/buffers/AIndexBuffer.h
-        include/opengles/buffers/OpenGLESIndexBuffer.h
-        src/opengles/buffers/OpenGLESIndexBuffer.cpp
-        include/ecs/layer/Layer.h
-        src/ecs/layer/Layer.cpp
-        include/ecs/layer/LayerManager.h
-        src/ecs/layer/LayerManager.cpp
-        src/ecs/camera/Camera2D.cpp
-        include/ecs/camera/Camera2D.h
-        include/ecs/camera/Camera2DSystem.h
-        src/ecs/camera/Camera2DSystem.cpp
-        include/opengles/opengles.h)
+        ${TINYXML2_SRC})
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

@@ -3,6 +3,7 @@
 //
 
 #include "opengles/util/OpenGLESBufferUtil.h"
+#include <stdexcept>
 
 namespace mars {
     GLuint OpenGLESBufferUtil::createBuffer(const GLenum target,
