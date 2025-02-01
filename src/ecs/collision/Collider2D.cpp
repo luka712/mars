@@ -7,7 +7,7 @@
 
 namespace mars {
     Collider2D::Collider2D(Entity *entity)
-        : AComponent(entity) {
+        : AComponent(entity), debug(false), debugColor(Color::red()) {
     }
 
     void Collider2D::initialize() {

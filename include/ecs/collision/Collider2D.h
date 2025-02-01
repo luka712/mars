@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <functional>
+#include <core/math/Color.h>
+
 #include "ecs/transform/RectTransform.h"
 #include "core/math/Rect.h"
 
@@ -35,6 +37,22 @@ namespace mars {
         //! @param debug The debug flag.
         void setDebug(const bool debug) { this->debug = debug; }
 
+        //! Get the tag.
+        //! @return The tag.
+        [[nodiscard]] std::string getTag() const {  return tag; }
+
+        //! Get the debug color.
+        //! @return The debug color.
+        [[nodiscard]] Color getDebugColor() const {   return debugColor;}
+
+        //! Set the debug color.
+        //! @param debugColor The debug color.
+        void setDebugColor(const Color &debugColor) { this->debugColor = debugColor; }
+
+        //! Set the tag.
+        //! @param tag The tag.
+        void setTag(const std::string &tag) { this->tag = tag; }
+
         //! Subscribe to on collision event.
         //! @param callback The callback.
         void subscribeToOnCollision(const std::function<void(const Collider2D*, const Collider2D*)>& callback) {
@@ -55,9 +73,11 @@ namespace mars {
 
     private:
         RectTransform* rectTransform{};
-        bool debug = false;
         Rect collisionRectangle{};
         std::vector<std::function<void(const Collider2D*, const Collider2D*)>> onCollisionCallbacks;
+        std::string tag{};
+        bool debug;
+        Color debugColor;
     };
 }
 

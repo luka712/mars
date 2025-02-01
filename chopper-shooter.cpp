@@ -56,6 +56,10 @@ void createScene(const mars::Framework &framework,
             .getContentManager()
             .load<mars::Texture2D>("images/radar.png");
 
+    std::shared_ptr<mars::Texture2D> heliportTexture = framework
+            .getContentManager()
+            .load<mars::Texture2D>("images/heliport.png");
+
     // TILEMAP
     std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
     tileMap->setLayer(layers[0]);
@@ -119,6 +123,20 @@ void createScene(const mars::Framework &framework,
                                           mars::Rect{64 * 7, 0, 64, 64},
                                       });
     radarSpriteRenderer->playAnimation("play");
+
+    // HELIPORT
+    std::shared_ptr<mars::Entity> heliport = entityManager.createEntity("heliport");
+    heliport->setLayer(layers[1]);
+    mars::RectTransform *heliportTransform = heliport->addComponent<mars::RectTransform>();
+    heliportTransform->setDrawRectangle(mars::Rect{470, 450, 64, 64});
+    mars::SpriteRenderer *heliportSpriteRenderer = heliport->addComponent<mars::SpriteRenderer>();
+    heliportSpriteRenderer->setSprite(new mars::Sprite(heliportTexture));
+    mars::Collider2D* collider = heliport->addComponent<mars::Collider2D>();
+    // collider->setDebug(true);
+    collider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
+        framework.getLogger().info("Heliport collision detected.");
+    });
+
 
     radarSpriteRenderer->setSprite(new mars::Sprite(radarTexture));
 }

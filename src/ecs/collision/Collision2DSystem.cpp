@@ -67,7 +67,7 @@ namespace mars {
                 drawRect.x -= cameraRect.x;
                 drawRect.y -= cameraRect.y;
                 // Line rendering.
-                spriteBatch.draw(drawRect, Color::red());
+                spriteBatch.draw(drawRect, collider->getDebugColor());
             }
         }
         spriteBatch.end();
