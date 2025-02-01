@@ -28,7 +28,7 @@ namespace mars {
 
         //! Remove a script component from the system.
         //! @param script The script component.
-        void remove(AScript *script);
+        void remove(const AScript *script);
 
         //! Render the sprite components.
         void render();
