@@ -22,6 +22,11 @@ namespace mars {
 
         //! The height of the rectangle.
         int32_t height;
+
+        //! Check if the rectangle intersects with another rectangle.
+        //! @param other The other rectangle.
+        //! @return True if the rectangles intersect, false otherwise.
+        [[nodiscard]] bool intersects(const Rect &other) const;
     };
 };
 

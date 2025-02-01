@@ -15,6 +15,7 @@ namespace mars {
         scriptSystem = std::make_unique<ScriptSystem>(framework);
         tileMapSystem = std::make_unique<TileMapSystem>(framework);
         camera2DSystem = std::make_unique<Camera2DSystem>(framework);
+        collision2DSystem = std::make_unique<Collision2DSystem>(framework);
     }
 
     Framework &ECSManager::getFramework() const {
@@ -45,6 +46,10 @@ namespace mars {
         camera2DSystem->add(component);
     }
 
+    void ECSManager::passComponentToSystem(Collider2D *component) const {
+        collision2DSystem->add(component);
+    }
+
     void ECSManager::removeComponentFromSystem(RectTransform *component) const {
         rectTransformSystem->remove(component);
     }
@@ -65,6 +70,10 @@ namespace mars {
         camera2DSystem->remove(camera);
     }
 
+    void ECSManager::removeComponentFromSystem(const Collider2D *collider) const {
+        collision2DSystem->remove(collider);
+    }
+
     void ECSManager::frameStart() const {
         spriteRendererSystem->frameStart();
         tileMapSystem->frameStart();
@@ -75,6 +84,7 @@ namespace mars {
 
         scriptSystem->update(time);
         rectTransformSystem->update(time);
+        collision2DSystem->update(time);
 
         for (auto &layer: layers) {
             const uint32_t currentLayerOrder = layer->getOrder();
@@ -84,9 +94,6 @@ namespace mars {
 
     void ECSManager::render() const {
         const std::vector<std::shared_ptr<Layer> > &layers = layerManager->getLayers();
-        SpriteBatch &spriteBatch = framework.getSpriteBatch();
-
-        spriteBatch.begin();
 
         scriptSystem->render();
 
@@ -98,8 +105,8 @@ namespace mars {
                 tileMapSystem->render(currentLayerOrder, *camera);
                 spriteRendererSystem->render(currentLayerOrder, *camera);
             }
+            collision2DSystem->render(*camera);
         }
 
-        spriteBatch.end();
     }
 }

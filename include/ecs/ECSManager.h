@@ -14,6 +14,7 @@
 #include "ecs/tilemap/TileMapSystem.h"
 #include "ecs/layer/LayerManager.h"
 #include "ecs/camera/Camera2DSystem.h"
+#include "ecs/collision/Collision2DSystem.h"
 
 namespace mars {
 
@@ -58,6 +59,10 @@ namespace mars {
         //! @param component The camera 2D component.
         void passComponentToSystem(Camera2D* component) const;
 
+        //! Passes the collider 2D component to the collision 2D system.
+        //! @param component The collider 2D component.
+        void passComponentToSystem(Collider2D* component) const;
+
         //! Removes the component from the system.
         //! @param component The component to remove.
         void removeComponentFromSystem(RectTransform* component) const;
@@ -78,6 +83,10 @@ namespace mars {
         //! @param component The component to remove.
         void removeComponentFromSystem(const Camera2D* component) const;
 
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(const Collider2D* component) const;
+
         //! Called when frame starts. Prepares the system for rendering, by sorting according to layer order.
         void frameStart() const;
 
@@ -97,6 +106,7 @@ namespace mars {
         std::unique_ptr<ScriptSystem> scriptSystem;
         std::unique_ptr<TileMapSystem> tileMapSystem;
         std::unique_ptr<Camera2DSystem> camera2DSystem;
+        std::unique_ptr<Collision2DSystem> collision2DSystem;
     };
 }
 

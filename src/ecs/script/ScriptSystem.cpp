@@ -13,8 +13,8 @@ namespace mars {
         scripts.emplace_back(script);
     }
 
-    void ScriptSystem::remove(AScript *script) {
-        for (int i = 0; i < scripts.size(); i++) {
+    void ScriptSystem::remove(const AScript *script) {
+        for (uint32_t i = 0; i < scripts.size(); i++) {
             if (scripts[i] == script) {
                 scripts.erase(scripts.begin() + i);
                 break;

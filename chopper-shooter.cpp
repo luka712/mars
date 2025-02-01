@@ -44,6 +44,10 @@ void createScene(const mars::Framework &framework,
             .getContentManager()
             .load<mars::Texture2D>("images/chopper-spritesheet.png");
 
+    std::shared_ptr<mars::Texture2D> enemyTexture = framework
+            .getContentManager()
+            .load<mars::Texture2D>("images/tank-big-left.png");
+
     std::shared_ptr<mars::Texture2D> tileMapTexture = framework
             .getContentManager()
             .load<mars::Texture2D>("tilemaps/jungle.png");
@@ -80,6 +84,21 @@ void createScene(const mars::Framework &framework,
     playerSpriteRenderer->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
     playerMoveScript->camera = camera.get();
+    auto playerCollider = player->addComponent<mars::Collider2D>();
+    playerCollider->setDebug(true);
+    playerCollider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
+        framework.getLogger().info("Collision detected.");
+    });
+
+
+    // ENEMY
+    std::shared_ptr<mars::Entity> enemy = entityManager.createEntity("enemy");
+    enemy->setLayer(layers[1]);
+    mars::RectTransform *enemyTransform = enemy->addComponent<mars::RectTransform>();
+    enemyTransform->setDrawRectangle(mars::Rect{500, 100, 64, 64});
+    mars::SpriteRenderer *enemySpriteRenderer = enemy->addComponent<mars::SpriteRenderer>();
+    enemySpriteRenderer->setSprite(new mars::Sprite(enemyTexture));
+    enemy->addComponent<mars::Collider2D>()->setDebug(true);
 
     // Radar
     std::shared_ptr<mars::Entity> radar = entityManager.createEntity("radar");
@@ -98,7 +117,6 @@ void createScene(const mars::Framework &framework,
                                           mars::Rect{64 * 5, 0, 64, 64},
                                           mars::Rect{64 * 6, 0, 64, 64},
                                           mars::Rect{64 * 7, 0, 64, 64},
-
                                       });
     radarSpriteRenderer->playAnimation("play");
 

@@ -87,7 +87,12 @@ target_link_libraries(tests
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC})
+        ${TINYXML2_SRC}
+        include/ecs/collision/Collider2D.h
+        src/ecs/collision/Collider2D.cpp
+        include/ecs/collision/Collision2DSystem.h
+        src/ecs/collision/Collision2DSystem.cpp
+        src/core/math/Rect.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
