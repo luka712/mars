@@ -7,8 +7,10 @@
 
 #include <memory>
 #include <vector>
+
 #include "core/buffers/AVertexBuffer.h"
 #include "core/buffers/AIndexBuffer.h"
+#include "core/buffers/AUniformBuffer.h"
 
 namespace mars {
 
@@ -28,7 +30,7 @@ namespace mars {
         //! @param usage The usage of the buffer.
         //! @param label The label of the buffer.
         //! @return The shared pointer to the vertex buffer.
-        std::shared_ptr<AVertexBuffer> createVertexBuffer(
+        [[nodiscard]] std::shared_ptr<AVertexBuffer> createVertexBuffer(
             std::vector<float> data,
             uint32_t vertexCount,
             BufferUsage usage,
@@ -37,9 +39,18 @@ namespace mars {
         //! Create a new index buffer.
         //! @param data The data to initialize the buffer with.
         //! @param label The label of the buffer.
-        std::shared_ptr<AIndexBuffer> createindexBuffer(
+        //! @return The shared pointer to the index buffer.
+        std::shared_ptr<AIndexBuffer> createIndexBuffer(
             std::vector<uint16_t> data,
             const std::string& label);
+
+        //! Create a new uniform buffer.
+        //! @param data The data to initialize the buffer with.
+        //! @param label The label of the buffer.
+        //! @param byteSize The size of the buffer.
+        //! @param bufferUsage The usage of the buffer.
+        //! @return The shared pointer to the uniform buffer.
+        std::shared_ptr<AUniformBuffer> createUniformBuffer(void* data, const std::string& label, uint32_t byteSize, BufferUsage bufferUsage);
 
     private:
         Framework& framework;

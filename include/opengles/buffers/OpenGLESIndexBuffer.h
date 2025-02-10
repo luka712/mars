@@ -11,6 +11,7 @@
 namespace mars {
     class Framework;
 
+    //! The OpenGLES implementation of the index buffer.
     class OpenGLESIndexBuffer : public AIndexBuffer {
     public:
         //! Construct a new OpenGLESIndexBuffer object.

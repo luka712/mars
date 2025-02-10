@@ -6,16 +6,15 @@
 #define OPENGLESVERTEXBUFFER_H
 
 #include "opengles/opengles.h"
-#include <sstream>
 #include "Framework.h"
 #include "core/log/Logger.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
 #include "core/buffers/AVertexBuffer.h"
-#include "glm/exponential.hpp"
 #include "opengles/util/OpenGLESUtil.h"
 
 namespace mars {
 
+    //! The OpenGLES implementation of the vertex buffer.
     class OpenGLESVertexBuffer : public AVertexBuffer {
     public:
         //! The constructor.

@@ -46,7 +46,7 @@ add_executable(mars main.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
         ${TINYXML2_SRC}
-        include/core/loaders/FileLoader.h)
+        include/core/camera/core/OrthographicCamera.h)
 
 # LINK
 target_link_libraries(mars
@@ -89,11 +89,14 @@ add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
         ${TINYXML2_SRC}
-        include/ecs/collision/Collider2D.h
-        src/ecs/collision/Collider2D.cpp
-        include/ecs/collision/Collision2DSystem.h
-        src/ecs/collision/Collision2DSystem.cpp
-        src/core/math/Rect.cpp)
+        include/core/camera/core/OrthographicCamera.h
+        include/core/camera/core/OrthographicCamera.h
+        include/core/buffers/AUniformBuffer.h
+        src/opengles/buffers/OpenGLESUniformBuffer.cpp
+        include/opengles/buffers/OpenGLESUniformBuffer.h
+        src/core/buffers/AUniformBuffer.cpp
+        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.cpp
+        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

@@ -6,6 +6,7 @@
 #include "core/buffers/BuffersFactory.h"
 
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
+#include "opengles/buffers/OpenGLESUniformBuffer.h"
 #include "opengles/buffers/OpenGLESVertexBuffer.h"
 
 namespace mars {
@@ -35,7 +36,7 @@ namespace mars {
         return std::shared_ptr<AVertexBuffer>(buffer);
     }
 
-    std::shared_ptr<AIndexBuffer> BuffersFactory::createindexBuffer(std::vector<uint16_t> data,  const std::string& label) {
+    std::shared_ptr<AIndexBuffer> BuffersFactory::createIndexBuffer(std::vector<uint16_t> data,  const std::string& label) {
 
         AIndexBuffer *buffer = nullptr;
         RenderingBackend renderingBackend = framework.getRenderingBackend();
@@ -51,4 +52,23 @@ namespace mars {
 
         return std::shared_ptr<AIndexBuffer>(buffer);
     }
+
+    std::shared_ptr<AUniformBuffer> BuffersFactory::createUniformBuffer(void* data, const std::string& label, uint32_t byteSize, BufferUsage bufferUsage)
+    {
+        AUniformBuffer *buffer = nullptr;
+        RenderingBackend renderingBackend = framework.getRenderingBackend();
+
+        switch (renderingBackend)
+        {
+        case RenderingBackend::OpenGLES:
+            buffer = new OpenGLESUniformBuffer(framework, data, label, byteSize, bufferUsage);
+            break;
+        default:
+            throw std::runtime_error("BuffersFactory::createUniformBuffer: Rendering backend not supported.");
+        }
+
+        return std::shared_ptr<AUniformBuffer>(buffer);
+    }
+
+
 }
