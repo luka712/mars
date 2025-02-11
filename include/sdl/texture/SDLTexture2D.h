@@ -29,8 +29,11 @@ namespace mars {
         //! @return The texture.
         SDL_Texture* getTexture() const { return texture; }
 
+        //! @inheritDoc
         void destroy() override;
 
+        //! @inheritDoc
+        std::string printInfo() override;
     private:
         Framework& framework;
         SDLRenderer& renderer;

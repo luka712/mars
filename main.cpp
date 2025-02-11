@@ -108,9 +108,13 @@ int main(int argc, char *argv[]) {
     auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({0, 1, 2, 2, 3, 0}, "Hello");
     std::vector<float> data = {1.0f, 2.0f, 3.0f, 4.0f};
     auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(data.data(), "Hello", 16, mars::BufferUsage::Uniform);
+    std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+            .getContentManager()
+            .load<mars::Texture2D>("tilemaps/jungle.png");
     vertexBuffer->printInfo();
     indexBuffer->printInfo();
     uniformBuffer->printInfo();
+    tileMapTexture->printInfo();
 
     // FRAME START EVENT?
 

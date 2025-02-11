@@ -10,6 +10,8 @@ namespace mars {
     //! The AContent class.
     //! Represents an abstract content class.
     class AContent {
+    public:
+        virtual ~AContent() = default;
     };
 }
 

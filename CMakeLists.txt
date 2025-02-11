@@ -95,8 +95,12 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/opengles/buffers/OpenGLESUniformBuffer.cpp
         include/opengles/buffers/OpenGLESUniformBuffer.h
         src/core/buffers/AUniformBuffer.cpp
-        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.cpp
-        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h)
+        src/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.cpp
+        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h
+        src/opengles/texture/OpenGLESTexture2D.cpp
+        include/opengles/texture/OpenGLESTexture2D.h
+        src/opengles/util/OpenGLESTextureUtil.cpp
+        include/opengles/util/OpenGLESTextureUtil.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

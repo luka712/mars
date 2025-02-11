@@ -18,13 +18,13 @@ namespace mars
         //! The OPENGLES sprite render pipeline constructor.
         explicit OpenGLESSpriteRenderPipeline(Framework &framework);
 
-        void initialize() override;
+        //! @inheritDoc
+        void render(
+            AVertexBuffer *vertexBuffer,
+            AIndexBuffer *indexBuffer,
+            uint32_t indicesCount,
+            uint32_t indicesOffset) override;
 
-        void begin() override;
-
-        void draw(const Sprite &sprite) override;
-
-        void end() override;
     private:
         OpenGLESRenderer &renderer;
     };

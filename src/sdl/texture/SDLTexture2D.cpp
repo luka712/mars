@@ -34,4 +34,9 @@ namespace mars {
     void SDLTexture2D::destroy() {
         SDL_DestroyTexture(texture);
     }
+
+    std::string SDLTexture2D::printInfo() {
+        return "";
+    }
+
 }

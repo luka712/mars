@@ -28,9 +28,9 @@ namespace mars {
           //! @param label The label of the texture. By default, it is set to an empty string.
           //! @return The texture.
           std::shared_ptr<Texture2D> createTextureFromImageFile(
-              std::string filePath,
+              const std::string& filePath,
               TextureUsage usage = TextureUsage::CopyDst_TextureBinding,
-              std::string label = "");
+              const std::string& label = "") const;
 
           private:
             Framework& framework;
