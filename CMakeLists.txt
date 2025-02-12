@@ -100,7 +100,11 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/opengles/texture/OpenGLESTexture2D.cpp
         include/opengles/texture/OpenGLESTexture2D.h
         src/opengles/util/OpenGLESTextureUtil.cpp
-        include/opengles/util/OpenGLESTextureUtil.h)
+        include/opengles/util/OpenGLESTextureUtil.h
+        src/core/camera/core/OrthographicCamera.cpp
+        include/core/math/Matrix.h
+        src/core/camera/CameraFactory.cpp
+        include/core/camera/CameraFactory.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

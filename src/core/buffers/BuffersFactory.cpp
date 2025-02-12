@@ -4,7 +4,6 @@
 
 #include "Framework.h"
 #include "core/buffers/BuffersFactory.h"
-
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
 #include "opengles/buffers/OpenGLESVertexBuffer.h"

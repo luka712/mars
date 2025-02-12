@@ -116,6 +116,10 @@ int main(int argc, char *argv[]) {
     uniformBuffer->printInfo();
     tileMapTexture->printInfo();
 
+    std::shared_ptr<mars::OrthographicCamera> camera = framework.getCameraFactory().createOrthographicCamera(
+        -10, 10, 10, -10, 0.1, 100);
+    camera->printInfo();
+
     // FRAME START EVENT?
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {

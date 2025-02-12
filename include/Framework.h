@@ -6,8 +6,6 @@
 #define FRAMEWORK_H
 
 #include <memory>
-#include <opengles/renderer/OpenGLESRenderer.h>
-
 #include "core/life_management/State.h"
 #include "core/window/WindowManager.h"
 #include "core/renderer/Renderer.h"
@@ -23,6 +21,7 @@
 #include "core/fonts/SpriteFontManager.h"
 #include "core/loaders/FileLoader.h"
 #include "core/buffers/BuffersFactory.h"
+#include "core/camera/CameraFactory.h"
 
 namespace mars {
 
@@ -103,6 +102,10 @@ namespace mars {
         //! @return The @ref BuffersFactory instance.
         [[nodiscard]] BuffersFactory& getBuffersFactory() const { return *buffersFactory; }
 
+        //! Gets the @ref CameraFactory instance.
+        //! @return The @ref CameraFactory instance.
+        [[nodiscard]] CameraFactory& getCameraFactory() const { return *cameraFactory; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -143,6 +146,7 @@ namespace mars {
         std::unique_ptr<SpriteFontManager> spriteFontManager;
         std::unique_ptr<FileLoader> fileLoader;
         std::unique_ptr<BuffersFactory> buffersFactory;
+        std::unique_ptr<CameraFactory> cameraFactory;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;
