@@ -2,13 +2,10 @@
 // Created by Erkapic Luka on 2.1.2025.
 //
 
-#include "opengles/opengles.h"
 #include <SDL.h>
+#include <format>
 #include "Framework.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
-
-#include <format>
-
 #include "opengles/util/OpenGLESUtil.h"
 
 namespace mars {
@@ -85,8 +82,8 @@ namespace mars {
 
     void OpenGLESRenderer::beginRenderPass() {
         glClear(GL_COLOR_BUFFER_BIT);
-        glViewport(0, 0, 800, 600);
-        glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+        glViewport(0, 0, 1280, 720);
+        glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     }
 
     void OpenGLESRenderer::endRenderPass() {
@@ -95,4 +92,9 @@ namespace mars {
 
     void OpenGLESRenderer::destroy() {
     }
+
+    OpenGLESRenderer *findOpenGLESRenderer(const Framework &framework) {
+        return dynamic_cast<OpenGLESRenderer*>(&framework.getRenderer());
+    }
+
 }

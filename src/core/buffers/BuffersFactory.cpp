@@ -2,6 +2,7 @@
 // Created by lukaa on 18.1.2025..
 //
 
+#include <stdexcept>
 #include "Framework.h"
 #include "core/buffers/BuffersFactory.h"
 #include "opengles/buffers/OpenGLESIndexBuffer.h"

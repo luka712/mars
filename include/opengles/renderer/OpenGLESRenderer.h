@@ -32,6 +32,12 @@ namespace mars {
     private:
         SDL_Window *window;
     };
+
+    //! From framework, find the @ref OpenGLESRenderer.
+    //! @param framework The framework.
+    //! @returns The @ref OpenGLESRenderer pointer.
+    OpenGLESRenderer* findOpenGLESRenderer(const Framework &framework);
+
 }
 
 

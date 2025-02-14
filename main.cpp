@@ -100,17 +100,18 @@ int main(int argc, char *argv[]) {
 
     std::vector<float> vertex = {
         0.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f
+        100.0f, 0.0f, 0.0f,
+        100.0f, 100.0f, 0.0f,
+        0.0f, 100.0f, 0.0f
     };
     auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
     auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({0, 1, 2, 2, 3, 0}, "Hello");
     std::vector<float> data = {1.0f, 2.0f, 3.0f, 4.0f};
-    auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(data.data(), "Hello", 16, mars::BufferUsage::Uniform);
+    auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(
+        data.data(), "Hello", 16, mars::BufferUsage::Uniform);
     std::shared_ptr<mars::Texture2D> tileMapTexture = framework
             .getContentManager()
-            .load<mars::Texture2D>("tilemaps/jungle.png");
+            .load<mars::Texture2D>("images/radar.png");
     vertexBuffer->printInfo();
     indexBuffer->printInfo();
     uniformBuffer->printInfo();
@@ -119,6 +120,10 @@ int main(int argc, char *argv[]) {
     std::shared_ptr<mars::OrthographicCamera> camera = framework.getCameraFactory().createOrthographicCamera(
         -10, 10, 10, -10, 0.1, 100);
     camera->printInfo();
+
+    std::shared_ptr<mars::ASpriteRenderPipeline> pipeline = framework.getPipelineFactory().
+            createSpriteRenderPipeline(camera.get());
+    pipeline->setSpriteTexture(tileMapTexture.get());
 
     // FRAME START EVENT?
 
@@ -132,7 +137,10 @@ int main(int argc, char *argv[]) {
         //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
         //framework.getSpriteBatch().end();
 
-        ecsManager.render();
+
+        // ecsManager.render();
+        pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
+
     });
 
     // createScene(framework, entityManager);

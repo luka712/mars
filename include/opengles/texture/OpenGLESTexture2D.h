@@ -40,6 +40,11 @@ namespace mars
         //! The OpenGL texture.
         GLuint texture = 0;
     };
+
+    //! Converts the @ref Texture2D to the @ref OpenGLESTexture2D
+    //! @param texture The @ref Texture2D
+    //! @returns The OpenGLESTexture2D.
+    OpenGLESTexture2D* asOpenGLESTexture(Texture2D* texture);
 }
 
 #endif //OPENGLESTEXTURE2D_H

@@ -40,9 +40,10 @@ namespace mars {
         this->inputManager = std::make_unique<InputManager>(*this);
         this->spriteFontLoader = std::make_unique<SpriteFontLoader>(*this);
         this->spriteFontManager = std::make_unique<SpriteFontManager>(*this);
-        this->fileLoader = std::make_unique<FileLoader>(*this);
+        this->fileReader = std::make_unique<FileReader>(*this);
         this->buffersFactory = std::make_unique<BuffersFactory>(*this);
         this->cameraFactory = std::make_unique<CameraFactory>(*this);
+        this->pipelineFactory = std::make_unique<PipelineFactory>(*this);
 #ifdef __EMSCRIPTEN__
         this->logger = std::make_unique<BrowserLogger>();
 #else

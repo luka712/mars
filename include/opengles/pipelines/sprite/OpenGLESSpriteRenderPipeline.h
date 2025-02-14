@@ -5,18 +5,34 @@
 #ifndef OPENGLESSPRITERENDERPIPELINE_H
 #define OPENGLESSPRITERENDERPIPELINE_H
 
+#include <core/renderer/enums.h>
+#include <glad/glad.h>
+
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
+#include "core/camera/core/OrthographicCamera.h"
+#include "opengles/texture/OpenGLESTexture2D.h"
 
-namespace mars
-{
+namespace mars {
     class Framework;
 
+    //! The OpenGLES implementation of @ref ASpriteRenderPipeline.
     class OpenGLESSpriteRenderPipeline : public ASpriteRenderPipeline {
     public:
+        //! The constructor.
+        //! @param framework The framework.
+        //! @param camera The orthographic camera.
+        //! @param culling The culling, by default it is `Culling::Back`.
+        explicit OpenGLESSpriteRenderPipeline(
+            Framework &framework,
+            OrthographicCamera *camera,
+            Culling culling = Culling::Back);
 
-        //! The OPENGLES sprite render pipeline constructor.
-        explicit OpenGLESSpriteRenderPipeline(Framework &framework);
+        //! @inheritDoc
+        Texture2D *getSpriteTexture() override { return texture; }
+
+        //! @inheritDoc
+        void setSpriteTexture(Texture2D *spriteTexture) override;
 
         //! @inheritDoc
         void render(
@@ -25,8 +41,23 @@ namespace mars
             uint32_t indicesCount,
             uint32_t indicesOffset) override;
 
+        //! @inheritDoc
+        void destroy() override;
+
     private:
-        OpenGLESRenderer &renderer;
+        Framework &framework;
+        OpenGLESRenderer *renderer;
+        OrthographicCamera *camera;
+        Culling culling;
+
+        GLuint glProgram{};
+        GLuint glVao{};
+        GLuint glLastVertexBuffer{};
+        GLint glProjectionViewMatrixLocation;
+        OpenGLESTexture2D *texture{};
+
+        void createProgram();
+        void createVao(uint vertexBuffer);
     };
 }
 

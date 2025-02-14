@@ -84,4 +84,8 @@ namespace mars {
     void OpenGLESVertexBuffer::destroy()  {
         glDeleteBuffers(1, &buffer);
     }
+
+    OpenGLESVertexBuffer* toOpenGLESVertexBuffer(AVertexBuffer* vertexBuffer) {
+        return dynamic_cast<OpenGLESVertexBuffer *>(vertexBuffer);
+    }
 }

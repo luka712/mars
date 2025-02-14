@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by luka on 18.1.2025.
 //
 
-#ifndef AINDEXBUFFER_H
-#define AINDEXBUFFER_H
+#ifndef A_INDEX_BUFFER_H
+#define A_INDEX_BUFFER_H
 
 #include <cstdint>
 #include <string>
@@ -12,6 +12,9 @@
 #include "core/buffers/BufferEnums.h"
 
 namespace mars {
+
+
+    //! The index buffer.
     class AIndexBuffer {
     public:
         //! Construct a new AIndexBuffer object.
@@ -63,4 +66,4 @@ namespace mars {
 }
 
 
-#endif //AINDEXBUFFER_H
+#endif //A_INDEX_BUFFER_H

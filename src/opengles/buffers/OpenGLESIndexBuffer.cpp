@@ -65,4 +65,8 @@ namespace mars {
     void OpenGLESIndexBuffer::destroy()  {
         glDeleteBuffers(1, &buffer);
     }
+
+    OpenGLESIndexBuffer* toOpenGLESIndexBuffer(AIndexBuffer* indexBuffer) {
+        return dynamic_cast<OpenGLESIndexBuffer *>(indexBuffer);
+    }
 }

@@ -20,6 +20,10 @@ namespace mars {
         //! @param label The label of the buffer.
         OpenGLESIndexBuffer(const Framework& framework, const std::string &label);
 
+        //! Gets the underlying buffer.
+        //! @returns The OpenGLES buffer.
+        [[nodiscard]] GLuint getBuffer() const { return buffer; }
+
         void initialize(const std::vector<uint16_t>& data) override;
 
         void initialize(const std::vector<uint32_t>& data) override;
@@ -33,6 +37,11 @@ namespace mars {
         Logger& logger;
         GLuint buffer;
     };
+
+    //! Converts the @ref AIndexBuffer to @ref OpenGLESIndexBuffer.
+    //! @param indexBuffer The index buffer.
+    //! @returns The @ref OpenGLESIndexBuffer.
+    OpenGLESIndexBuffer* toOpenGLESIndexBuffer(AIndexBuffer* indexBuffer);
 }
 
 

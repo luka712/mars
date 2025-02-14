@@ -1,11 +1,10 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by luka on 18.1.2025.
 //
 
-#ifndef OPENGLESVERTEXBUFFER_H
-#define OPENGLESVERTEXBUFFER_H
+#ifndef OPEN_GLES_VERTEX_BUFFER_H
+#define OPEN_GLES_VERTEX_BUFFER_H
 
-#include "opengles/opengles.h"
 #include "Framework.h"
 #include "core/log/Logger.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
@@ -13,7 +12,6 @@
 #include "opengles/util/OpenGLESUtil.h"
 
 namespace mars {
-
     //! The OpenGLES implementation of the vertex buffer.
     class OpenGLESVertexBuffer : public AVertexBuffer {
     public:
@@ -21,6 +19,10 @@ namespace mars {
         //! @param framework The framework.
         //! @param label The label.
         explicit OpenGLESVertexBuffer(const Framework &framework, const std::string &label = "");
+
+        //! Gets the underlying buffer.
+        //! @returns The OpenGLES buffer.
+        [[nodiscard]] GLuint getBuffer() const { return buffer; }
 
         [[nodiscard]] bool isWritable() const override { return glHint != GL_STATIC_DRAW; }
 
@@ -41,8 +43,12 @@ namespace mars {
         GLuint buffer{};
         GLenum glHint = GL_STATIC_DRAW;
         GLenum glTarget = GL_ARRAY_BUFFER;
-
     };
+
+    //! Convert the @ref AVertexBuffer to the @ref OpenGLESVertexBuffer.
+    //! @param vertexBuffer The vertex buffer.
+    //! @returns The @ref OpenGLESVertexBuffer.
+    OpenGLESVertexBuffer *toOpenGLESVertexBuffer(AVertexBuffer *vertexBuffer);
 }
 
-#endif //OPENGLESVERTEXBUFFER_H
+#endif //OPEN_GLES_VERTEX_BUFFER_H

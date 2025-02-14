@@ -22,6 +22,13 @@ namespace mars {
         //! For testing only.
         SDL
     };
+
+    //! The culling mode.
+    enum class Culling {
+        None = 0,
+        Back,
+        Front
+    };
 }
 
 #endif //RENDERER_ENUMS_H

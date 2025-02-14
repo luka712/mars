@@ -3,10 +3,8 @@
 //
 
 #include <sstream>
+#include "Framework.h"
 #include "opengles/texture/OpenGLESTexture2D.h"
-
-#include <Framework.h>
-
 #include "opengles/util/OpenGLESUtil.h"
 
 namespace mars
@@ -43,4 +41,9 @@ namespace mars
 
         return oss.str();
     }
+
+    OpenGLESTexture2D *asOpenGLESTexture(Texture2D *texture) {
+        return dynamic_cast<OpenGLESTexture2D*>(texture);
+    }
+
 }

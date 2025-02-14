@@ -17,6 +17,7 @@ namespace mars
     {
     public:
         virtual ~ASpriteRenderPipeline() = default;
+
         //! Get the current texture.
         virtual Texture2D* getSpriteTexture() = 0;
 
@@ -32,8 +33,8 @@ namespace mars
         virtual void render(
             AVertexBuffer* vertexBuffer,
             AIndexBuffer* indexBuffer,
-            uint32_t indicesCount = -1,
-            uint32_t indicesOffset = 0) = 0;
+            uint32_t indicesCount,
+            uint32_t indicesOffset) = 0;
 
         //! Destroys the pipeline.
         virtual void destroy() = 0;

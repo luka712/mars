@@ -1,11 +1,13 @@
 //
-// Created by lukaa on 23.11.2024.
+// Created by Luka on 23.11.2024.
 //
 
 #ifndef FRAMEWORK_H
 #define FRAMEWORK_H
 
 #include <memory>
+#include <core/loaders/FileReader.h>
+
 #include "core/life_management/State.h"
 #include "core/window/WindowManager.h"
 #include "core/renderer/Renderer.h"
@@ -19,9 +21,9 @@
 #include "core/renderer/enums.h"
 #include "core/loaders/SpriteFontLoader.h"
 #include "core/fonts/SpriteFontManager.h"
-#include "core/loaders/FileLoader.h"
 #include "core/buffers/BuffersFactory.h"
 #include "core/camera/CameraFactory.h"
+#include "core/pipelines/PipelineFactory.h"
 
 namespace mars {
 
@@ -94,9 +96,9 @@ namespace mars {
         //! @return The @ref SpriteFontManager instance.
         [[nodiscard]] SpriteFontManager& getSpriteFontManager() const { return *spriteFontManager; }
 
-        //! Gets the @ref FileLoader instance.
-        //! @return The @ref FileLoader instance.
-        [[nodiscard]] FileLoader& getFileLoader() const { return *fileLoader; }
+        //! Gets the @ref FileReader instance.
+        //! @return The @ref FileReader instance.
+        [[nodiscard]] FileReader& getFileReader() const { return *fileReader; }
 
         //! Gets the @ref BuffersFactory instance.
         //! @return The @ref BuffersFactory instance.
@@ -105,6 +107,10 @@ namespace mars {
         //! Gets the @ref CameraFactory instance.
         //! @return The @ref CameraFactory instance.
         [[nodiscard]] CameraFactory& getCameraFactory() const { return *cameraFactory; }
+
+        //! Gets the @ref PipelineFactory instance.
+        //! @return The @ref PipelineFactory instance.
+        [[nodiscard]] PipelineFactory& getPipelineFactory() const { return *pipelineFactory; }
 
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
@@ -144,9 +150,10 @@ namespace mars {
         std::unique_ptr<InputManager> inputManager;
         std::unique_ptr<SpriteFontLoader> spriteFontLoader;
         std::unique_ptr<SpriteFontManager> spriteFontManager;
-        std::unique_ptr<FileLoader> fileLoader;
+        std::unique_ptr<FileReader> fileReader;
         std::unique_ptr<BuffersFactory> buffersFactory;
         std::unique_ptr<CameraFactory> cameraFactory;
+        std::unique_ptr<PipelineFactory> pipelineFactory;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;

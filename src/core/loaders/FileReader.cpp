@@ -4,18 +4,18 @@
 
 #include <fstream>
 #include "Framework.h"
-#include "core/loaders/FileLoader.h"
+#include "core/loaders/FileReader.h"
 
 namespace mars {
 
-    FileLoader::FileLoader(Framework &framework)
+    FileReader::FileReader(Framework &framework)
         : framework(framework) {
     }
 
-    std::string FileLoader::loadFile( std::string filePath) {
+    std::string FileReader::readFile( const std::string& filePath) const {
         std::ifstream fileStream(filePath);
         if (!fileStream.is_open()) {
-            const std::string msg = "FileLoader::loadFile: Cannot open file: " + filePath;
+            const std::string msg = "FileReader::readFile: Cannot open file: " + filePath;
             framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }

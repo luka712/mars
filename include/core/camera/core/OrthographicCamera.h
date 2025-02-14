@@ -2,12 +2,13 @@
 // Created by luka on 09.02.25.
 //
 
-#ifndef ORTHOGRAPHICCAMERA_H
-#define ORTHOGRAPHICCAMERA_H
+#ifndef ORTHOGRAPHIC_CAMERA_H
+#define ORTHOGRAPHIC_CAMERA_H
 
 #include <memory>
 #include <glm/glm.hpp>
 #include "core/buffers/AUniformBuffer.h"
+#include "core/time/Time.h"
 
 namespace mars
 {
@@ -90,4 +91,4 @@ namespace mars
     };
 }
 
-#endif //ORTHOGRAPHICCAMERA_H
+#endif //ORTHOGRAPHIC_CAMERA_H

@@ -104,7 +104,16 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/core/camera/core/OrthographicCamera.cpp
         include/core/math/Matrix.h
         src/core/camera/CameraFactory.cpp
-        include/core/camera/CameraFactory.h)
+        include/core/camera/CameraFactory.h
+        src/opengles/util/OpenGLESShaderUtil.cpp
+        include/opengles/util/OpenGLESShaderUtil.h
+        src/opengles/util/OpenGLESProgramUtil.cpp
+        include/opengles/util/OpenGLESProgramUtil.h
+        src/core/pipelines/PipelineFactory.cpp
+        src/opengles/util/OpenGLESVertexArrayObjectUtil.cpp
+        include/opengles/util/OpenGLESVertexArrayObjectUtil.h
+        src/opengles/util/OpenGLESUniformUtil.cpp
+        include/opengles/util/OpenGLESUniformUtil.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
