@@ -26,6 +26,7 @@ find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
+find_package(box2d REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -36,6 +37,7 @@ include_directories(
         ${GLAD_INCLUDE_DIR}
         ${TINYXML2_INCLUDE_DIR}
         ${CATCH2_INCLUDE_DIR}
+        ${BOX2D_INCLUDE_DIR}
 )
 
 # SOURCES
@@ -55,6 +57,7 @@ target_link_libraries(mars
         ${GLM_LIBRARY}
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
+        ${BOX2D_LIBRARY}
 )
 
 # COPY DLLS
@@ -82,42 +85,19 @@ target_link_libraries(tests
         ${GLM_LIBRARY}
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
+        ${BOX2D_LIBRARY}
 )
 
 # GAMES
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
-        include/core/camera/core/OrthographicCamera.h
-        include/core/camera/core/OrthographicCamera.h
-        include/core/buffers/AUniformBuffer.h
-        src/opengles/buffers/OpenGLESUniformBuffer.cpp
-        include/opengles/buffers/OpenGLESUniformBuffer.h
-        src/core/buffers/AUniformBuffer.cpp
-        src/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.cpp
-        include/opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h
-        src/opengles/texture/OpenGLESTexture2D.cpp
-        include/opengles/texture/OpenGLESTexture2D.h
-        src/opengles/util/OpenGLESTextureUtil.cpp
-        include/opengles/util/OpenGLESTextureUtil.h
-        src/core/camera/core/OrthographicCamera.cpp
-        include/core/math/Matrix.h
-        src/core/camera/CameraFactory.cpp
-        include/core/camera/CameraFactory.h
-        src/opengles/util/OpenGLESShaderUtil.cpp
-        include/opengles/util/OpenGLESShaderUtil.h
-        src/opengles/util/OpenGLESProgramUtil.cpp
-        include/opengles/util/OpenGLESProgramUtil.h
-        src/core/pipelines/PipelineFactory.cpp
-        src/opengles/util/OpenGLESVertexArrayObjectUtil.cpp
-        include/opengles/util/OpenGLESVertexArrayObjectUtil.h
-        src/opengles/util/OpenGLESUniformUtil.cpp
-        include/opengles/util/OpenGLESUniformUtil.h)
+        ${TINYXML2_SRC})
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         ${GLM_LIBRARY}
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
+        ${BOX2D_LIBRARY}
 )
