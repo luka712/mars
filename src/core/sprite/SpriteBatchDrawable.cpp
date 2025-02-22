@@ -15,8 +15,9 @@ namespace mars {
           }
 
 	void SpriteBatchDrawable::initialize() {
-		drawingMesh = std::make_unique<SpriteBatchMesh>(framework, maxBatchSize);
-		drawingMesh->initialize();
+		// TODO: uncomment
+		//drawingMesh = std::make_unique<SpriteBatchMesh>(framework, maxBatchSize);
+		// drawingMesh->initialize();
 	}
 
 	void SpriteBatchDrawable::reset() {

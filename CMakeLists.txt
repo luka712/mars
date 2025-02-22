@@ -77,7 +77,8 @@ file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
 add_executable(tests tests/tests.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC})
+        ${TINYXML2_SRC}
+        tests/geometry_tests.cpp)
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
         ${SDL2_LIBRARY}
@@ -92,7 +93,9 @@ target_link_libraries(tests
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC})
+        ${TINYXML2_SRC}
+        include/core/geometry/Geometry.h
+        src/core/geometry/Geometry.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

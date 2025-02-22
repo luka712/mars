@@ -26,10 +26,10 @@ namespace mars {
         const std::string vertexShaderCode = reader.readFile("shaders/glsl/300es/sprite/sprite_vs.glsl");
         const std::string fragmentShaderCode = reader.readFile("shaders/glsl/300es/sprite/sprite_fs.glsl");
 
-        const uint vertexShader = OpenGLESUtil::getShader()->createVertexShader(
+        const GLuint vertexShader = OpenGLESUtil::getShader()->createVertexShader(
             vertexShaderCode,
             "OpenGLESSpriteRenderPipeline.vertexShader");
-        const uint fragmentShader = OpenGLESUtil::getShader()->createFragmentShader(
+        const GLuint fragmentShader = OpenGLESUtil::getShader()->createFragmentShader(
             fragmentShaderCode,
             "OpenGLESSpriteRenderPipeline.fragmentShader");
 
@@ -41,7 +41,7 @@ namespace mars {
         glDeleteShader(fragmentShader);
     }
 
-    void OpenGLESSpriteRenderPipeline::createVao(uint vertexBuffer) {
+    void OpenGLESSpriteRenderPipeline::createVao(GLuint vertexBuffer) {
         if (glVao != 0) {
             glDeleteVertexArrays(1, &glVao);
         }

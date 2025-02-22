@@ -29,6 +29,17 @@ namespace mars {
         Back,
         Front
     };
+
+    //! The vertex format. Used to describe the format of a vertex attribute.
+    enum class VertexFormat {
+        Float32x1 = 0,
+        Float32x2 = 1,
+        Float32x3 = 2,
+        Float32x4 = 3,
+
+        //! The format of a 32-bit float with 16 components. Used for matrix attributes.
+        Float32x16 = 15
+    };
 }
 
 #endif //RENDERER_ENUMS_H

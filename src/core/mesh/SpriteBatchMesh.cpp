@@ -6,11 +6,12 @@
 #include "Framework.h"
 
 namespace mars {
-    SpriteBatchMesh::SpriteBatchMesh(Framework &framework, size_t numberOfInstances)
-        : Mesh(), maxInstances(numberOfInstances) {
+    /*
+    SpriteBatchMesh::SpriteBatchMesh(Framework &framework, const size_t numberOfInstances){
         vertexData.resize(maxInstances * TOTAL_FLOATS_IN_SPRITE);
         setupIndices();
     }
+    */
 
     void SpriteBatchMesh::setupIndices() {
         indices.resize(maxInstances * 6);

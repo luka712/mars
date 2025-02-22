@@ -9,41 +9,45 @@
 #include <glm/glm.hpp>
 
 namespace mars {
-class Framework;
+    class Framework;
 
-class SpriteBatchMesh : public Mesh {
-  //! The number of floats components per vertex.
-  //! 9 since it's build as (xyz rgba uv).
-  const size_t TOTAL_FLOATS_PER_VERTEX = 4;
+    class SpriteBatchMesh : public Mesh {
 
-  //! The total number of floats in the sprite.
-  //! 4 for each vertex * 9 floats per vertex (xyz rgba uv).
-  const size_t TOTAL_FLOATS_IN_SPRITE = 4 * TOTAL_FLOATS_PER_VERTEX;
 
-  std::vector<float> vertexData;
+    public:
+        //! Construct a new SpriteBatchMesh object.
+        //! @param framework The framework.
+        //! @param numberOfInstances The number of instances.
+        SpriteBatchMesh(Framework &framework, const size_t numberOfInstances);
 
-  size_t maxInstances;
+        //! The maximum number of instances that can be batched.
+        [[nodiscard]] inline size_t getMaxInstances() const { return maxInstances; }
 
-    void setupIndices();
+        //! The number of instances that are currently batched.
+        void resize(size_t newSize);
 
-  public:
-    //! Construct a new SpriteBatchMesh object.
-    //! @param framework The framework.
-    //! @param numberOfInstances The number of instances.
-    SpriteBatchMesh(Framework& framework, size_t numberOfInstances);
+        //! Write a sprite to the batch.
+        //! @param instance The instance index position.
+        //! @param position The position of the sprite.
+        //! @param size The size of the sprite.
+        void writeSprite(size_t instance, glm::vec3 position, glm::vec2 size);
 
-    //! The maximum number of instances that can be batched.
-    [[nodiscard]] inline size_t getMaxInstances() const { return maxInstances; }
+    private:
+        //! The number of floats components per vertex.
+        //! 9 since it's build as (xyz rgba uv).
+        const size_t TOTAL_FLOATS_PER_VERTEX = 9;
 
-    //! The number of instances that are currently batched.
-    void resize(size_t newSize);
+        //! The total number of floats in the sprite.
+        //! 4 for each vertex * 9 floats per vertex (xyz rgba uv).
+        const size_t TOTAL_FLOATS_IN_SPRITE = 4 * TOTAL_FLOATS_PER_VERTEX;
 
-    //! Write a sprite to the batch.
-    //! @param instance The instance index position.
-    //! @param position The position of the sprite.
-    //! @param size The size of the sprite.
-    void writeSprite(size_t instance, glm::vec3 position, glm::vec2 size);
-};
+        std::vector<float> vertexData;
+        std::vector<uint16_t> indices;
+
+        size_t maxInstances;
+
+        void setupIndices();
+    };
 
 #endif //SPRITEBATCHMESH_H
 }

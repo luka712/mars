@@ -57,7 +57,7 @@ namespace mars {
         OpenGLESTexture2D *texture{};
 
         void createProgram();
-        void createVao(uint vertexBuffer);
+        void createVao(GLuint vertexBuffer);
     };
 }
 
