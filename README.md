@@ -22,3 +22,10 @@ Of course delete `.template` from your file.
 Use `make all` to compile to emscripten.
 Use `make run` to run in browser.
 
+### TROUBLESHOOTING BUILD
+
+#### Windows
+
+Cmake should be using:
+- Toolchain: MinGW
+- Generator: MinGW Makefiles

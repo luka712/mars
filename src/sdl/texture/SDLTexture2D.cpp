@@ -1,7 +1,8 @@
 //
-// Created by lukaa on 21.12.2024..
+// Created by Erkapic Luka on 21.12.2024.
 //
 
+#include <stdexcept>
 #include <Framework.h>
 #include "sdl/texture/SDLTexture2D.h"
 #include <sdl/renderer/SDLRenderer.h>

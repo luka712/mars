@@ -1,10 +1,11 @@
 //
-// Created by lukaa on 21.1.2025..
+// Created by Erkapic Luka on 21.1.2025.
 //
 
+#include <stdexcept>
+#include <algorithm>
 #include "Framework.h"
 #include "ecs/layer/LayerManager.h"
-#include <algorithm>
 
 namespace mars {
     LayerManager::LayerManager(Framework &framework) : framework(framework) {
@@ -12,7 +13,7 @@ namespace mars {
     }
 
     std::shared_ptr<Layer> LayerManager::createLayer(std::string name, const uint32_t order, std::string description) {
-        for (auto &layer: layers) {
+        for (const auto &layer: layers) {
             if (layer->getName() == name) {
                 const std::string msg = "Layer with name " + name + " already exists.";
                 framework.getLogger().error(msg.c_str());

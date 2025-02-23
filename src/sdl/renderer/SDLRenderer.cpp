@@ -1,7 +1,8 @@
 //
-// Created by lukaa on 23.11.2024..
+// Created by Erkapic Luka on 23.11.2024.
 //
 
+#include <stdexcept>
 #include "Framework.h"
 #include "sdl/renderer/SDLRenderer.h"
 

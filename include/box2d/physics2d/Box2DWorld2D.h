@@ -11,7 +11,7 @@
 namespace mars {
 
     //! The 2D physics world.
-    class Box2DWorld2D : public AWorld2D{
+    class Box2DWorld2D final : public AWorld2D{
     public:
         //! Construct a new APhysicsWorld2D object.
         //! @param worldDef The world definition.
@@ -20,7 +20,7 @@ namespace mars {
         void createBody(BodyDefinition2D &bodyDef) override;
 
     private:
-        b2WorldId world{};
+        b2World* world{};
     };
 }
 

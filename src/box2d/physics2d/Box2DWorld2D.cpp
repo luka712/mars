@@ -6,14 +6,10 @@
 
 namespace mars {
 
-    Box2DWorld2D::Box2DWorld2D(WorldDefinition2D worldDef) : AWorld2D(worldDef) {
+    Box2DWorld2D::Box2DWorld2D(WorldDefinition2D worldDef)
+    : AWorld2D(worldDef) {
 
-        // WORLD DEFINITION
-        b2WorldDef def = b2DefaultWorldDef();
-        def.gravity = b2Vec2(worldDef.gravity.x, worldDef.gravity.y);
-
-        // WORLD
-        world = b2CreateWorld(&def);
+        world = new b2World(b2Vec2(worldDef.gravity.x, worldDef.gravity.y));
     }
 
     void Box2DWorld2D::createBody(BodyDefinition2D &bodyDef) {

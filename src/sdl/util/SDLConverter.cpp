@@ -2,7 +2,7 @@
 // Created by lukaa on 22.12.2024..
 //
 
-
+#include <stdexcept>
 #include "Framework.h"
 #include "sdl/util/SDLConverter.h"
 

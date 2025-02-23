@@ -1,7 +1,8 @@
 //
-// Created by lukaa on 1.2.2025..
+// Created by Erkapic Luka on 1.2.2025.
 //
 
+#include <stdexcept>
 #include "ecs/collision/Collider2D.h"
 #include "ecs/entity/Entity.h"
 

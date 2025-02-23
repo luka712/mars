@@ -23,8 +23,8 @@ namespace mars {
 
     void OpenGLESSpriteRenderPipeline::createProgram() {
         const FileReader &reader = framework.getFileReader();
-        const std::string vertexShaderCode = reader.readFile("shaders/glsl/300es/sprite/sprite_vs.glsl");
-        const std::string fragmentShaderCode = reader.readFile("shaders/glsl/300es/sprite/sprite_fs.glsl");
+        const std::string vertexShaderCode = reader.readFile("content/shaders/glsl/300es/sprite/sprite_vs.glsl");
+        const std::string fragmentShaderCode = reader.readFile("content/shaders/glsl/300es/sprite/sprite_fs.glsl");
 
         const GLuint vertexShader = OpenGLESUtil::getShader()->createVertexShader(
             vertexShaderCode,

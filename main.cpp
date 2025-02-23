@@ -10,7 +10,6 @@
 #include "ecs/tilemap/TileMap.h"
 // #include "spdlog/spdlog.h"
 // #include "spdlog/sinks/basic_file_sink.h"
-#include <box2d/box2d.h>
 
 #include "box2d/physics2d/Box2DWorld2D.h"
 
@@ -78,8 +77,6 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
     transform->setDrawRectangle(mars::Rect{100, 100, 200, 200});
     mars::SpriteRenderer *spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
     spriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
-
-    b2WorldDef worldDef = b2DefaultWorldDef();
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
