@@ -44,6 +44,8 @@ namespace mars {
         this->buffersFactory = std::make_unique<BuffersFactory>(*this);
         this->cameraFactory = std::make_unique<CameraFactory>(*this);
         this->pipelineFactory = std::make_unique<PipelineFactory>(*this);
+        this->meshFactory = std::make_unique<MeshFactory>(*this);
+        this->geometryBuilder = std::make_unique<GeometryBuilder>();
 #ifdef __EMSCRIPTEN__
         this->logger = std::make_unique<BrowserLogger>();
 #else

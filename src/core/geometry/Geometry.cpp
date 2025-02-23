@@ -5,7 +5,7 @@
 #include "core/geometry/Geometry.h"
 
 namespace mars {
-    std::vector<float> Geometry::toInterleaved(GeometryFormat format) {
+    std::vector<float> Geometry::toInterleaved(const GeometryFormat format) const {
         std::vector<float> interleavedData;
 
         switch (format)

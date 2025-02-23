@@ -41,7 +41,7 @@ namespace mars {
         //! @param byteSize The size of the buffer in bytes.
         //! @param vertexCount The number of vertices.
         //! @param usage The usage of the buffer.
-        virtual void initialize(void *data, const  uint32_t byteSize,const  uint32_t vertexCount, const  BufferUsage usage) = 0;
+        virtual void initialize(const void *data, const  uint32_t byteSize,const  uint32_t vertexCount, const  BufferUsage usage) = 0;
 
         //! Initialize the vertex buffer. This will create a writable buffer since data is not passed in.
         //! Creates writable buffer by default.

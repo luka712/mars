@@ -24,6 +24,8 @@
 #include "core/buffers/BuffersFactory.h"
 #include "core/camera/CameraFactory.h"
 #include "core/pipelines/PipelineFactory.h"
+#include "core/mesh/MeshFactory.h"
+#include "core/geometry/GeometryBuilder.h"
 
 namespace mars {
 
@@ -112,6 +114,14 @@ namespace mars {
         //! @return The @ref PipelineFactory instance.
         [[nodiscard]] PipelineFactory& getPipelineFactory() const { return *pipelineFactory; }
 
+        //! Gets the @ref MeshFactory instance.
+        //! @return The @ref MeshFactory instance.
+        [[nodiscard]] MeshFactory& getMeshFactory() const { return *meshFactory; }
+
+        //! Gets the @ref GeometryBuilder instance.
+        //! @return The @ref GeometryBuilder instance.
+        [[nodiscard]] GeometryBuilder& getGeometryBuilder() const { return *geometryBuilder; }
+
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
         void subscribeToUpdateEvent(const std::function<void(const Time time)>& callback);
@@ -154,6 +164,8 @@ namespace mars {
         std::unique_ptr<BuffersFactory> buffersFactory;
         std::unique_ptr<CameraFactory> cameraFactory;
         std::unique_ptr<PipelineFactory> pipelineFactory;
+        std::unique_ptr<MeshFactory> meshFactory;
+        std::unique_ptr<GeometryBuilder> geometryBuilder;
 
         // EVENTS
         std::vector<std::function<void(const Time time)>> onUpdate;

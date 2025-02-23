@@ -95,7 +95,10 @@ add_executable(chopper-shooter chopper-shooter.cpp
         ${GLAD_SRC}
         ${TINYXML2_SRC}
         include/core/geometry/Geometry.h
-        src/core/geometry/Geometry.cpp)
+        src/core/geometry/Geometry.cpp
+        include/core/mesh/MeshFactory.h
+        include/core/geometry/GeometryBuilder.h
+        src/core/geometry/GeometryBuilder.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

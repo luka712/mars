@@ -13,7 +13,7 @@ namespace mars {
           logger(framework.getLogger()){
     }
 
-    void OpenGLESVertexBuffer::initialize(void *data, const uint32_t byteSize, const uint32_t vertexCount,
+    void OpenGLESVertexBuffer::initialize(const void *data, const uint32_t byteSize, const uint32_t vertexCount,
                                           const BufferUsage usage) {
         this->byteSize = byteSize;
         this->vertexCount = vertexCount;

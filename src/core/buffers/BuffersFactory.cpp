@@ -14,7 +14,7 @@ namespace mars {
     }
 
     std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
-        std::vector<float> data,
+        const std::vector<float>& data,
         uint32_t vertexCount,
         BufferUsage usage,
         const std::string& label) const {
@@ -29,14 +29,14 @@ namespace mars {
             default:
                 throw std::runtime_error("BuffersFactory::createVertexBuffer: Rendering backend not supported.");
         }
-        void *dataPtr = data.data();
+        const float *dataPtr = data.data();
         uint32_t byteSize = data.size() * sizeof(float);
         buffer->initialize(dataPtr, byteSize, vertexCount, usage);
 
         return std::shared_ptr<AVertexBuffer>(buffer);
     }
 
-    std::shared_ptr<AIndexBuffer> BuffersFactory::createIndexBuffer(std::vector<uint16_t> data,  const std::string& label) {
+    std::shared_ptr<AIndexBuffer> BuffersFactory::createIndexBuffer(const std::vector<uint16_t>& data,  const std::string& label) {
 
         AIndexBuffer *buffer = nullptr;
         RenderingBackend renderingBackend = framework.getRenderingBackend();

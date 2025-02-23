@@ -31,7 +31,7 @@ namespace mars {
         //! @param label The label of the buffer.
         //! @return The shared pointer to the vertex buffer.
         [[nodiscard]] std::shared_ptr<AVertexBuffer> createVertexBuffer(
-            std::vector<float> data,
+            const std::vector<float>& data,
             uint32_t vertexCount,
             BufferUsage usage,
             const std::string& label) const;
@@ -41,7 +41,7 @@ namespace mars {
         //! @param label The label of the buffer.
         //! @return The shared pointer to the index buffer.
         std::shared_ptr<AIndexBuffer> createIndexBuffer(
-            std::vector<uint16_t> data,
+            const std::vector<uint16_t>& data,
             const std::string& label);
 
         //! Create a new uniform buffer.

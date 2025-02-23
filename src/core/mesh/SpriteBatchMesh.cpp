@@ -1,17 +1,18 @@
 //
-// Created by lukaa on 29.11.2024
+// Created by Erkapic Luka on 29.11.2024.
 //
 
 #include "core/mesh/SpriteBatchMesh.h"
 #include "Framework.h"
 
 namespace mars {
-    /*
-    SpriteBatchMesh::SpriteBatchMesh(Framework &framework, const size_t numberOfInstances){
-        vertexData.resize(maxInstances * TOTAL_FLOATS_IN_SPRITE);
+
+    SpriteBatchMesh::SpriteBatchMesh(Framework &framework, const uint32_t numberOfInstances): Mesh(framework) {
+        maxInstances = numberOfInstances;
+        vertexData = std::vector<float>(maxInstances * TOTAL_FLOATS_IN_SPRITE);
         setupIndices();
     }
-    */
+
 
     void SpriteBatchMesh::setupIndices() {
         indices.resize(maxInstances * 6);
@@ -28,8 +29,19 @@ namespace mars {
         }
     }
 
+    void SpriteBatchMesh::initialize() {
+        vertexBuffer = framework.getBuffersFactory().createVertexBuffer(
+            vertexData,
+            maxInstances * 4,
+            BufferUsage::Vertex_CopyDst,
+            "SpriteBatchMesh.vertexBuffer");
 
-    void SpriteBatchMesh::resize(size_t newSize) {
+        indexBuffer = framework.getBuffersFactory().createIndexBuffer(
+            indices,
+            "SpriteBatchMesh.indexBuffer");
+    }
+
+    void SpriteBatchMesh::resize(const size_t newSize) {
         if (newSize == maxInstances) {
             return;
         }
@@ -47,9 +59,16 @@ namespace mars {
 
         setupIndices();
 
-        // TODO: Dispose of buffers.
+        // Dispose of buffers.
+        if (vertexBuffer != nullptr) {
+            vertexBuffer->destroy();
+        }
+        if (indexBuffer != nullptr) {
+            indexBuffer->destroy();
+        }
 
-        // TODO: Assign new buffers.
+        // Assign the new buffers.
+        initialize();
     }
 
     void SpriteBatchMesh::writeSprite(size_t instance, glm::vec3 position, glm::vec2 size) {

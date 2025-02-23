@@ -128,6 +128,9 @@ int main(int argc, char *argv[]) {
             createSpriteRenderPipeline(camera.get());
     pipeline->setSpriteTexture(tileMapTexture.get());
 
+    std::shared_ptr<mars::Geometry > geometry = framework.getGeometryBuilder().quadGeometry();
+    std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(*geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
+
     // FRAME START EVENT?
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {

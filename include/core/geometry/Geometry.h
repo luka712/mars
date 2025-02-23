@@ -40,39 +40,83 @@ namespace mars {
 
     class Geometry {
     public:
+        //! Gets the vertex count.
+        //! @return The vertex count.
+        [[nodiscard]] uint32_t getVertexCount() const { return vertexCount; }
+
+        //! Sets the vertex count.
+        //! @param vertexCount The vertex count.
+        void setVertexCount(const uint32_t vertexCount) { this->vertexCount = vertexCount; }
+
+        //! Gets the indices of the geometry.
+        //! @return The indices of the geometry.
+        [[nodiscard]] const std::vector<uint16_t>& getIndices() const { return indices; }
+
+        //! Sets the indices of the geometry.
+        //! @param indices The indices of the geometry.
+        void setIndices(const std::vector<uint16_t>& indices) { this->indices = indices; }
+
+        //! Gets the positions of the geometry.
+        //! @return The positions of the geometry.
+        [[nodiscard]] const std::vector<float>& getPositions() const { return positions; }
+
+        //! Sets the positions of the geometry.
+        //! @param positions The positions of the geometry.
+        void setPositions(const std::vector<float>& positions) { this->positions = positions; }
+
+        //! Gets the colors of the geometry.
+        //! @return The colors of the geometry.
+        [[nodiscard]] const std::vector<float>& getColors() const { return colors; }
+
+        //! Sets the colors of the geometry.
+        //! @param colors The colors of the geometry.
+        void setColors(const std::vector<float>& colors) { this->colors = colors; }
+
+        //! Gets the texture coordinates of the geometry.
+        //! @return The texture coordinates of the geometry.
+        [[nodiscard]] const std::vector<float>& getTextureCoords() const { return textureCoords; }
+
+        //! Sets the texture coordinates of the geometry.
+        //! @param textureCoords The texture coordinates of the geometry.
+        void setTextureCoords(const std::vector<float>& textureCoords) { this->textureCoords = textureCoords; }
+
+        //! Gets the normals of the geometry.
+        //! @return The normals of the geometry.
+        [[nodiscard]] const std::vector<float>& getNormals() const { return normals; }
+
+        //! Sets the normals of the geometry.
+        //! @param normals The normals of the geometry.
+        void setNormals(const std::vector<float>& normals) { this->normals = normals; }
+
         //! The position vertex format of the geometry.
         VertexFormat positionsFormat;
-
-        //! The positions of the geometry.
-        std::vector<float> positions;
 
         //! The color vertex format of the geometry.
         VertexFormat colorFormat;
 
-        //! The colors of the geometry.
-        std::vector<float> colors;
 
         //! The texture coordinates vertex format of the geometry.
         VertexFormat textureCoordsFormat;
 
-        //! The texture coordinates of the geometry.
-        std::vector<float> textureCoords;
 
         //! The normals vertex format of the geometry.
         VertexFormat normalsFormat;
 
-        //! The normals of the geometry.
-        std::vector<float> normals;
 
-        //! The indices of the geometry.
-        std::vector<uint16_t> indices;
+
 
         //! Converts data of this geometry to interleaved buffer format.
         //! @param format The format of the geometry.
         //! @return The interleaved data of the geometry.
-        std::vector<float> toInterleaved(GeometryFormat format);
+        [[nodiscard]] std::vector<float> toInterleaved(GeometryFormat format) const;
 
     private:
+        uint32_t vertexCount = 0;
+        std::vector<uint16_t> indices;
+        std::vector<float> positions;
+        std::vector<float> colors;
+        std::vector<float> textureCoords;
+        std::vector<float> normals;
 
         //! Pushes the geometry data for index to the destination array.
         //! @param index The index of the vertex.
@@ -80,12 +124,12 @@ namespace mars {
         //! @param sourceFormat The source format.
         //! @param destination The destination array.
         //! @param destinationFormat The destination format.
-        void pushFormat(
+        static void pushFormat(
             int32_t index,
             const std::vector<float> &source,
             VertexFormat sourceFormat,
             std::vector<float> &destination,
-            VertexFormat destinationFormat);
+            VertexFormat destinationFormat) ;
     };
 }
 
