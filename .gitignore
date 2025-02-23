@@ -12,4 +12,4 @@ _deps
 CMakeUserPresets.json
 .idea
 cmake-build-debug
-emscripten_build
+emscripten-build
