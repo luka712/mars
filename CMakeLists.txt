@@ -98,7 +98,14 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/core/geometry/Geometry.cpp
         include/core/mesh/MeshFactory.h
         include/core/geometry/GeometryBuilder.h
-        src/core/geometry/GeometryBuilder.cpp)
+        src/core/geometry/GeometryBuilder.cpp
+        include/core/physics2d/AWorld2D.h
+        include/core/physics2d/body/ABody2D.h
+        include/core/physics2d/body/BodyDefinition2D.h
+        include/box2d/physics2d/Box2DWorld2D.h
+        src/core/physics2d/AWorld2D.cpp
+        src/box2d/physics2d/Box2DWorld2D.cpp
+        include/core/physics2d/WorldDefinition2D.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

@@ -20,7 +20,7 @@ namespace mars {
     public:
         //! Construct a new Collision2DSystem object.
         //! @param framework The framework.
-        Collision2DSystem(Framework &framework);
+        explicit Collision2DSystem(Framework &framework);
 
         //! Add a collider component to the system.
         //! @param collider The Collider2D component.

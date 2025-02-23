@@ -12,6 +12,8 @@
 // #include "spdlog/sinks/basic_file_sink.h"
 #include <box2d/box2d.h>
 
+#include "box2d/physics2d/Box2DWorld2D.h"
+
 class MovePlayer final : public mars::AScript {
     mars::RectTransform *transform;
 
@@ -130,6 +132,12 @@ int main(int argc, char *argv[]) {
 
     std::shared_ptr<mars::Geometry > geometry = framework.getGeometryBuilder().quadGeometry();
     std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(*geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
+
+    // PHYSICS.
+    mars::WorldDefinition2D worldDef{};
+    worldDef.gravity = glm::vec2(0, -9.8f);
+
+    std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(worldDef);
 
     // FRAME START EVENT?
 

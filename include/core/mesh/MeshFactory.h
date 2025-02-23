@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 23.2.2025..
+// Created by Erkapic Luka on 23.2.2025.
 //
 
-#ifndef MESHFACTORY_H
-#define MESHFACTORY_H
+#ifndef MESH_FACTORY_H
+#define MESH_FACTORY_H
 
 #include "core/mesh/Mesh.h"
 
@@ -28,4 +28,4 @@ namespace mars {
     };
 }
 
-#endif //MESHFACTORY_H
+#endif //MESH_FACTORY_H

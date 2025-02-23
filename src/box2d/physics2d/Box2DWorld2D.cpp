@@ -1,0 +1,21 @@
+//
+// Created by Erkapic Luka on 23.2.2025.
+//
+
+#include "box2d/physics2d/Box2DWorld2D.h"
+
+namespace mars {
+
+    Box2DWorld2D::Box2DWorld2D(WorldDefinition2D worldDef) : AWorld2D(worldDef) {
+
+        // WORLD DEFINITION
+        b2WorldDef def = b2DefaultWorldDef();
+        def.gravity = b2Vec2(worldDef.gravity.x, worldDef.gravity.y);
+
+        // WORLD
+        world = b2CreateWorld(&def);
+    }
+
+    void Box2DWorld2D::createBody(BodyDefinition2D &bodyDef) {
+    }
+}
