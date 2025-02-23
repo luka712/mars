@@ -6,7 +6,7 @@
 #define OPENGLESTEXTURE2D_H
 
 #include <string>
-#include <glad/glad.h>
+#include "opengles/opengles.h"
 #include "core/log/Logger.h"
 #include "core/texture/Texture2D.h"
 #include "core/data/ImageData.h"

@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include <core/log/Logger.h>
-#include <glad/glad.h>
+#include "opengles/opengles.h"
 #include <string>
 
 namespace mars {

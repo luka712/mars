@@ -3,7 +3,7 @@ include(FetchContent)
 FetchContent_Declare(
   box2d
   GIT_REPOSITORY https://github.com/erincatto/box2d.git
-  GIT_TAG main  # Or a specific release tag
+  GIT_TAG v2.4.2
 )
 
 FetchContent_MakeAvailable(box2d)

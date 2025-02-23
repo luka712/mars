@@ -1,13 +1,12 @@
 //
-// Created by luka on 10.02.25.
+// Created by Erkapic Luka on 10.02.25.
 //
 
-#ifndef OPENGLESSPRITERENDERPIPELINE_H
-#define OPENGLESSPRITERENDERPIPELINE_H
+#ifndef OPEN_GLES_SPRITE_RENDER_PIPELINE_H
+#define OPEN_GLES_SPRITE_RENDER_PIPELINE_H
 
 #include <core/renderer/enums.h>
-#include <glad/glad.h>
-
+#include "opengles/opengles.h"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
 #include "core/camera/core/OrthographicCamera.h"
@@ -62,4 +61,4 @@ namespace mars {
 }
 
 
-#endif //OPENGLESSPRITERENDERPIPELINE_H
+#endif //OPEN_GLES_SPRITE_RENDER_PIPELINE_H

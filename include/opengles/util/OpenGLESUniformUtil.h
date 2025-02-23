@@ -1,11 +1,11 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
 #ifndef OPEN_GLES_UNIFORM_UTIL_H
 #define OPEN_GLES_UNIFORM_UTIL_H
-#include <glad/glad.h>
 
+#include "opengles/opengles.h"
 #include "core/log/Logger.h"
 
 namespace mars {

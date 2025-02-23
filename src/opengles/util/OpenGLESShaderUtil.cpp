@@ -1,10 +1,9 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
-#include "../../../include/opengles/util/OpenGLESShaderUtil.h"
-
 #include <stdexcept>
+#include "opengles/util/OpenGLESShaderUtil.h"
 
 namespace mars {
     OpenGLESShaderUtil::OpenGLESShaderUtil(Logger &logger)
@@ -17,9 +16,11 @@ namespace mars {
         glShaderSource(shader, 1, &sourceCStr, nullptr);
         glCompileShader(shader);
 
+#ifndef __EMSCRIPTEN__
         if (!label.empty()) {
             glObjectLabel(GL_SHADER, shader, static_cast<GLsizei>(label.size()), label.c_str());
         }
+#endif
 
         GLint status;
         glGetShaderiv(shader, GL_COMPILE_STATUS, &status);

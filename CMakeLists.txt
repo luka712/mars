@@ -68,7 +68,7 @@ endif()
 
 # COPY ASSETS/CONTENT/SHADERS
 file(COPY content DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY shaders DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY content/shaders DESTINATION ${CMAKE_BINARY_DIR})
 
 # COPY VENDOR
 file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
@@ -105,7 +105,8 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/box2d/physics2d/Box2DWorld2D.h
         src/core/physics2d/AWorld2D.cpp
         src/box2d/physics2d/Box2DWorld2D.cpp
-        include/core/physics2d/WorldDefinition2D.h)
+        include/core/physics2d/WorldDefinition2D.h
+        src/opengles/util/OpenGLESProgramUtil.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

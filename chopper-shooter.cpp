@@ -15,7 +15,7 @@
 
 
 std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
-    std::string jungleMap = framework.getFileLoader().loadFile("content/tilemaps/jungle.map");
+    std::string jungleMap = framework.getFileReader().readFile("content/tilemaps/jungle.map");
     std::vector<std::vector<int> > map;
     std::istringstream mapSS(jungleMap);
     std::string line;

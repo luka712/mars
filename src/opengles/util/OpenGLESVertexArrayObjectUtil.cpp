@@ -1,9 +1,8 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
 #include "opengles/util/OpenGLESVertexArrayObjectUtil.h"
-
 
 namespace mars {
 
@@ -14,9 +13,11 @@ namespace mars {
         glBindVertexArray(vao);
 
         // Label
+#ifndef __EMSCRIPTEN__
         if (!label.empty()) {
             glObjectLabel(GL_VERTEX_ARRAY, vao, static_cast<GLsizei>(label.size()), label.c_str());
         }
+#endif
 
         return vao;
     }

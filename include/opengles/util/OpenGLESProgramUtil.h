@@ -1,9 +1,9 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
-#ifndef OPENGLESPROGRAMUTIL_H
-#define OPENGLESPROGRAMUTIL_H
+#ifndef OPEN_GLES_PROGRAM_UTIL_H
+#define OPEN_GLES_PROGRAM_UTIL_H
 
 #include "opengles/opengles.h"
 #include "core/log/Logger.h"
@@ -21,7 +21,7 @@ public:
         //! @param fragmentShader The fragment shader.
         //! @param label The label. By default, it is empty. If empty, it is not set.
         //! @return The program id.
-        GLuint create(GLuint vertexShader, GLuint fragmentShader, const std::string& label = "") const;
+        [[nodiscard]] GLuint create(GLuint vertexShader, GLuint fragmentShader, const std::string& label = "") const;
 
         private:
         Logger& logger;
@@ -30,4 +30,4 @@ public:
 
 
 
-#endif //OPENGLESPROGRAMUTIL_H
+#endif //OPEN_GLES_PROGRAM_UTIL_H

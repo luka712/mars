@@ -1,11 +1,9 @@
 //
-// Created by luka on 11.02.25.
+// Created by Erkapic Luka on 11.02.25.
 //
 
-#include "../../../include/opengles/util/OpenGLESTextureUtil.h"
-
 #include <stdexcept>
-#include <../../../cmake-build-debug/vendor/glad/include/glad/glad.h>
+#include "opengles/util/OpenGLESTextureUtil.h"
 
 namespace mars {
     OpenGLESTextureUtil::OpenGLESTextureUtil(Logger &logger) : logger(logger) {
@@ -50,12 +48,15 @@ namespace mars {
         {
             std::string msg = "Potential error occurred during setup of OpenGL texture.";
             logger.error(msg);
-            throw new std::runtime_error(msg);
+            throw std::runtime_error(msg);
         }
+
+#ifndef __EMSCRIPTEN__
         if (!label.empty())
         {
             glObjectLabel(GL_TEXTURE_2D, texture, static_cast<GLsizei>(label.size()), label.c_str());
         }
+#endif
 
         return texture;
     }

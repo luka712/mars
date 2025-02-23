@@ -6,8 +6,6 @@
 #define OPENGLESUNIFORMBUFFER_H
 
 #include <Framework.h>
-#include <core/log/Logger.h>
-
 #include "core/buffers/AUniformBuffer.h"
 
 namespace mars

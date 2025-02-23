@@ -21,9 +21,11 @@ namespace mars {
         glAttachShader(program, fragmentShader);
         glLinkProgram(program);
 
+#ifndef __EMSCRIPTEN__
         if (!label.empty()) {
             glObjectLabel(GL_PROGRAM, program, static_cast<GLsizei>(label.size()), label.c_str());
         }
+#endif
 
         GLint success;
         glGetProgramiv(program, GL_LINK_STATUS, &success );
