@@ -42,8 +42,9 @@ namespace mars {
         staticLogger->warn(msg);
     }
 
-    OpenGLESRenderer::OpenGLESRenderer(Framework &framework)
+    OpenGLESRenderer::OpenGLESRenderer(Framework &framework, const glm::vec2 frameBufferSize)
         : Renderer(framework), window(nullptr) {
+        this->frameBufferSize = frameBufferSize;
     }
 
     void OpenGLESRenderer::initialize() {
@@ -94,7 +95,6 @@ namespace mars {
     }
 
     OpenGLESRenderer *findOpenGLESRenderer(const Framework &framework) {
-        return dynamic_cast<OpenGLESRenderer*>(&framework.getRenderer());
+        return dynamic_cast<OpenGLESRenderer *>(&framework.getRenderer());
     }
-
 }

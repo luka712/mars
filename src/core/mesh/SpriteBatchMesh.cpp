@@ -17,8 +17,8 @@ namespace mars {
     void SpriteBatchMesh::setupIndices() {
         indices.resize(maxInstances * 6);
         for (size_t i = 0; i < maxInstances; i++) {
-            size_t indexInIndices = i * 6;
-            size_t indicesStartIndex = i * 4;
+            const size_t indexInIndices = i * 6;
+            const size_t indicesStartIndex = i * 4;
 
             indices[indexInIndices] = indicesStartIndex + 2; // Bottom left.
             indices[indexInIndices + 1] = indicesStartIndex + 3; // Bottom right.
@@ -71,7 +71,7 @@ namespace mars {
         initialize();
     }
 
-    void SpriteBatchMesh::writeSprite(size_t instance, glm::vec3 position, glm::vec2 size) {
+    void SpriteBatchMesh::writeSprite(const size_t instance, const glm::vec3 position, const glm::vec2 size) {
         size_t index = instance * TOTAL_FLOATS_IN_SPRITE; // 36 due to 9 * 4 vertices.
 
         // Top left.
@@ -118,4 +118,59 @@ namespace mars {
         vertexData[index++] = 1;
         vertexData[index++] = 1;
     }
+
+    void SpriteBatchMesh::writeSprite(
+        const size_t instance, glm::vec3 position, glm::vec2 size, Color color,
+        const float u0, const float v0, const float u1, const float v1) {
+        size_t index = instance * TOTAL_FLOATS_IN_SPRITE; // 36 due to 9 * 4 vertices.
+
+        // Top left.
+        vertexData[index++] = position.x;
+        vertexData[index++] = position.y;
+        vertexData[index++] = position.z;
+        vertexData[index++] = color.r;
+        vertexData[index++] = color.g;
+        vertexData[index++] = color.b;
+        vertexData[index++] = color.a;
+        vertexData[index++] = u0;
+        vertexData[index++] = v0;
+
+        // Top right.
+        vertexData[index++] = position.x + size.x;
+        vertexData[index++] = position.y;
+        vertexData[index++] = position.z;
+        vertexData[index++] = color.r;
+        vertexData[index++] = color.g;
+        vertexData[index++] = color.b;
+        vertexData[index++] = color.a;
+        vertexData[index++] = u1;
+        vertexData[index++] = v0;
+
+        // Bottom left.
+        vertexData[index++] = position.x;
+        vertexData[index++] = position.y + size.y;
+        vertexData[index++] = position.z;
+        vertexData[index++] = color.r;
+        vertexData[index++] = color.g;
+        vertexData[index++] = color.b;
+        vertexData[index++] = color.a;
+        vertexData[index++] = u0;
+        vertexData[index++] = v1;
+
+        // Bottom right.
+        vertexData[index++] = position.x + size.x;
+        vertexData[index++] = position.y + size.y;
+        vertexData[index++] = position.z;
+        vertexData[index++] = color.r;
+        vertexData[index++] = color.g;
+        vertexData[index++] = color.b;
+        vertexData[index++] = color.a;
+        vertexData[index++] = u1;
+        vertexData[index] = v1;
+    }
+
+    void SpriteBatchMesh::applyChanges() {
+        vertexBuffer->update(vertexData.data(), vertexData.size() * sizeof(float),0);
+    }
+
 }

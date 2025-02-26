@@ -8,7 +8,7 @@
 
 namespace mars {
     SDLSpriteBatch::SDLSpriteBatch(Framework &framework)
-        : framework(framework), currentItemIndex(0), currentTexture(nullptr) {
+        : SpriteBatch(framework), currentItemIndex(0), currentTexture(nullptr) {
     }
 
     void SDLSpriteBatch::initialize() {
@@ -122,7 +122,6 @@ namespace mars {
             currentItemIndex++;
         }
     }
-
 
     void SDLSpriteBatch::end() {
         for (int i = 0; i < currentItemIndex; i++) {

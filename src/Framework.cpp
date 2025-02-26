@@ -6,7 +6,6 @@
 #include "sdl/renderer/SDLRenderer.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
 #include "sdl/sprite/SDLSpriteBatch.h"
-#include "opengles/sprite/OpenGLESSpriteBatch.h"
 
 #ifdef __EMSCRIPTEN__
 #include "core/log/BrowserLogger.h"
@@ -29,8 +28,8 @@ namespace mars {
             this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         }
         else {
-            this->renderer = std::make_unique<OpenGLESRenderer>(*this);
-            this->spriteBatch = std::make_unique<OpenGLESSpriteBatch>(*this);
+            this->renderer = std::make_unique<OpenGLESRenderer>(*this, options.frameBufferSize);
+            this->spriteBatch = std::make_unique<SpriteBatch>(*this);
         }
 
         this->timeManager = std::make_unique<TimeManager>();
@@ -133,6 +132,7 @@ namespace mars {
         renderer->endRenderPass();
 
         // - FRAME END
+        spriteBatch->frameEnd();
         timeManager->frameEnd();
     }
 

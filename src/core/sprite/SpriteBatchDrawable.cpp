@@ -1,62 +1,91 @@
 //
-// Created by lukaa on 29.11.2024..
+// Created by Erkapic Luka on 29.11.2024.
 //
-
-#include <utility>
 
 #include "Framework.h"
 #include "core/sprite/SpriteBatchDrawable.h"
 
 namespace mars {
+    SpriteBatchDrawable::SpriteBatchDrawable(
+        Framework &framework,
+        Texture2D& texture,
+        OrthographicCamera& camera,
+        const size_t maxBatchSize)
+        : framework(framework), camera(camera), texture(texture), maxBatchSize(maxBatchSize) {
+    }
 
-	SpriteBatchDrawable::SpriteBatchDrawable(Framework& framework, std::shared_ptr<Texture2D>  texture, size_t maxBatchSize)
-		: framework(framework), texture(std::move(texture)), maxBatchSize(maxBatchSize){
+    void SpriteBatchDrawable::initialize() {
+        renderPipeline = framework.getPipelineFactory().createSpriteRenderPipeline(&camera);
+        renderPipeline->setSpriteTexture(&texture);
 
-          }
+        drawingMesh = std::make_unique<SpriteBatchMesh>(framework, maxBatchSize);
+        drawingMesh->initialize();
+    }
 
-	void SpriteBatchDrawable::initialize() {
-		// TODO: uncomment
-		//drawingMesh = std::make_unique<SpriteBatchMesh>(framework, maxBatchSize);
-		// drawingMesh->initialize();
-	}
+    void SpriteBatchDrawable::reset() {
+        // Nothing is drawn yet.
+        fromInstance = 0;
+        toInstance = 0;
+    }
 
-	void SpriteBatchDrawable::reset() {
-		// Nothing is drawn yet.
-		fromInstance = 0;
-		toInstance = 0;
-	}
+    void SpriteBatchDrawable::writeSprite(const glm::vec3 position, const glm::vec2 size) {
+        if (toInstance >= maxBatchSize) {
+            // We need to resize the batch.
+            needsResize = true;
+            return;
+        }
 
-	void SpriteBatchDrawable::writeSprite(glm::vec3 position, glm::vec2 size) {
-		if (toInstance >= maxBatchSize) {
-			// We need to resize the batch.
-			needsResize = true;
-			return;
-		}
+        drawingMesh->writeSprite(toInstance, position, size);
+        toInstance++;
+    }
 
-		drawingMesh->writeSprite(toInstance, position, size);
-		toInstance++;
-	}
+    void SpriteBatchDrawable::writeSprite(
+        glm::vec3 position, glm::vec2 size, Color color,
+        float u0, float v0, float u1, float v1) {
+        // We must wait for frame end to resize.
+        if (toInstance >= maxBatchSize)
+        {
+            needsResize = true;
+            return;
+        }
 
-	void SpriteBatchDrawable::draw() {
-		// Nothing to draw.
-		if (toInstance <= 0 || fromInstance > toInstance)
-		{
-			return;
-		}
+        drawingMesh->writeSprite(toInstance, position, size, color, u0, v0, u1, v1);
 
-		// Clamp instance to max batch size.
-		if(toInstance >= maxBatchSize)
-		{
-			toInstance = maxBatchSize - 1;
-		}
+        // Write at correct position.
+        toInstance++;
+    }
 
-		// Draw mesh.
-		int indicesOffset = static_cast<int>(fromInstance) * 6;
-		int indicesCount = toInstance * 6 - indicesOffset;
-		drawingMesh->applyChanges();
-		// renderPipeline.Render(drawingMesh.VertexBuffer, drawingMesh.IndexBuffer,
-		// 	indicesCount,
-		// 	(uint) indicesOffset );
-		fromInstance = toInstance;
-	}
+
+    void SpriteBatchDrawable::draw() {
+        // Nothing to draw.
+        if (toInstance <= 0 || fromInstance > toInstance) {
+            return;
+        }
+
+        // Clamp instance to max batch size.
+        if (toInstance >= maxBatchSize) {
+            toInstance = maxBatchSize - 1;
+        }
+
+        // Draw mesh.
+        const size_t indicesOffset = static_cast<int>(fromInstance) * 6;
+        const size_t indicesCount = toInstance * 6 - indicesOffset;
+        drawingMesh->applyChanges();
+        renderPipeline->render(
+            &drawingMesh->getVertexBuffer(),
+            &drawingMesh->getIndexBuffer(),
+         	indicesCount,
+         	indicesOffset );
+        fromInstance = toInstance;
+    }
+
+    void SpriteBatchDrawable::frameEnd() {
+
+        if (needsResize) {
+            maxBatchSize *= 2;
+            drawingMesh->resize(maxBatchSize);
+        }
+
+        needsResize = false;
+    }
 }

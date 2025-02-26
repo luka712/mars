@@ -19,6 +19,8 @@ namespace mars {
     //! The mesh class.
     class Mesh {
     public:
+        virtual ~Mesh() = default;
+
         //! Construct a new Mesh object.
         //! @param framework The framework.
         explicit Mesh(Framework& framework);
@@ -42,6 +44,14 @@ namespace mars {
         //! Gets the normals of the mesh.
         //! @return The normals of the mesh.
         std::vector<float>& getNormals() { return normals; }
+
+        //! Gets the vertex buffer.
+        //! @return The vertex buffer.
+        [[nodiscard]] AVertexBuffer& getVertexBuffer() const { return *vertexBuffer; }
+
+        //! Gets the index buffer.
+        //! @return The index buffer.
+        [[nodiscard]] AIndexBuffer& getIndexBuffer() const { return *indexBuffer; }
 
         //! Initialize the mesh.
         virtual void initialize();

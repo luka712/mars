@@ -6,6 +6,7 @@
 #define RENDERER_H
 
 #include "core/math/Color.h"
+#include "glm/vec2.hpp"
 
 namespace mars {
     class Framework;
@@ -15,6 +16,10 @@ namespace mars {
         public:
             //! The clear color of the renderer.
             Color clearColor = Color::lightPink();
+
+            //! Gets the frame buffer size.
+            //! @return The frame buffer size.
+            [[nodiscard]] glm::u32vec2 getFrameBufferSize() const { return frameBufferSize; }
 
             //! Destroy the Renderer object.
             virtual ~Renderer() = default;
@@ -38,6 +43,7 @@ namespace mars {
 
         protected:
             Framework &framework;
+            glm::u32vec2 frameBufferSize;
     };
 }
 

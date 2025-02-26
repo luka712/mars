@@ -16,6 +16,8 @@ if(WIN32)
     # NOTE: SET DIFFERENT PATH FOR YOUR SDL2 INSTALLATION
     set(SDL2_PATH "D:/_Windows/Libs/SDL2-devel-2.30.9-mingw/SDL2/x86_64-w64-mingw32")
     set(SDL2_IMAGE_PATH "D:/_Windows/Libs/SDL2_image-devel-2.8.3-mingw/SDL2_image-2.8.3/x86_64-w64-mingw32")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
 endif()
 
 # PACKAGES
@@ -106,7 +108,8 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/core/physics2d/AWorld2D.cpp
         src/box2d/physics2d/Box2DWorld2D.cpp
         include/core/physics2d/WorldDefinition2D.h
-        src/opengles/util/OpenGLESProgramUtil.cpp)
+        src/opengles/util/OpenGLESProgramUtil.cpp
+        src/core/sprite/SpriteBatch.cpp)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}

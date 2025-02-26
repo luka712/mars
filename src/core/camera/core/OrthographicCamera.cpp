@@ -24,7 +24,7 @@ namespace mars {
         this->top = top;
         this->nearPlane = nearPlane;
         this->farPlane = farPlane;
-        eye = glm::vec3(0,0,1);
+        eye = glm::vec3(0,0,-1);
         target = glm::vec3(0,0,0);
         updateMatrices();
 
@@ -44,9 +44,9 @@ namespace mars {
     }
 
     void OrthographicCamera::updateMatrices() {
-        viewMatrix = lookAt(eye, target, glm::vec3(0,1,0));
+        viewMatrix = lookAtLH(eye, target, glm::vec3(0,1,0));
         // TODO: account for different z space, right now it's setup for OpenGL
-        projectionMatrix = glm::ortho(left, right, bottom, top, nearPlane, farPlane);
+        projectionMatrix = glm::orthoLH_NO(left, right, bottom, top, nearPlane, farPlane);
         projectionViewMatrix = viewMatrix * projectionMatrix;
     }
 

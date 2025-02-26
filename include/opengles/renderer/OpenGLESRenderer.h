@@ -15,7 +15,8 @@ namespace mars {
     public:
         //! Construct a new OpenGLESRenderer object.
         //! @param framework The framework.
-        explicit OpenGLESRenderer(Framework &framework);
+        //! @param frameBufferSize The frame buffer size.
+        explicit OpenGLESRenderer(Framework &framework, glm::vec2 frameBufferSize);
 
         //! @copydoc Renderer::initialize()
         void initialize() override;

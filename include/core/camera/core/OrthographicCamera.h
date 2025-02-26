@@ -45,7 +45,7 @@ namespace mars
 
         //! Gets the projection view matrix.
         //! @returns The projection view matrix.
-        [[nodiscard]] glm::mat4 getProjectionViewMatrix() const { return  projectionViewMatrix; }
+        [[nodiscard]] glm::mat4& getProjectionViewMatrix() { return  projectionViewMatrix; }
 
         //! Gets the view matrix buffer.
         //! @return The view matrix buffer.

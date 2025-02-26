@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <core/loaders/FileReader.h>
-
 #include "core/life_management/State.h"
 #include "core/window/WindowManager.h"
 #include "core/renderer/Renderer.h"
@@ -26,6 +25,7 @@
 #include "core/pipelines/PipelineFactory.h"
 #include "core/mesh/MeshFactory.h"
 #include "core/geometry/GeometryBuilder.h"
+#include "core/sprite/SpriteBatch.h"
 
 namespace mars {
 
@@ -35,6 +35,9 @@ namespace mars {
 
         //! The rendering backend.
         RenderingBackend renderingBackend;
+
+        //! The frame buffer size.
+        glm::vec2 frameBufferSize;
     };
 
     /**

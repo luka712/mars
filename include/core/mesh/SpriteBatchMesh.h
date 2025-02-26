@@ -1,9 +1,11 @@
 //
-// Created by lukaa on 29.11.2024..
+// Created by Erkapic Luka on 29.11.2024.
 //
 
-#ifndef SPRITEBATCHMESH_H
-#define SPRITEBATCHMESH_H
+#ifndef SPRITE_BATCH_MESH_H
+#define SPRITE_BATCH_MESH_H
+
+#include <core/math/Color.h>
 
 #include "core/mesh/Mesh.h"
 #include <glm/glm.hpp>
@@ -15,17 +17,15 @@ namespace mars {
     //! Note that changing positions, indices, colors, texture coordinates and normals will have no effect.
     class SpriteBatchMesh : public Mesh {
 
-
     public:
         //! Construct a new SpriteBatchMesh object.
         //! @param framework The framework.
         //! @param numberOfInstances The number of instances.
-        SpriteBatchMesh(Framework &framework, const uint32_t numberOfInstances);
+        SpriteBatchMesh(Framework &framework, uint32_t numberOfInstances);
 
         //! The maximum number of instances that can be batched.
         [[nodiscard]] inline size_t getMaxInstances() const { return maxInstances; }
 
-        //! @copydoc
         void initialize() override;
 
         //! The number of instances that are currently batched.
@@ -36,6 +36,20 @@ namespace mars {
         //! @param position The position of the sprite.
         //! @param size The size of the sprite.
         void writeSprite(size_t instance, glm::vec3 position, glm::vec2 size);
+
+        //! Write a sprite to the batch.
+        //! @param instance The instance index position.
+        //! @param position The position of the sprite.
+        //! @param size The size of the sprite.
+        //! @param color The color of the sprite.
+        //! @param u0 The u0.
+        //! @param v0 The v0.
+        //! @param u1 The u1.
+        //! @param v1 The v1.
+        void writeSprite(size_t instance, glm::vec3 position, glm::vec2 size, Color color,
+            float u0, float v0, float u1, float v1);
+
+        void applyChanges() override;
 
     private:
         //! The number of floats components per vertex.
@@ -52,6 +66,7 @@ namespace mars {
 
         void setupIndices();
     };
-
-#endif //SPRITEBATCHMESH_H
 }
+
+#endif //SPRITE_BATCH_MESH_H
+

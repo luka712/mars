@@ -91,6 +91,7 @@ int main(int argc, char *argv[]) {
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
         mars::RenderingBackend::OpenGLES,
+        glm::vec2(1280, 720)
     });
 
 
@@ -120,7 +121,7 @@ int main(int argc, char *argv[]) {
     tileMapTexture->printInfo();
 
     std::shared_ptr<mars::OrthographicCamera> camera = framework.getCameraFactory().createOrthographicCamera(
-        -10, 10, 10, -10, 0.1, 100);
+        -10, 10, 10, -10, 0.0, 100);
     camera->printInfo();
 
     std::shared_ptr<mars::ASpriteRenderPipeline> pipeline = framework.getPipelineFactory().
@@ -144,13 +145,14 @@ int main(int argc, char *argv[]) {
     });
 
     framework.subscribeToRenderEvent([&]() {
-        // framework.getSpriteBatch().begin();
-        //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-        //framework.getSpriteBatch().end();
+        framework.getSpriteBatch().begin();
+       //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+        framework.getSpriteBatch().draw(tileMapTexture.get(), {100,100,200,200}, {1, 1, 1, 1});
+        framework.getSpriteBatch().end();
 
 
         // ecsManager.render();
-        pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
+        // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
 
     });
 

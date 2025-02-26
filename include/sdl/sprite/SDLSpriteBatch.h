@@ -45,7 +45,6 @@ namespace mars {
         void end() override;
 
     private:
-        Framework &framework;
         SDL_Renderer* renderer{};
         SDLTexture2D* currentTexture;
         int32_t currentItemIndex;

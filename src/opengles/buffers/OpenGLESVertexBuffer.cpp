@@ -10,7 +10,7 @@ namespace mars {
     OpenGLESVertexBuffer::OpenGLESVertexBuffer(const Framework &framework, const std::string &label)
         : AVertexBuffer(label),
           renderer(dynamic_cast<OpenGLESRenderer &>(framework.getRenderer())),
-          logger(framework.getLogger()){
+          logger(framework.getLogger()) {
     }
 
     void OpenGLESVertexBuffer::initialize(const void *data, const uint32_t byteSize, const uint32_t vertexCount,
@@ -41,22 +41,21 @@ namespace mars {
     }
 
     void OpenGLESVertexBuffer::update(void *data, const uint32_t byteSize, const uint32_t offset) {
-        OpenGLESUtil::getBuffer()->writeBuffer(buffer, GL_VERTEX_ARRAY, data, byteSize, offset);
+        OpenGLESUtil::getBuffer()->writeBuffer(buffer, GL_ARRAY_BUFFER, data, byteSize, offset);
     }
 
     std::string OpenGLESVertexBuffer::printInfo() {
-
         std::string hint;
         switch (glHint) {
             case GL_STATIC_DRAW:
                 hint = "GL_STATIC_DRAW";
-            break;
+                break;
             case GL_DYNAMIC_DRAW:
                 hint = "GL_DYNAMIC_DRAW";
-            break;
+                break;
             case GL_STREAM_DRAW:
                 hint = "GL_STREAM_DRAW";
-            break;
+                break;
             default:
                 throw std::runtime_error("Unknown buffer hint.");
         }
@@ -71,7 +70,7 @@ namespace mars {
 
         oss << "\tFRAMEWORK DATA:\n";
         oss << "\t\tType: VertexBuffer\n";
-       //  oss << "\t\tFramework Usage: " << usage << "\n"; // High level usage from framework.
+        //  oss << "\t\tFramework Usage: " << usage << "\n"; // High level usage from framework.
         oss << "\t\tVertex Count: " << vertexCount << "\n";
         oss << "\t\tByte Size: " << byteSize << "\n";
         oss << "\t\tByte Stride: " << byteStride << "\n";
@@ -81,11 +80,11 @@ namespace mars {
         return oss.str();
     }
 
-    void OpenGLESVertexBuffer::destroy()  {
+    void OpenGLESVertexBuffer::destroy() {
         glDeleteBuffers(1, &buffer);
     }
 
-    OpenGLESVertexBuffer* toOpenGLESVertexBuffer(AVertexBuffer* vertexBuffer) {
+    OpenGLESVertexBuffer *toOpenGLESVertexBuffer(AVertexBuffer *vertexBuffer) {
         return dynamic_cast<OpenGLESVertexBuffer *>(vertexBuffer);
     }
 }
