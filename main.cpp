@@ -12,6 +12,7 @@
 // #include "spdlog/sinks/basic_file_sink.h"
 
 #include "box2d/physics2d/Box2DWorld2D.h"
+#include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
 
 class MovePlayer final : public mars::AScript {
     mars::RectTransform *transform;
@@ -136,6 +137,13 @@ int main(int argc, char *argv[]) {
     worldDef.gravity = glm::vec2(0, -9.8f);
 
     std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(worldDef);
+    mars::BodyDefinition2D bodyDef{};
+    bodyDef.position = glm::vec2(0, -10);
+    std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(bodyDef);
+    mars::Box2DPolygonShape groundBox{};
+    groundBox.setAsBox(50, 10);
+    groundBody->createFixture(&groundBox, 0);
+
 
     // FRAME START EVENT?
 
