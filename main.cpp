@@ -12,6 +12,7 @@
 // #include "spdlog/sinks/basic_file_sink.h"
 
 #include "box2d/physics2d/Box2DWorld2D.h"
+#include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
 
 class MovePlayer final : public mars::AScript {
     mars::RectTransform *transform;
@@ -114,7 +115,7 @@ int main(int argc, char *argv[]) {
         data.data(), "Hello", 16, mars::BufferUsage::Uniform);
     std::shared_ptr<mars::Texture2D> tileMapTexture = framework
             .getContentManager()
-            .load<mars::Texture2D>("images/radar.png");
+            .load<mars::Texture2D>("images/heliport.png");
     vertexBuffer->printInfo();
     indexBuffer->printInfo();
     uniformBuffer->printInfo();
@@ -135,7 +136,32 @@ int main(int argc, char *argv[]) {
     mars::WorldDefinition2D worldDef{};
     worldDef.gravity = glm::vec2(0, -9.8f);
 
+    // STATIC BODY - GROUND
     std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(worldDef);
+    mars::BodyDefinition2D groundBodyDef {};
+    groundBodyDef .position = glm::vec2(0, -10);
+    std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef );
+    mars::Box2DPolygonShape groundBox{};
+    groundBox.setAsBox(50, 10);
+    groundBody->createFixture(&groundBox, 0);
+
+    // DYNAMIC BODY - BOX
+    mars::BodyDefinition2D bodyDef {};
+    bodyDef.type = mars::BodyType2D::DynamicBody;
+    bodyDef.position = glm::vec2(0, 4);
+
+    std::shared_ptr<mars::ABody2D> body = world2D->createBody(groundBodyDef );
+
+    mars::Box2DPolygonShape dynamicBox{};
+    dynamicBox.setAsBox(1, 1);
+
+    mars::FixtureDefinition2D fixtureDef{};
+    fixtureDef.density = 1;
+    fixtureDef.friction = 0.3f;
+    fixtureDef.shape = &dynamicBox;
+
+    body->createFixture(fixtureDef);
+
 
     // FRAME START EVENT?
 

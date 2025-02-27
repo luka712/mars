@@ -109,7 +109,19 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/box2d/physics2d/Box2DWorld2D.cpp
         include/core/physics2d/WorldDefinition2D.h
         src/opengles/util/OpenGLESProgramUtil.cpp
-        src/core/sprite/SpriteBatch.cpp)
+        src/core/sprite/SpriteBatch.cpp
+        include/box2d/physics2d/body/Box2DBody.h
+        src/box2d/physics2d/body/Box2DBody.cpp
+        include/core/physics2d/shape/AShape.h
+        include/core/physics2d/shape/APolygonShape.h
+        include/box2d/physics2d/shape/ABox2DShape.h
+        include/box2d/physics2d/shape/Box2DPolygonShape.h
+        src/box2d/physics2d/shape/Box2DPolygonShape.cpp
+        include/core/physics2d/fixture/AFixture2D.h
+        include/box2d/physics2d/fixture/Box2DFixture.h
+        src/box2d/physics2d/fixture/Box2DFixture.cpp
+        include/core/physics2d/enums.h
+        include/core/physics2d/fixture/FixtureDefinition2D.h)
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
