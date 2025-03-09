@@ -12,6 +12,9 @@
 
 
 #include "game/chopper-shooter/move-player.h"
+#include "lua/LuaManager.h"
+
+static     std::map<std::string, std::shared_ptr<mars::Texture2D>> textures;
 
 
 std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
@@ -34,23 +37,31 @@ std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
 
 void createScene(const mars::Framework &framework,
                  mars::EntityManager &entityManager,
-                 const std::vector<std::shared_ptr<mars::Layer> > &layers) {
+                 const std::vector<std::shared_ptr<mars::Layer> > &layers,
+                 sol::state& luaState) {
     auto spriteFont = framework.getSpriteFontManager().getDefaultFont();
 
-    std::vector<std::vector<int32_t> > map = loadMap(framework);
+    // LOAD ASSETS
+    sol::table luaLevel = luaState["Level1"];
+    sol::table luaTextures = luaLevel["textures"];
+    uint32_t textureIndex = 0;
+    while (true) {
+        sol::optional<sol::table> existsLuaTexture = luaTextures[textureIndex];
+        if (!existsLuaTexture) {
+            break;
+        }
+        sol::table luaTexture = luaTextures[textureIndex];
+        std::string id = luaTexture["id"];
+        std::string file = luaTexture["file"];
+        textures[id] = framework.getContentManager().load<mars::Texture2D>(file);
+        textureIndex++;
+    }
 
+    std::shared_ptr<mars::Texture2D>& playerTexture = textures["chopper"];
 
-    std::shared_ptr<mars::Texture2D> playerTexture = framework
-            .getContentManager()
-            .load<mars::Texture2D>("images/chopper-spritesheet.png");
+    std::shared_ptr<mars::Texture2D>& enemyTexture = textures["tank"];
 
-    std::shared_ptr<mars::Texture2D> enemyTexture = framework
-            .getContentManager()
-            .load<mars::Texture2D>("images/tank-big-left.png");
-
-    std::shared_ptr<mars::Texture2D> tileMapTexture = framework
-            .getContentManager()
-            .load<mars::Texture2D>("tilemaps/jungle.png");
+    std::shared_ptr<mars::Texture2D>& tileMapTexture = textures["jungle"];
 
     std::shared_ptr<mars::Texture2D> radarTexture = framework
             .getContentManager()
@@ -59,6 +70,10 @@ void createScene(const mars::Framework &framework,
     std::shared_ptr<mars::Texture2D> heliportTexture = framework
             .getContentManager()
             .load<mars::Texture2D>("images/heliport.png");
+
+    std::vector<std::vector<int32_t> > map = loadMap(framework);
+
+
 
     // TILEMAP
     std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
@@ -156,12 +171,33 @@ int main(int argc, char *argv[]) {
     });
 
     mars::ECSManager ecsManager(framework);
+    mars::LuaManager luaManager(framework);
 
-    std::vector<std::shared_ptr<mars::Layer> > layers = {
-        ecsManager.getLayerManager().createLayer("MAP", 0, "The map layer"),
-        ecsManager.getLayerManager().createLayer("GameObjects", 1, "The Game Objects Layer"),
-        ecsManager.getLayerManager().createLayer("UI", 2, "THE UI LAYER")
-    };
+    sol::state& luaState = luaManager.getLuaState();
+    luaState.script_file("content/scripts/Level1.lua");
+
+    sol::table luaLevel = luaState["Level1"];
+    sol::table luaLayers = luaLevel["layers"];
+
+    std::vector<std::shared_ptr<mars::Layer> > layers;
+    uint32_t layerIndex = 0;
+    while (true) {
+        sol::optional<sol::table> existsLuaLayer = luaLayers[layerIndex];
+        if (existsLuaLayer == sol::nullopt) {
+            break;
+        }
+        else {
+            sol::table luaLayer = luaLayers[layerIndex];
+            std::string layerName = luaLayer["name"];
+            uint32_t orderIndex = static_cast<uint32_t>(luaLayer["order"]);
+            std::string description = luaLayer["description"];
+            layers.push_back(ecsManager.getLayerManager().createLayer(
+                layerName, orderIndex, description
+            ));
+        }
+        layerIndex++;
+
+    }
 
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
 
@@ -179,7 +215,7 @@ int main(int argc, char *argv[]) {
         ecsManager.render();
     });
 
-    createScene(framework, entityManager, layers);
+    createScene(framework, entityManager, layers, luaState);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

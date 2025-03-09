@@ -17,6 +17,8 @@ if(WIN32)
     set(SDL2_PATH "D:/_Windows/Libs/SDL2-devel-2.30.9-mingw/SDL2/x86_64-w64-mingw32")
     set(SDL2_IMAGE_PATH "D:/_Windows/Libs/SDL2_image-devel-2.8.3-mingw/SDL2_image-2.8.3/x86_64-w64-mingw32")
 
+    set(LUA_PATH "D:/_Windows/lua")
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
 endif()
 
@@ -29,6 +31,8 @@ find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
+find_package(lua REQUIRED)
+find_package(sol REQUIRED)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -40,6 +44,8 @@ include_directories(
         ${TINYXML2_INCLUDE_DIR}
         ${CATCH2_INCLUDE_DIR}
         ${BOX2D_INCLUDE_DIR}
+        ${LUA_INCLUDE_DIR}
+        ${SOL_INCLUDE_DIR}
 )
 
 # SOURCES
@@ -60,12 +66,14 @@ target_link_libraries(mars
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
+        ${LUA_LIBRARY}
 )
 
 # COPY DLLS
 if(WIN32)
     file(COPY shared_libs/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
     file(COPY shared_libs/SDL2_image.dll DESTINATION ${CMAKE_BINARY_DIR})
+
 endif()
 
 # COPY ASSETS/CONTENT/SHADERS
@@ -81,6 +89,7 @@ add_executable(tests tests/tests.cpp
         ${GLAD_SRC}
         ${TINYXML2_SRC}
         tests/geometry_tests.cpp)
+
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
         ${SDL2_LIBRARY}
@@ -89,39 +98,15 @@ target_link_libraries(tests
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
+        ${LUA_LIBRARY}
 )
 
 # GAMES
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
-        include/core/geometry/Geometry.h
-        src/core/geometry/Geometry.cpp
-        include/core/mesh/MeshFactory.h
-        include/core/geometry/GeometryBuilder.h
-        src/core/geometry/GeometryBuilder.cpp
-        include/core/physics2d/AWorld2D.h
-        include/core/physics2d/body/ABody2D.h
-        include/core/physics2d/body/BodyDefinition2D.h
-        include/box2d/physics2d/Box2DWorld2D.h
-        src/core/physics2d/AWorld2D.cpp
-        src/box2d/physics2d/Box2DWorld2D.cpp
-        include/core/physics2d/WorldDefinition2D.h
-        src/opengles/util/OpenGLESProgramUtil.cpp
-        src/core/sprite/SpriteBatch.cpp
-        include/box2d/physics2d/body/Box2DBody.h
-        src/box2d/physics2d/body/Box2DBody.cpp
-        include/core/physics2d/shape/AShape.h
-        include/core/physics2d/shape/APolygonShape.h
-        include/box2d/physics2d/shape/ABox2DShape.h
-        include/box2d/physics2d/shape/Box2DPolygonShape.h
-        src/box2d/physics2d/shape/Box2DPolygonShape.cpp
-        include/core/physics2d/fixture/AFixture2D.h
-        include/box2d/physics2d/fixture/Box2DFixture.h
-        src/box2d/physics2d/fixture/Box2DFixture.cpp
-        include/core/physics2d/enums.h
-        include/core/physics2d/fixture/FixtureDefinition2D.h)
+        ${TINYXML2_SRC})
+
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
@@ -129,4 +114,5 @@ target_link_libraries(chopper-shooter
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
+        ${LUA_LIBRARY}
 )

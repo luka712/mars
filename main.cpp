@@ -13,6 +13,7 @@
 
 #include "box2d/physics2d/Box2DWorld2D.h"
 #include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
+#include "lua/LuaManager.h"
 
 class MovePlayer final : public mars::AScript {
     mars::RectTransform *transform;

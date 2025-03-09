@@ -35,7 +35,6 @@ namespace mars {
         }
 
         const std::string msg = "Cannot resolve content type for asset \"" + assetFilePath + "\".";
-        // ReSharper disable once CppClassIsIncomplete
         framework.getLogger().error(msg.c_str());
         throw std::runtime_error(msg);
 
