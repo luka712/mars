@@ -13,9 +13,11 @@ namespace mars
         : framework(framework), logger(framework.getLogger())
     {
         this->label = label;
+        this->width = imageData.getWidth();
+        this->height = imageData.getHeight();
         texture = OpenGLESUtil::getTexture()->create(
-            static_cast<GLint>(imageData.getWidth()),
-            static_cast<GLint>(imageData.getHeight()),
+            static_cast<GLint>(width),
+            static_cast<GLint>(height),
             GL_RGBA,
             GL_RGBA,
             GL_UNSIGNED_BYTE,

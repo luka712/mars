@@ -6,7 +6,7 @@
 
 namespace mars {
 
-    ImageData::ImageData(uint32_t width, uint32_t height, unsigned char *data, uint32_t channels)
+    ImageData::ImageData(const uint32_t width, const uint32_t height, unsigned char *data, const uint32_t channels)
         : width(width), height(height), data(data, data + width * height * channels), channels(channels) {
     }
 

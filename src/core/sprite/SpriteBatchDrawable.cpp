@@ -40,8 +40,8 @@ namespace mars {
     }
 
     void SpriteBatchDrawable::writeSprite(
-        glm::vec3 position, glm::vec2 size, Color color,
-        float u0, float v0, float u1, float v1) {
+        const glm::vec3 position, const glm::vec2 size, const Color color,
+        const float u0, const float v0, const float u1, const float v1) {
         // We must wait for frame end to resize.
         if (toInstance >= maxBatchSize)
         {

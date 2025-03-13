@@ -20,6 +20,8 @@ namespace mars {
     //! The sprite batch.
     class SpriteBatch {
     public:
+        virtual ~SpriteBatch() = default;
+
         //! The constructor.
         //! @param framework The framework.
         explicit SpriteBatch(Framework& framework);
@@ -66,6 +68,8 @@ namespace mars {
         Framework& framework;
         std::map<Texture2D*, SpriteBatchDrawable*> drawables;
         Texture2D* currentTexture = nullptr;
+        //! Texture to be used when one of overload without texture is called.
+        std::shared_ptr<Texture2D> defaultWhiteTexture;
         SpriteBatchDrawable* currentDrawable = nullptr;
         std::shared_ptr<OrthographicCamera> camera;
 

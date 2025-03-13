@@ -73,8 +73,6 @@ void createScene(const mars::Framework &framework,
 
     std::vector<std::vector<int32_t> > map = loadMap(framework);
 
-
-
     // TILEMAP
     std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
     tileMap->setLayer(layers[0]);
@@ -167,7 +165,8 @@ int main(int argc, char *argv[]) {
 
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::SDL
+        mars::RenderingBackend::OpenGLES,
+        glm::vec2(1280, 720)
     });
 
     mars::ECSManager ecsManager(framework);

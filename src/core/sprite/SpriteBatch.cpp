@@ -11,23 +11,19 @@ namespace mars {
 
     void SpriteBatch::checkIfNewDrawableShouldBeCreated(Texture2D *texture) {
         // If there was a texture change we need to end the current sprite batch drawable and start a new one.
-        if (texture != currentTexture)
-        {
+        if (texture != currentTexture) {
             // End will draw. This draws with previously set sprite batch drawable.
             end();
 
             // Create a new sprite batch drawable if needed.
-            SpriteBatchDrawable* drawable = nullptr;
+            SpriteBatchDrawable *drawable = nullptr;
 
             // If drawable is not in dictionary, create a new one.
-            if (!drawables.contains(texture))
-            {
+            if (!drawables.contains(texture)) {
                 drawable = new SpriteBatchDrawable(framework, *texture, *camera, MAX_BATCH_SIZE);
                 drawable->initialize();
                 drawables[texture] = drawable;
-            }
-            else
-            {
+            } else {
                 drawable = drawables[texture];
             }
 
@@ -42,30 +38,31 @@ namespace mars {
             0, static_cast<float>(frameBufferSize.x),
             0, static_cast<float>(frameBufferSize.y),
             0, 1);
+        defaultWhiteTexture = framework.getTextureFactory().createEmpty(1, 1, Color::white());
     }
 
     void SpriteBatch::begin() {
-        for (auto& drawable : drawables) {
-            drawable.second->reset();
+        for (auto &[fst, snd]: drawables) {
+            snd->reset();
         }
 
         // Clear the current texture.
         currentTexture = nullptr;
     }
 
-    void SpriteBatch::draw(Texture2D* texture, Rect drawRect, Rect sourceRect, Color color) {
+    void SpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Rect sourceRect, const Color color) {
         checkIfNewDrawableShouldBeCreated(texture);
 
         // Safe to assign current texture.
         currentTexture = texture;
 
-        auto textureWidth = static_cast<float>(texture->getWidth());
-        auto textureHeight = static_cast<float>(texture->getHeight());
+        const auto textureWidth = static_cast<float>(texture->getWidth());
+        const auto textureHeight = static_cast<float>(texture->getHeight());
 
-        float u0 = static_cast<float>(sourceRect.x) / textureWidth;
-        float v0 = static_cast<float>(sourceRect.y) / textureHeight;
-        float u1 = static_cast<float>(sourceRect.x + sourceRect.width) / textureWidth;
-        float v1 = static_cast<float>(sourceRect.y + sourceRect.height) / textureHeight;
+        const float u0 = static_cast<float>(sourceRect.x) / textureWidth;
+        const float v0 = static_cast<float>(sourceRect.y) / textureHeight;
+        const float u1 = static_cast<float>(sourceRect.x + sourceRect.width) / textureWidth;
+        const float v1 = static_cast<float>(sourceRect.y + sourceRect.height) / textureHeight;
 
         currentDrawable->writeSprite(
             glm::vec3(drawRect.x, drawRect.y, 0),
@@ -75,7 +72,7 @@ namespace mars {
         );
     }
 
-    void SpriteBatch::draw(Texture2D* texture, const Rect drawRect, const Color color) {
+    void SpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Color color) {
         checkIfNewDrawableShouldBeCreated(texture);
 
         // Safe to assign current texture.
@@ -89,7 +86,10 @@ namespace mars {
     }
 
     void SpriteBatch::draw(const Rect drawRect, const Color color) {
-        checkIfNewDrawableShouldBeCreated(nullptr);
+        checkIfNewDrawableShouldBeCreated(defaultWhiteTexture.get());
+
+        // Safe to assign current texture.
+        currentTexture = defaultWhiteTexture.get();
 
         currentDrawable->writeSprite(
             glm::vec3(drawRect.x, drawRect.y, 0),
@@ -98,7 +98,8 @@ namespace mars {
         );
     }
 
-    void SpriteBatch::drawString(SpriteFont* spriteFont, std::string text, glm::vec2 position, Color* color, float scale) {
+    void SpriteBatch::drawString(SpriteFont *spriteFont, std::string text, glm::vec2 position, Color *color,
+                                 float scale) {
         checkIfNewDrawableShouldBeCreated(spriteFont->getTexture());
 
         checkIfNewDrawableShouldBeCreated(spriteFont->getTexture());
@@ -107,8 +108,7 @@ namespace mars {
         currentTexture = spriteFont->getTexture();
 
         float nextCharX = 0;
-        for (char& character: text)
-        {
+        for (char &character: text) {
             /* TODO: implement
             SpriteFontCharacter spriteFontCharacter = spriteFont[character]!;
 
@@ -141,10 +141,8 @@ namespace mars {
     }
 
     void SpriteBatch::frameEnd() {
-        for (auto& drawable: drawables) {
+        for (auto &drawable: drawables) {
             drawable.second->frameEnd();
         }
     }
-
-
 }
