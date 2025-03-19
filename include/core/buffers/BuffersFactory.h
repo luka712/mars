@@ -1,13 +1,14 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#ifndef ABUFFERSFACTORY_H
-#define ABUFFERSFACTORY_H
+#ifndef A_BUFFERS_FACTORY_H
+#define A_BUFFERS_FACTORY_H
 
 #include <memory>
 #include <vector>
 
+#include "AInstanceBuffer.h"
 #include "core/buffers/AVertexBuffer.h"
 #include "core/buffers/AIndexBuffer.h"
 #include "core/buffers/AUniformBuffer.h"
@@ -42,7 +43,7 @@ namespace mars {
         //! @return The shared pointer to the index buffer.
         std::shared_ptr<AIndexBuffer> createIndexBuffer(
             const std::vector<uint16_t>& data,
-            const std::string& label);
+            const std::string& label) const;
 
         //! Create a new uniform buffer.
         //! @param data The data to initialize the buffer with.
@@ -50,7 +51,25 @@ namespace mars {
         //! @param byteSize The size of the buffer.
         //! @param bufferUsage The usage of the buffer.
         //! @return The shared pointer to the uniform buffer.
-        std::shared_ptr<AUniformBuffer> createUniformBuffer(void* data, const std::string& label, uint32_t byteSize, BufferUsage bufferUsage);
+        std::shared_ptr<AUniformBuffer> createUniformBuffer(
+            void* data,
+            const std::string& label,
+            uint32_t byteSize,
+            BufferUsage bufferUsage) const;
+
+        //! Create a new instance buffer.
+        //! @param data The data to initialize the buffer with.
+        //! @param byteSize The size of the buffer.
+        //! @param strideInBytes The stride in bytes.
+        //! @param instanceCount The number of instances.
+        //! @param label The label of the buffer.
+        //! @return The shared pointer to the instance buffer.
+        std::shared_ptr<AInstanceBuffer> createInstanceBuffer(
+            const void* data,
+            uint32_t byteSize,
+            uint32_t strideInBytes,
+            uint32_t instanceCount,
+            const std::string& label) const;
 
     private:
         Framework& framework;
@@ -58,4 +77,4 @@ namespace mars {
 }
 
 
-#endif //ABUFFERSFACTORY_H
+#endif //A_BUFFERS_FACTORY_H

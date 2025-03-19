@@ -18,6 +18,10 @@ namespace mars {
         collision2DSystem = std::make_unique<Collision2DSystem>(framework);
     }
 
+    void ECSManager::initialize() const {
+        collision2DSystem->initialize();
+    }
+
     Framework &ECSManager::getFramework() const {
         return framework;
     }

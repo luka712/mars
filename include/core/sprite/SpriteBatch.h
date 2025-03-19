@@ -22,6 +22,10 @@ namespace mars {
     public:
         virtual ~SpriteBatch() = default;
 
+        //! Get the camera.
+        //! @return The camera.
+        [[nodiscard]] const OrthographicCamera& getCamera() const { return *camera; }
+
         //! The constructor.
         //! @param framework The framework.
         explicit SpriteBatch(Framework& framework);

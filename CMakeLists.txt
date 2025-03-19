@@ -105,7 +105,13 @@ target_link_libraries(tests
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC})
+        ${TINYXML2_SRC}
+        include/core/pipelines/lines/ALinesRenderPipeline.h
+        include/opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h
+        src/opengles/pipelines/lines/OpenGLESLinesRenderPipeline.cpp
+        include/core/buffers/AInstanceBuffer.h
+        include/opengles/buffers/OpenGLESInstanceBuffer.h
+        src/opengles/buffers/OpenGLESInstanceBuffer.cpp)
 
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}

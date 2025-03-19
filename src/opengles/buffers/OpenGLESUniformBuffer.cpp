@@ -8,13 +8,13 @@
 
 namespace mars
 {
-    OpenGLESUniformBuffer::OpenGLESUniformBuffer(Framework &framework, const std::string &label, uint32_t byteSize, BufferUsage bufferUsage)
+    OpenGLESUniformBuffer::OpenGLESUniformBuffer(Framework &framework, const std::string &label, const uint32_t byteSize, const BufferUsage bufferUsage)
         : AUniformBuffer(framework, label, byteSize, bufferUsage)
     {
         bufferData = malloc(byteSize);
     }
 
-    OpenGLESUniformBuffer::OpenGLESUniformBuffer(Framework& framework, void* data, const std::string& label,
+    OpenGLESUniformBuffer::OpenGLESUniformBuffer(Framework& framework, const void* data, const std::string& label,
         uint32_t byteSize, BufferUsage bufferUsage)
             : AUniformBuffer(framework, label, byteSize, bufferUsage)
     {
@@ -44,5 +44,13 @@ namespace mars
     void OpenGLESUniformBuffer::destroy()
     {
         free(bufferData);
+    }
+
+    OpenGLESUniformBuffer* toOpenGLESUniformBuffer(AUniformBuffer* uniformBuffer) {
+        return dynamic_cast<OpenGLESUniformBuffer*>(uniformBuffer);
+    }
+
+    std::shared_ptr<OpenGLESUniformBuffer> toOpenGLESUniformBuffer(const std::shared_ptr<AUniformBuffer> &uniformBuffer) {
+        return std::dynamic_pointer_cast<OpenGLESUniformBuffer>(uniformBuffer);
     }
 }

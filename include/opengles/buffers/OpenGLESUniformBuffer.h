@@ -29,7 +29,7 @@ namespace mars
         //! @param label The label.
         //! @param byteSize The size of the buffer.
         //! @param bufferUsage The usage of the buffer.
-        OpenGLESUniformBuffer(Framework& framework, void* inputData, const std::string& label, uint32_t byteSize, BufferUsage bufferUsage);
+        OpenGLESUniformBuffer(Framework& framework, const void* inputData, const std::string& label, uint32_t byteSize, BufferUsage bufferUsage);
 
         //! Gets the buffer data.
         //! @return The buffer data.
@@ -49,6 +49,16 @@ namespace mars
         // to be passed as glUniformXX.
         void* bufferData{};
     };
+
+    //! Converts the @ref AUniformBuffer to @ref OpenGLESUniformBuffer.
+    //! @param uniformBuffer The uniform buffer.
+    //! @returns The @ref OpenGLESUniformBuffer.
+    OpenGLESUniformBuffer* toOpenGLESUniformBuffer(AUniformBuffer* uniformBuffer);
+
+    //! Converts the @ref AUniformBuffer to @ref OpenGLESUniformBuffer.
+    //! @param uniformBuffer The uniform buffer.
+    //! @returns The @ref OpenGLESUniformBuffer.
+    std::shared_ptr<OpenGLESUniformBuffer> toOpenGLESUniformBuffer(const std::shared_ptr<AUniformBuffer> &uniformBuffer);
 }
 
 #endif //OPENGLESUNIFORMBUFFER_H

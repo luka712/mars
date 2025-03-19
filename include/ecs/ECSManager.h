@@ -27,6 +27,9 @@ namespace mars {
         //! The constructor of the ECSManager object.
         explicit ECSManager(Framework& framework);
 
+        //! Initialize the ECSManager.
+        void initialize() const;
+
         //! Get the framework.
         //! @return The framework.
         [[nodiscard]] Framework& getFramework() const;

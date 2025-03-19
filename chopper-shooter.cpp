@@ -201,6 +201,7 @@ int main(int argc, char *argv[]) {
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
 
     framework.initialize();
+    ecsManager.initialize();
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
         ecsManager.frameStart();

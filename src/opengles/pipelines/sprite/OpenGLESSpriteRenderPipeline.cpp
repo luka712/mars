@@ -77,8 +77,8 @@ namespace mars {
         AIndexBuffer *indexBuffer,
         const uint32_t indicesCount,
         uint32_t indicesOffset) {
-        OpenGLESVertexBuffer *glVertexBuffer = toOpenGLESVertexBuffer(vertexBuffer);
-        OpenGLESIndexBuffer *glIndexBuffer = toOpenGLESIndexBuffer(indexBuffer);
+        const OpenGLESVertexBuffer *glVertexBuffer = toOpenGLESVertexBuffer(vertexBuffer);
+        const OpenGLESIndexBuffer *glIndexBuffer = toOpenGLESIndexBuffer(indexBuffer);
 
         if (GLuint glBuffer = glVertexBuffer->getBuffer(); glBuffer != glLastVertexBuffer) {
             createVao(glBuffer);

@@ -55,7 +55,8 @@ namespace mars {
         OpenGLESUtil::initialize(logger);
 
 #ifndef __EMSCRIPTEN__
-        gladLoadGLLoader(SDL_GL_GetProcAddress);
+        // gladLoadGLLoader(SDL_GL_GetProcAddress);
+        gladLoadGLES2Loader(SDL_GL_GetProcAddress);
 #endif
         std::string msg = "Open GLES initialized.\n";
         msg += "Vendor  : " + std::string((char *) glGetString(GL_VENDOR)) + "\n";
