@@ -22,6 +22,8 @@ namespace mars {
         //! @return The world.
         [[nodiscard]] b2World& getBox2DWorld() const { return *world; }
 
+        void update(const Time& time, uint32_t velocityIterations, uint32_t positionIterations) override;
+
         std::shared_ptr<ABody2D> createBody(BodyDefinition2D &bodyDef) override;
 
     private:

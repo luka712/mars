@@ -168,6 +168,9 @@ int main(int argc, char *argv[]) {
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
         ecsManager.frameStart();
+
+        world2D->update(time, 6, 2);
+
         ecsManager.update(time);
     });
 

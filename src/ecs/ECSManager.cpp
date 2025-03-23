@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 9.12.2024..
+// Created by Erkapic Luka on 9.12.2024.
 //
 
 #include "ecs/ECSManager.h"
@@ -16,6 +16,7 @@ namespace mars {
         tileMapSystem = std::make_unique<TileMapSystem>(framework);
         camera2DSystem = std::make_unique<Camera2DSystem>(framework);
         collision2DSystem = std::make_unique<Collision2DSystem>(framework);
+        entityBuilderLua = std::make_unique<EntityBuilderLua>(framework, *this);
     }
 
     void ECSManager::initialize() const {

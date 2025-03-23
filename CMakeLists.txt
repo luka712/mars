@@ -111,7 +111,9 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/opengles/pipelines/lines/OpenGLESLinesRenderPipeline.cpp
         include/core/buffers/AInstanceBuffer.h
         include/opengles/buffers/OpenGLESInstanceBuffer.h
-        src/opengles/buffers/OpenGLESInstanceBuffer.cpp)
+        src/opengles/buffers/OpenGLESInstanceBuffer.cpp
+        include/ecs/entity/EntityBuilderLua.h
+        src/ecs/entity/EntityBuilderLua.cpp)
 
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}

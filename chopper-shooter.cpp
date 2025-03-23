@@ -37,6 +37,7 @@ std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
 
 void createScene(const mars::Framework &framework,
                  mars::EntityManager &entityManager,
+                 mars::EntityBuilderLua& entityBuilder,
                  const std::vector<std::shared_ptr<mars::Layer> > &layers,
                  sol::state& luaState) {
     auto spriteFont = framework.getSpriteFontManager().getDefaultFont();
@@ -75,7 +76,6 @@ void createScene(const mars::Framework &framework,
 
     // TILEMAP
     std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
-    tileMap->setLayer(layers[0]);
     tileMap->addComponent<mars::RectTransform>();
     auto tileMapComponent = tileMap->addComponent<mars::TileMap>();
     tileMapComponent->setTexture(tileMapTexture);
@@ -88,10 +88,12 @@ void createScene(const mars::Framework &framework,
     camera->addComponent<mars::Camera2D>();
 
     // PLAYER
-    std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
-    player->setLayer(layers[1]);
-    auto playerTransform = player->addComponent<mars::RectTransform>();
-    playerTransform->setDrawRectangle(mars::Rect{300, 100, 64, 64});
+    sol::table playerTable = luaLevel["entities"][0];
+    std::shared_ptr<mars::Entity> player = entityBuilder.buildEntity(playerTable, layers);
+    //player->setLayer(layers[1]);
+    // Build from lua script
+    //auto playerTransform = player->addComponent<mars::RectTransform>();
+    //playerTransform->setDrawRectangle(mars::Rect{300, 100, 64, 64});
     auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
     playerSpriteRenderer->setSprite(new mars::Sprite(playerTexture));
     playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 64, 32, 32}, mars::Rect{32, 64, 32, 32}});
@@ -102,17 +104,18 @@ void createScene(const mars::Framework &framework,
     auto playerMoveScript = player->addComponent<MovePlayer>();
     playerMoveScript->camera = camera.get();
     auto playerCollider = player->addComponent<mars::Collider2D>();
-    playerCollider->setDebug(true);
+    // playerCollider->setDebug(true);
     playerCollider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
         framework.getLogger().info("Collision detected.");
     });
 
 
     // ENEMY
-    std::shared_ptr<mars::Entity> enemy = entityManager.createEntity("enemy");
-    enemy->setLayer(layers[1]);
-    mars::RectTransform *enemyTransform = enemy->addComponent<mars::RectTransform>();
-    enemyTransform->setDrawRectangle(mars::Rect{500, 100, 64, 64});
+    sol::table enemyTable = luaLevel["entities"][1];
+    std::shared_ptr<mars::Entity> enemy = entityBuilder.buildEntity(enemyTable, layers);
+    // enemy->setLayer(layers[1]);
+    // mars::RectTransform *enemyTransform = enemy->addComponent<mars::RectTransform>();
+    // enemyTransform->setDrawRectangle(mars::Rect{500, 100, 64, 64});
     mars::SpriteRenderer *enemySpriteRenderer = enemy->addComponent<mars::SpriteRenderer>();
     enemySpriteRenderer->setSprite(new mars::Sprite(enemyTexture));
     enemy->addComponent<mars::Collider2D>()->setDebug(true);
@@ -199,6 +202,7 @@ int main(int argc, char *argv[]) {
     }
 
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
+    mars::EntityBuilderLua &entityBuilder = ecsManager.getEntityBuilderLua();
 
     framework.initialize();
     ecsManager.initialize();
@@ -215,7 +219,7 @@ int main(int argc, char *argv[]) {
         ecsManager.render();
     });
 
-    createScene(framework, entityManager, layers, luaState);
+    createScene(framework, entityManager, entityBuilder, layers, luaState);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

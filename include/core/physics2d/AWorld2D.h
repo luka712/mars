@@ -9,6 +9,7 @@
 #include "core/physics2d/WorldDefinition2D.h"
 #include "core/physics2d/body/BodyDefinition2D.h"
 #include "core/physics2d/body/ABody2D.h"
+#include "core/time/Time.h"
 
 namespace mars {
     //! The 2D physics world.
@@ -24,6 +25,16 @@ namespace mars {
         //! @param bodyDef The body definition.
         //! @return The body.
         virtual std::shared_ptr<ABody2D> createBody(BodyDefinition2D &bodyDef) = 0;
+
+        //! Update the world.
+        //! @param time The time.
+        //! @param velocityIterations The velocity iterations.
+        //! The higher the number, the more accurate the simulation, but at cost of performance.
+        //! Generally, between 6 and 10 is a good range.
+        //! @param positionIterations The position iterations.
+        //! The higher the number, the more accurate the simulation, but at cost of performance.
+        //! Generally, between 2 and 4 is a good range.
+        virtual void update(const Time& time, uint32_t velocityIterations, uint32_t positionIterations) = 0;
 
     protected:
         WorldDefinition2D worldDef;

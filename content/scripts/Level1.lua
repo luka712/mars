@@ -21,17 +21,15 @@ Level1 = {
     entities = {
         [0] = {
             name = "player",
-            layer = 4,
+            layer = 1,
             components = {
-                transform = {
-                    position = {
-                        x = 240,
-                        y = 106
+                rect_transform = {
+                    draw_rect = {
+                        x = 300,
+                        y = 100,
+                        width = 64,
+                        height = 64
                     },
-                    width = 32,
-                    height = 32,
-                    scale = 1,
-                    rotation = 0
                 },
                 sprite = {
                     textureAssetId = "chopper-texture",
@@ -56,17 +54,15 @@ Level1 = {
         },
         [1] = {
             name = "tank-enemy-1",
-            layer = 2,
+            layer = 1,
             components = {
-                transform = {
-                    position = {
+                rect_transform = {
+                    draw_rect = {
                         x = 650,
-                        y = 405
-                    },
-                    width = 32,
-                    height = 32,
-                    scale = 1,
-                    rotation = 0
+                        y = 405,
+                        width = 64,
+                        height = 64,
+                    }
                 },
                 sprite = {
                     textureAssetId = "tank-texture-big-left",
