@@ -7,6 +7,7 @@
 
 #include "ecs/entity/EntityManager.h"
 #include "ecs/transform/RectTransform.h"
+#include "ecs/physics2d/RigidBody2D.h"
 #include <sol/sol.hpp>
 
 namespace mars {
@@ -34,6 +35,12 @@ namespace mars {
         //! @param rectTransformTable The table containing the entity data.
         //! @return The built transform component.
         RectTransform* buildRectTransform(Entity& entity, sol::table &rectTransformTable) const;
+
+        //! Builds a rigid body 2D component from a Lua script.
+        //! @param entity The entity to add the component to.
+        //! @param rigidBodyTable The table containing the entity data.
+        //! @return The built rigid body 2D component.
+        RigidBody2D* buildRigidBody2D(Entity& entity, sol::table &rigidBodyTable) const;
 
     private:
         Framework& framework;

@@ -10,7 +10,7 @@ namespace mars {
         rectTransforms.emplace_back(rectTransform);
     }
 
-    void RectTransformSystem::remove(RectTransform *rectTransform) {
+    void RectTransformSystem::remove(const RectTransform *rectTransform) {
         for (int i = 0; i < rectTransforms.size(); i++) {
             if (rectTransforms[i].get() == rectTransform) {
                 rectTransforms.erase(rectTransforms.begin() + i);
@@ -20,7 +20,7 @@ namespace mars {
     }
 
     void RectTransformSystem::update(const Time &time) {
-        for (std::shared_ptr<RectTransform>& rectTransform : rectTransforms) {
+        for (const std::shared_ptr<RectTransform>& rectTransform : rectTransforms) {
             rectTransform->update(time);
         }
     }

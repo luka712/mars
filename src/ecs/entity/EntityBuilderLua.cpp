@@ -45,19 +45,24 @@ namespace mars {
             buildRectTransform(*entity, transformTable);
         }
 
+        // - Check if rigid body is available.
+        if (componentsTable["rigid_body_2d"].valid()) {
+            sol::table bodyTable = componentsTable["rigid_body_2d"];
+            buildRigidBody2D(*entity, bodyTable);
+        }
+
         return entity;
     }
 
-    RectTransform* EntityBuilderLua::buildRectTransform(Entity &entity,
-                                                                        sol::table &rectTransformTable) const {
-        // RectTransform properties.
+    RectTransform *EntityBuilderLua::buildRectTransform(Entity &entity, sol::table &rectTransformTable) const {
         if (!rectTransformTable.valid()) {
-            const std::string msg = "EntityBuilderLua::buildRectTransform Cannot create RectTransform without table.";
+            const std::string msg =
+                    "'EntityBuilderLua::buildRectTransform': Cannot create 'RectTransform' without table.";
             framework.getLogger().error(msg);
             throw std::runtime_error(msg);
         }
 
-        RectTransform* rectTransform = entity.addComponent<RectTransform>();
+        auto *rectTransform = entity.addComponent<RectTransform>();
 
         // Check if draw rect is available.
         if (rectTransformTable["draw_rect"].valid()) {
@@ -71,5 +76,19 @@ namespace mars {
         }
 
         return rectTransform;
+    }
+
+    RigidBody2D *EntityBuilderLua::buildRigidBody2D(Entity &entity, sol::table &rigidBodyTable) const {
+        if (!rigidBodyTable.valid()) {
+            const std::string msg = "'EntityBuilderLua::buildRigidBody2D': Cannot create 'RigidBody2D' without table.";
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+
+        auto *rigidBody = entity.addComponent<RigidBody2D>();
+
+        // PROPERTIES - TODO: Add more properties.
+
+        return rigidBody;
     }
 }

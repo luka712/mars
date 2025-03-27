@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 1.1.2025..
+// Created by Erkapic Luka on 1.1.2025.
 //
 
-#ifndef ASCRIPT_H
-#define ASCRIPT_H
+#ifndef A_SCRIPT_H
+#define A_SCRIPT_H
 
 #include "ecs/components/AComponent.h"
 
@@ -18,4 +18,4 @@ namespace mars {
 
 }
 
-#endif //ASCRIPT_H
+#endif //A_SCRIPT_H

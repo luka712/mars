@@ -16,8 +16,13 @@ namespace mars {
         //! @param bodyDef The body definition.
         Box2DBody(AWorld2D& world, const BodyDefinition2D& bodyDef);
 
+        //! @copydoc
+        glm::vec2 getPosition() override;
+
+        //! @copydoc
         std::shared_ptr<AFixture2D> createFixture(AShape* shape, float density) override;
 
+        //! @copydoc
         std::shared_ptr<AFixture2D> createFixture(FixtureDefinition2D& fixtureDef) override;
 
     private:

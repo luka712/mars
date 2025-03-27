@@ -41,6 +41,9 @@ Level1 = {
                 collider = {
                     tag = "PLAYER"
                 },
+                rigid_body_2d = {
+
+                },
                 input = {
                     keyboard = {
                         up = "w",

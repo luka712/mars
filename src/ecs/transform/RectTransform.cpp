@@ -11,6 +11,11 @@ namespace mars {
         : AComponent(entity), drawRectangle(), rotation(0) {
     }
 
+    void RectTransform::setPosition(const glm::vec2 position) {
+        drawRectangle.x = static_cast<int32_t>(position.x);
+        drawRectangle.y = static_cast<int32_t>(position.y);
+    }
+
     Rect RectTransform::getDrawRectangle() const {
         return drawRectangle;
     }

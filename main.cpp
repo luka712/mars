@@ -73,6 +73,7 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
     playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 0, 50, 50}, mars::Rect{50, 0, 50, 50}});
     playerSpriteRenderer->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
+    auto playerBody = player->addComponent<mars::RigidBody2D>();
 
     std::shared_ptr<mars::Entity> entity = entityManager.createEntity("projectile");
     mars::RectTransform *transform = entity->addComponent<mars::RectTransform>();
@@ -139,6 +140,8 @@ int main(int argc, char *argv[]) {
 
     // STATIC BODY - GROUND
     std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(worldDef);
+
+
     mars::BodyDefinition2D groundBodyDef {};
     groundBodyDef .position = glm::vec2(0, -10);
     std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef );
@@ -181,12 +184,12 @@ int main(int argc, char *argv[]) {
         framework.getSpriteBatch().end();
 
 
-        // ecsManager.render();
+        ecsManager.render();
         // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
 
     });
 
-    // createScene(framework, entityManager);
+     createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

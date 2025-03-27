@@ -17,6 +17,7 @@ namespace mars {
         camera2DSystem = std::make_unique<Camera2DSystem>(framework);
         collision2DSystem = std::make_unique<Collision2DSystem>(framework);
         entityBuilderLua = std::make_unique<EntityBuilderLua>(framework, *this);
+        physics2DSystem = std::make_unique<Physics2DSystem>(framework);
     }
 
     void ECSManager::initialize() const {
@@ -55,7 +56,11 @@ namespace mars {
         collision2DSystem->add(component);
     }
 
-    void ECSManager::removeComponentFromSystem(RectTransform *component) const {
+    void ECSManager::passComponentToSystem(RigidBody2D *component) const {
+        physics2DSystem->add(component);
+    }
+
+    void ECSManager::removeComponentFromSystem(const RectTransform *component) const {
         rectTransformSystem->remove(component);
     }
 
@@ -63,7 +68,7 @@ namespace mars {
         spriteRendererSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(AScript *component) const {
+    void ECSManager::removeComponentFromSystem(const AScript *component) const {
         scriptSystem->remove(component);
     }
 
@@ -71,12 +76,16 @@ namespace mars {
         tileMapSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(const Camera2D *camera) const {
-        camera2DSystem->remove(camera);
+    void ECSManager::removeComponentFromSystem(const Camera2D *component) const {
+        camera2DSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(const Collider2D *collider) const {
-        collision2DSystem->remove(collider);
+    void ECSManager::removeComponentFromSystem(const Collider2D *component) const {
+        collision2DSystem->remove(component);
+    }
+
+    void ECSManager::removeComponentFromSystem(const RigidBody2D *component) const {
+        physics2DSystem->remove(component);
     }
 
     void ECSManager::frameStart() const {
@@ -87,6 +96,7 @@ namespace mars {
     void ECSManager::update(const Time &time) const {
         const std::vector<std::shared_ptr<Layer> > &layers = layerManager->getLayers();
 
+        physics2DSystem->update(time);
         scriptSystem->update(time);
         rectTransformSystem->update(time);
         collision2DSystem->update(time);

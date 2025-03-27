@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 9.12.2024..
+// Created by Erkapic Luka on 9.12.2024.
 //
 
-#ifndef ECSMANAGER_H
-#define ECSMANAGER_H
+#ifndef ECS_MANAGER_H
+#define ECS_MANAGER_H
 
 #include <memory>
 #include "Framework.h"
@@ -16,11 +16,12 @@
 #include "ecs/camera/Camera2DSystem.h"
 #include "ecs/collision/Collision2DSystem.h"
 #include "ecs/entity/EntityBuilderLua.h"
+#include "ecs/physics2d/Physics2DSystem.h"
 
 namespace mars {
     //! The ECSManager class.
 	//! Entry point into the ECS part of the engine.
-    //! Manages all the systems in ecs part of the engine.
+    //! Manages all the systems in ECS part of the engine.
     class ECSManager {
     public:
         //! The constructor of the ECSManager object.
@@ -69,9 +70,13 @@ namespace mars {
         //! @param component The collider 2D component.
         void passComponentToSystem(Collider2D *component) const;
 
+        //! Passes the body 2D component to the physics 2D system.
+        //! @param component The body 2D component.
+        void passComponentToSystem(RigidBody2D *component) const;
+
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(RectTransform *component) const;
+        void removeComponentFromSystem(const RectTransform *component) const;
 
         //! Removes the component from the system.
         //! @param component The component to remove.
@@ -79,7 +84,7 @@ namespace mars {
 
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(AScript *component) const;
+        void removeComponentFromSystem(const AScript *component) const;
 
         //! Removes the component from the system.
         //! @param component The component to remove.
@@ -92,6 +97,10 @@ namespace mars {
         //! Removes the component from the system.
         //! @param component The component to remove.
         void removeComponentFromSystem(const Collider2D *component) const;
+
+        //! Removes the component from the system.
+        //! @param component The component to remove.
+        void removeComponentFromSystem(const RigidBody2D *component) const;
 
         //! Called when frame starts. Prepares the system for rendering, by sorting according to layer order.
         void frameStart() const;
@@ -114,8 +123,9 @@ namespace mars {
         std::unique_ptr<Camera2DSystem> camera2DSystem;
         std::unique_ptr<Collision2DSystem> collision2DSystem;
         std::unique_ptr<EntityBuilderLua> entityBuilderLua;
+        std::unique_ptr<Physics2DSystem> physics2DSystem;
     };
 }
 
 
-#endif //ECSMANAGER_H
+#endif //ECS_MANAGER_H

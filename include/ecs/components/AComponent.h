@@ -23,7 +23,7 @@ namespace mars {
         //! Destroy the Component object.
         virtual ~AComponent() = default;
 
-        //! Gets the entity that the component is attached to.
+        //! Gets the entity that this component is attached to.
         [[nodiscard]] Entity& getEntity() const;
 
         //! Initialize the component.

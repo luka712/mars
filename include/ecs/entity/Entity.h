@@ -28,6 +28,10 @@ namespace mars {
         //! @return The framework.
         [[nodiscard]] Framework& getFramework() const;
 
+        //! Gets the ECS manager.
+        //! @return The ECS manager.
+        [[nodiscard]] ECSManager& getECSManager() const { return ecsManager; }
+
         //! Get the name of the entity.
         [[nodiscard]] std::string getName() const;
 
@@ -60,7 +64,14 @@ namespace mars {
         template<typename T>
         T* addComponent() {
 
-            std::string key = typeid(T).name();
+            // Check if component is already added. If so, fail because it cannot be added twice.
+            const std::string key = typeid(T).name();
+            if ( componentsMap.contains(key)) {
+                const std::string msg = "Component of type " + key + " is already added to the entity.";
+                framework.getLogger().error(msg.c_str());
+                throw std::runtime_error(msg);
+            }
+
             componentsMap[key] = std::make_shared<T>(this);
             T* component = dynamic_cast<T*>(componentsMap[key].get());
 
@@ -76,8 +87,7 @@ namespace mars {
         //! Remove a component from the entity.
         template <typename T>
         void removeComponent() {
-            const std::string key = typeid(T).name();
-            if (componentsMap.contains(key)) {
+            if (const std::string key = typeid(T).name(); componentsMap.contains(key)) {
                 T* component = dynamic_cast<T*>(componentsMap[key].get());
                 ecsManager.removeComponentFromSystem(component);
                 componentsMap.erase(key);

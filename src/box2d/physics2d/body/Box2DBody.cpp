@@ -20,6 +20,11 @@ namespace mars {
         body = box2DWorld->CreateBody(&box2DBodyDef);
     }
 
+    glm::vec2 Box2DBody::getPosition() {
+        b2Vec2 pos = body->GetPosition();
+        return {pos.x, pos.y};
+    }
+
     std::shared_ptr<AFixture2D> Box2DBody::createFixture(AShape *shape, float density) {
         auto *shapeImpl = reinterpret_cast<ABox2DShape *>(shape);
         b2Fixture *fixture;

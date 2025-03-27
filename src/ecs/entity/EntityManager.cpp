@@ -16,7 +16,7 @@ namespace  mars {
         return framework;
     }
 
-    std::shared_ptr<Entity> EntityManager::createEntity(std::string entityName) {
+    std::shared_ptr<Entity> EntityManager::createEntity(const std::string& entityName) {
         auto entity = std::make_shared<Entity>(ecsManager, entityName);
         entities.push_back(entity);
         return entity;

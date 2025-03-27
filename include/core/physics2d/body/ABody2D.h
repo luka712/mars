@@ -17,6 +17,10 @@ namespace mars {
         //! The destructor
         virtual ~ABody2D() = default;
 
+        //! Get the position of the body.
+        //! @return The position of the body.
+        virtual glm::vec2 getPosition() = 0;
+
         //! Creates a fixture from a shape and attach it to this body.
         //! @param shape The shape to be cloned.
         //! @param density The shape density (set to zero for static bodies).

@@ -19,7 +19,7 @@ namespace mars {
 
         //! Remove a RectTransform component from the system.
         //! @param rectTransform The RectTransform component.
-        void remove(RectTransform *rectTransform);
+        void remove(const RectTransform *rectTransform);
 
         //! Update the RectTransform components.
         //! @param time The game time.

@@ -32,7 +32,7 @@ namespace mars {
         //! Create a new entity with a given name.
         //! @param entityName The name of the entity.
         //! @return The reference to the @see Entity.
-        std::shared_ptr<Entity> createEntity(std::string entityName);
+        std::shared_ptr<Entity> createEntity(const std::string& entityName);
 
         //! Get all the entities.
         //! @return The vector of entities.

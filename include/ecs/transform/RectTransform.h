@@ -7,14 +7,24 @@
 
 #include "ecs/components/AComponent.h"
 #include "core/math/Rect.h"
+#include "glm/vec2.hpp"
 
 namespace mars {
     //! The rect transform component.
+    //! Used to store the position, rotation and scale of the entity in 2D world space.
     class RectTransform : public AComponent {
     public:
         //! Construct a new RectTransform object.
         //! @param entity The entity that the component is attached to.
         explicit RectTransform(Entity* entity);
+
+        //! Get the position.
+        //! @return The position.
+        [[nodiscard]] glm::vec2 getPosition() const { return {drawRectangle.x, drawRectangle.y}; }
+
+        //! Set the position.
+        //! @param position The position.
+        void setPosition(glm::vec2 position);
 
         //! Get the drawing rectangle.
         //! @return The drawing rectangle.
