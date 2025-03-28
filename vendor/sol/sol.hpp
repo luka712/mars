@@ -6752,7 +6752,14 @@ namespace sol {
 			static_assert(std::is_constructible<T, Args&&...>::value, "T must be constructible with Args");
 
 			*this = nullopt;
+			// START CHANGE:  27-03-2025 ERKAPIC LUKA - change due to EMSCRIPTEN error (__EMSCRIPTEN__ line was added)
+#if __EMSCRIPTEN__
+			new (static_cast<void*>(this)) optional(std::in_place, std::forward<Args>(args)...);
+			return **this;
+#else
 			this->construct(std::forward<Args>(args)...);
+#endif
+// ENDCHANGE
 		}
 
 		/// Swaps this optional with the other.

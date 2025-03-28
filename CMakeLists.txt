@@ -116,7 +116,8 @@ add_executable(chopper-shooter chopper-shooter.cpp
         src/ecs/entity/EntityBuilderLua.cpp
         include/ecs/physics2d/Physics2DSystem.h
         include/ecs/physics2d/RigidBody2D.h
-        src/ecs/physics2d/RigidBody2D.cpp)
+        src/ecs/physics2d/RigidBody2D.cpp
+)
 
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}

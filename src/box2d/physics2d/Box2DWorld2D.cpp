@@ -3,8 +3,8 @@
 //
 
 #include "box2d/physics2d/Box2DWorld2D.h"
-
 #include "box2d/physics2d/body/Box2DBody.h"
+#include <stdexcept>
 
 namespace mars {
     Box2DWorld2D::Box2DWorld2D(WorldDefinition2D worldDef)
@@ -36,8 +36,7 @@ namespace mars {
                 return b2_kinematicBody;
 
             default:
-                const std::string msg = "Unknown body type: " + std::to_string(static_cast<int>(type));
-                throw std::invalid_argument(msg);
+               throw std::runtime_error("Unknown body type.");
         }
     }
 }
