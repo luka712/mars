@@ -46,7 +46,8 @@ namespace mars {
         //! The color of the sprite.
         Color color;
 
-        //! Is fixed. If fixed, tile is not moving when camera changes position.
+        //! Is fixed. If fixed is <code>true</code> this sprite is not moving with the camera and is fixed to position on screen.
+        /// Typical use case would be for rendering UI elements.
         bool isFixed = false;
     protected:
           SpriteRendererSystem* system{};

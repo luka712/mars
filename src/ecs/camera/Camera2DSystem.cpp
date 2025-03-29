@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 1.1.2025..
+// Created by Erkapic Luka on 1.1.2025.
 //
 
 #include "Framework.h"
@@ -11,7 +11,7 @@ namespace mars {
     }
 
     void Camera2DSystem::add(Camera2D *camera2D) {
-        activeCameraComponents.emplace_back(camera2D);
+        cameraComponents.emplace_back(camera2D);
 
         // By default, camera is size of window bounds.
         WindowBounds windowBounds = framework.getWindowManager().getWindowBounds();
@@ -20,22 +20,22 @@ namespace mars {
     }
 
     void Camera2DSystem::remove(const Camera2D *camera2D) {
-        for (int i = 0; i < activeCameraComponents.size(); i++) {
-            if (activeCameraComponents[i] == camera2D) {
-                activeCameraComponents.erase(activeCameraComponents.begin() + i);
+        for (int i = 0; i < cameraComponents.size(); i++) {
+            if (cameraComponents[i] == camera2D) {
+                cameraComponents.erase(cameraComponents.begin() + i);
                 break;
             }
         }
     }
 
     void Camera2DSystem::update(const Time &time) {
-        for (Camera2D *camera: activeCameraComponents) {
+        for (Camera2D *camera: cameraComponents) {
             camera->update(time);
         }
     }
 
     void Camera2DSystem::render() {
-        for (Camera2D *camera: activeCameraComponents) {
+        for (Camera2D *camera: cameraComponents) {
             camera->render();
         }
     }

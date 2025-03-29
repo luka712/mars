@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 22.1.2025..
+// Created by Erkapic Luka on 22.1.2025.
 //
 
 #include <sstream>
@@ -11,11 +11,11 @@ namespace mars {
         : AComponent(entity) {
     }
 
-    void Camera2D::setWidth(uint32_t width) {
+    void Camera2D::setWidth(const uint32_t width) {
         this->width = width;
     }
 
-    void Camera2D::setHeight(uint32_t height) {
+    void Camera2D::setHeight(const uint32_t height) {
         this->height = height;
     }
 
@@ -29,7 +29,7 @@ namespace mars {
         }
     }
 
-    RectTransform *Camera2D::getRectTransform() {
+    RectTransform *Camera2D::getRectTransform() const {
         return rectTransform;
     }
 

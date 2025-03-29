@@ -45,7 +45,7 @@ namespace mars {
     private:
         Framework &framework;
 
-        std::vector<SpriteRenderer *> sprites;
+        std::vector<SpriteRenderer *> spriteRendererComponents;
         //! Layer order is key, while sprites to render are values.
         std::map<uint32_t, std::vector<SpriteRenderer *> > layerOrderSpritesMap;
         //! Layer order is key, while sprites to render count is value.

@@ -50,16 +50,34 @@ namespace mars {
         void setName(const std::string &name);
 
         //! Get a component of the entity.
+        //! Throws an exception if the component is not found.
+        //! @tparam T The type of the component.
+        //! @param validationMessage The override message to throw if the component is not found. If empty, default message is thrown.
+        //! @return The component.
         template<typename T>
-        T* getComponent() {
+        T* getComponent(const std::string& validationMessage = "") {
 
             const std::string key = typeid(T).name();
             if (componentsMap.contains(key)) {
                 return dynamic_cast<T*>(componentsMap[key].get());
             }
 
-            const std::string msg = "Entity::getComponent does not have a valid component of type " + key;
+            // If validation message is provided, throw an exception with that message.
+            const std::string msg = validationMessage == "" ? "Entity::getComponent does not have a valid component of type " + key : validationMessage;
             framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+
+        //! Get a component of the entity.
+        //! Returns nullptr if the component is not found.
+        //! @tparam T The type of the component.
+        //! @return The component.
+        template<typename T>
+        T* getComponentOrNull() {
+
+            if (const std::string key = typeid(T).name(); componentsMap.contains(key)) {
+                return dynamic_cast<T*>(componentsMap[key].get());
+            }
 
             return nullptr;
         }

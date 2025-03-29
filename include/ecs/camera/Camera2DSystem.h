@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 22.1.2025..
+// Created by Erkapic Luka on 22.1.2025.
 //
 
-#ifndef CAMERA2DSYSTEM_H
-#define CAMERA2DSYSTEM_H
+#ifndef CAMERA2D_SYSTEM_H
+#define CAMERA2D_SYSTEM_H
 
 #include <vector>
 #include "ecs/camera/Camera2D.h"
@@ -20,7 +20,7 @@ namespace mars {
 
         //! Get the Camera2D components.
         //! @return The Camera2D components.
-        [[nodiscard]] const std::vector<Camera2D*>& getCameraComponents() const { return activeCameraComponents; }
+        [[nodiscard]] const std::vector<Camera2D*>& getCameraComponents() const { return cameraComponents; }
 
         //! Add a Camera2D component to the system.
         //! @param camera2D The Camera2D component.
@@ -39,8 +39,8 @@ namespace mars {
 
     private:
         Framework &framework;
-        std::vector<Camera2D *> activeCameraComponents;
+        std::vector<Camera2D *> cameraComponents;
     };
 }
 
-#endif //CAMERA2DSYSTEM_H
+#endif //CAMERA2D_SYSTEM_H

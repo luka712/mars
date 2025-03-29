@@ -27,14 +27,8 @@ namespace mars {
     }
 
     void SpriteRenderer::initialize() {
-
         // Entity must have RectTransform component.
-        rectTransform = entity->getComponent<RectTransform>();
-        if (rectTransform == nullptr) {
-            std::string msg = "SpriteRenderer component requires RectTransform component.";
-            framework.getLogger().error(msg.c_str());
-            throw std::runtime_error(msg);
-        }
+        rectTransform = entity->getComponent<RectTransform>("SpriteRenderer component requires RectTransform component.");
     }
 
     void SpriteRenderer::destroy() {

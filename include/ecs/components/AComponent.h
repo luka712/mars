@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 #include <core/life_management/State.h>
+#include <ecs/entity/Entity.h>
+
 #include "core/time/Time.h"
 
 namespace mars {

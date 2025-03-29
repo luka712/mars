@@ -12,13 +12,13 @@ namespace mars {
     }
 
     void SpriteRendererSystem::add(SpriteRenderer *spriteRenderer) {
-        sprites.emplace_back(spriteRenderer);
+        spriteRendererComponents.emplace_back(spriteRenderer);
     }
 
     void SpriteRendererSystem::remove(const SpriteRenderer *sprite) {
-        for (int i = 0; i < sprites.size(); i++) {
-            if (sprites[i] == sprite) {
-                sprites.erase(sprites.begin() + i);
+        for (int i = 0; i < spriteRendererComponents.size(); i++) {
+            if (spriteRendererComponents[i] == sprite) {
+                spriteRendererComponents.erase(spriteRendererComponents.begin() + i);
                 break;
             }
         }
@@ -46,7 +46,7 @@ namespace mars {
         }
 
         // Update the sprite renderers.
-        for (SpriteRenderer *spriteRenderer: sprites) {
+        for (SpriteRenderer *spriteRenderer: spriteRendererComponents) {
             moveToLayerMap(spriteRenderer);
         }
     }

@@ -34,7 +34,7 @@ namespace mars {
 
         //! Get the rect transform.
         //! @return The rect transform. If not set, returns nullptr.
-        [[nodiscard]] RectTransform *getRectTransform();
+        [[nodiscard]] RectTransform *getRectTransform() const;
 
         void initialize() override;
 
