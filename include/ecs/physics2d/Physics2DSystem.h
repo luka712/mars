@@ -6,7 +6,8 @@
 #define PHYSICS2D_SYSTEM_H
 
 #include <vector>
-#include "RigidBody2D.h"
+#include "ecs/physics2d/RigidBody2D.h"
+#include "ecs/physics2d/ACollider2D.h"
 #include "core/physics2d/AWorld2D.h"
 
 namespace mars {
@@ -33,6 +34,14 @@ namespace mars {
         //! @param body The body 2d.
         void remove(const RigidBody2D* body);
 
+        //! Add a collider 2d to the system.
+        //! @param collider The collider 2d.
+        void add(ACollider2D* collider);
+
+        //! Remove a collider 2d from the system.
+        //! @param collider The collider 2d.
+        void remove(const ACollider2D* collider);
+
         //! Update the physics 2d components.
         //! @param time The game time.
         void update(const Time& time);
@@ -41,6 +50,8 @@ namespace mars {
         Framework& framework;
         std::unique_ptr<AWorld2D> world;
         std::vector<std::shared_ptr<RigidBody2D>> bodies;
+        std::vector<std::shared_ptr<ACollider2D>> colliders;
+        std::vector<RigidBody2D*> bodiesToRemove;
     };
 
 }

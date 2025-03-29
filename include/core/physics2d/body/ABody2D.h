@@ -5,6 +5,7 @@
 #ifndef A_PHYSICS_BODY2D_H
 #define A_PHYSICS_BODY2D_H
 
+#include <memory>
 #include "core/physics2d/fixture/AFixture2D.h"
 #include "core/physics2d/shape/AShape.h"
 #include "core/physics2d/fixture/FixtureDefinition2D.h"

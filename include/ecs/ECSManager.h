@@ -14,10 +14,10 @@
 #include "ecs/tilemap/TileMapSystem.h"
 #include "ecs/layer/LayerManager.h"
 #include "ecs/camera/Camera2DSystem.h"
-#include "ecs/collision/Collision2DSystem.h"
 #include "ecs/entity/EntityBuilderLua.h"
 #include "ecs/physics2d/Physics2DSystem.h"
 #include "ecs/sprite/data/SpriteManager.h"
+#include "physics2d/BoxCollider2D.h"
 
 namespace mars {
     //! The ECSManager class.
@@ -73,7 +73,7 @@ namespace mars {
 
         //! Passes the collider 2D component to the collision 2D system.
         //! @param component The collider 2D component.
-        void passComponentToSystem(Collider2D *component) const;
+        void passComponentToSystem(ACollider2D *component) const;
 
         //! Passes the body 2D component to the physics 2D system.
         //! @param component The body 2D component.
@@ -101,7 +101,7 @@ namespace mars {
 
         //! Removes the component from the system.
         //! @param component The component to remove.
-        void removeComponentFromSystem(const Collider2D *component) const;
+        void removeComponentFromSystem(const ACollider2D *component) const;
 
         //! Removes the component from the system.
         //! @param component The component to remove.
@@ -126,7 +126,6 @@ namespace mars {
         std::unique_ptr<ScriptSystem> scriptSystem;
         std::unique_ptr<TileMapSystem> tileMapSystem;
         std::unique_ptr<Camera2DSystem> camera2DSystem;
-        std::unique_ptr<Collision2DSystem> collision2DSystem;
         std::unique_ptr<EntityBuilderLua> entityBuilderLua;
         std::unique_ptr<Physics2DSystem> physics2DSystem;
         std::unique_ptr<SpriteManager> spriteManager;

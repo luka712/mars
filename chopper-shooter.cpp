@@ -6,7 +6,6 @@
 
 
 #include "Framework.h"
-#include "core/sprite/AnimatedSprite.h"
 #include "ecs/ECSManager.h"
 #include "ecs/tilemap/TileMap.h"
 
@@ -107,11 +106,8 @@ void createScene(const mars::Framework &framework,
     player->getComponent<mars::AnimatedSpriteRenderer>()->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
     playerMoveScript->camera = camera.get();
-    auto playerCollider = player->addComponent<mars::Collider2D>();
-    // playerCollider->setDebug(true);
-    playerCollider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
-        framework.getLogger().info("Collision detected.");
-    });
+   // player->addComponent<mars::RigidBody2D>();
+    player->addComponent<mars::BoxCollider2D>();
 
 
     // ENEMY
@@ -122,7 +118,7 @@ void createScene(const mars::Framework &framework,
     // enemyTransform->setDrawRectangle(mars::Rect{500, 100, 64, 64});
     // mars::SpriteRenderer *enemySpriteRenderer = enemy->addComponent<mars::SpriteRenderer>();
    // enemySpriteRenderer->setSprite(std::make_shared<mars::Sprite>(enemyTexture));
-    enemy->addComponent<mars::Collider2D>()->setDebug(true);
+    //enemy->addComponent<mars::Collider2D>()->setDebug(true);
 
     // Radar
     std::shared_ptr<mars::Entity> radar = entityManager.createEntity("radar");
@@ -151,11 +147,9 @@ void createScene(const mars::Framework &framework,
     heliportTransform->setDrawRectangle(mars::Rect{470, 450, 64, 64});
     mars::SpriteRenderer *heliportSpriteRenderer = heliport->addComponent<mars::SpriteRenderer>();
     heliportSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(heliportTexture));
-    mars::Collider2D* collider = heliport->addComponent<mars::Collider2D>();
+    // mars::Collider2D* collider = heliport->addComponent<mars::Collider2D>();
     // collider->setDebug(true);
-    collider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
-        framework.getLogger().info("Heliport collision detected.");
-    });
+
 
 
     radarSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(radarTexture));

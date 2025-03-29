@@ -9,7 +9,8 @@ namespace mars {
 
     //! The 2D physics shape.
     class AShape {
-
+    public:
+        virtual ~AShape() = default;
     };
 
 }

@@ -5,6 +5,8 @@
 #ifndef BOX2D_SHAPE_H
 #define BOX2D_SHAPE_H
 
+#include <box2d/b2_shape.h>
+
 namespace mars {
 
     enum class Box2DShapeType {
@@ -18,19 +20,19 @@ namespace mars {
 
         //! Get the shape.
         //! @return The shape.
-        b2Shape* getBox2DShape() {  return shape; }
+        [[nodiscard]] virtual b2Shape* getBox2DShape() = 0;
 
         //! Get the shape type.
         //! @return The shape type.
-        Box2DShapeType getShapeType() { return type; }
+        [[nodiscard]] Box2DShapeType getShapeType() const { return type; }
 
     protected:
+        Box2DShapeType type{};
 
         //! Initialize the shape.
         //! Can be set just to pointer of the shape implementation.
         virtual void initShape() = 0;
-        b2Shape* shape{};
-        Box2DShapeType type{};
+
     };
 }
 

@@ -12,8 +12,13 @@
 namespace mars {
 
     //! The Box2D implementation of the 2D physics polygon shape.
-    class Box2DPolygonShape : public ABox2DShape, public APolygonShape {
+    class Box2DPolygonShape final : public ABox2DShape, public APolygonShape {
     public:
+
+        //! @copydoc
+        [[nodiscard]] b2Shape* getBox2DShape() override { return &polygonShape; }
+
+        //! @copydoc
         void setAsBox(float halfWidth, float halfHeight) override;
 
     protected:

@@ -1,11 +1,12 @@
 //
-// Created by lukaa on 9.12.2024.
+// Created by Erkapic Luka on 9.12.2024.
 //
 
-#ifndef RECTTRANSFORMSYSTEM_H
-#define RECTTRANSFORMSYSTEM_H
+#ifndef RECT_TRANSFORM_SYSTEM_H
+#define RECT_TRANSFORM_SYSTEM_H
 
 #include <vector>
+#include <memory>
 #include "ecs/transform/RectTransform.h"
 
 namespace mars {
@@ -30,4 +31,4 @@ namespace mars {
     };
 }
 
-#endif //RECTTRANSFORMSYSTEM_H
+#endif //RECT_TRANSFORM_SYSTEM_H

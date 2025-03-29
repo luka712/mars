@@ -30,6 +30,19 @@ namespace mars {
         }
     }
 
+    void Physics2DSystem::add(ACollider2D *collider) {
+        colliders.emplace_back(collider);
+    }
+
+    void Physics2DSystem::remove(const ACollider2D *collider) {
+        for (int i = 0; i < colliders.size(); i++) {
+            if (colliders[i].get() == collider) {
+                colliders.erase(colliders.begin() + i);
+                break;
+            }
+        }
+    }
+
     void Physics2DSystem::update(const Time &time) {
         for (const auto &body: bodies) {
             body->update(time);

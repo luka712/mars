@@ -6,6 +6,7 @@
 #define RIGID_BODY_2D_H
 
 #include "ecs/transform/RectTransform.h"
+#include "ecs/physics2d/ACollider2D.h"
 #include "core/physics2d/body/ABody2D.h"
 
 namespace mars {
@@ -15,6 +16,7 @@ namespace mars {
     class RigidBody2D : public AComponent {
     public:
         //! Construct a new Body2D object.
+        //! @param entity The entity that the component is attached to.
         explicit RigidBody2D(Entity *entity);
 
         //! @copydoc
@@ -25,11 +27,16 @@ namespace mars {
         void createBodyOnSelf(const Physics2DSystem &system);
 
         //! @copydoc
-        void update(const Time& time) override;
+        void update(const Time &time) override;
 
     private:
         RectTransform *rectTransform;
+        ACollider2D *collider;
         std::shared_ptr<ABody2D> body;
+
+        //! Try to find the collider.
+        //! @return The collider if found, otherwise nullptr.
+        [[nodiscard]] ACollider2D* tryFindCollider() const;
     };
 }
 

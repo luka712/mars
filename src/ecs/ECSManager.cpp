@@ -15,14 +15,12 @@ namespace mars {
         scriptSystem = std::make_unique<ScriptSystem>(framework);
         tileMapSystem = std::make_unique<TileMapSystem>(framework);
         camera2DSystem = std::make_unique<Camera2DSystem>(framework);
-        collision2DSystem = std::make_unique<Collision2DSystem>(framework);
         entityBuilderLua = std::make_unique<EntityBuilderLua>(framework, *this);
         physics2DSystem = std::make_unique<Physics2DSystem>(framework);
         spriteManager = std::make_unique<SpriteManager>(framework);
     }
 
     void ECSManager::initialize() const {
-        collision2DSystem->initialize();
     }
 
     Framework &ECSManager::getFramework() const {
@@ -57,8 +55,8 @@ namespace mars {
         camera2DSystem->add(component);
     }
 
-    void ECSManager::passComponentToSystem(Collider2D *component) const {
-        collision2DSystem->add(component);
+    void ECSManager::passComponentToSystem(ACollider2D *component) const {
+        physics2DSystem->add(component);
     }
 
     void ECSManager::passComponentToSystem(RigidBody2D *component) const {
@@ -85,8 +83,8 @@ namespace mars {
         camera2DSystem->remove(component);
     }
 
-    void ECSManager::removeComponentFromSystem(const Collider2D *component) const {
-        collision2DSystem->remove(component);
+    void ECSManager::removeComponentFromSystem(const ACollider2D *component) const {
+        physics2DSystem->remove(component);
     }
 
     void ECSManager::removeComponentFromSystem(const RigidBody2D *component) const {
@@ -104,7 +102,6 @@ namespace mars {
         physics2DSystem->update(time);
         scriptSystem->update(time);
         rectTransformSystem->update(time);
-        collision2DSystem->update(time);
 
         for (auto &layer: layers) {
             const uint32_t currentLayerOrder = layer->getOrder();
@@ -125,7 +122,6 @@ namespace mars {
                 tileMapSystem->render(currentLayerOrder, *camera);
                 spriteRendererSystem->render(currentLayerOrder, *camera);
             }
-            collision2DSystem->render(*camera);
         }
 
     }

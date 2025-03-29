@@ -4,6 +4,8 @@
 
 #include "ecs/script/ScriptSystem.h"
 
+#include <cstdint>
+
 namespace mars {
     ScriptSystem::ScriptSystem(Framework &framework)
            : framework(framework) {

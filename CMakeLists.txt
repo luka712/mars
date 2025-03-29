@@ -121,6 +121,10 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/asset_toolkit/sprite/Sprite.h
         include/ecs/sprite/data/SpriteManager.h
         src/ecs/sprite/data/SpriteManager.cpp
+        include/ecs/physics2d/ACollider2D.h
+        include/ecs/physics2d/BoxCollider2D.h
+        src/ecs/physics2d/ACollider2D.cpp
+        src/ecs/physics2d/BoxCollider2D.cpp
 )
 
 target_link_libraries(chopper-shooter

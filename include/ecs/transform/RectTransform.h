@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 8.12.2024..
+// Created by Erkapic Luka on 8.12.2024.
 //
 
-#ifndef RECTTRANSFORM_H
-#define RECTTRANSFORM_H
+#ifndef RECT_TRANSFORM_H
+#define RECT_TRANSFORM_H
 
 #include "ecs/components/AComponent.h"
 #include "core/math/Rect.h"
@@ -46,4 +46,4 @@ namespace mars {
 }
 
 
-#endif //RECTTRANSFORM_H
+#endif //RECT_TRANSFORM_H

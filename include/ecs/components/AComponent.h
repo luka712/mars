@@ -1,15 +1,12 @@
 //
-// Created by lukaa on 8.12.2024..
+// Created by Erkapic Luka on 8.12.2024.
 //
 
-#ifndef ACOMPONENT_H
-#define ACOMPONENT_H
+#ifndef A_COMPONENT_H
+#define A_COMPONENT_H
 
-#include <memory>
 #include <string>
-#include <core/life_management/State.h>
-#include <ecs/entity/Entity.h>
-
+#include "core/life_management/State.h"
 #include "core/time/Time.h"
 
 namespace mars {
@@ -54,4 +51,4 @@ namespace mars {
 }
 
 
-#endif //ACOMPONENT_H
+#endif //A_COMPONENT_H

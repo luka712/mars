@@ -26,20 +26,6 @@ namespace mars {
             framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }
-
-        // Entity cannot have sprite renderer component.
-        if (entity->getComponent<SpriteRenderer>() != nullptr) {
-            const std::string msg = "TileMap component cannot be attached to entity with SpriteRenderer component.";
-            framework.getLogger().error(msg.c_str());
-            throw std::runtime_error(msg);
-        }
-
-        // Entity cannot have animated sprite renderer component.
-        if (entity->getComponent<AnimatedSpriteRenderer>() != nullptr) {
-            const std::string msg = "TileMap component cannot be attached to entity with AnimatedSpriteRenderer component.";
-            framework.getLogger().error(msg.c_str());
-            throw std::runtime_error(msg);
-        }
     }
 
     void TileMap::loadTiles(const glm::vec2 tileSize, const std::vector<std::vector<int32_t>> &tiles) {

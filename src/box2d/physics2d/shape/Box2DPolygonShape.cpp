@@ -11,7 +11,6 @@ namespace mars {
     }
 
     void Box2DPolygonShape::initShape() {
-        shape = &polygonShape;
         type = Box2DShapeType::Polygon;
     }
 }
