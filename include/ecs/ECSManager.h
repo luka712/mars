@@ -17,6 +17,7 @@
 #include "ecs/collision/Collision2DSystem.h"
 #include "ecs/entity/EntityBuilderLua.h"
 #include "ecs/physics2d/Physics2DSystem.h"
+#include "ecs/sprite/data/SpriteManager.h"
 
 namespace mars {
     //! The ECSManager class.
@@ -37,6 +38,10 @@ namespace mars {
         //! Get the entity manager.
         //! @return The entity manager.
         [[nodiscard]] EntityManager &getEntityManager() const;
+
+        //! Get the sprite manager.
+        //! @return The sprite manager.
+        [[nodiscard]] SpriteManager &getSpriteManager() const;
 
         //! Get the layer manager.
         //! @return The layer manager.
@@ -124,6 +129,7 @@ namespace mars {
         std::unique_ptr<Collision2DSystem> collision2DSystem;
         std::unique_ptr<EntityBuilderLua> entityBuilderLua;
         std::unique_ptr<Physics2DSystem> physics2DSystem;
+        std::unique_ptr<SpriteManager> spriteManager;
     };
 }
 

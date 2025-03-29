@@ -9,7 +9,7 @@ namespace mars {
     OpenGLESTextureUtil::OpenGLESTextureUtil(Logger &logger) : logger(logger) {
     }
 
-    GLuint OpenGLESTextureUtil::create(int32_t width, int32_t height, GLint format, GLint internalFormat, GLint type, const void* data, const std::string& label)
+    GLuint OpenGLESTextureUtil::create(const int32_t width, const int32_t height, const GLint format, const GLint internalFormat, const GLint type, const void* data, const std::string& label)
     {
         validateTextureType(type);
         validateInternalFormat(internalFormat);
@@ -19,7 +19,6 @@ namespace mars {
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, data);
-        // TODO: pass parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -46,7 +45,7 @@ namespace mars {
 
         if (glGetError() != GL_NO_ERROR)
         {
-            std::string msg = "Potential error occurred during setup of OpenGL texture.";
+            const std::string msg = "Potential error occurred during setup of OpenGL texture.";
             logger.error(msg);
             throw std::runtime_error(msg);
         }

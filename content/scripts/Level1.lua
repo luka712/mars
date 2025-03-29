@@ -1,7 +1,7 @@
 Level1 = {
     textures = {
         [0] = { id = "jungle", file = "tilemaps/jungle.png" },
-        [1] = { id = "chopper", file = "images/chopper-spritesheet.png" },
+        [1] = { id = "bat", file = "images/bat.png" },
         [2] = { id = "tank", file = "images/tank-big-left.png" },
         [3] = { id = "projectile", file = "images/bullet-enemy.png" },
     },
@@ -31,12 +31,46 @@ Level1 = {
                         height = 64
                     },
                 },
-                sprite = {
-                    textureAssetId = "chopper-texture",
-                    animated = true,
-                    frameCount = 2,
-                    animationSpeed = 90,
-                    fixed = false
+                animated_sprite_renderer = {
+                    texture_id = "bat",
+                    animations = {
+                      [0] = {
+                         name = "down",
+                         frames = {
+                            [0] = { x = 0, y = 0, width = 32, height = 32 },
+                            [1] = { x = 32, y = 0, width = 32, height = 32 },
+                            [2] = { x = 64, y = 0, width = 32, height = 32 },
+                            [3] = { x = 96, y = 0, width = 32, height = 32 }
+                         },
+                      },
+                      [1] = {
+                        name= "right",
+                        frames = {
+                            [0] = { x = 0, y = 32, width = 32, height = 32 },
+                            [1] = { x = 32, y = 32, width = 32, height = 32 },
+                            [2] = { x = 64, y = 32, width = 32, height = 32 },
+                            [3] = { x = 96, y = 32, width = 32, height = 32 }
+                        }
+                      },
+                      [2] = {
+                        name = "up",
+                        frames = {
+                          [0] =  { x = 0, y = 64, width = 32, height = 32 },
+                           [1] =  { x = 32, y = 64, width = 32, height = 32 },
+                            [2] = { x = 64, y = 64, width = 32, height = 32 },
+                            [3] = { x = 96, y = 64, width = 32, height = 32 }
+                        }
+                      },
+                      [3] = {
+                        name = "left",
+                        frames = {
+                          [0] =  { x = 0, y = 96, width = 32, height = 32 },
+                           [1] =  { x = 32, y = 96, width = 32, height = 32 },
+                            [2] = { x = 64, y = 96, width = 32, height = 32 },
+                            [3] = { x = 96, y = 96, width = 32, height = 32 }
+                        }
+                   },
+                   },
                 },
                 collider = {
                     tag = "PLAYER"
@@ -67,9 +101,8 @@ Level1 = {
                         height = 64,
                     }
                 },
-                sprite = {
-                    textureAssetId = "tank-texture-big-left",
-                    animated = false
+                sprite_renderer = {
+                    texture_id = "tank",
                 },
                 collider = {
                     tag = "ENEMY"

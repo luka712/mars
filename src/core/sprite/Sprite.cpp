@@ -12,7 +12,7 @@ namespace mars {
         sourceRect = Rect(0, 0, static_cast<int>(width), static_cast<int>(height));
     }
 
-    Texture2D& Sprite::getTexture() const {
+    Texture2D &Sprite::getTexture() const {
         return *texture;
     }
 

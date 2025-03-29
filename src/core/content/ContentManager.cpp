@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 31.12.2024..
+// Created by Erkapic Luka on 31.12.2024.
 //
 
 #include <stdexcept>
@@ -7,12 +7,11 @@
 #include "core/content/ContentManager.h"
 
 namespace mars {
-
     ContentManager::ContentManager(Framework &framework)
-        : framework(framework) , rootDirectory("content"){
+        : framework(framework), rootDirectory("content") {
     }
 
-    const std::string & ContentManager::getRootDirectory() {
+    const std::string &ContentManager::getRootDirectory() {
         return rootDirectory;
     }
 
@@ -20,23 +19,38 @@ namespace mars {
         this->rootDirectory = rootDirectory;
     }
 
-    std::shared_ptr<AContent> ContentManager::load(const std::string &assetFilePath, const std::type_info &typeInfo) {
+    std::shared_ptr<AContent> ContentManager::load(
+        const std::string &assetFilePath,
+        const std::type_info &typeInfo,
+        const std::string &key) {
 
-        std::string fullPath = rootDirectory + "/" + assetFilePath;
+        const std::string fullPath = rootDirectory + "/" + assetFilePath;
 
+        // Check if content is already loaded by full path.
         if (contentMap.contains(fullPath)) {
-            return  contentMap[fullPath];
+            return contentMap[fullPath];
         }
 
+        // Check if content is already saved by key.
+        if (!key.empty() && contentMap.contains(key)) {
+            return contentMap[key];
+        }
+
+        // Load the content.
         if (typeInfo.name() == typeid(Texture2D).name()) {
             std::shared_ptr<AContent> content = framework.getTextureFactory().createTextureFromImageFile(fullPath);
+
+            if (!key.empty()) {
+                contentMap[key] = content;
+            }
+
             contentMap[fullPath] = content;
+
             return content;
         }
 
         const std::string msg = "Cannot resolve content type for asset \"" + assetFilePath + "\".";
         framework.getLogger().error(msg.c_str());
         throw std::runtime_error(msg);
-
     }
 }

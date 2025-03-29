@@ -36,6 +36,7 @@ std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
 }
 
 void createScene(const mars::Framework &framework,
+                 mars::ECSManager& ecsManager,
                  mars::EntityManager &entityManager,
                  mars::EntityBuilderLua& entityBuilder,
                  const std::vector<std::shared_ptr<mars::Layer> > &layers,
@@ -54,7 +55,8 @@ void createScene(const mars::Framework &framework,
         sol::table luaTexture = luaTextures[textureIndex];
         std::string id = luaTexture["id"];
         std::string file = luaTexture["file"];
-        textures[id] = framework.getContentManager().load<mars::Texture2D>(file);
+        textures[id] = framework.getContentManager().load<mars::Texture2D>(file, id);
+        ecsManager.getSpriteManager().addSprite(textures[id], id);
         textureIndex++;
     }
 
@@ -94,13 +96,15 @@ void createScene(const mars::Framework &framework,
     // Build from lua script
     //auto playerTransform = player->addComponent<mars::RectTransform>();
     //playerTransform->setDrawRectangle(mars::Rect{300, 100, 64, 64});
-    auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
-    playerSpriteRenderer->setSprite(new mars::Sprite(playerTexture));
-    playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 64, 32, 32}, mars::Rect{32, 64, 32, 32}});
-    playerSpriteRenderer->addAnimation("right", {mars::Rect{0, 32, 32, 32}, mars::Rect{32, 32, 32, 32}});
-    playerSpriteRenderer->addAnimation("down", {mars::Rect{0, 0, 32, 32}, mars::Rect{32, 0, 32, 32}});
-    playerSpriteRenderer->addAnimation("up", {mars::Rect{0, 96, 32, 32}, mars::Rect{32, 96, 32, 32}});
-    playerSpriteRenderer->playAnimation("left");
+
+   // auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
+   // playerSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(playerTexture));
+   //playerSpriteRenderer->addAnimation("down", {mars::Rect{0, 64, 32, 32}, mars::Rect{32, 64, 32, 32}, mars::Rect{64, 64, 32, 32}, mars::Rect{96, 64, 32, 32}});
+   // playerSpriteRenderer->addAnimation("right", {mars::Rect{0, 32, 32, 32}, mars::Rect{32, 32, 32, 32}});
+   //playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 96, 32, 32}, mars::Rect{32, 96, 32, 32}, mars::Rect{64, 96, 32, 32}, mars::Rect{96, 96, 32, 32}});
+   //playerSpriteRenderer->addAnimation("up", {mars::Rect{0, 96, 32, 32}, mars::Rect{32, 96, 32, 32}});
+   //playerSpriteRenderer->playAnimation("left");
+    player->getComponent<mars::AnimatedSpriteRenderer>()->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
     playerMoveScript->camera = camera.get();
     auto playerCollider = player->addComponent<mars::Collider2D>();
@@ -116,8 +120,8 @@ void createScene(const mars::Framework &framework,
     // enemy->setLayer(layers[1]);
     // mars::RectTransform *enemyTransform = enemy->addComponent<mars::RectTransform>();
     // enemyTransform->setDrawRectangle(mars::Rect{500, 100, 64, 64});
-    mars::SpriteRenderer *enemySpriteRenderer = enemy->addComponent<mars::SpriteRenderer>();
-    enemySpriteRenderer->setSprite(new mars::Sprite(enemyTexture));
+    // mars::SpriteRenderer *enemySpriteRenderer = enemy->addComponent<mars::SpriteRenderer>();
+   // enemySpriteRenderer->setSprite(std::make_shared<mars::Sprite>(enemyTexture));
     enemy->addComponent<mars::Collider2D>()->setDebug(true);
 
     // Radar
@@ -127,7 +131,7 @@ void createScene(const mars::Framework &framework,
     radarTransform->setDrawRectangle(mars::Rect{1200, 15, 64, 64});
     mars::AnimatedSpriteRenderer *radarSpriteRenderer = radar->addComponent<mars::AnimatedSpriteRenderer>();
     radarSpriteRenderer->isFixed = true;
-    radarSpriteRenderer->setSprite(new mars::Sprite(radarTexture));
+    radarSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(radarTexture));
     radarSpriteRenderer->addAnimation("play", {
                                           mars::Rect{64 * 0, 0, 64, 64},
                                           mars::Rect{64 * 1, 0, 64, 64},
@@ -146,7 +150,7 @@ void createScene(const mars::Framework &framework,
     mars::RectTransform *heliportTransform = heliport->addComponent<mars::RectTransform>();
     heliportTransform->setDrawRectangle(mars::Rect{470, 450, 64, 64});
     mars::SpriteRenderer *heliportSpriteRenderer = heliport->addComponent<mars::SpriteRenderer>();
-    heliportSpriteRenderer->setSprite(new mars::Sprite(heliportTexture));
+    heliportSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(heliportTexture));
     mars::Collider2D* collider = heliport->addComponent<mars::Collider2D>();
     // collider->setDebug(true);
     collider->subscribeToOnCollision([&](const mars::Collider2D *playerCollider, const mars::Collider2D *otherCollider) {
@@ -154,7 +158,7 @@ void createScene(const mars::Framework &framework,
     });
 
 
-    radarSpriteRenderer->setSprite(new mars::Sprite(radarTexture));
+    radarSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(radarTexture));
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -219,7 +223,7 @@ int main(int argc, char *argv[]) {
         ecsManager.render();
     });
 
-    createScene(framework, entityManager, entityBuilder, layers, luaState);
+    createScene(framework, ecsManager, entityManager, entityBuilder, layers, luaState);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

@@ -18,13 +18,13 @@ namespace mars {
     }
 
     Sprite* SpriteRenderer::getSprite() const {
-        return sprite;
+        return sprite.get();
     }
 
-    void SpriteRenderer::setSprite(Sprite* sprite) {
+    // ReSharper disable once CppPassValueParameterByConstReference
+    void SpriteRenderer::setSprite(std::shared_ptr<Sprite> sprite) {
         this->sprite = sprite;
     }
-
 
     void SpriteRenderer::initialize() {
 
@@ -36,6 +36,11 @@ namespace mars {
             throw std::runtime_error(msg);
         }
     }
+
+    void SpriteRenderer::destroy() {
+        sprite.reset();
+    }
+
 
     std::string SpriteRenderer::toString() {
         std::stringstream result;

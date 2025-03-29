@@ -27,15 +27,20 @@ namespace mars {
         [[nodiscard]] const RectTransform* getRectTransform() const;
 
         //! Gets the sprite.
-        //! @return The sprite.
+        //! @return The sprite. It can be nullptr.
         [[nodiscard]] virtual Sprite* getSprite() const;
 
         //! Sets the sprite.
         //! @param sprite The sprite.
-        void setSprite(Sprite* sprite);
+        void setSprite(std::shared_ptr<Sprite> sprite);
 
+        //! @copydoc
         void initialize() override;
 
+        //! @copydoc
+        void destroy() override;
+
+        //! @copydoc
         std::string toString() override;
 
         //! The color of the sprite.
@@ -46,7 +51,7 @@ namespace mars {
     protected:
           SpriteRendererSystem* system{};
           RectTransform* rectTransform{};
-          Sprite* sprite{};
+          std::shared_ptr<Sprite> sprite;
     };
 
 }

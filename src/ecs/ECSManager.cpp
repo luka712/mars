@@ -18,6 +18,7 @@ namespace mars {
         collision2DSystem = std::make_unique<Collision2DSystem>(framework);
         entityBuilderLua = std::make_unique<EntityBuilderLua>(framework, *this);
         physics2DSystem = std::make_unique<Physics2DSystem>(framework);
+        spriteManager = std::make_unique<SpriteManager>(framework);
     }
 
     void ECSManager::initialize() const {
@@ -30,6 +31,10 @@ namespace mars {
 
     EntityManager &ECSManager::getEntityManager() const {
         return *entityManager;
+    }
+
+    SpriteManager &ECSManager::getSpriteManager() const {
+        return *spriteManager;
     }
 
     void ECSManager::passComponentToSystem(RectTransform *component) const {

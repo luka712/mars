@@ -69,11 +69,11 @@ target_link_libraries(mars
         ${LUA_LIBRARY}
 )
 
-# COPY DLLS
+# COPY SHARED LIBS
 if(WIN32)
     file(COPY shared_libs/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
     file(COPY shared_libs/SDL2_image.dll DESTINATION ${CMAKE_BINARY_DIR})
-
+    file(COPY shared_libs/lua54.dll DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
 # COPY ASSETS/CONTENT/SHADERS
@@ -117,6 +117,10 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/ecs/physics2d/Physics2DSystem.h
         include/ecs/physics2d/RigidBody2D.h
         src/ecs/physics2d/RigidBody2D.cpp
+        include/asset_toolkit/sprite/Rectangle.h
+        include/asset_toolkit/sprite/Sprite.h
+        include/ecs/sprite/data/SpriteManager.h
+        src/ecs/sprite/data/SpriteManager.cpp
 )
 
 target_link_libraries(chopper-shooter

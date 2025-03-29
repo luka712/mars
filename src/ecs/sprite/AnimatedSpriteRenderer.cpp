@@ -22,7 +22,7 @@ namespace mars {
 
 
     void AnimatedSpriteRenderer::addAnimation(const std::string &animationName, const std::vector<Rect> &frames) {
-        AnimatedSprite *animatedSprite = new AnimatedSprite(sprite->getTextureShared());
+        auto *animatedSprite = new AnimatedSprite(sprite->getTextureShared());
         animations.emplace(animationName, animatedSprite);
         animatedSprite->setFrames(frames);
         currentAnimation = animatedSprite;

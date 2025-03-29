@@ -5,10 +5,11 @@
 #ifndef ENTITY_BUILDER_LUA_H
 #define ENTITY_BUILDER_LUA_H
 
+#include <sol/sol.hpp>
 #include "ecs/entity/EntityManager.h"
 #include "ecs/transform/RectTransform.h"
 #include "ecs/physics2d/RigidBody2D.h"
-#include <sol/sol.hpp>
+#include "ecs/sprite/AnimatedSpriteRenderer.h"
 
 namespace mars {
 
@@ -35,6 +36,18 @@ namespace mars {
         //! @param rectTransformTable The table containing the entity data.
         //! @return The built transform component.
         RectTransform* buildRectTransform(Entity& entity, sol::table &rectTransformTable) const;
+
+        //! Builds a sprite renderer component from a Lua script.
+        //! @param entity The entity to add the component to.
+        //! @param spriteRendererTable The table containing the entity data.
+        //! @return The built sprite renderer component.
+        SpriteRenderer* buildSpriteRenderer(Entity& entity, sol::table &spriteRendererTable) const;
+
+        //! Builds an animated sprite renderer component from a Lua script.
+        //! @param entity The entity to add the component to.
+        //! @param animatedSpriteRendererTable The table containing the entity data.
+        //! @return The built animated sprite renderer component.
+        AnimatedSpriteRenderer* buildAnimatedSpriteRenderer(Entity& entity, sol::table &animatedSpriteRendererTable) const;
 
         //! Builds a rigid body 2D component from a Lua script.
         //! @param entity The entity to add the component to.

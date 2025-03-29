@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 22.12.2024..
+// Created by Erkapic Luka on 22.12.2024.
 //
 
 #ifndef SPRITE_H

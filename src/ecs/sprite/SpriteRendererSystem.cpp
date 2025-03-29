@@ -92,9 +92,11 @@ namespace mars {
 
             // If there is a sprite.
             if (const Sprite *sprite = spriteRenderer->getSprite(); sprite != nullptr) {
+
+                const Rect& sourceRect = sprite->getSourceRect();
                 spriteBatch.draw(&sprite->getTexture(),
                                  drawRect,
-                                 sprite->getSourceRect(),
+                                 sourceRect,
                                  spriteRenderer->color);
             } else {
                 spriteBatch.draw(drawRect, spriteRenderer->color);

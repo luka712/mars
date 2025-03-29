@@ -5,7 +5,7 @@
 #include "core/sprite/AnimatedSprite.h"
 
 namespace mars {
-    AnimatedSprite::AnimatedSprite(std::shared_ptr<Texture2D> texture)
+    AnimatedSprite::AnimatedSprite(const std::shared_ptr<Texture2D> &texture)
     : Sprite(texture), currentFrame(0), frameTime(0), animationSpeed(1), changeFrameTime(100) {
         // Nothing to do.
     }
@@ -22,7 +22,7 @@ namespace mars {
         return frames[currentFrame];
     }
 
-    void AnimatedSprite::update(Time time) {
+    void AnimatedSprite::update(const Time time) {
         // Nothing to do.
         if (frames.empty()) {
             return;

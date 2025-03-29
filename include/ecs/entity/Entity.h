@@ -52,10 +52,14 @@ namespace mars {
         //! Get a component of the entity.
         template<typename T>
         T* getComponent() {
+
             const std::string key = typeid(T).name();
             if (componentsMap.contains(key)) {
                 return dynamic_cast<T*>(componentsMap[key].get());
             }
+
+            const std::string msg = "Entity::getComponent does not have a valid component of type " + key;
+            framework.getLogger().error(msg);
 
             return nullptr;
         }

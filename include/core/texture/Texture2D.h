@@ -24,7 +24,7 @@ namespace mars {
 
         //! Gets the label of the texture.
         //! @return The label of the texture.
-        std::string getLabel() const { return label; }
+        [[nodiscard]] std::string getLabel() const { return label; }
 
         //! Destroy the texture.
         //! Releases the resources.

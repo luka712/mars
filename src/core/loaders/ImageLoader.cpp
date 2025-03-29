@@ -15,7 +15,7 @@ namespace mars {
         : framework(framework){
     }
 
-    std::shared_ptr<ImageData> ImageLoader::load(const std::string &path, bool cache) {
+    std::shared_ptr<ImageData> ImageLoader::load(const std::string &path, const bool cache) {
 
         // Check if image is already in cache.
         if (cache) {
@@ -39,6 +39,13 @@ namespace mars {
         SDL_Surface* surface = IMG_Load(path.c_str());
         if (!surface) {
             const std::string msg = "Failed to load image from path: \"" + path + "\". Error: " + IMG_GetError();
+            framework.getLogger().error(msg.c_str());
+            throw std::runtime_error(msg);
+        }
+
+        // We must ensure that the image is in RGBA format.
+        if (surface->format->BytesPerPixel != 4) {
+            const std::string msg = "Image under path \"" + path + "\" is not in RGBA format.";
             framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }

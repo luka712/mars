@@ -14,7 +14,7 @@ namespace mars {
 
     std::shared_ptr<Texture2D> TextureFactory::createTextureFromImageFile(
         const std::string &filePath, const TextureUsage usage, const std::string &label) const {
-        std::shared_ptr<ImageData> imageData = framework.getImageLoader().load(filePath);
+        const std::shared_ptr<ImageData> imageData = framework.getImageLoader().load(filePath);
         ImageData &data = *imageData;
 
         RenderingBackend backend = framework.getRenderingBackend();

@@ -15,7 +15,7 @@
 namespace mars {
     Framework::Framework(FrameworkOptions options)
     {
-        currentState = State::CREATED;
+        currentState = CREATED;
         renderingBackend = options.renderingBackend;
         onRender.resize(0);
 
