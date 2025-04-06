@@ -21,7 +21,7 @@ namespace asset_toolkit {
         //! All levels. The order of this array is only relevant in <code>LinearHorizontal</code> and <code>linearVertical</code>
         //! world layouts (see <code>worldLayout</code> value). <br/>
         //! Otherwise, you should refer to the <code>worldX</code>, <code>worldY</code> coordinates of each Level.
-        std::vector<asset_tookit::LdtkLevel> levels;
+        std::vector<LdtkLevel> levels;
     };
 }
 

@@ -26,11 +26,35 @@ bool test_root_is_loaded() {
         result.value.iid != "";
 }
 
+bool test_levels_are_loaded() {
+    LdtkLoader loader;
+    const auto result = loader.load("content/ldtk/basic_map.ldtk");
+
+    return result.value.levels.size() > 0;
+}
+
+bool test_layer_instances_are_loaded() {
+    LdtkLoader loader;
+    const auto result = loader.load("content/ldtk/basic_map.ldtk");
+
+    return result.value.levels[0].layerInstances.size() > 0;
+}
+
+bool test_auto_layer_tiles_are_loaded() {
+    LdtkLoader loader;
+    const auto result = loader.load("content/ldtk/basic_map.ldtk");
+
+    return result.value.levels[0].layerInstances[0].autoLayerTiles.size() > 0;
+}
+
 TEST_CASE( "Ldtk loading.", "[test_failed_to_load_ldtk, test_loaded_ldtk]" ) {
     REQUIRE( test_failed_to_load_ldtk() == false );
     REQUIRE(  test_loaded_ldtk() );
 }
 
-TEST_CASE( "Ldtk Format is correct.", "[test_root_is_loaded]" ) {
+TEST_CASE( "Ldtk Format is correct.", "[test_root_is_loaded, test_levels_are_loaded, test_layer_instances_are_loaded, test_auto_layer_tiles_are_loaded]" ) {
     REQUIRE( test_root_is_loaded());
+    REQUIRE( test_levels_are_loaded());
+    REQUIRE( test_layer_instances_are_loaded());
+    REQUIRE( test_auto_layer_tiles_are_loaded());
 }

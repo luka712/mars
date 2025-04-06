@@ -92,10 +92,7 @@ add_executable(tests tests/tests.cpp
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
-        include/core/physics2d/draw/ADebugDraw2D.h
-        src/box2d/physics2d/draw/b2DrawImpl.cpp
-        include/box2d/physics2d/util/Box2DUtil.h)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
