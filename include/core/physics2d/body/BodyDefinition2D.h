@@ -13,7 +13,7 @@ namespace mars {
     struct BodyDefinition2D {
         //! Construct a new BodyDefinition2D object.
         BodyDefinition2D()
-            : type(BodyType2D::StaticBody), position(glm::vec2(0.0f, 0.0f)) {
+            : type(BodyType2D::StaticBody), position(glm::vec2(0.0f, 0.0f)), angle(0.0f) {
         }
 
         //! The body type.
@@ -21,6 +21,9 @@ namespace mars {
 
         //! The position.
         glm::vec2 position;
+
+        //! The world angle of the body in radians.
+        float angle;
     };
 }
 

@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 27.3.2025..
+// Created by Erkapic Luka on 27.3.2025.
 //
 
 #include "Framework.h"
@@ -13,7 +13,7 @@ namespace mars {
         // The default gravity is 9.8 m/s^2.
         worldDef.gravity = glm::vec2(0, -9.8f);
 
-        world = std::make_unique<Box2DWorld2D>(worldDef);
+        world = std::make_unique<Box2DWorld2D>(framework, worldDef);
     }
 
     void Physics2DSystem::add(RigidBody2D *body) {

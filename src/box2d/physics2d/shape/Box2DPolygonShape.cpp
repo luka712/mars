@@ -6,11 +6,12 @@
 
 namespace mars {
 
-    void Box2DPolygonShape::setAsBox(const float halfWidth, const float halfHeight) {
-        polygonShape.SetAsBox(halfWidth, halfHeight);
+    Box2DPolygonShape::Box2DPolygonShape() {
+        shape = new b2PolygonShape();
     }
 
-    void Box2DPolygonShape::initShape() {
-        type = Box2DShapeType::Polygon;
+
+    void Box2DPolygonShape::setAsBox(const float halfWidth, const float halfHeight) {
+        shape->SetAsBox(halfWidth, halfHeight);
     }
 }

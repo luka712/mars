@@ -5,7 +5,7 @@
 #ifndef COLLIDER2D_H
 #define COLLIDER2D_H
 
-#include "box2d/physics2d/shape/ABox2DShape.h"
+#include "core/physics2d/shape/AShape.h"
 #include "ecs/components/AComponent.h"
 
 namespace mars {
@@ -21,7 +21,7 @@ namespace mars {
 
         //! Get the shape.
         //! @return The shape.
-        [[nodiscard]] virtual ABox2DShape* getShape() = 0;
+        [[nodiscard]] virtual AShape* getShape() = 0;
     };
 }
 

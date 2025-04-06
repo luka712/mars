@@ -10,7 +10,6 @@
 namespace mars {
     //! The 2D physics polygon shape.
     class APolygonShape : public AShape {
-
     public:
 
         //! Build vertices to represent an axis-aligned box centered on the local origin.

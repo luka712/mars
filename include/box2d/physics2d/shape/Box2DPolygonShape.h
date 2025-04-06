@@ -12,20 +12,18 @@
 namespace mars {
 
     //! The Box2D implementation of the 2D physics polygon shape.
-    class Box2DPolygonShape final : public ABox2DShape, public APolygonShape {
+    class Box2DPolygonShape final : public ABox2DShape<b2PolygonShape>, public APolygonShape {
     public:
-
-        //! @copydoc
-        [[nodiscard]] b2Shape* getBox2DShape() override { return &polygonShape; }
+        //! Construct a new Box2DPolygonShape object.
+        explicit Box2DPolygonShape();
 
         //! @copydoc
         void setAsBox(float halfWidth, float halfHeight) override;
 
-    protected:
-        void initShape() override;
-
-    private:
-        b2PolygonShape polygonShape;
+        //! @copydoc
+        [[nodiscard]] ShapeType2D getShapeType() const override {
+            return ShapeType2D::Polygon;
+        }
     };
 }
 

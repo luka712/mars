@@ -24,7 +24,7 @@ namespace mars {
         explicit BoxCollider2D(Entity* entity);
 
         //! @copydoc
-        ABox2DShape* getShape() override;
+        AShape* getShape() override;
 
         //! @copydoc
         void initialize() override;

@@ -90,6 +90,13 @@ add_executable(tests tests/tests.cpp
         ${TINYXML2_SRC}
         tests/geometry_tests.cpp)
 
+# ASSET TOOLKIT TESTS
+file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
+        include/core/physics2d/draw/ADebugDraw2D.h
+        src/box2d/physics2d/draw/b2DrawImpl.cpp
+        include/box2d/physics2d/util/Box2DUtil.h)
+
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
         ${SDL2_LIBRARY}
@@ -125,6 +132,12 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/ecs/physics2d/BoxCollider2D.h
         src/ecs/physics2d/ACollider2D.cpp
         src/ecs/physics2d/BoxCollider2D.cpp
+        include/asset_toolkit/ldtk/data/LdtkLayerInstance.h
+        include/asset_toolkit/ldtk/data/LdtkTileInstance.h
+        src/asset_toolkit/ldtk/LdtkLoader.cpp
+        include/asset_toolkit/ldtk/Result.h
+        include/asset_toolkit/ldtk/data/LdtkJsonRoot.h
+        tests/asset_toolkit/ldtk_tests.cpp
 )
 
 target_link_libraries(chopper-shooter

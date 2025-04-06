@@ -68,18 +68,19 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();
     playerTransform->setDrawRectangle(mars::Rect{300, 100, 200, 200});
+    std::shared_ptr<mars::Sprite> uvSprite = std::make_shared<mars::Sprite>(uvTestTexture);
     auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
-    playerSpriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
+    playerSpriteRenderer->setSprite(uvSprite);
     playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 0, 50, 50}, mars::Rect{50, 0, 50, 50}});
     playerSpriteRenderer->playAnimation("left");
     auto playerMoveScript = player->addComponent<MovePlayer>();
-    auto playerBody = player->addComponent<mars::RigidBody2D>();
+    // auto playerBody = player->addComponent<mars::RigidBody2D>();
 
     std::shared_ptr<mars::Entity> entity = entityManager.createEntity("projectile");
     mars::RectTransform *transform = entity->addComponent<mars::RectTransform>();
     transform->setDrawRectangle(mars::Rect{100, 100, 200, 200});
     mars::SpriteRenderer *spriteRenderer = entity->addComponent<mars::SpriteRenderer>();
-    spriteRenderer->setSprite(new mars::Sprite(uvTestTexture));
+    spriteRenderer->setSprite(uvSprite);
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -139,28 +140,28 @@ int main(int argc, char *argv[]) {
     worldDef.gravity = glm::vec2(0, -9.8f);
 
     // STATIC BODY - GROUND
-    std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(worldDef);
-
+    std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(framework, worldDef);
+    world2D->initialize();
 
     mars::BodyDefinition2D groundBodyDef {};
-    groundBodyDef .position = glm::vec2(0, -10);
+    groundBodyDef.position = glm::vec2(300,400);
     std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef );
-    mars::Box2DPolygonShape groundBox{};
-    groundBox.setAsBox(50, 10);
+    mars::Box2DPolygonShape groundBox;
+    groundBox.setAsBox(200, 50);
     groundBody->createFixture(&groundBox, 0);
 
     // DYNAMIC BODY - BOX
     mars::BodyDefinition2D bodyDef {};
     bodyDef.type = mars::BodyType2D::DynamicBody;
-    bodyDef.position = glm::vec2(0, 4);
-
-    std::shared_ptr<mars::ABody2D> body = world2D->createBody(groundBodyDef );
+    bodyDef.position = glm::vec2(350, 100);
+    bodyDef.angle = 1.0f;
+    std::shared_ptr<mars::ABody2D> body = world2D->createBody(bodyDef );
 
     mars::Box2DPolygonShape dynamicBox{};
-    dynamicBox.setAsBox(1, 1);
+    dynamicBox.setAsBox(25, 25);
 
     mars::FixtureDefinition2D fixtureDef{};
-    fixtureDef.density = 1;
+    fixtureDef.density = 1.0;
     fixtureDef.friction = 0.3f;
     fixtureDef.shape = &dynamicBox;
 
@@ -183,7 +184,7 @@ int main(int argc, char *argv[]) {
         framework.getSpriteBatch().draw(tileMapTexture.get(), {100,100,200,200}, {1, 1, 1, 1});
         framework.getSpriteBatch().end();
 
-
+        world2D->render();
         ecsManager.render();
         // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
 

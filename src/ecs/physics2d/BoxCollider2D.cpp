@@ -11,7 +11,7 @@ namespace mars {
         : ACollider2D(entity), rectTransform(nullptr) {
     }
 
-    ABox2DShape * BoxCollider2D::getShape() {
+    AShape * BoxCollider2D::getShape() {
         return shape.get();
     }
 
