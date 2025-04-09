@@ -26,24 +26,21 @@ namespace asset_toolkit {
         //! NOTE: this is for pre-allocated arrays only. Such as when mappings vectors or points from LDTK.
         //! @param arrayToFill The array to fill.
         //! @param jsonArray The JSON array.
-        void fillArrayData(int32_t *arrayToFill, nlohmann::json& jsonArray);
+        static void fillArrayData(int32_t *arrayToFill, nlohmann::json& jsonArray);
 
         //! Parse the LDTK root node from a string.
         //! @param rootToFill The root to fill.
         //! @param rootJson The root JSON.
-        //! @return The LDTK json root.
         void parseJsonRootNode(LdtkJsonRoot& rootToFill, nlohmann::json& rootJson);
 
         //! Fill in level data to the root node.
         //! @param rootToFill The root to fill.
         //! @param levelsJson The JSON of levels.
-        //! @return The LDTK level.
         void parseLevelNodes(LdtkJsonRoot& rootToFill, nlohmann::json& levelsJson);
 
         //! Fill in layer instances to the level node.
         //! @param levelToFill The level to fill.
         //! @param layerInstancesJson The JSON of layer instances.
-        //! @return The LDTK layer instance.
         void parseLayerInstances(LdtkLevel& levelToFill, nlohmann::json& layerInstancesJson);
 
         //! Fill in array of tile instances from the JSON.

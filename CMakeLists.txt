@@ -92,7 +92,12 @@ add_executable(tests tests/tests.cpp
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
+        include/asset_toolkit/asset_bundle/AssetBundle.h
+        include/asset_toolkit/asset_bundle/sprite_sheet/SpriteSheet.h
+        include/asset_toolkit/asset_bundle/AssetBundleLoader.h
+        src/asset_toolkit/asset_bundle/AssetBundleLoader.cpp
+        tests/asset_toolkit/asset_bundle_loader.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
@@ -121,8 +126,8 @@ add_executable(chopper-shooter chopper-shooter.cpp
         include/ecs/physics2d/Physics2DSystem.h
         include/ecs/physics2d/RigidBody2D.h
         src/ecs/physics2d/RigidBody2D.cpp
-        include/asset_toolkit/sprite/Rectangle.h
-        include/asset_toolkit/sprite/Sprite.h
+        include/asset_toolkit/asset_bundle/common/Rectangle.h
+        include/asset_toolkit/asset_bundle/sprite_sheet/Sprite.h
         include/ecs/sprite/data/SpriteManager.h
         src/ecs/sprite/data/SpriteManager.cpp
         include/ecs/physics2d/ACollider2D.h

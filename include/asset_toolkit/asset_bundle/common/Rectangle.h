@@ -22,15 +22,6 @@ namespace asset_toolkit {
 
         //! The height of the rectangle.
         int32_t height;
-
-        //! Construct a new Rectangle object.
-        //! @param x The x coordinate of the rectangle.
-        //! @param y The y coordinate of the rectangle.
-        //! @param width The width of the rectangle.
-        //! @param height The height of the rectangle.
-        Rectangle(const int32_t x, const int32_t y, const int32_t width, const int32_t height)
-            : x(x), y(y), width(width), height(height) {
-        }
     };
 }
 

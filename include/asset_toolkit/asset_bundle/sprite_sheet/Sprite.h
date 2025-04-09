@@ -6,7 +6,7 @@
 #define SPRITE_H
 #include <string>
 
-#include "asset_toolkit/sprite/Rectangle.h"
+#include "asset_toolkit/asset_bundle/common/Rectangle.h"
 
 namespace asset_toolkit {
     //! The Sprite class.
