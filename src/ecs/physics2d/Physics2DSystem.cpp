@@ -16,9 +16,13 @@ namespace mars {
         world = std::make_unique<Box2DWorld2D>(framework, worldDef);
     }
 
+    void Physics2DSystem::initialize() {
+        world->initialize();
+    }
+
     void Physics2DSystem::add(RigidBody2D *body) {
         bodies.emplace_back(body);
-        body->createBodyOnSelf(*this);
+        body->createBodyOnSelf(this);
     }
 
     void Physics2DSystem::remove(const RigidBody2D *body) {
@@ -44,8 +48,15 @@ namespace mars {
     }
 
     void Physics2DSystem::update(const Time &time) {
+
+        world->update(time, 6, 2);
+
         for (const auto &body: bodies) {
             body->update(time);
         }
+    }
+
+    void Physics2DSystem::render() const {
+        world->render();
     }
 }

@@ -115,31 +115,6 @@ add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
         ${TINYXML2_SRC}
-        include/core/pipelines/lines/ALinesRenderPipeline.h
-        include/opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h
-        src/opengles/pipelines/lines/OpenGLESLinesRenderPipeline.cpp
-        include/core/buffers/AInstanceBuffer.h
-        include/opengles/buffers/OpenGLESInstanceBuffer.h
-        src/opengles/buffers/OpenGLESInstanceBuffer.cpp
-        include/ecs/entity/EntityBuilderLua.h
-        src/ecs/entity/EntityBuilderLua.cpp
-        include/ecs/physics2d/Physics2DSystem.h
-        include/ecs/physics2d/RigidBody2D.h
-        src/ecs/physics2d/RigidBody2D.cpp
-        include/asset_toolkit/asset_bundle/common/Rectangle.h
-        include/asset_toolkit/asset_bundle/sprite_sheet/Sprite.h
-        include/ecs/sprite/data/SpriteManager.h
-        src/ecs/sprite/data/SpriteManager.cpp
-        include/ecs/physics2d/ACollider2D.h
-        include/ecs/physics2d/BoxCollider2D.h
-        src/ecs/physics2d/ACollider2D.cpp
-        src/ecs/physics2d/BoxCollider2D.cpp
-        include/asset_toolkit/ldtk/data/LdtkLayerInstance.h
-        include/asset_toolkit/ldtk/data/LdtkTileInstance.h
-        src/asset_toolkit/ldtk/LdtkLoader.cpp
-        include/asset_toolkit/ldtk/Result.h
-        include/asset_toolkit/ldtk/data/LdtkJsonRoot.h
-        tests/asset_toolkit/ldtk_tests.cpp
 )
 
 target_link_libraries(chopper-shooter

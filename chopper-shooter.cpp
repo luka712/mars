@@ -107,7 +107,7 @@ void createScene(const mars::Framework &framework,
     auto playerMoveScript = player->addComponent<MovePlayer>();
     playerMoveScript->camera = camera.get();
    // player->addComponent<mars::RigidBody2D>();
-    player->addComponent<mars::BoxCollider2D>();
+    // player->addComponent<mars::BoxCollider2D>();
 
 
     // ENEMY

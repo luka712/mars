@@ -29,6 +29,10 @@ namespace mars {
         //! @return The body.
         virtual std::shared_ptr<ABody2D> createBody(BodyDefinition2D &bodyDef) = 0;
 
+        //! Destroy a body.
+        //! @param body The body to destroy or remove from world.
+        virtual void destroyBody(std::shared_ptr<ABody2D> &body) = 0;
+
         //! Update the world.
         //! @param time The time.
         //! @param velocityIterations The velocity iterations.

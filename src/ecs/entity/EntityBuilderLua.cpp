@@ -57,6 +57,12 @@ namespace mars {
             buildAnimatedSpriteRenderer(*entity, animatedSpriteRendererTable);
         }
 
+        // - Check if box collider is available.
+        if (componentsTable["box_collider_2d"].valid()) {
+            sol::table boxColliderTable = componentsTable["box_collider_2d"];
+            entity->addComponent<BoxCollider2D>();
+        }
+
         // - Check if rigid body is available.
         if (componentsTable["rigid_body_2d"].valid()) {
             sol::table bodyTable = componentsTable["rigid_body_2d"];
@@ -164,7 +170,21 @@ namespace mars {
         return animatedSpriteRenderer;
     }
 
-    RigidBody2D *EntityBuilderLua::buildRigidBody2D(Entity &entity, sol::table &rigidBodyTable) const {
+    BoxCollider2D * EntityBuilderLua::buildBoxCollider2D(Entity &entity, const sol::table &boxColliderTable) const {
+        if (!boxColliderTable.valid()) {
+            const std::string msg = "EntityBuilderLua::buildBoxCollider2D: Cannot create 'BoxCollider2D' without table.";
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+
+        auto *boxCollider2D = entity.addComponent<BoxCollider2D>();
+
+        // PROPERTIES - TODO: Add more properties.
+
+        return boxCollider2D;
+    }
+
+    RigidBody2D *EntityBuilderLua::buildRigidBody2D(Entity &entity, const sol::table &rigidBodyTable) const {
         if (!rigidBodyTable.valid()) {
             const std::string msg = "EntityBuilderLua::buildRigidBody2D: Cannot create 'RigidBody2D' without table.";
             framework.getLogger().error(msg);
@@ -173,7 +193,29 @@ namespace mars {
 
         auto *rigidBody = entity.addComponent<RigidBody2D>();
 
-        // PROPERTIES - TODO: Add more properties.
+        // BODY TYPE
+        if (!rigidBodyTable["type"].valid()) {
+            const std::string msg = "EntityBuilderLua::buildRigidBody2D: Cannot create 'RigidBody2D' without type.";
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+        const std::string type = rigidBodyTable["type"];
+        BodyType2D bodyType = BodyType2D::StaticBody;
+        if (type == "static") {
+            bodyType = BodyType2D::StaticBody;
+        }
+        else if (type == "dynamic") {
+            bodyType = BodyType2D::DynamicBody;
+        }
+        else if (type == "kinematic") {
+            bodyType = BodyType2D::KinematicBody;
+        }
+        else {
+            const std::string msg = "EntityBuilderLua::buildRigidBody2D: Type must be one of 'static', 'kinematic' or 'dynamic'.";
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+        rigidBody->setBodyType(bodyType);
 
         return rigidBody;
     }

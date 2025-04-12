@@ -19,6 +19,9 @@ namespace mars {
         //! @copydoc
         glm::vec2 getPosition() override;
 
+        //! Gets the underlying Box2D body.
+        [[nodiscard]] b2Body* getBox2DBody() const { return body; }
+
         //! @copydoc
         std::shared_ptr<AFixture2D> createFixture(AShape* shape, float density) override;
 

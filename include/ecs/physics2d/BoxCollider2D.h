@@ -12,19 +12,17 @@
 
 
 namespace mars {
-
     class Entity;
 
     //! The physics 2D box collider component.
     class BoxCollider2D final : public ACollider2D {
-
     public:
         //! Construct a new BoxCollider2D object.
         //! @param entity The entity that the component is attached to.
-        explicit BoxCollider2D(Entity* entity);
+        explicit BoxCollider2D(Entity *entity);
 
         //! @copydoc
-        AShape* getShape() override;
+        AShape *getShape() override;
 
         //! @copydoc
         void initialize() override;

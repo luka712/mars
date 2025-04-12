@@ -6,14 +6,29 @@
 #include "ecs/entity/Entity.h"
 #include "box2d/physics2d/body/Box2DBody.h"
 #include "ecs/physics2d/BoxCollider2D.h"
+#include "ecs/physics2d/Physics2DSystem.h"
 
 namespace mars {
-    RigidBody2D::RigidBody2D(Entity *entity): AComponent(entity), rectTransform(nullptr) {
+    RigidBody2D::RigidBody2D(Entity *entity): AComponent(entity),
+                                              rectTransform(nullptr),
+                                              collider(nullptr) {
+        bodyType = BodyType2D::StaticBody;
+    }
+
+    void RigidBody2D::setBodyType(const BodyType2D type) {
+        if (bodyType != type) {
+
+            // If type is changed we must destroy and re-create the body.
+            destroyBodyOnSelf();
+            bodyType = type;
+            createBodyOnSelf(physics2DSystem);
+        }
     }
 
     void RigidBody2D::initialize() {
         // Entity must have RectTransform component.
-        rectTransform = entity->getComponent<RectTransform>("SpriteRenderer component requires RectTransform component.");
+        rectTransform = entity->getComponent<RectTransform>(
+            "SpriteRenderer component requires RectTransform component.");
 
         // Entity must have any of the collider components.
         collider = tryFindCollider();
@@ -24,19 +39,27 @@ namespace mars {
         }
     }
 
-    void RigidBody2D::createBodyOnSelf(const Physics2DSystem &system) {
+    void RigidBody2D::createBodyOnSelf(Physics2DSystem *system) {
+
+        if (system == nullptr) {
+            const std::string msg = "'RigidBody2D::createBodyOnSelf' cannot be called with nullptr 'system' argument.";
+            framework.getLogger().error(msg.c_str());
+            throw std::runtime_error(msg);
+        }
+
+        physics2DSystem = system;
 
         // Check if body is already created.
         if (body != nullptr) {
-            const std::string msg =
-                    "'Body2D::body' is already created. 'Body2D::createBodyOnSelf' cannot be called twice.";
+            const std::string msg = "'Body2D::body' is already created. 'Body2D::createBodyOnSelf' cannot be called twice.";
             framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }
 
         BodyDefinition2D groundBodyDef{};
+        groundBodyDef.type = bodyType;
         groundBodyDef.position = rectTransform->getPosition();
-        body = system.getWorld().createBody(groundBodyDef);
+        body = system->getWorld().createBody(groundBodyDef);
     }
 
     void RigidBody2D::update(const Time &time) {
@@ -44,16 +67,22 @@ namespace mars {
         rectTransform->setPosition(position);
     }
 
-    ACollider2D * RigidBody2D::tryFindCollider() const {
+    ACollider2D *RigidBody2D::tryFindCollider() const {
         // Try all implementations of colliders.
 
         // BoxCollider2D
-        if (auto* collider = entity->getComponentOrNull<BoxCollider2D>(); collider != nullptr) {
+        if (auto *collider = entity->getComponentOrNull<BoxCollider2D>(); collider != nullptr) {
             return collider;
         }
 
         // TODO: other types of colliders.
 
         return nullptr;
+    }
+
+    void RigidBody2D::destroyBodyOnSelf() {
+       physics2DSystem->getWorld().destroyBody(body);
+        body = nullptr;
+
     }
 }

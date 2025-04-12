@@ -21,6 +21,7 @@ namespace mars {
     }
 
     void ECSManager::initialize() const {
+        physics2DSystem->initialize();
     }
 
     Framework &ECSManager::getFramework() const {
@@ -124,5 +125,6 @@ namespace mars {
             }
         }
 
+        physics2DSystem->render();
     }
 }

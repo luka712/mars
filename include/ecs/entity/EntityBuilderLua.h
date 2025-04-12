@@ -10,6 +10,7 @@
 #include "ecs/transform/RectTransform.h"
 #include "ecs/physics2d/RigidBody2D.h"
 #include "ecs/sprite/AnimatedSpriteRenderer.h"
+#include "ecs/physics2d/BoxCollider2D.h"
 
 namespace mars {
 
@@ -49,11 +50,17 @@ namespace mars {
         //! @return The built animated sprite renderer component.
         AnimatedSpriteRenderer* buildAnimatedSpriteRenderer(Entity& entity, sol::table &animatedSpriteRendererTable) const;
 
+        //! Builds a box collider 2D component from a Lua script.
+        //! @param entity The entity to add the component to.
+        //! @param boxColliderTable The table containing the entity data.
+        //! @return The built box collider 2D component.
+        BoxCollider2D* buildBoxCollider2D(Entity& entity, const sol::table &boxColliderTable) const;
+
         //! Builds a rigid body 2D component from a Lua script.
         //! @param entity The entity to add the component to.
         //! @param rigidBodyTable The table containing the entity data.
         //! @return The built rigid body 2D component.
-        RigidBody2D* buildRigidBody2D(Entity& entity, sol::table &rigidBodyTable) const;
+        RigidBody2D* buildRigidBody2D(Entity& entity, const sol::table &rigidBodyTable) const;
 
     private:
         Framework& framework;

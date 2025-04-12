@@ -35,7 +35,11 @@ namespace mars {
         //! @copydoc
         void render() override;
 
+        //! @copydoc
         std::shared_ptr<ABody2D> createBody(BodyDefinition2D &bodyDef) override;
+
+        //! @copydoc
+        void destroyBody(std::shared_ptr<ABody2D> &body) override;
 
     private:
         Framework& framework;

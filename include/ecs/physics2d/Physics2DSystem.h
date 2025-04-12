@@ -20,11 +20,14 @@ namespace mars {
     public:
         //! The constructor of the Physics2DSystem object.
         //! @param framework The framework.
-        Physics2DSystem(Framework& framework);
+        explicit Physics2DSystem(Framework& framework);
 
         //! Get the world.
         //! @return The world.
         [[nodiscard]] AWorld2D& getWorld() const { return *world; }
+
+        //! Initialize the physics system.
+        void initialize();
 
         //! Add a body 2d to the system.
         //! @param body The body 2d.
@@ -45,6 +48,9 @@ namespace mars {
         //! Update the physics 2d components.
         //! @param time The game time.
         void update(const Time& time);
+
+        //! Render the debug information of the system.
+        void render() const;
 
     private:
         Framework& framework;

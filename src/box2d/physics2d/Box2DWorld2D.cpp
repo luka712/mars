@@ -34,5 +34,10 @@ namespace mars {
         return std::make_shared<Box2DBody>(*this, bodyDef);
     }
 
+    void  Box2DWorld2D::destroyBody(std::shared_ptr<ABody2D> &body) {
+        ABody2D *body2D = body.get();
+        const Box2DBody* boxBody = dynamic_cast<Box2DBody*>(body2D);
+        world->DestroyBody(boxBody->getBox2DBody());
+    }
 
 }

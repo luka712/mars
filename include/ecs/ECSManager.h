@@ -51,6 +51,10 @@ namespace mars {
         //! @return The entity builder from lua.
         [[nodiscard]] EntityBuilderLua& getEntityBuilderLua() const { return *entityBuilderLua; }
 
+        //! Gets the physics 2D system.
+        //! @return The physics 2D system.
+        [[nodiscard]] Physics2DSystem& getPhysics2DSystem() const { return *physics2DSystem; }
+
         //! Passes the rect transform component to the rect transform system.
         //! @param component The rect transform component.
         void passComponentToSystem(RectTransform *component) const;
