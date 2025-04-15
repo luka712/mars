@@ -52,14 +52,14 @@ namespace mars {
         }
     }
 
-    void TileMapSystem::render(uint32_t layerOrder, Camera2D& camera) {
-        if (!layerOrderTileMapsMap.contains(layerOrder)) {
+    void TileMapSystem::render(uint32_t currentLayerOrder, Camera2D& camera) {
+        if (!layerOrderTileMapsMap.contains(currentLayerOrder)) {
             return;
         }
 
         SpriteBatch &spriteBatch = framework.getSpriteBatch();
 
-        for (const TileMap *tileMap: layerOrderTileMapsMap[layerOrder]) {
+        for (const TileMap *tileMap: layerOrderTileMapsMap[currentLayerOrder]) {
             tileMap->render(spriteBatch, camera);
         }
     }

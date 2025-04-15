@@ -55,6 +55,8 @@ namespace asset_toolkit {
             layer.levelId = layerInstance["levelId"];
             layer.__tilesetRelPath = layerInstance["__tilesetRelPath"];
             layer.visible = layerInstance["visible"];
+            layer.__cWid = layerInstance["__cWid"];
+            layer.__cHei = layerInstance["__cHei"];
 
             // - INT GRID CSV
             for (const nlohmann::json &value: layerInstance["intGridCsv"]) {

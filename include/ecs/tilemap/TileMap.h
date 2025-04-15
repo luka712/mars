@@ -47,12 +47,15 @@ namespace mars {
         //! Render the tile map.
         //! @param spriteBatch The sprite batch.
         //! @param camera The camera.
-        void render(SpriteBatch& spriteBatch, Camera2D& camera) const;
+        void render(SpriteBatch& spriteBatch, const Camera2D& camera) const;
 
         std::string toString() override;
 
         //! The size of tiles.
         glm::vec2 tileSize;
+
+        //! The scale of tile map.
+        float scale;
 
         //! The tint color of tile map.
         Color color;

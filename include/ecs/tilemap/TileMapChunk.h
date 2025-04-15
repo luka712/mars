@@ -32,6 +32,9 @@ namespace mars {
         //! @return The source rect.
         [[nodiscard]] Rect getSourceRect() const { return sourceRect; }
 
+        //! If marked as empty, this chunk will not be rendered.
+        bool empty;
+
     private:
         int32_t x;
         int32_t y;

@@ -5,7 +5,8 @@
 #include "ecs/tilemap/TileMapChunk.h"
 
 namespace mars {
-    TileMapChunk::TileMapChunk(int32_t x, int32_t y, Rect sourceRect)
+    TileMapChunk::TileMapChunk(const int32_t x, const int32_t y, const Rect sourceRect)
         : x(x), y(y), sourceRect(sourceRect){
+        empty = false;
     }
 }

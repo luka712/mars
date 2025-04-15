@@ -43,11 +43,21 @@ namespace mars {
             throw std::runtime_error(msg);
         }
 
-        // We must ensure that the image is in RGBA format.
+        // We must ensure that the image is in RGBA format. Try to convert it if not.
         if (surface->format->BytesPerPixel != 4) {
-            const std::string msg = "Image under path \"" + path + "\" is not in RGBA format.";
-            framework.getLogger().error(msg.c_str());
-            throw std::runtime_error(msg);
+
+            // Convert to 32-bit RGBA
+            SDL_Surface* converted = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA32, 0);
+
+            if (!converted) {
+                SDL_FreeSurface(surface);
+                const std::string msg = "Image under path \"" + path + "\" is not in RGBA format.";
+                framework.getLogger().error(msg.c_str());
+                throw std::runtime_error(msg);
+            }
+
+            SDL_free(surface);
+            surface = converted;
         }
 
         std::shared_ptr<ImageData> imageData = std::make_shared<SDLImageData>(surface);

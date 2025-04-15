@@ -6,11 +6,10 @@
 #include "Framework.h"
 #include "ecs/tilemap/TileMap.h"
 #include "ecs/entity/Entity.h"
-#include "ecs/sprite/AnimatedSpriteRenderer.h"
 
 namespace mars {
     TileMap::TileMap(Entity* entity)
-        : AComponent(entity), color(Color::white()), tileSize(0,0), texture(nullptr) {
+        : AComponent(entity), tileSize(0,0), scale(1), color(Color::white()), texture(nullptr) {
     }
 
     const RectTransform* TileMap::getRectTransform() const {
@@ -38,7 +37,7 @@ namespace mars {
 
         this->tileSize = tileSize;
 
-        auto textureColumns = static_cast<int32_t>(static_cast<float>(texture->getWidth()) / tileSize.x);
+        const auto textureColumns = static_cast<int32_t>(static_cast<float>(texture->getWidth()) / tileSize.x);
 
         const auto tw = static_cast<int32_t>(tileSize.x);
         const auto th = static_cast<int32_t>(tileSize.y);
@@ -48,12 +47,19 @@ namespace mars {
             int32_t x = 0;
             for (auto& index: row) {
 
-                Rect sourceRect{};
+                if (index < 0) {
+                    TileMapChunk chunk(0,0, {});
+                    chunk.empty = true;
+                    chunks.emplace_back(chunk);
+                    x++;
+                    continue;
+                }
+
                 const int32_t tx = index % textureColumns;
                 const int32_t ty = index / textureColumns;
-
+                Rect sourceRect{};
                 sourceRect.x = tx * tw;
-                sourceRect.y = ty * th;
+                sourceRect.y = th - ty * th;
                 sourceRect.width = tw;
                 sourceRect.height = th;
                 chunks.emplace_back(x,y, sourceRect);
@@ -63,17 +69,25 @@ namespace mars {
         }
     }
 
-    void TileMap::render(SpriteBatch &spriteBatch, Camera2D& camera) const {
+    void TileMap::render(SpriteBatch &spriteBatch, const Camera2D& camera) const {
 
         const Rect cameraDrawRect = camera.getRectTransform()->getDrawRectangle();
 
         for (auto& chunk : chunks) {
 
+            // Skip empty chunks.
+            if (chunk.empty) {
+                continue;
+            }
+
+            const int32_t sclX = static_cast<int32_t>(tileSize.x) * scale;
+            const int32_t sclY = static_cast<int32_t>(tileSize.y) * scale;
+
             Rect drawRect{};
-            drawRect.x = chunk.getX() * static_cast<int32_t>(tileSize.x) - cameraDrawRect.x;
-            drawRect.y = chunk.getY() * static_cast<int32_t>(tileSize.y) - cameraDrawRect.y;
-            drawRect.width = static_cast<int32_t>(tileSize.x);
-            drawRect.height = static_cast<int32_t>(tileSize.y);
+            drawRect.x = chunk.getX() * sclX - cameraDrawRect.x;
+            drawRect.y = chunk.getY() * sclY - cameraDrawRect.y;
+            drawRect.width = sclX;
+            drawRect.height = sclY;
 
             spriteBatch.draw(texture.get(), drawRect, chunk.getSourceRect(), color);
         }

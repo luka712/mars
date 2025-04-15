@@ -10,6 +10,7 @@
 #include <vector>
 #include "core/pipelines/lines/ALinesRenderPipeline.h"
 #include "core/buffers/AInstanceBuffer.h"
+#include "core/life_management/State.h"
 
 namespace mars {
     class Framework;
@@ -46,6 +47,7 @@ namespace mars {
         static const int32_t VERTEX_FLOATS;
         static const int32_t MAX_VERTICES;
         Framework &framework;
+        State currentState{CREATED};
         uint32_t currentVertexCount;
         uint32_t vertexDataIndex;
         std::vector<float> vertexData;

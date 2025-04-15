@@ -39,6 +39,8 @@ namespace mars {
         pipeline = framework.getPipelineFactory().createLinesRenderPipeline(
             camera.getProjectionViewBuffer(),
             *modelBuffer.get());
+
+        currentState = INITIALIZED;
     }
 
     void b2DrawImpl::addVertex(const b2Vec2 &a, const b2Color &color) {
@@ -105,6 +107,14 @@ namespace mars {
     }
 
     void b2DrawImpl::render() {
+
+        if (currentState != INITIALIZED) {
+
+            const std::string msg = "b2DrawImpl::render() cannot be called before initialize() is called.";
+            framework.getLogger().error(msg);
+            throw std::runtime_error(msg);
+        }
+
         vertexBuffer->update(vertexData.data(), currentVertexCount * VERTEX_FLOATS * sizeof(float), 0);
         pipeline->render(*vertexBuffer.get(), 1, currentVertexCount);
         currentVertexCount = 0;

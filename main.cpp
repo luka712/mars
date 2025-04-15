@@ -11,6 +11,8 @@
 // #include "spdlog/spdlog.h"
 // #include "spdlog/sinks/basic_file_sink.h"
 
+#include <asset_toolkit/ldtk/LdtkLoader.h>
+
 #include "box2d/physics2d/Box2DWorld2D.h"
 #include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
 #include "lua/LuaManager.h"
@@ -47,24 +49,6 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
             .getContentManager()
             .load<mars::Texture2D>("texture/uv_test.png");
 
-    std::shared_ptr<mars::Texture2D> tileMapTexture = framework
-            .getContentManager()
-            .load<mars::Texture2D>("tilemaps/jungle.png");
-
-    std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
-    tileMap->addComponent<mars::RectTransform>();
-    auto tileMapComponent = tileMap->addComponent<mars::TileMap>();
-    tileMapComponent->setTexture(tileMapTexture);
-    tileMapComponent->loadTiles(glm::vec2(32, 32),
-                                {
-                                    {2, 2, 2, 2},
-                                    {1, 1, 1, 1},
-                                    {2, 2, 2, 2},
-                                    {3, 3, 3, 3},
-                                    {1, 2, 1, 1, 1, 1, 1}
-                                });
-    tileMapComponent->tileSize = glm::vec2(64, 64);
-
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();
     playerTransform->setDrawRectangle(mars::Rect{300, 100, 200, 200});
@@ -83,6 +67,59 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
     spriteRenderer->setSprite(uvSprite);
 }
 
+void createCamera(mars::EntityManager &entityManager) {
+    // CAMERA
+    std::shared_ptr<mars::Entity> camera = entityManager.createEntity("camera");
+    camera->addComponent<mars::RectTransform>();
+    camera->addComponent<mars::Camera2D>();
+}
+
+void loadLdtk(const mars::Framework &framework, mars::EntityManager &entityManager) {
+    asset_toolkit::LdtkLoader loader;
+
+    asset_toolkit::Result<asset_toolkit::LdtkJsonRoot> root = loader.load("content/ldtk/basic_map.ldtk");
+
+    if (!root.isSuccess) {
+        std::cout << "Failed to load ldtk assets" << std::endl << root.message << std::endl;
+    } else {
+        const asset_toolkit::LdtkJsonRoot ldtk = root.value;
+        asset_toolkit::LdtkLevel level1 = ldtk.levels[0];
+
+        const std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+                .getContentManager()
+                .load<mars::Texture2D>("tilemaps/tilemap.png");
+
+        int32_t tilesInRow = tileMapTexture->getWidth() / 8;
+
+        for (const auto &layer: level1.layerInstances) {
+            std::vector<std::vector<int32_t> > tiles;
+
+            for (size_t i = 0; i < layer.__cHei; i++) {
+                tiles.emplace_back();
+                for (size_t j = 0; j < layer.__cWid; j++) {
+                    const int32_t index = i * layer.__cWid + j;
+                    if (layer.intGridCsv[index] == 0) {
+                        tiles[i].emplace_back(-1);
+                        continue;
+                    }
+
+                    auto ldtkTileInstance = layer.autoLayerTiles[index];
+                    auto tileId = ((ldtkTileInstance.src[1] / 8) * tilesInRow) + ldtkTileInstance.src[0] / 8;
+                    tiles[i].emplace_back(tileId);
+                }
+            }
+
+            const std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
+            tileMap->addComponent<mars::RectTransform>();
+            const auto tileMapComponent = tileMap->addComponent<mars::TileMap>();
+            tileMapComponent->setTexture(tileMapTexture);
+            tileMapComponent->loadTiles(glm::vec2(8, 8), tiles);
+            tileMapComponent->tileSize = glm::vec2(8, 8);
+            tileMapComponent->scale = 3;
+        }
+    }
+}
+
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main(int argc, char *argv[]) {
@@ -97,13 +134,12 @@ int main(int argc, char *argv[]) {
         mars::RenderingBackend::OpenGLES,
         glm::vec2(1280, 720)
     });
-
-
     mars::ECSManager ecsManager(framework);
-
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
 
     framework.initialize();
+    ecsManager.initialize();
+
 
     std::vector<float> vertex = {
         0.0f, 0.0f, 0.0f,
@@ -132,8 +168,9 @@ int main(int argc, char *argv[]) {
             createSpriteRenderPipeline(camera.get());
     pipeline->setSpriteTexture(tileMapTexture.get());
 
-    std::shared_ptr<mars::Geometry > geometry = framework.getGeometryBuilder().quadGeometry();
-    std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(*geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
+    std::shared_ptr<mars::Geometry> geometry = framework.getGeometryBuilder().quadGeometry();
+    std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(
+        *geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
 
     // PHYSICS.
     mars::WorldDefinition2D worldDef{};
@@ -143,19 +180,19 @@ int main(int argc, char *argv[]) {
     std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(framework, worldDef);
     world2D->initialize();
 
-    mars::BodyDefinition2D groundBodyDef {};
-    groundBodyDef.position = glm::vec2(300,400);
-    std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef );
+    mars::BodyDefinition2D groundBodyDef{};
+    groundBodyDef.position = glm::vec2(300, 400);
+    std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef);
     mars::Box2DPolygonShape groundBox;
     groundBox.setAsBox(200, 50);
     groundBody->createFixture(&groundBox, 0);
 
     // DYNAMIC BODY - BOX
-    mars::BodyDefinition2D bodyDef {};
+    mars::BodyDefinition2D bodyDef{};
     bodyDef.type = mars::BodyType2D::DynamicBody;
     bodyDef.position = glm::vec2(350, 100);
     bodyDef.angle = 1.0f;
-    std::shared_ptr<mars::ABody2D> body = world2D->createBody(bodyDef );
+    std::shared_ptr<mars::ABody2D> body = world2D->createBody(bodyDef);
 
     mars::Box2DPolygonShape dynamicBox{};
     dynamicBox.setAsBox(25, 25);
@@ -167,6 +204,8 @@ int main(int argc, char *argv[]) {
 
     body->createFixture(fixtureDef);
 
+    createCamera(entityManager);
+    loadLdtk(framework, entityManager);
 
     // FRAME START EVENT?
 
@@ -180,17 +219,16 @@ int main(int argc, char *argv[]) {
 
     framework.subscribeToRenderEvent([&]() {
         framework.getSpriteBatch().begin();
-       //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-        framework.getSpriteBatch().draw(tileMapTexture.get(), {100,100,200,200}, {1, 1, 1, 1});
+        //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+        framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
         framework.getSpriteBatch().end();
 
         world2D->render();
         ecsManager.render();
         // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
-
     });
 
-     createScene(framework, entityManager);
+    createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

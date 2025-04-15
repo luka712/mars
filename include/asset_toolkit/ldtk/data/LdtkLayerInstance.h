@@ -15,6 +15,12 @@ namespace asset_toolkit {
         //! The level id.
         uint32_t levelId;
 
+        //! Grid-based height.
+        uint32_t __cHei;
+
+        //! Grid-based width.
+        uint32_t __cWid;
+
         //! The relative path to corresponding Tileset, if any.
         std::string __tilesetRelPath;
 
