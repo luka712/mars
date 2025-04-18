@@ -2,10 +2,10 @@
 // Created by Erkapic Luka on 29.3.2025.
 //
 
-#ifndef SPRITE_H
-#define SPRITE_H
-#include <string>
+#ifndef ASSET_TOOLKIT_SPRITE_H
+#define ASSET_TOOLKIT_SPRITE_H
 
+#include <string>
 #include "asset_toolkit/asset_bundle/common/Rectangle.h"
 
 namespace asset_toolkit {
@@ -19,4 +19,4 @@ namespace asset_toolkit {
     };
 }
 
-#endif //SPRITE_H
+#endif //ASSET_TOOLKIT_SPRITE_H

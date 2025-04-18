@@ -6,6 +6,8 @@
 
 
 #include "Framework.h"
+#include "asset_toolkit/asset_bundle/AssetBundle.h"
+#include "asset_toolkit/asset_bundle/AssetBundleLoader.h"
 #include "ecs/ECSManager.h"
 #include "ecs/tilemap/TileMap.h"
 
@@ -13,7 +15,7 @@
 #include "game/chopper-shooter/move-player.h"
 #include "lua/LuaManager.h"
 
-static     std::map<std::string, std::shared_ptr<mars::Texture2D>> textures;
+static std::map<std::string, std::shared_ptr<mars::Texture2D>> textures;
 
 
 std::vector<std::vector<int> > loadMap(const mars::Framework &framework) {
@@ -178,6 +180,11 @@ int main(int argc, char *argv[]) {
 
     sol::table luaLevel = luaState["Level1"];
     sol::table luaLayers = luaLevel["layers"];
+    sol::table luaAssetBundles = luaLevel["asset_bundles"];
+
+    asset_toolkit::AssetBundleLoader assetBundleLoader;
+    std::string filename = luaAssetBundles[0]["file"];
+    std::shared_ptr<asset_toolkit::AssetBundle> assetBundle = assetBundleLoader.load(filename);
 
     std::vector<std::shared_ptr<mars::Layer> > layers;
     uint32_t layerIndex = 0;

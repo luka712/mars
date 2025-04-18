@@ -10,6 +10,7 @@
 #include "asset_toolkit/asset_bundle/sprite_sheet/Sprite.h"
 
 namespace asset_toolkit {
+
     //! The Sprite Sheet, which contains a collection of sprites.
     struct SpriteSheet {
         //! The sprite sheet name.

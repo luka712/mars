@@ -1,4 +1,7 @@
 Level1 = {
+    asset_bundles = {
+        [0] = { name = "platformer", file = "content/bundles/platformer.json" },
+    },
     textures = {
         [0] = { id = "jungle", file = "tilemaps/jungle.png" },
         [1] = { id = "bat", file = "images/bat.png" },
