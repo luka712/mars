@@ -8,6 +8,7 @@
 #include <memory>
 #include "core/math/Rect.h"
 #include "core/texture/Texture2D.h"
+#include "glm/vec2.hpp"
 
 namespace mars {
     //! Class that represents a sprite.
@@ -44,10 +45,21 @@ namespace mars {
         //! @param sourceRect The source rectangle.
         void setSourceRect(Rect sourceRect);
 
+        //! The origin of sprite
+        //! @return The origin of sprite.
+        [[nodiscard]] glm::vec2 getOrigin() const {
+            return origin;
+        }
+
+        //! Sets the origin of the sprite.
+        //! @param origin The origin of the sprite.
+        void setOrigin(const glm::vec2 &origin);
+
     protected:
         std::shared_ptr<Texture2D> texture;
         Rect sourceRect{};
 
+        glm::vec2 origin{};
         uint32_t width{};
         uint32_t height{};
 

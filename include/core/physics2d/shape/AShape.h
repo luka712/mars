@@ -15,11 +15,17 @@ namespace mars {
     //! The 2D physics shape.
     class AShape {
     public:
+        //! The constructor.
+        AShape() : density(0) {}
+
         virtual ~AShape() = default;
 
         //! Get the shape type.
         //! @return The shape type.
         [[nodiscard]] virtual ShapeType2D getShapeType() const = 0;
+
+        //! Gets or set density of a shape, typically in kg/m^2.
+        float density;
     };
 
 }

@@ -26,6 +26,10 @@ namespace mars {
         //! @param position The position.
         void setPosition(glm::vec2 position);
 
+        //! Gets the size of the rectangle.
+        //! @return The size of the rectangle.
+        [[nodiscard]] glm::vec2 getSize() const { return {drawRectangle.width, drawRectangle.height}; }
+
         //! Get the drawing rectangle.
         //! @return The drawing rectangle.
         [[nodiscard]] Rect getDrawRectangle() const;
@@ -34,8 +38,10 @@ namespace mars {
         //! @param drawRectangle The drawing rectangle.
         void setDrawRectangle(Rect drawRectangle);
 
+        //! @copydoc
         void update(const Time &time) override;
 
+        //! @copydoc
         std::string toString() override;
 
     private:

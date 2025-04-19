@@ -56,14 +56,23 @@ namespace mars {
             throw std::runtime_error(msg);
         }
 
-        BodyDefinition2D groundBodyDef{};
-        groundBodyDef.type = bodyType;
-        groundBodyDef.position = rectTransform->getPosition();
-        body = system->getWorld().createBody(groundBodyDef);
+        glm::vec2 pos = rectTransform->getPosition();
+        const glm::vec2 size = rectTransform->getSize();
+        pos += size / 2.0f;
+
+        BodyDefinition2D bodyDef{};
+        bodyDef.type = bodyType;
+        bodyDef.position = pos;
+        body = system->getWorld().createBody(bodyDef);
+
+        // We need to get underlying shape.
+        AShape* shape = collider->getShape();
+        // Fixture is created from shape and collider density.
+        body->createFixture(shape, collider->getDensity());
     }
 
     void RigidBody2D::update(const Time &time) {
-        const glm::vec2 position = body->getPosition();
+        const glm::vec2 position = body->getPosition() - rectTransform->getSize() / 2.0f;
         rectTransform->setPosition(position);
     }
 

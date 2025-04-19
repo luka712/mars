@@ -2,7 +2,6 @@
 // Created by lukaa on 8.12.2024..
 //
 
-#include <utility>
 #include <sstream>
 #include "ecs/transform/RectTransform.h"
 

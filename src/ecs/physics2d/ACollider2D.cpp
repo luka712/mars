@@ -8,5 +8,14 @@
 namespace mars {
 
     ACollider2D::ACollider2D(Entity *entity)
-        : AComponent(entity) {}
+        : AComponent(entity) {
+    }
+
+    float ACollider2D::getDensity() {
+        return getShape()->density;
+    }
+
+    void ACollider2D::setDensity(const float density) {
+        getShape()->density = density;
+    }
 }

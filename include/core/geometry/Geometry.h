@@ -94,16 +94,11 @@ namespace mars {
         //! The color vertex format of the geometry.
         VertexFormat colorFormat;
 
-
         //! The texture coordinates vertex format of the geometry.
         VertexFormat textureCoordsFormat;
 
-
         //! The normals vertex format of the geometry.
         VertexFormat normalsFormat;
-
-
-
 
         //! Converts data of this geometry to interleaved buffer format.
         //! @param format The format of the geometry.

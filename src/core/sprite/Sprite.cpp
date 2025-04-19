@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 22.12.2024..
+// Created by Erkapic Luka on 22.12.2024.
 //
 
 #include "core/sprite/Sprite.h"
@@ -10,6 +10,7 @@ namespace mars {
         width = texture->getWidth();
         height = texture->getHeight();
         sourceRect = Rect(0, 0, static_cast<int>(width), static_cast<int>(height));
+        origin = {0,0}; // By default, top left corner is the origin.
     }
 
     Texture2D &Sprite::getTexture() const {
@@ -32,7 +33,11 @@ namespace mars {
         return sourceRect;
     }
 
-    void Sprite::setSourceRect(Rect newSourceRect) {
-        this->sourceRect = newSourceRect;
+    void Sprite::setSourceRect(const Rect sourceRect) {
+        this->sourceRect = sourceRect;
+    }
+
+    void Sprite::setOrigin(const glm::vec2 &origin) {
+        this->origin = origin;
     }
 }

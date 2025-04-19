@@ -22,6 +22,12 @@ namespace mars {
         //! Get the shape.
         //! @return The shape.
         [[nodiscard]] virtual AShape* getShape() = 0;
+
+        //! Gets density of a shape, typically in kg/m^2.
+        float getDensity();
+
+        //! Set density of a shape, typically in kg/m^2.
+        void setDensity(float density);
     };
 }
 
