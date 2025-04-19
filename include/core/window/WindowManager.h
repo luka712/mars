@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 22.11.2024
+// Created by Erkapic Luka on 22.11.2024.
 //
 
 #ifndef WINDOWMANAGER_H
@@ -51,7 +51,7 @@ namespace mars {
         //! Initialize the window for OpenGLES.
         //! @param major The major version of OpenGLES.
         //! @param minor The minor version of OpenGLES.
-        void initializeForOpenGLES(int major = 3, int minor = 2);
+        void initializeForOpenGLES(int major = 3, int minor = 0);
 
         //! Run the event loop.
         void runEventLoop();

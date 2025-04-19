@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD 20)
 # INCLUDE
 include(FetchContent)
 
+# SYSTEM PACKAGES
+find_package(lua)
+
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
@@ -20,6 +23,15 @@ if(WIN32)
     set(LUA_PATH "D:/_Windows/lua")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
+elseif(APPLE)
+    # Set Homebrew paths for macOS
+    set(CMAKE_PREFIX_PATH "/opt/homebrew;/usr/local" CACHE PATH "Path to Homebrew libraries")
+
+    find_library(OPENGL_LIBRARY OpenGL REQUIRED) # Find OpenGL framework
+    if(NOT OPENGL_LIBRARY)
+        message(FATAL_ERROR "OpenGL framework not found")
+    endif()
+    message(STATUS "OpenGL framework: ${OPENGL_LIBRARY}")
 endif()
 
 # PACKAGES
@@ -31,8 +43,10 @@ find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
-find_package(lua REQUIRED)
 find_package(sol REQUIRED)
+if(EMSCRIPTEN)
+    find_package(lua REQUIRED)
+endif()
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -55,8 +69,7 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
-        include/core/camera/core/OrthographicCamera.h)
+        ${TINYXML2_SRC})
 
 # LINK
 target_link_libraries(mars
@@ -67,6 +80,7 @@ target_link_libraries(mars
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARY}
+        ${OPENGL_LIBRARY}
 )
 
 # COPY SHARED LIBS
@@ -125,4 +139,5 @@ target_link_libraries(chopper-shooter
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARY}
+        ${OPENGL_LIBRARY}
 )

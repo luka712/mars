@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 22.11.2024..
+// Created by Erkapic Luka on 22.11.2024.
 //
 
 #if __EMSCRIPTEN__
@@ -49,7 +49,7 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
     Logger &logger = framework.getLogger();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
-        std::string msg = "WindowManager::initializeForOpenGLES: Failed to initialize SDL.";
+        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to initialize SDL. Error: ") + SDL_GetError();
         logger.error(msg);
         throw std::runtime_error(msg);
     }
@@ -71,9 +71,15 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
                               windowBounds.width, windowBounds.height,
                               SDL_WINDOW_OPENGL);
 
+    if (window == NULL) {
+        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") + SDL_GetError();
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
+
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
-        const std::string msg = "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context.";
+        const std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ") + SDL_GetError();
         logger.error(msg);
         throw std::runtime_error(msg);
     }

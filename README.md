@@ -8,12 +8,16 @@ It can be used as low-level or as high level ECS framework.
 ### Build
 
 It is tested with C-Lion as IDE.
-CMakeLists.txt should be build.
+CMakeLists.txt should be built.
+
+To build simply run `cmake`.
+
 This will download all required dependencies in `cmake-build-debug` folder.
+
 Main project is called `mars`.
 
 #### Linux 
-From `cmake-build-debug` folder run `.. cmake`
+From `cmake-build-debug` folder run `cmake ..`
 
 ### EMSCRIPTEN
 
@@ -24,6 +28,10 @@ Of course delete `.template` from your file.
 
 Use `make all` to compile to emscripten.
 Use `make run` to run in browser.
+
+### LUA
+> [!WARNING]
+> Use system Lua for everything except for EMSCRIPTEN.
 
 #### EMSCRIPTEN DEPENDENCIES 
 
@@ -39,3 +47,9 @@ Note that `cmake-build-debug/_deps/lua-src/lua.c` will cause issues and should b
 Cmake should be using:
 - Toolchain: MinGW
 - Generator: MinGW Makefiles
+
+### RENDERERS
+
+ | rendering backend | Windows | MacOS | Linux | Android | iOS |
+ | opengles          |   [x]   |  [ ]  |  [x]  |  [ ]    | [ ] |
+ |   metal           |   [ ]   |  [x]  |  [ ]  |  [ ]    | [ ] |
