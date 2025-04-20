@@ -12,12 +12,11 @@
 #include "ecs/sprite/SpriteRendererSystem.h"
 #include "ecs/script/ScriptSystem.h"
 #include "ecs/tilemap/TileMapSystem.h"
-#include "ecs/layer/LayerManager.h"
+#include "ecs/layering/LayerManager.h"
 #include "ecs/camera/Camera2DSystem.h"
 #include "ecs/entity/EntityBuilderLua.h"
 #include "ecs/physics2d/Physics2DSystem.h"
 #include "ecs/sprite/data/SpriteManager.h"
-#include "physics2d/BoxCollider2D.h"
 
 namespace mars {
     //! The ECSManager class.

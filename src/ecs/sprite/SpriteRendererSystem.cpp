@@ -66,7 +66,7 @@ namespace mars {
 
     void SpriteRendererSystem::render(const uint32_t currentLayerOrder, Camera2D& camera) {
 
-        // Check if he has layer to render.
+        // Check if we have layer to render. If not just return.
         if (!layerOrderSpritesMap.contains(currentLayerOrder)) {
             return;
         }

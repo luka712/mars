@@ -10,7 +10,7 @@
 #include <utility>
 
 namespace mars {
-    //! The layer class.
+    //! The Layer class represents a layer in the ECS (Entity-Component-System) architecture.
     class Layer {
     public:
         //! Construct a new SpriteLayer object.
@@ -23,7 +23,7 @@ namespace mars {
         //! @return The name of the layer.
         [[nodiscard]] const std::string& getName() const { return name; }
 
-        //! The order of the layer. The lower the order, the earlier the layer is rendered.
+        //! The order of the layer. Lower order means the layer is rendered first.
         //! @return The order of the layer.
         [[nodiscard]] uint32_t getOrder() const { return order; }
 

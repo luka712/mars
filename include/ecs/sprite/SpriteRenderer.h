@@ -7,7 +7,7 @@
 
 #include "core/math/Color.h"
 #include "core/sprite/Sprite.h"
-#include "ecs/layer/Layer.h"
+#include "ecs/layering/Layer.h"
 #include "ecs/transform/RectTransform.h"
 
 namespace mars {

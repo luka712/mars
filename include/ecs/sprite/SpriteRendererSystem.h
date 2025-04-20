@@ -1,13 +1,13 @@
 //
-// Created by lukaa on 10.12.2024..
+// Created by Erkapic Luka on 10.12.2024.
 //
 
-#ifndef SPRITERENDERERSYSTEM_H
-#define SPRITERENDERERSYSTEM_H
+#ifndef SPRITE_RENDERER_SYSTEM_H
+#define SPRITE_RENDERER_SYSTEM_H
 
 #include <vector>
 #include <map>
-#include "ecs/layer/Layer.h"
+#include "ecs/layering/Layer.h"
 #include "ecs/sprite/SpriteRenderer.h"
 #include "ecs/camera/Camera2D.h"
 

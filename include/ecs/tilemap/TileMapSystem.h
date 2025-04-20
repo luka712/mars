@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "ecs/tilemap/TileMap.h"
-#include "ecs/layer/Layer.h"
+#include "ecs/layering/Layer.h"
 #include "ecs/camera/Camera2D.h"
 
 namespace mars {

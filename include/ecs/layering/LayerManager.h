@@ -6,7 +6,7 @@
 #define LAYERMANAGER_H
 
 #include <vector>
-#include "ecs/layer/Layer.h"
+#include "ecs/layering/Layer.h"
 
 namespace mars {
     class Framework;
@@ -19,10 +19,11 @@ namespace mars {
         //! @param framework The framework.
         explicit LayerManager(Framework& framework);
 
-        //! Construct a new SpriteLayer object.
+        //! Creates a new layer with the specified name, order, and description.
         //! @param name The name of the layer.
         //! @param order The order of the layer.
         //! @param description The description of the layer.
+        //! @return The created layer.
         std::shared_ptr<Layer> createLayer(std::string name, uint32_t order, std::string description);
 
         //! Get the default layer.
