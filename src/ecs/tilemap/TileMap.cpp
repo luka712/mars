@@ -59,7 +59,7 @@ namespace mars {
                 const int32_t ty = index / textureColumns;
                 Rect sourceRect{};
                 sourceRect.x = tx * tw;
-                sourceRect.y = th - ty * th;
+                sourceRect.y = ty * th;
                 sourceRect.width = tw;
                 sourceRect.height = th;
                 chunks.emplace_back(x,y, sourceRect);

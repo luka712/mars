@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include "Framework.h"
-#include "ecs/layer/LayerManager.h"
+#include "ecs/layering/LayerManager.h"
 
 namespace mars {
     LayerManager::LayerManager(Framework &framework) : framework(framework) {

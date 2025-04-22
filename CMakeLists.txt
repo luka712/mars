@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD 20)
 include(FetchContent)
 
 # SYSTEM PACKAGES
-find_package(lua)
+if(APPLE)
+    find_package(lua)
+endif()
 
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
@@ -21,6 +23,7 @@ if(WIN32)
     set(SDL2_IMAGE_PATH "D:/_Windows/Libs/SDL2_image-devel-2.8.3-mingw/SDL2_image-2.8.3/x86_64-w64-mingw32")
 
     set(LUA_PATH "D:/_Windows/lua")
+    set(LUA_INCLUDE_DIR "${LUA_PATH}")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
 elseif(APPLE)
@@ -44,7 +47,7 @@ find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
 find_package(sol REQUIRED)
-if(EMSCRIPTEN)
+if(EMSCRIPTEN OR WIN32)
     find_package(lua REQUIRED)
 endif()
 

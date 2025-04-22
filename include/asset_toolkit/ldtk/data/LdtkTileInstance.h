@@ -13,9 +13,12 @@ namespace asset_toolkit {
         //! Alpha/opacity of the tile (0-1, defaults to 1).
         float a;
 
-        //! "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.
-        //! - Bit 0 = X flip
-        //! - Bit 1 = Y flip
+        //! “Flip bits”, a 2-bits integer to represent the mirror transformations of the tile.
+        //! Bit 0 is X symmetry and bit 1 is Y symmetry. So you get the following possible values:
+        //! - Bit 0 = no transformation
+        //! - Bit 1 = horizontal(X) symmetry
+        //! - Bit 2 = vertical(Y) symmetry
+        //! - Bit 3 = both symmetries
         //! Examples: f=0 (no flip), f=1 (X flip only), f=2 (Y flip only), f=3 (both flips)
         int32_t f;
 

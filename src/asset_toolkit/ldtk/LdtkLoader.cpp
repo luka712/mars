@@ -53,7 +53,9 @@ namespace asset_toolkit {
         for (const nlohmann::json &layerInstance: layerInstancesJson) {
             LdtkLayerInstance layer;
             layer.levelId = layerInstance["levelId"];
-            layer.__tilesetRelPath = layerInstance["__tilesetRelPath"];
+            if (layerInstance.contains("__tilesetRelPath") && !layerInstance["__tilesetRelPath"].is_null()) {
+                layer.__tilesetRelPath = layerInstance["__tilesetRelPath"];
+            }
             layer.visible = layerInstance["visible"];
             layer.__cWid = layerInstance["__cWid"];
             layer.__cHei = layerInstance["__cHei"];

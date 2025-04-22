@@ -98,15 +98,24 @@ void loadLdtk(const mars::Framework &framework, mars::EntityManager &entityManag
                 tiles.emplace_back();
                 for (size_t j = 0; j < layer.__cWid; j++) {
                     const int32_t index = i * layer.__cWid + j;
-                    if (layer.intGridCsv[index] == 0) {
+
+                    // If the index is out of bounds or the value is 0, we skip it.
+                    if (layer.intGridCsv.size() <= index || layer.intGridCsv[index] == 0) {
                         tiles[i].emplace_back(-1);
                         continue;
                     }
 
                     auto ldtkTileInstance = layer.autoLayerTiles[index];
-                    auto tileId = ((ldtkTileInstance.src[1] / 8) * tilesInRow) + ldtkTileInstance.src[0] / 8;
+                    auto tileId = ldtkTileInstance.t;
                     tiles[i].emplace_back(tileId);
                 }
+            }
+
+            for (auto& autoTile : layer.autoLayerTiles) {
+
+                int tilesYIndex = autoTile.px[1] / 8;
+                int tilesXIndex = autoTile.px[0] / 8;
+                tiles[tilesYIndex][tilesXIndex] = autoTile.t;
             }
 
             const std::shared_ptr<mars::Entity> tileMap = entityManager.createEntity("tilemap");
@@ -115,7 +124,7 @@ void loadLdtk(const mars::Framework &framework, mars::EntityManager &entityManag
             tileMapComponent->setTexture(tileMapTexture);
             tileMapComponent->loadTiles(glm::vec2(8, 8), tiles);
             tileMapComponent->tileSize = glm::vec2(8, 8);
-            tileMapComponent->scale = 3;
+            tileMapComponent->scale = 1;
         }
     }
 }
