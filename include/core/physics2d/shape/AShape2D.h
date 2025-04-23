@@ -5,20 +5,17 @@
 #ifndef A_SHAPE_H
 #define A_SHAPE_H
 
+#include "core/physics2d/enums.h"
+
 namespace mars {
 
-    //! The shape type for 2D physics.
-    enum class ShapeType2D {
-        Polygon
-    };
-
     //! The 2D physics shape.
-    class AShape {
+    class AShape2D {
     public:
         //! The constructor.
-        AShape() : density(0) {}
+        AShape2D() : density(0) {}
 
-        virtual ~AShape() = default;
+        virtual ~AShape2D() = default;
 
         //! Get the shape type.
         //! @return The shape type.

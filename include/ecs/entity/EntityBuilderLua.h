@@ -65,6 +65,19 @@ namespace mars {
     private:
         Framework& framework;
         ECSManager &ecsManager;
+
+        //! Helper function to get a value from a Lua table or return a default value.
+        //! @tparam T The type of the value.
+        //! @param table The Lua table.
+        //! @param fieldName The name of the field to get.
+        //! @return The value from the table or a default value.
+        template<typename T>
+       static T getValueOrDefault(const sol::table &table, const std::string &fieldName) {
+            if (table[fieldName].valid()) {
+                return table[fieldName];
+            }
+            return T{};
+        }
     };
 }
 

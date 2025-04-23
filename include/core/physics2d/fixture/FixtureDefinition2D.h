@@ -5,7 +5,7 @@
 #ifndef FIXTURE_DEFINITION_2D_H
 #define FIXTURE_DEFINITION_2D_H
 
-#include "core/physics2d/shape/AShape.h"
+#include "core/physics2d/shape/AShape2D.h"
 
 namespace mars {
 
@@ -13,7 +13,7 @@ namespace mars {
 struct FixtureDefinition2D {
 
     //! The shape.
-    AShape* shape;
+    AShape2D* shape;
 
     //! The friction coefficient, usually in the range [0,1].
     float friction;

@@ -5,14 +5,14 @@
 #ifndef A_POLYGON_SHAPE_H
 #define A_POLYGON_SHAPE_H
 
-#include "core/physics2d/shape/AShape.h"
+#include "core/physics2d/shape/AShape2D.h"
 
 namespace mars {
     //! The 2D physics polygon shape.
-    class APolygonShape : public AShape {
+    class APolygonShape2D : public AShape2D {
     public:
 
-        //! Build vertices to represent an axis-aligned box centered on the local origin.
+        //! Build vertices to represent an axis-aligned box centred on the local origin.
         //! @param halfWidth The half width.
         //! @param halfHeight The half height.
         virtual void setAsBox(float halfWidth, float halfHeight) = 0;

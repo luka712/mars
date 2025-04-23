@@ -5,7 +5,7 @@
 #include "core/physics2d/AWorld2D.h"
 
 namespace mars {
-    AWorld2D::AWorld2D(WorldDefinition2D worldDef) : worldDef(worldDef){
+    AWorld2D::AWorld2D(const WorldDefinition2D worldDef) : worldDef(worldDef){
 
     }
 }

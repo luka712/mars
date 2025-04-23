@@ -66,7 +66,7 @@ namespace mars {
         body = system->getWorld().createBody(bodyDef);
 
         // We need to get underlying shape.
-        AShape* shape = collider->getShape();
+        AShape2D* shape = collider->getShape();
         // Fixture is created from shape and collider density.
         body->createFixture(shape, collider->getDensity());
     }

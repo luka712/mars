@@ -43,7 +43,7 @@ namespace mars {
         //! Generally, between 2 and 4 is a good range.
         virtual void update(const Time &time, uint32_t velocityIterations, uint32_t positionIterations) = 0;
 
-        //! Renders the draw information. Usually used for debug draw.
+        //! Renders the draw information. Usually used for debug drawing.
         virtual void render() = 0;
 
     protected:

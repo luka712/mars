@@ -7,12 +7,12 @@
 
 #include "box2d/b2_polygon_shape.h"
 #include "box2d/physics2d/shape/ABox2DShape.h"
-#include "core/physics2d/shape/APolygonShape.h"
+#include "core/physics2d/shape/APolygonShape2D.h"
 
 namespace mars {
 
     //! The Box2D implementation of the 2D physics polygon shape.
-    class Box2DPolygonShape final : public ABox2DShape<b2PolygonShape>, public APolygonShape {
+    class Box2DPolygonShape final : public ABox2DShape<b2PolygonShape>, public APolygonShape2D {
     public:
         //! Construct a new Box2DPolygonShape object.
         explicit Box2DPolygonShape();

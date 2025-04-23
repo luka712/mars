@@ -19,6 +19,12 @@ namespace mars {
         DynamicBody,
     };
 
+    //! The shape type for 2D physics.
+    enum class ShapeType2D {
+        Polygon
+    };
+
+
 }
 
 #endif //PHYSICS_ENUMS_H

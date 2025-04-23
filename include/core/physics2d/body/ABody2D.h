@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "core/physics2d/fixture/AFixture2D.h"
-#include "core/physics2d/shape/AShape.h"
+#include "core/physics2d/shape/AShape2D.h"
 #include "core/physics2d/fixture/FixtureDefinition2D.h"
 
 namespace mars {
@@ -25,10 +25,12 @@ namespace mars {
         //! Creates a fixture from a shape and attach it to this body.
         //! @param shape The shape to be cloned.
         //! @param density The shape density (set to zero for static bodies).
-        virtual std::shared_ptr<AFixture2D> createFixture(AShape *shape, float density) = 0;
+        //! @return The fixture.
+        virtual std::shared_ptr<AFixture2D> createFixture(AShape2D *shape, float density) = 0;
 
         //! Creates a fixture from a fixture definition and attach it to this body.
         //! @param fixture The fixture definition.
+        //! @return The fixture.
         virtual std::shared_ptr<AFixture2D> createFixture(FixtureDefinition2D &fixture) = 0;
     };
 }

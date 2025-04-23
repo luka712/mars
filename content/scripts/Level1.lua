@@ -75,7 +75,7 @@ Level1 = {
                    },
                    },
                 },
-                collider = {
+                box_collider_2d = {
                     tag = "PLAYER"
                 },
                 rigid_body_2d = {
@@ -107,8 +107,12 @@ Level1 = {
                 sprite_renderer = {
                     texture_id = "tank",
                 },
-                collider = {
-                    tag = "ENEMY"
+                box_collider_2d = {
+                    tag = "ENEMY",
+                    density = 1,
+                },
+                rigid_body_2d = {
+                    type = "dynamic"
                 },
                 projectileEmitter = {
                     textureAssetId = "bullet-enemy",

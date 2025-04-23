@@ -26,7 +26,7 @@ namespace mars {
         return {pos.x, pos.y};
     }
 
-    std::shared_ptr<AFixture2D> Box2DBody::createFixture(AShape *shape, float density) {
+    std::shared_ptr<AFixture2D> Box2DBody::createFixture(AShape2D *shape, float density) {
 
         b2Fixture *fixture;
         ShapeType2D shapeType = shape->getShapeType();
@@ -50,7 +50,7 @@ namespace mars {
 
     std::shared_ptr<AFixture2D> Box2DBody::createFixture(FixtureDefinition2D &fixtureDef) {
         b2FixtureDef def;
-        AShape* shape = fixtureDef.shape;
+        AShape2D* shape = fixtureDef.shape;
         def.density = fixtureDef.density;
         def.friction = fixtureDef.friction;
 

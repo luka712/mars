@@ -60,7 +60,7 @@ namespace mars {
         // - Check if box collider is available.
         if (componentsTable["box_collider_2d"].valid()) {
             sol::table boxColliderTable = componentsTable["box_collider_2d"];
-            entity->addComponent<BoxCollider2D>();
+            buildBoxCollider2D(*entity, boxColliderTable);
         }
 
         // - Check if rigid body is available.
@@ -179,7 +179,9 @@ namespace mars {
 
         auto *boxCollider2D = entity.addComponent<BoxCollider2D>();
 
-        // PROPERTIES - TODO: Add more properties.
+        // PROPERTIES
+        const float density = getValueOrDefault<float>(boxColliderTable, "density");
+        boxCollider2D->setDensity(density);
 
         return boxCollider2D;
     }
@@ -194,27 +196,16 @@ namespace mars {
         auto *rigidBody = entity.addComponent<RigidBody2D>();
 
         // BODY TYPE
-        if (!rigidBodyTable["type"].valid()) {
-            const std::string msg = "EntityBuilderLua::buildRigidBody2D: Cannot create 'RigidBody2D' without type.";
-            framework.getLogger().error(msg);
-            throw std::runtime_error(msg);
-        }
-        const std::string type = rigidBodyTable["type"];
         BodyType2D bodyType = BodyType2D::StaticBody;
-        if (type == "static") {
-            bodyType = BodyType2D::StaticBody;
-        }
-        else if (type == "dynamic") {
+        const std::string type = getValueOrDefault<std::string>(rigidBodyTable, "type");
+
+        if (type == "dynamic") {
             bodyType = BodyType2D::DynamicBody;
         }
         else if (type == "kinematic") {
             bodyType = BodyType2D::KinematicBody;
         }
-        else {
-            const std::string msg = "EntityBuilderLua::buildRigidBody2D: Type must be one of 'static', 'kinematic' or 'dynamic'.";
-            framework.getLogger().error(msg);
-            throw std::runtime_error(msg);
-        }
+
         rigidBody->setBodyType(bodyType);
 
         return rigidBody;

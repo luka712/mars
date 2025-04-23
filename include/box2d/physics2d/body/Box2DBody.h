@@ -9,6 +9,8 @@
 #include "core/physics2d/body/ABody2D.h"
 
 namespace mars {
+
+    //! The Box2D implementation of the 2D body.
     class Box2DBody : public ABody2D {
     public:
         //! The constructor.
@@ -23,7 +25,7 @@ namespace mars {
         [[nodiscard]] b2Body* getBox2DBody() const { return body; }
 
         //! @copydoc
-        std::shared_ptr<AFixture2D> createFixture(AShape* shape, float density) override;
+        std::shared_ptr<AFixture2D> createFixture(AShape2D* shape, float density) override;
 
         //! @copydoc
         std::shared_ptr<AFixture2D> createFixture(FixtureDefinition2D& fixtureDef) override;

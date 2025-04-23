@@ -11,7 +11,7 @@ namespace mars {
         : framework(framework) {
         WorldDefinition2D worldDef{};
         // The default gravity is 9.8 m/s^2.
-        worldDef.gravity = glm::vec2(0, -9.8f);
+        worldDef.gravity = glm::vec2(0, 9.8f);
 
         world = std::make_unique<Box2DWorld2D>(framework, worldDef);
     }
