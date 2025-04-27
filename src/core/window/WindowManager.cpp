@@ -6,17 +6,26 @@
 #include <emscripten.h>
 #endif
 
+#if __APPLE__
+#include <Metal/Metal.hpp>
+#endif
 
-#include "opengles/opengles.h"
+
 #include "Framework.h"
 #include "core/window/WindowManager.h"
+#include "opengles/opengles.h"
 #include <iostream>
 #include <core/log/Logger.h>
+
 
 using namespace mars;
 
 WindowManager::WindowManager(Framework &framework, const WindowManagerOptions options)
-    : framework(framework), windowBounds(options.windowBounds) {
+    : framework(framework), window(nullptr), renderer(nullptr), windowBounds(options.windowBounds) {
+
+#if __APPLE__
+    metalLayer = nullptr;
+#endif
 }
 
 void WindowManager::subscribeToRenderEvent(const std::function<void()> &callback) {
@@ -45,14 +54,21 @@ void WindowManager::initializeForSDL() {
                               0);
 }
 
-void WindowManager::initializeForOpenGLES(const int major, const int minor) {
+void WindowManager::InitializeSDL() const {
     Logger &logger = framework.getLogger();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
-        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to initialize SDL. Error: ") + SDL_GetError();
+        const std::string msg = std::string("WindowManager::InitializeSDL: Failed to initialize SDL. Error: ") +
+                                SDL_GetError();
         logger.error(msg);
         throw std::runtime_error(msg);
     }
+}
+
+void WindowManager::initializeForOpenGLES(const int major, const int minor) {
+    Logger &logger = framework.getLogger();
+
+    InitializeSDL();
 
     // Set OpenGL ES version
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -71,19 +87,67 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
                               windowBounds.width, windowBounds.height,
                               SDL_WINDOW_OPENGL);
 
-    if (window == NULL) {
-        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") + SDL_GetError();
+    if (window == nullptr) {
+        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") +
+                          SDL_GetError();
         logger.error(msg);
         throw std::runtime_error(msg);
     }
 
     SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
-        const std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ") + SDL_GetError();
+        const std::string msg = std::string(
+                                    "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ")
+                                + SDL_GetError();
         logger.error(msg);
         throw std::runtime_error(msg);
     }
 }
+
+#if __APPLE__
+void WindowManager::initializeForMetal() {
+    Logger &logger = framework.getLogger();
+
+    InitializeSDL();
+
+    logger.info(
+        "WindowManager::initializeForMetal: Client size: " + std::to_string(windowBounds.width) + ", " +
+        std::to_string(windowBounds.height) + ".");
+
+    SDL_CreateWindowAndRenderer(windowBounds.width, windowBounds.height,
+                                0,
+                                &window,
+                                &renderer);
+
+    if (window == nullptr) {
+        const std::string msg = std::string("WindowManager::initializeForMetal: Failed to create window. Error: ") +
+                          SDL_GetError();
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
+
+    if (renderer == nullptr) {
+        const std::string msg = std::string("WindowManager::initializeForMetal: Failed to create renderer. Error: ") +
+                     SDL_GetError();
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
+
+    metalLayer = static_cast<CA::MetalLayer *>(SDL_RenderGetMetalLayer(renderer));
+
+    if (metalLayer == nullptr) {
+        const std::string msg = "WindowManager::InitializeForMetal: Failed to get metal layer: " + std::string(SDL_GetError());
+        logger.error(msg);
+        throw std::runtime_error(msg.c_str());
+    }
+
+    // Log information about the device and if metal is linked.
+   const NS::String *nsDeviceName = metalLayer->device()->name();
+   const auto deviceName = std::string(nsDeviceName->cString(NS::StringEncoding::ASCIIStringEncoding));
+   logger.info("SDLWindowManager::InitializeForMetal: Metal Enabled. Metal Device: " + deviceName + ".");
+}
+#endif
+
 
 // Store a reference to the instance for the loop.
 // Done to support EMSCRIPTEN.

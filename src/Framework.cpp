@@ -12,6 +12,11 @@
 #else
 #include "core/log/SpdLogger.h"
 #endif
+
+#if __APPLE__
+#include "metal/renderer/MetalRenderer.h"
+#endif
+
 namespace mars {
     Framework::Framework(FrameworkOptions options)
     {
@@ -27,6 +32,11 @@ namespace mars {
             this->renderer = std::make_unique<SDLRenderer>(*this);
             this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         }
+#if __APPLE__
+        else if (renderingBackend == RenderingBackend::Metal) {
+            this->renderer = std::make_unique<MetalRenderer>(*this, options.frameBufferSize);
+        }
+#endif
         else {
             this->renderer = std::make_unique<OpenGLESRenderer>(*this, options.frameBufferSize);
             this->spriteBatch = std::make_unique<SpriteBatch>(*this);
@@ -68,6 +78,11 @@ namespace mars {
         if (renderingBackend == RenderingBackend::SDL) {
             windowManager->initializeForSDL();
         }
+#if __APPLE__
+        if (renderingBackend == RenderingBackend::Metal) {
+            windowManager->initializeForMetal();
+        }
+#endif
         else {
 #if __EMSCRIPTEN__
             windowManager->initializeForOpenGLES(3, 0);

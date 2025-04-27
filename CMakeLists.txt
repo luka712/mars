@@ -10,6 +10,9 @@ include(FetchContent)
 # SYSTEM PACKAGES
 if(APPLE)
     find_package(lua)
+    find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
+    find_library(QUARTZ_CORE_LIBRARY QuartzCore REQUIRED)
+    find_library(METAL_LIBRARY Metal REQUIRED)
 endif()
 
 # MODULES - we set modules in cmake_modules folder.
@@ -27,6 +30,8 @@ if(WIN32)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
 elseif(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
+
     # Set Homebrew paths for macOS
     set(CMAKE_PREFIX_PATH "/opt/homebrew;/usr/local" CACHE PATH "Path to Homebrew libraries")
 
@@ -35,6 +40,10 @@ elseif(APPLE)
         message(FATAL_ERROR "OpenGL framework not found")
     endif()
     message(STATUS "OpenGL framework: ${OPENGL_LIBRARY}")
+
+    SET(METAL_INCLUDE_DIR ${CMAKE_BINARY_DIR}/vendor/metal-cpp)
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif()
 
 # PACKAGES
@@ -63,6 +72,9 @@ include_directories(
         ${BOX2D_INCLUDE_DIR}
         ${LUA_INCLUDE_DIR}
         ${SOL_INCLUDE_DIR}
+
+        # if APPLE
+        ${METAL_INCLUDE_DIR}
 )
 
 # SOURCES
@@ -84,6 +96,11 @@ target_link_libraries(mars
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARY}
         ${OPENGL_LIBRARY}
+
+        # APPLE DEVICES
+        ${QUARTZ_CORE_LIBRARY}
+        ${FOUNDATION_LIBRARY}
+        ${METAL_LIBRARY}
 )
 
 # COPY SHARED LIBS
@@ -109,12 +126,7 @@ add_executable(tests tests/tests.cpp
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
-        include/asset_toolkit/asset_bundle/AssetBundle.h
-        include/asset_toolkit/asset_bundle/sprite_sheet/SpriteSheet.h
-        include/asset_toolkit/asset_bundle/AssetBundleLoader.h
-        src/asset_toolkit/asset_bundle/AssetBundleLoader.cpp
-        tests/asset_toolkit/asset_bundle_loader.cpp)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
@@ -143,4 +155,9 @@ target_link_libraries(chopper-shooter
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARY}
         ${OPENGL_LIBRARY}
+
+        # APPLE DEVICES
+        ${QUARTZ_CORE_LIBRARY}
+        ${FOUNDATION_LIBRARY}
+        ${METAL_LIBRARY}
 )

@@ -1,22 +1,25 @@
 //
-// Created by lukaa on 2.1.2025..
+// Created by Luka Erkapic on 26.04.25.
 //
 
-#ifndef OPENGLES_RENDERER_H
-#define OPENGLES_RENDERER_H
+#ifndef METAL_RENDERER_H
+#define METAL_RENDERER_H
+
+#if __APPLE__
 
 #include <SDL.h>
+#include "metal/metal.h"
 #include "core/renderer/Renderer.h"
 
 namespace mars {
     class Framework;
 
-    class OpenGLESRenderer final : public Renderer {
+    class MetalRenderer final : public Renderer {
     public:
-        //! Construct a new OpenGLESRenderer object.
+        //! Construct a new MetalRenderer object.
         //! @param framework The framework.
         //! @param frameBufferSize The frame buffer size.
-        explicit OpenGLESRenderer(Framework &framework, glm::vec2 frameBufferSize);
+        explicit MetalRenderer(Framework &framework, glm::vec2 frameBufferSize);
 
         //! @copydoc Renderer::initialize()
         void initialize() override;
@@ -32,14 +35,10 @@ namespace mars {
 
     private:
         SDL_Window *window;
+        MTL::Device* device;
     };
-
-    //! From framework, find the @ref OpenGLESRenderer.
-    //! @param framework The framework.
-    //! @returns The @ref OpenGLESRenderer pointer.
-    OpenGLESRenderer* findOpenGLESRenderer(const Framework &framework);
-
 }
 
+#endif
 
-#endif //OPENGLESRENDERER_H
+#endif //METAL_RENDERER_H

@@ -6,27 +6,30 @@
 
 #define WINDOWMANAGER_H
 
-#include <Framework.h>
 #include <functional>
 #include <SDL.h>
 #include <vector>
 #include "core/window/WindowManagerOptions.h"
 
-namespace mars {
+#if __APPLE__
+#include <metal-cpp/QuartzCore/CAMetalLayer.hpp>
+using namespace MTL;
+#endif
 
+namespace mars {
     class Framework;
 
     //! The window manager.
     class WindowManager {
     public:
         bool running = true;
-        std::vector<std::function<void()>> updateEvents;
-        std::vector<std::function<void()>> renderEvents;
+        std::vector<std::function<void()> > updateEvents;
+        std::vector<std::function<void()> > renderEvents;
 
         //! Construct a new WindowManager object.
         //! @param framework The @see Framework.
         //! @param options The options for the window manager.
-        explicit WindowManager(Framework& framework, WindowManagerOptions options);
+        explicit WindowManager(Framework &framework, WindowManagerOptions options);
 
         //! Get the window.
         //! @return The window.
@@ -36,6 +39,12 @@ namespace mars {
         //! Get the window bounds.
         //! @return The window bounds.
         [[nodiscard]] WindowBounds getWindowBounds() const { return windowBounds; }
+
+#if __APPLE__
+        //! Gets the metal layer.
+        ////! The metal layer.
+        [[nodiscard]] CA::MetalLayer *getMetalLayer() const { return metalLayer; }
+#endif
 
         //! Subscribe to the update event.
         //! @param callback The callback to subscribe.
@@ -48,10 +57,15 @@ namespace mars {
         //! Initialize the window.
         void initializeForSDL();
 
-        //! Initialize the window for OpenGLES.
+        //! Initialize the window for OpenGLES API.
         //! @param major The major version of OpenGLES.
         //! @param minor The minor version of OpenGLES.
         void initializeForOpenGLES(int major = 3, int minor = 0);
+
+#if __APPLE__
+        //! Initialize the window for working with Metal API.
+        void initializeForMetal();
+#endif
 
         //! Run the event loop.
         void runEventLoop();
@@ -60,9 +74,18 @@ namespace mars {
         void destroy();
 
     private:
-        Framework& framework;
-        SDL_Window *window{};
+        Framework &framework;
+        SDL_Window *window;
+        //! It's possible for renderer to be nullptr depending on implementation of backend.
+        SDL_Renderer *renderer;
         WindowBounds windowBounds;
+
+#if __APPLE__
+        CA::MetalLayer *metalLayer{};
+#endif
+
+        //! Calls the SDL_Init() internally and setup sdl.
+        void InitializeSDL() const;
     };
 }
 

@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
 
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::OpenGLES,
+        mars::RenderingBackend::Metal,
         glm::vec2(1280, 720)
     });
     mars::ECSManager ecsManager(framework);
