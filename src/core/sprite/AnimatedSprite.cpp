@@ -6,7 +6,7 @@
 
 namespace mars {
     AnimatedSprite::AnimatedSprite(const std::shared_ptr<Texture2D> &texture)
-    : Sprite(texture), currentFrame(0), frameTime(0), animationSpeed(1), changeFrameTime(100) {
+    : GameSprite(texture), currentFrame(0), frameTime(0), animationSpeed(1), changeFrameTime(100) {
         // Nothing to do.
     }
 

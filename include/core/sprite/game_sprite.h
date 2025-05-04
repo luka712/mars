@@ -12,14 +12,14 @@
 
 namespace mars {
     //! Class that represents a sprite.
-    class Sprite {
+    class GameSprite {
     public:
         //! Construct a new Sprite object.
         //! @param texture The texture.
-        explicit Sprite(const std::shared_ptr<Texture2D> &texture);
+        explicit GameSprite(const std::shared_ptr<Texture2D> &texture);
 
         //! The destructor.
-        virtual ~Sprite() = default;
+        virtual ~GameSprite() = default;
 
         //! Gets the texture.
         //! @return The texture.

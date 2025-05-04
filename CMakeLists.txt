@@ -17,7 +17,7 @@ endif()
 
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 # VARIABLES
 if(WIN32)
@@ -56,6 +56,7 @@ find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
 find_package(sol REQUIRED)
+find_package(Entt REQUIRED)
 if(EMSCRIPTEN OR WIN32)
     find_package(lua REQUIRED)
 endif()
@@ -72,6 +73,7 @@ include_directories(
         ${BOX2D_INCLUDE_DIR}
         ${LUA_INCLUDE_DIR}
         ${SOL_INCLUDE_DIR}
+        ${ENTT_INCLUDE_DIR}
 
         # if APPLE
         ${METAL_INCLUDE_DIR}
@@ -126,7 +128,15 @@ add_executable(tests tests/tests.cpp
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
+        include/entt_ecs/entt_ecs.h
+        include/entt_ecs/transform/rect_transform.h
+        include/entt_ecs/transform/rect_transform_system.h
+        src/entt_ecs/transform/rect_transform_system.cpp
+        include/entt_ecs/sprite/sprite_renderer.h
+        src/entt_ecs/entt_ecs.cpp
+        include/entt_ecs/sprite/sprite_renderer_system.h
+        src/entt_ecs/sprite/sprite_renderer_system.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

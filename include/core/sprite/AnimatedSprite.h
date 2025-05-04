@@ -9,14 +9,14 @@
 
 #include "map"
 #include "core/time/Time.h"
-#include "core/sprite/Sprite.h"
+#include "core/sprite/game_sprite.h"
 
 namespace mars {
 
     //! The AnimatedSprite class.
     //! Plays simple animation from a single sprite sheet.
     //! Set animation frames with index and source rectangle.
-    class AnimatedSprite : public Sprite {
+    class AnimatedSprite : public GameSprite {
     public:
 
         //! Construct a new AnimatedSprite object.

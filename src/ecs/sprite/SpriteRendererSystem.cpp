@@ -91,7 +91,7 @@ namespace mars {
             }
 
             // If there is a sprite.
-            if (const Sprite *sprite = spriteRenderer->getSprite(); sprite != nullptr) {
+            if (const GameSprite *sprite = spriteRenderer->getSprite(); sprite != nullptr) {
 
                 const Rect& sourceRect = sprite->getSourceRect();
                 spriteBatch.draw(&sprite->getTexture(),

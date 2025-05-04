@@ -16,6 +16,9 @@
 #include "box2d/physics2d/Box2DWorld2D.h"
 #include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
 #include "lua/LuaManager.h"
+#include "entt_ecs/entt_ecs.h"
+#include "entt_ecs/sprite/sprite_renderer.h"
+#include "entt_ecs/transform/rect_transform.h"
 
 class MovePlayer final : public mars::AScript {
     mars::RectTransform *transform;
@@ -52,7 +55,7 @@ void createScene(const mars::Framework &framework, mars::EntityManager &entityMa
     std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
     auto playerTransform = player->addComponent<mars::RectTransform>();
     playerTransform->setDrawRectangle(mars::Rect{300, 100, 200, 200});
-    std::shared_ptr<mars::Sprite> uvSprite = std::make_shared<mars::Sprite>(uvTestTexture);
+    std::shared_ptr<mars::GameSprite> uvSprite = std::make_shared<mars::GameSprite>(uvTestTexture);
     auto playerSpriteRenderer = player->addComponent<mars::AnimatedSpriteRenderer>();
     playerSpriteRenderer->setSprite(uvSprite);
     playerSpriteRenderer->addAnimation("left", {mars::Rect{0, 0, 50, 50}, mars::Rect{50, 0, 50, 50}});
@@ -140,14 +143,18 @@ int main(int argc, char *argv[]) {
 
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::Metal,
+        mars::RenderingBackend::OpenGLES,
         glm::vec2(1280, 720)
     });
     mars::ECSManager ecsManager(framework);
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
+    mars_entt_ecs::EnttEcs ecs(framework);
+
 
     framework.initialize();
     ecsManager.initialize();
+
+
 
 
     std::vector<float> vertex = {
@@ -216,6 +223,11 @@ int main(int argc, char *argv[]) {
     createCamera(entityManager);
     loadLdtk(framework, entityManager);
 
+    auto ecs_entity = ecs.getRegistry().create();
+    ecs.getRegistry().emplace<mars_entt_ecs::RectTransform>(ecs_entity).position = {100, 300};
+    ecs.getRegistry().emplace<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
+
+
     // FRAME START EVENT?
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
@@ -232,8 +244,10 @@ int main(int argc, char *argv[]) {
         framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
         framework.getSpriteBatch().end();
 
+        ecs.render();
         world2D->render();
         ecsManager.render();
+
         // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
     });
 

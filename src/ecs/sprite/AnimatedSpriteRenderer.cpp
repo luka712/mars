@@ -12,7 +12,7 @@ namespace mars {
         currentAnimation = nullptr;
     }
 
-    Sprite *AnimatedSpriteRenderer::getSprite() const {
+    GameSprite *AnimatedSpriteRenderer::getSprite() const {
         return currentAnimation;
     }
 
@@ -39,7 +39,7 @@ namespace mars {
     std::string AnimatedSpriteRenderer::toString() {
         std::stringstream result;
 
-        Sprite *sprite = getSprite();
+        GameSprite *sprite = getSprite();
 
         result << "AnimatedSpriteRenderer\n"
                 //  << "\t - sprite(" << sprite->getTexture()->getLabel() << ")\n"

@@ -108,7 +108,7 @@ namespace mars {
 
         if (spriteRendererTable["texture_id"].valid()) {
             const std::string textureId = spriteRendererTable["texture_id"];
-            const std::shared_ptr<Sprite> sprite = ecsManager.getSpriteManager().getSprite(textureId);
+            const std::shared_ptr<GameSprite> sprite = ecsManager.getSpriteManager().getSprite(textureId);
             spriteRenderer->setSprite(sprite);
         }
 
@@ -129,7 +129,7 @@ namespace mars {
 
         if (animatedSpriteRendererTable["texture_id"].valid()) {
             const std::string textureId = animatedSpriteRendererTable["texture_id"];
-            const std::shared_ptr<Sprite> sprite = ecsManager.getSpriteManager().getSprite(textureId);
+            const std::shared_ptr<GameSprite> sprite = ecsManager.getSpriteManager().getSprite(textureId);
             animatedSpriteRenderer->setSprite(sprite);
         }
 

@@ -7,7 +7,7 @@
 
 #include "TileMapChunk.h"
 #include "core/math/Color.h"
-#include "core/sprite/Sprite.h"
+#include "core/sprite/game_sprite.h"
 #include "ecs/transform/RectTransform.h"
 #include "ecs/camera/Camera2D.h"
 

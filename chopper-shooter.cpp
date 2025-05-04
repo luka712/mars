@@ -10,6 +10,7 @@
 #include "asset_toolkit/asset_bundle/AssetBundleLoader.h"
 #include "ecs/ECSManager.h"
 #include "ecs/tilemap/TileMap.h"
+#include "entt_ecs/entt_ecs.h"
 
 
 #include "game/chopper-shooter/move-player.h"
@@ -129,7 +130,7 @@ void createScene(const mars::Framework &framework,
     radarTransform->setDrawRectangle(mars::Rect{1200, 15, 64, 64});
     mars::AnimatedSpriteRenderer *radarSpriteRenderer = radar->addComponent<mars::AnimatedSpriteRenderer>();
     radarSpriteRenderer->isFixed = true;
-    radarSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(radarTexture));
+    radarSpriteRenderer->setSprite(std::make_shared<mars::GameSprite>(radarTexture));
     radarSpriteRenderer->addAnimation("play", {
                                           mars::Rect{64 * 0, 0, 64, 64},
                                           mars::Rect{64 * 1, 0, 64, 64},
@@ -148,13 +149,13 @@ void createScene(const mars::Framework &framework,
     mars::RectTransform *heliportTransform = heliport->addComponent<mars::RectTransform>();
     heliportTransform->setDrawRectangle(mars::Rect{470, 450, 64, 64});
     mars::SpriteRenderer *heliportSpriteRenderer = heliport->addComponent<mars::SpriteRenderer>();
-    heliportSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(heliportTexture));
+    heliportSpriteRenderer->setSprite(std::make_shared<mars::GameSprite>(heliportTexture));
     // mars::Collider2D* collider = heliport->addComponent<mars::Collider2D>();
     // collider->setDebug(true);
 
 
 
-    radarSpriteRenderer->setSprite(std::make_shared<mars::Sprite>(radarTexture));
+    radarSpriteRenderer->setSprite(std::make_shared<mars::GameSprite>(radarTexture));
 }
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -211,6 +212,8 @@ int main(int argc, char *argv[]) {
 
     framework.initialize();
     ecsManager.initialize();
+
+
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
         ecsManager.frameStart();

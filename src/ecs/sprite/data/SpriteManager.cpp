@@ -11,7 +11,7 @@ namespace mars {
     {
     }
 
-    std::shared_ptr<Sprite> SpriteManager::getSprite(const std::string& name) {
+    std::shared_ptr<GameSprite> SpriteManager::getSprite(const std::string& name) {
         return sprites.find(name)->second;
     }
 
@@ -24,7 +24,7 @@ namespace mars {
             throw std::runtime_error(msg);
         }
 
-        sprites[spriteName] = std::make_shared<Sprite>(texture);
+        sprites[spriteName] = std::make_shared<GameSprite>(texture);
     }
 
 

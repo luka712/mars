@@ -2,10 +2,10 @@
 // Created by Erkapic Luka on 22.12.2024.
 //
 
-#include "core/sprite/Sprite.h"
+#include "core/sprite/game_sprite.h"
 
 namespace mars {
-    Sprite::Sprite(const std::shared_ptr<Texture2D> &texture)
+    GameSprite::GameSprite(const std::shared_ptr<Texture2D> &texture)
         : texture(texture) {
         width = texture->getWidth();
         height = texture->getHeight();
@@ -13,31 +13,31 @@ namespace mars {
         origin = {0,0}; // By default, top left corner is the origin.
     }
 
-    Texture2D &Sprite::getTexture() const {
+    Texture2D &GameSprite::getTexture() const {
         return *texture;
     }
 
-    std::shared_ptr<Texture2D> Sprite::getTextureShared() const {
+    std::shared_ptr<Texture2D> GameSprite::getTextureShared() const {
         return texture;
     }
 
-    uint32_t Sprite::getWidth() const {
+    uint32_t GameSprite::getWidth() const {
         return width;
     }
 
-    uint32_t Sprite::getHeight() const {
+    uint32_t GameSprite::getHeight() const {
         return height;
     }
 
-    Rect Sprite::getSourceRect() const {
+    Rect GameSprite::getSourceRect() const {
         return sourceRect;
     }
 
-    void Sprite::setSourceRect(const Rect sourceRect) {
+    void GameSprite::setSourceRect(const Rect sourceRect) {
         this->sourceRect = sourceRect;
     }
 
-    void Sprite::setOrigin(const glm::vec2 &origin) {
+    void GameSprite::setOrigin(const glm::vec2 &origin) {
         this->origin = origin;
     }
 }

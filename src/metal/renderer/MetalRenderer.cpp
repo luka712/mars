@@ -1,3 +1,6 @@
+
+#if __APPLE__
+
 #define NS_PRIVATE_IMPLEMENTATION
 #define CA_PRIVATE_IMPLEMENTATION
 #define MTL_PRIVATE_IMPLEMENTATION
@@ -45,3 +48,5 @@ namespace mars {
     void MetalRenderer::destroy() {
     }
 }
+
+#endif

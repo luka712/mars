@@ -8,7 +8,7 @@
 #include <string>
 #include <map>
 #include "core/texture/Texture2D.h"
-#include "core/sprite/Sprite.h"
+#include "core/sprite/game_sprite.h"
 
 namespace mars {
 
@@ -27,7 +27,7 @@ namespace mars {
         //! Get a sprite from the manager.
         //! @param name The name of the sprite.
         //! @return The sprite.
-        std::shared_ptr<Sprite> getSprite(const std::string &name);
+        std::shared_ptr<GameSprite> getSprite(const std::string &name);
 
         //! Add a sprite to the manager.
         //! @param texture The texture of the sprite.
@@ -36,7 +36,7 @@ namespace mars {
 
     private:
         Framework& framework;
-        std::map<std::string, std::shared_ptr<Sprite> > sprites;
+        std::map<std::string, std::shared_ptr<GameSprite> > sprites;
     };
 }
 

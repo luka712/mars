@@ -5,6 +5,12 @@
 Mars is C++ game framework created to run on variety of devices with different rendering backends.
 It can be used as low-level or as high level ECS framework.
 
+### Install dependencies
+
+#### Conan
+
+Run `conan install . -s compiler.cppstd=20`
+
 ### Build
 
 It is tested with C-Lion as IDE.

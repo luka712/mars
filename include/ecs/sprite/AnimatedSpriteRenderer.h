@@ -20,7 +20,7 @@ namespace mars {
         explicit AnimatedSpriteRenderer(Entity* entity);
 
         //! Get the current sprite.
-        [[nodiscard]] Sprite* getSprite() const override;
+        [[nodiscard]] GameSprite* getSprite() const override;
 
         //! Play the animation.
         //! @param animationName The name of the animation.

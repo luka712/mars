@@ -6,7 +6,7 @@
 #define SPRITERENDERER_H
 
 #include "core/math/Color.h"
-#include "core/sprite/Sprite.h"
+#include "core/sprite/game_sprite.h"
 #include "ecs/layering/Layer.h"
 #include "ecs/transform/RectTransform.h"
 
@@ -28,11 +28,11 @@ namespace mars {
 
         //! Gets the sprite.
         //! @return The sprite. It can be nullptr.
-        [[nodiscard]] virtual Sprite* getSprite() const;
+        [[nodiscard]] virtual GameSprite* getSprite() const;
 
         //! Sets the sprite.
         //! @param sprite The sprite.
-        void setSprite(std::shared_ptr<Sprite> sprite);
+        void setSprite(std::shared_ptr<GameSprite> sprite);
 
         //! @copydoc
         void initialize() override;
@@ -52,7 +52,7 @@ namespace mars {
     protected:
           SpriteRendererSystem* system{};
           RectTransform* rectTransform{};
-          std::shared_ptr<Sprite> sprite;
+          std::shared_ptr<GameSprite> sprite;
     };
 
 }
