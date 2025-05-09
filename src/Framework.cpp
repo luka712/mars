@@ -39,9 +39,9 @@ namespace mars {
 #endif
         else {
             this->renderer = std::make_unique<OpenGLESRenderer>(*this, options.frameBufferSize);
-            this->spriteBatch = std::make_unique<SpriteBatch>(*this);
         }
 
+        this->spriteBatch = std::make_unique<SpriteBatch>(*this);
         this->timeManager = std::make_unique<TimeManager>();
         this->imageLoader = std::make_unique<ImageLoader>(*this);
         this->textureFactory = std::make_unique<TextureFactory>(*this);
@@ -100,7 +100,7 @@ namespace mars {
 
         // RENDERER
         renderer->initialize();
-        spriteBatch->initialize();
+        // spriteBatch->initialize();
         // TODO: uncomment
         // spriteFontManager->initialize();
 
@@ -147,7 +147,7 @@ namespace mars {
         renderer->endRenderPass();
 
         // - FRAME END
-        spriteBatch->frameEnd();
+        // spriteBatch->frameEnd();
         timeManager->frameEnd();
     }
 

@@ -141,21 +141,32 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Hello, World!" << std::endl;
 
+    mars::RenderingBackend backend = mars::RenderingBackend::OpenGL;
+#if __APPLE__
+    backend = mars::RenderingBackend::Metal;
+#endif
+
     mars::Framework framework(mars::FrameworkOptions{
         mars::WindowBounds(1280, 720),
-        mars::RenderingBackend::OpenGLES,
+        backend,
         glm::vec2(1280, 720)
     });
+
+    framework.initialize();
+    //  ecsManager.initialize();
+
+#if __APPLE__
+    framework.subscribeToUpdateEvent([&](const mars::Time time) {
+
+    });
+
+    framework.subscribeToRenderEvent([&]() {});
+    framework.runEventLoop();
+#endif
+
     mars::ECSManager ecsManager(framework);
     mars::EntityManager &entityManager = ecsManager.getEntityManager();
     mars_entt_ecs::EnttEcs ecs(framework);
-
-
-    framework.initialize();
-    ecsManager.initialize();
-
-
-
 
     std::vector<float> vertex = {
         0.0f, 0.0f, 0.0f,

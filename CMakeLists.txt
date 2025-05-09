@@ -9,7 +9,7 @@ include(FetchContent)
 
 # SYSTEM PACKAGES
 if(APPLE)
-    find_package(lua)
+    find_package(lua REQUIRED)
     find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
     find_library(QUARTZ_CORE_LIBRARY QuartzCore REQUIRED)
     find_library(METAL_LIBRARY Metal REQUIRED)

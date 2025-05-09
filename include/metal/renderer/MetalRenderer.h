@@ -35,7 +35,19 @@ namespace mars {
 
     private:
         SDL_Window *window;
+        //! The metal layer.
+        CA::MetalLayer* metalLayer;
+        //! The window surface to draw to.
+        CA::MetalDrawable* currentDrawable;
         MTL::Device* device;
+        MTL::CommandQueue *queue;
+
+        // RENDERING
+        MTL::CommandBuffer *renderCommandBuffer;
+        MTL::RenderCommandEncoder *renderCommandEncoder;
+
+        //! Create a new render pass.
+        void setupNewRenderPass();
     };
 }
 
