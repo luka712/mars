@@ -153,6 +153,7 @@ int main(int argc, char *argv[]) {
     });
 
     framework.initialize();
+    framework.getBuffersFactory().createVertexBuffer({1.0f,1.0f,1.0f}, 3, mars::BufferUsage::Vertex_CopyDst, "Hello");
     //  ecsManager.initialize();
 
 #if __APPLE__

@@ -6,7 +6,6 @@
 #define METAL_RENDERER_H
 
 #if __APPLE__
-
 #include <SDL.h>
 #include "metal/metal.h"
 #include "core/renderer/Renderer.h"
@@ -20,6 +19,10 @@ namespace mars {
         //! @param framework The framework.
         //! @param frameBufferSize The frame buffer size.
         explicit MetalRenderer(Framework &framework, glm::vec2 frameBufferSize);
+
+        //! Gets the Metal device.
+        //! @return The MTL::Device pointer.
+        [[nodiscard]] MTL::Device* getDevice() const { return  device; }
 
         //! @copydoc Renderer::initialize()
         void initialize() override;

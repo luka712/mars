@@ -9,7 +9,7 @@ namespace mars {
     OpenGLESConverter::OpenGLESConverter(Logger &logger) : logger(logger) {
     }
 
-    GLenum OpenGLESConverter::convertToGLHint(BufferUsage usage) {
+    GLenum OpenGLESConverter::convertToGLHint(const BufferUsage usage) const {
         switch (usage) {
             case BufferUsage::Vertex:
                 return GL_STATIC_DRAW;

@@ -5,7 +5,6 @@
 #include <sstream>
 #include "opengles/buffers/OpenGLESVertexBuffer.h"
 
-
 namespace mars {
     OpenGLESVertexBuffer::OpenGLESVertexBuffer(const Framework &framework, const std::string &label)
         : AVertexBuffer(label),

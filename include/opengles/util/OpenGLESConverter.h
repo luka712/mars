@@ -18,7 +18,7 @@ namespace mars {
         explicit OpenGLESConverter(Logger& logger);
 
         //! Converts the buffer usage to OpenGLES buffer usage.
-        GLenum convertToGLHint(BufferUsage usage);
+        GLenum convertToGLHint(BufferUsage usage) const;
 
     private:
         Logger &logger;

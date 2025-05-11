@@ -10,6 +10,10 @@
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
 #include "opengles/buffers/OpenGLESVertexBuffer.h"
 
+#if __APPLE__
+#include "metal/buffers/metal_vertex_buffer.h"
+#endif
+
 namespace mars {
     BuffersFactory::BuffersFactory(Framework &framework) : framework(framework) {
     }
@@ -25,6 +29,11 @@ namespace mars {
             case RenderingBackend::OpenGLES:
                 buffer = new OpenGLESVertexBuffer(framework, label);
                 break;
+#if __APPLE__
+            case RenderingBackend::Metal:
+                buffer = new MetalVertexBuffer(framework, label);
+                break;
+#endif
             default:
                 throw std::runtime_error("BuffersFactory::createVertexBuffer: Rendering backend not supported.");
         }

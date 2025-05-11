@@ -136,7 +136,14 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         include/entt_ecs/sprite/sprite_renderer.h
         src/entt_ecs/entt_ecs.cpp
         include/entt_ecs/sprite/sprite_renderer_system.h
-        src/entt_ecs/sprite/sprite_renderer_system.cpp)
+        src/entt_ecs/sprite/sprite_renderer_system.cpp
+        include/metal/buffers/metal_vertex_buffer.h
+        include/metal/util/metal_util.h
+        include/metal/util/metal_buffer_util.h
+        src/metal/util/metal_buffer_util.cpp
+        src/metal/buffers/metal_vertex_buffer.cpp
+        include/metal/util/metal_converter.h
+        src/metal/util/metal_converter.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

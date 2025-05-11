@@ -10,10 +10,12 @@
 #include <Metal/Metal.hpp>
 #include <QuartzCore/QuartzCore.hpp>
 
-#include <SDL.h>
+
 #include <format>
 #include "Framework.h"
+#include "metal/util/metal_util.h"
 #include "metal/renderer/MetalRenderer.h"
+
 
 namespace mars {
     static Logger *staticLogger = nullptr;
@@ -31,6 +33,8 @@ namespace mars {
         window = framework.getWindowManager().getWindow();
         Logger &logger = framework.getLogger();
         staticLogger = &logger;
+
+        MetalUtil::initialize(logger);
 
         metalLayer = framework.getWindowManager().getMetalLayer();
         device = CreateSystemDefaultDevice();
