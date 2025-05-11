@@ -7,7 +7,7 @@
 
 #include "core/buffers/AVertexBuffer.h"
 #include "metal/metal.h"
-#include "metal/renderer/MetalRenderer.h"
+#include "metal/renderer/metal_renderer.h"
 #include "Framework.h"
 
 namespace mars {
@@ -44,6 +44,7 @@ namespace mars {
 
         // METAL
         MTL::Device *device{};
+        MTL::CommandQueue *queue{};
         MTL::ResourceOptions options{};
         MTL::Buffer *buffer;
     };

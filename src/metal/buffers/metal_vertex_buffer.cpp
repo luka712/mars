@@ -3,12 +3,14 @@
 //
 
 #include <sstream>
+#include "Framework.h"
 #include "metal/buffers/metal_vertex_buffer.h"
 #include "metal/util/metal_util.h"
+#include "metal/renderer/metal_renderer.h"
 
 namespace mars {
     MetalVertexBuffer::MetalVertexBuffer(const Framework &framework, const std::string &label): AVertexBuffer(label),
-        renderer(dynamic_cast<MetalRenderer &>(framework.getRenderer())),
+        renderer(dynamic_cast<MetalRenderer&>(framework.getRenderer())),
         logger(framework.getLogger()), usage(BufferUsage::Vertex), buffer() {
     }
 
@@ -19,9 +21,10 @@ namespace mars {
         const BufferUsage usage)
     {
         device = renderer.getDevice();
+        queue = renderer.getQueue();
 
         options = MetalUtil::getMetalConverter().convert(usage);
-        buffer = MetalUtil::getBufferUtil().create(device, data, byteSize, label, options);
+        buffer = MetalUtil::getBufferUtil().create(device, queue, data, byteSize, label, options);
     }
 
     void MetalVertexBuffer::initialize(uint32_t byteSize, uint32_t vertexCount) {
@@ -30,7 +33,6 @@ namespace mars {
     }
 
     void MetalVertexBuffer::update(void *data, uint32_t byteSize, uint32_t offset) {
-
 
     }
 

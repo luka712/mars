@@ -14,7 +14,7 @@
 #include <format>
 #include "Framework.h"
 #include "metal/util/metal_util.h"
-#include "metal/renderer/MetalRenderer.h"
+#include "metal/renderer/metal_renderer.h"
 
 
 namespace mars {
@@ -115,6 +115,10 @@ namespace mars {
     }
 
     void MetalRenderer::destroy() {
+    }
+
+    MetalRenderer& toMetalRenderer(Renderer& renderer) {
+        return *dynamic_cast<MetalRenderer*>(&renderer);
     }
 }
 

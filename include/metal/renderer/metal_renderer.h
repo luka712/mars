@@ -24,6 +24,10 @@ namespace mars {
         //! @return The MTL::Device pointer.
         [[nodiscard]] MTL::Device* getDevice() const { return  device; }
 
+        //! Gets the Metal queue.
+        //! @return The MTL::Queue pointer.
+            [[nodiscard]] MTL::CommandQueue * getQueue() const { return queue; }
+
         //! @copydoc Renderer::initialize()
         void initialize() override;
 
@@ -52,6 +56,11 @@ namespace mars {
         //! Create a new render pass.
         void setupNewRenderPass();
     };
+
+    //! Convert the renderer to the Metal renderer.
+    //! @param renderer The renderer.
+    //! @return The MetalRenderer.
+    static MetalRenderer& toMetalRenderer(Renderer& renderer);
 }
 
 #endif

@@ -143,7 +143,9 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         src/metal/util/metal_buffer_util.cpp
         src/metal/buffers/metal_vertex_buffer.cpp
         include/metal/util/metal_converter.h
-        src/metal/util/metal_converter.cpp)
+        src/metal/util/metal_converter.cpp
+        include/metal/buffers/metal_index_buffer.h
+        src/metal/buffers/metal_index_buffer.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

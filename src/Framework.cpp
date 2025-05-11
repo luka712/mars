@@ -14,7 +14,7 @@
 #endif
 
 #if __APPLE__
-#include "metal/renderer/MetalRenderer.h"
+#include "metal/renderer/metal_renderer.h"
 #endif
 
 namespace mars {

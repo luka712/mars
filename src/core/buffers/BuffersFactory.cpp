@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "Framework.h"
 #include "core/buffers/BuffersFactory.h"
+
+#include "metal/buffers/metal_index_buffer.h"
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
@@ -12,6 +14,7 @@
 
 #if __APPLE__
 #include "metal/buffers/metal_vertex_buffer.h"
+#include "metal/buffers/metal_index_buffer.h"
 #endif
 
 namespace mars {
@@ -52,6 +55,11 @@ namespace mars {
             case RenderingBackend::OpenGLES:
                 buffer = new OpenGLESIndexBuffer(framework, label);
                 break;
+#if __APPLE__
+            case RenderingBackend::Metal:
+                buffer = new MetalIndexBuffer(framework, label);
+                break;
+#endif
             default:
                 throw std::runtime_error("BuffersFactory::createindexBuffer: Rendering backend not supported.");
         }
