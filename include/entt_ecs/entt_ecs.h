@@ -5,15 +5,11 @@
 #ifndef ENTT_ECS_H
 #define ENTT_ECS_H
 
+#include "Framework.h"
 #include <memory>
 #include <entt/entt.hpp>
 #include "entt_ecs/transform/rect_transform_system.h"
 #include "entt_ecs/sprite/sprite_renderer_system.h"
-
-namespace mars {
-
-    class Framework;
-}
 
 namespace mars_entt_ecs {
 

@@ -4,6 +4,7 @@
 
 #include "Framework.h"
 #include "entt_ecs/entt_ecs.h"
+#include "entt_ecs/layer/layer_tag.h"
 
 namespace mars_entt_ecs {
     EnttEcs::EnttEcs(mars::Framework &framework)
@@ -17,10 +18,6 @@ namespace mars_entt_ecs {
 
     void EnttEcs::render() {
 
-        auto spriteBatch = framework.getSpriteBatch();
-
-        spriteBatch.begin();
-        spriteRendererSystem->render();
-        spriteBatch.end();
+        spriteRendererSystem->render<Layer0Tag>();
     }
 }

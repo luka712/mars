@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
+#if __APPLE__
+
 #include <sstream>
 #include "Framework.h"
 #include "metal/buffers/metal_vertex_buffer.h"
@@ -76,3 +78,5 @@ namespace mars {
         return dynamic_cast<MetalVertexBuffer *>(vertexBuffer);
     }
 }
+
+#endif

@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
+#if __APPLE__
+
 #include <string>
 #include <stdexcept>
 #include "metal/util/metal_converter.h"
@@ -26,3 +28,5 @@ namespace mars {
         }
     }
 }
+
+#endif

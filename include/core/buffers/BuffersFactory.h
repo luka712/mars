@@ -31,7 +31,7 @@ namespace mars {
         //! @param usage The usage of the buffer.
         //! @param label The label of the buffer.
         //! @return The shared pointer to the vertex buffer.
-        [[nodiscard]] std::shared_ptr<AVertexBuffer> createVertexBuffer(
+        std::shared_ptr<AVertexBuffer> createVertexBuffer(
             const std::vector<float>& data,
             uint32_t vertexCount,
             BufferUsage usage,

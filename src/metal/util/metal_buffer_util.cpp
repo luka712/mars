@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
+#if __APPLE__
+
 #include "metal/util/metal_buffer_util.h"
 
 #include <memory>
@@ -89,6 +91,6 @@ namespace mars {
 
         return buffer;
     }
-
-
 }
+
+#endif

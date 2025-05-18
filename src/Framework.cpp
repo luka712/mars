@@ -100,7 +100,7 @@ namespace mars {
 
         // RENDERER
         renderer->initialize();
-        // spriteBatch->initialize();
+        spriteBatch->initialize();
         // TODO: uncomment
         // spriteFontManager->initialize();
 

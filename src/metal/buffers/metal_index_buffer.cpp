@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
+#if __APPLE__
+
 #include <sstream>
 #include "metal/buffers/metal_index_buffer.h"
 #include "metal/renderer/metal_renderer.h"
@@ -54,6 +56,6 @@ namespace mars {
     void  MetalIndexBuffer::destroy() {
         buffer->release();
     }
-
-
 }
+
+#endif

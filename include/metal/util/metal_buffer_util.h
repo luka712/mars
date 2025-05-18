@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
+#if __APPLE__
+
 #ifndef METAL_BUFFER_UTIL_H
 #define METAL_BUFFER_UTIL_H
 
@@ -55,3 +57,5 @@ namespace mars {
 }
 
 #endif //METAL_BUFFER_UTIL_H
+
+#endif

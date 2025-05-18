@@ -7,6 +7,11 @@ set(CMAKE_CXX_STANDARD 20)
 # INCLUDE
 include(FetchContent)
 
+# Define a macro in debug mode
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(DEBUG)
+endif()
+
 # SYSTEM PACKAGES
 if(APPLE)
     find_package(lua REQUIRED)
@@ -145,7 +150,8 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         include/metal/util/metal_converter.h
         src/metal/util/metal_converter.cpp
         include/metal/buffers/metal_index_buffer.h
-        src/metal/buffers/metal_index_buffer.cpp)
+        src/metal/buffers/metal_index_buffer.cpp
+        include/entt_ecs/layer/layer_tag.h)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

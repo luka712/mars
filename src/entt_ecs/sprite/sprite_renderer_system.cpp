@@ -3,39 +3,28 @@
 //
 
 #include "entt_ecs/sprite/sprite_renderer_system.h"
-
-#include <Framework.h>
-
-#include "entt_ecs/transform/rect_transform.h"
-#include "entt_ecs/sprite/sprite_renderer.h"
 #include "entt_ecs/entt_ecs.h"
 
 namespace mars_entt_ecs {
     SpriteRendererSystem::SpriteRendererSystem(EnttEcs &ecs)
-        : ecs(ecs) {
+        : ecs(ecs), framework(ecs.getFramework()), registry(ecs.getRegistry()), spriteBatch(nullptr) {
     }
 
-    void SpriteRendererSystem::render() {
+    void SpriteRendererSystem::render(const RectTransform &rect_transform, const SpriteRenderer &sprite_renderer) const {
 
-        auto spriteBatch = ecs.getFramework().getSpriteBatch();
-        const auto view = ecs.getRegistry().view<SpriteRenderer, RectTransform>();
+        auto drawRect = mars::Rect();
+        drawRect.x = rect_transform.position.x;
+        drawRect.y = rect_transform.position.y;
+        drawRect.width = rect_transform.size.x;
+        drawRect.height = rect_transform.size.y;
 
-        view.each([&](auto entity, const SpriteRenderer& renderer, const RectTransform& rectTransform) {
+        auto& sprite = sprite_renderer.sprite;
 
-            auto drawRect = mars::Rect();
-            drawRect.x = rectTransform.position.x;
-            drawRect.y = rectTransform.position.y;
-            drawRect.width = rectTransform.size.x;
-            drawRect.height = rectTransform.size.y;
-
-            auto& sprite = renderer.sprite;
-
-            if (sprite.get() != nullptr) {
-                const mars::Rect sourceRect = sprite->getSourceRect();
-                spriteBatch.draw(&sprite->getTexture(), drawRect, sourceRect, renderer.color);
-            } else {
-                spriteBatch.draw(drawRect, renderer.color);
-            }
-        });
+        if (sprite.get() != nullptr) {
+            const mars::Rect sourceRect = sprite->getSourceRect();
+            spriteBatch->draw(&sprite->getTexture(), drawRect, sourceRect, sprite_renderer.color);
+        } else {
+            spriteBatch->draw(drawRect, sprite_renderer.color);
+        }
     }
 }

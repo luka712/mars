@@ -17,6 +17,7 @@
 #include "include/box2d/physics2d/shape/Box2DPolygonShape.h"
 #include "lua/LuaManager.h"
 #include "entt_ecs/entt_ecs.h"
+#include "entt_ecs/layer/layer_tag.h"
 #include "entt_ecs/sprite/sprite_renderer.h"
 #include "entt_ecs/transform/rect_transform.h"
 
@@ -141,7 +142,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Hello, World!" << std::endl;
 
-    mars::RenderingBackend backend = mars::RenderingBackend::OpenGL;
+    mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
 #if __APPLE__
     backend = mars::RenderingBackend::Metal;
 #endif
@@ -153,8 +154,16 @@ int main(int argc, char *argv[]) {
     });
 
     framework.initialize();
-    framework.getBuffersFactory().createVertexBuffer({1.0f,1.0f,1.0f}, 3, mars::BufferUsage::Vertex, "Hello");
-    framework.getBuffersFactory().createIndexBuffer({1,1,1}, "IndexBuffer");
+    std::vector vertex = {
+        0.0f, 0.0f, 0.0f,
+        100.0f, 0.0f, 0.0f,
+        100.0f, 100.0f, 0.0f,
+        0.0f, 100.0f, 0.0f
+    };
+    auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
+    auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({0, 1, 2, 2, 3, 0}, "Hello");
+
+
     //  ecsManager.initialize();
 
 #if __APPLE__
@@ -166,19 +175,11 @@ int main(int argc, char *argv[]) {
     framework.runEventLoop();
 #endif
 
-    mars::ECSManager ecsManager(framework);
-    mars::EntityManager &entityManager = ecsManager.getEntityManager();
     mars_entt_ecs::EnttEcs ecs(framework);
+    ecs.initialize();
 
-    std::vector<float> vertex = {
-        0.0f, 0.0f, 0.0f,
-        100.0f, 0.0f, 0.0f,
-        100.0f, 100.0f, 0.0f,
-        0.0f, 100.0f, 0.0f
-    };
-    auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
-    auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({0, 1, 2, 2, 3, 0}, "Hello");
     std::vector<float> data = {1.0f, 2.0f, 3.0f, 4.0f};
+
     auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(
         data.data(), "Hello", 16, mars::BufferUsage::Uniform);
     std::shared_ptr<mars::Texture2D> tileMapTexture = framework
@@ -206,6 +207,7 @@ int main(int argc, char *argv[]) {
     worldDef.gravity = glm::vec2(0, -9.8f);
 
     // STATIC BODY - GROUND
+    /*
     std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(framework, worldDef);
     world2D->initialize();
 
@@ -232,39 +234,43 @@ int main(int argc, char *argv[]) {
     fixtureDef.shape = &dynamicBox;
 
     body->createFixture(fixtureDef);
+*/
+    // createCamera(entityManager);
+    // loadLdtk(framework, entityManager);
 
-    createCamera(entityManager);
-    loadLdtk(framework, entityManager);
-
-    auto ecs_entity = ecs.getRegistry().create();
+    const auto ecs_entity = ecs.getRegistry().create();
     ecs.getRegistry().emplace<mars_entt_ecs::RectTransform>(ecs_entity).position = {100, 300};
+    ecs.getRegistry().emplace<mars_entt_ecs::Layer0Tag>(ecs_entity);
     ecs.getRegistry().emplace<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
 
 
     // FRAME START EVENT?
 
     framework.subscribeToUpdateEvent([&](const mars::Time time) {
-        ecsManager.frameStart();
+       // ecsManager.frameStart();
 
-        world2D->update(time, 6, 2);
+       // world2D->update(time, 6, 2);
 
-        ecsManager.update(time);
+      //  ecsManager.update(time);
+
     });
 
     framework.subscribeToRenderEvent([&]() {
         framework.getSpriteBatch().begin();
+
         //  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-        framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
+      //  framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
         framework.getSpriteBatch().end();
 
         ecs.render();
-        world2D->render();
-        ecsManager.render();
+
+     //   world2D->render();
+       // ecsManager.render();
 
         // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
     });
 
-    createScene(framework, entityManager);
+  //  createScene(framework, entityManager);
 
     framework.runEventLoop();
     framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");

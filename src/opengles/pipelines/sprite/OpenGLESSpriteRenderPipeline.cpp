@@ -76,11 +76,16 @@ namespace mars {
         AVertexBuffer *vertexBuffer,
         AIndexBuffer *indexBuffer,
         const uint32_t indicesCount,
-        uint32_t indicesOffset) {
+        const uint32_t indicesOffset) {
+
+#if DEBUG
+        assert(camera != nullptr);
+#endif
+
         const OpenGLESVertexBuffer *glVertexBuffer = toOpenGLESVertexBuffer(vertexBuffer);
         const OpenGLESIndexBuffer *glIndexBuffer = toOpenGLESIndexBuffer(indexBuffer);
 
-        if (GLuint glBuffer = glVertexBuffer->getBuffer(); glBuffer != glLastVertexBuffer) {
+        if (const GLuint glBuffer = glVertexBuffer->getBuffer(); glBuffer != glLastVertexBuffer) {
             createVao(glBuffer);
             glLastVertexBuffer = glBuffer;
         }

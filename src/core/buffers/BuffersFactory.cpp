@@ -6,15 +6,14 @@
 #include "Framework.h"
 #include "core/buffers/BuffersFactory.h"
 
-#include "metal/buffers/metal_index_buffer.h"
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
 #include "opengles/buffers/OpenGLESVertexBuffer.h"
 
 #if __APPLE__
-#include "metal/buffers/metal_vertex_buffer.h"
 #include "metal/buffers/metal_index_buffer.h"
+#include "metal/buffers/metal_vertex_buffer.h"
 #endif
 
 namespace mars {
