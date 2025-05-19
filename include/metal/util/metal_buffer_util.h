@@ -51,6 +51,12 @@ namespace mars {
                             bool waitForCopyToFinish = false
         );
 
+        //! Update the buffer which is created as shared buffer with MTL::ResourceStorageModeShared.
+        //! @param buffer The buffer to update.
+        //! @param data The data of buffer.
+        //! @param byteSize The size of buffer in bytes.
+        void updateSharedBuffer(MTL::Buffer *buffer, void* data, const uint32_t byteSize);
+
     private:
         Logger &logger;
     };

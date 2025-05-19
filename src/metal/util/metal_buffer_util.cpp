@@ -91,6 +91,10 @@ namespace mars {
 
         return buffer;
     }
+
+    void MetalBufferUtil::updateSharedBuffer(MTL::Buffer *buffer, void* data, const uint32_t byteSize) {
+        memcpy(buffer->contents(), data, byteSize);
+    }
 }
 
 #endif

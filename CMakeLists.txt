@@ -151,7 +151,11 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         src/metal/util/metal_converter.cpp
         include/metal/buffers/metal_index_buffer.h
         src/metal/buffers/metal_index_buffer.cpp
-        include/entt_ecs/layer/layer_tag.h)
+        include/entt_ecs/layer/layer_tag.h
+        include/metal/buffers/metal_uniform_buffer.h
+        src/metal/buffers/metal_uniform_buffer.cpp
+        include/metal/buffers/metal_instance_buffer.h
+        src/metal/buffers/metal_instance_buffer.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

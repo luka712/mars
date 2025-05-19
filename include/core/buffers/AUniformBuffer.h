@@ -18,6 +18,8 @@ namespace mars
     class AUniformBuffer
     {
     public:
+        virtual ~AUniformBuffer() = default;
+
         //! The constructor.
         //! @param framework The framework.
         //! @param label The label.
