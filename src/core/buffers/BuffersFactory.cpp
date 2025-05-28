@@ -6,6 +6,7 @@
 #include "Framework.h"
 #include "core/buffers/BuffersFactory.h"
 
+#include "metal/buffers/metal_uniform_buffer.h"
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
@@ -14,6 +15,7 @@
 #if __APPLE__
 #include "metal/buffers/metal_index_buffer.h"
 #include "metal/buffers/metal_vertex_buffer.h"
+#include "metal/buffers/metal_uniform_buffer.h"
 #endif
 
 namespace mars {
@@ -79,6 +81,11 @@ namespace mars {
             case RenderingBackend::OpenGLES:
                 buffer = new OpenGLESUniformBuffer(framework, data, label, byteSize, bufferUsage);
                 break;
+#if __APPLE__
+            case RenderingBackend::Metal:
+                buffer = new MetalUniformBuffer(framework, data, label, byteSize, bufferUsage);
+                break;
+#endif
             default:
                 throw std::runtime_error("BuffersFactory::createUniformBuffer: Rendering backend not supported.");
         }
