@@ -17,6 +17,10 @@
 #include "metal/renderer/metal_renderer.h"
 #endif
 
+#if __WIN32__
+#include "dx11/renderer/dx11_renderer.h"
+#endif
+
 namespace mars {
     Framework::Framework(FrameworkOptions options)
     {
@@ -35,6 +39,10 @@ namespace mars {
 #if __APPLE__
         else if (renderingBackend == RenderingBackend::Metal) {
             this->renderer = std::make_unique<MetalRenderer>(*this, options.frameBufferSize);
+        }
+#elif __WIN32__
+        else if (renderingBackend == RenderingBackend::D3D11) {
+            this->renderer = std::make_unique<DX11Renderer>(*this, options.frameBufferSize);
         }
 #endif
         else {

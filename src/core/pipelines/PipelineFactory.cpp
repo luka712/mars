@@ -2,6 +2,7 @@
 // Created by luka on 09.02.25.
 //
 
+#include <stdexcept>
 #include "Framework.h"
 #include "core/pipelines/PipelineFactory.h"
 #include "opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h"

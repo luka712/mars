@@ -2,6 +2,7 @@
 // Created by Erkapic Luka on 29.3.2025.
 //
 
+#include <stdexcept>
 #include "Framework.h"
 #include "ecs/sprite/data/SpriteManager.h"
 

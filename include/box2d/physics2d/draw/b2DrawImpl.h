@@ -40,8 +40,11 @@ namespace mars {
         void DrawPoint(const b2Vec2 &p, float size, const b2Color &color) override;
 
         //! Draws the content to the screen.
-        //! All other methods "Draw" methods just fill the vertexData buffer.
+        //! All other "Draw" methods just fill the vertexData buffer.
         void render();
+
+        //! Destroy the debug draw.
+        void destroy();
 
     private:
         static const int32_t VERTEX_FLOATS;
@@ -56,9 +59,9 @@ namespace mars {
         std::shared_ptr<AVertexBuffer> vertexBuffer;
 
         //! Add a vertex to the vertex data.
-        //! @param a The vertex position.
+        //! @param pos The vertex position.
         //! @param color The vertex color.
-        void addVertex(const b2Vec2 &a, const b2Color &color);
+        void addVertex(const b2Vec2 &pos, const b2Color &color);
     };
 }
 

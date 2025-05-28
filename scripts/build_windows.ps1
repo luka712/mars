@@ -1,0 +1,1 @@
+cmake -B cmake-build-debugvisualstudio -S . -DCMAKE_TOOLCHAIN_FILE=D:/_Windows/vcpkg/scripts/buildsystems/vcpkg.cmake

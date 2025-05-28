@@ -7,7 +7,6 @@
 
 #include <map>
 #include <string>
-#include <cxxabi.h>
 
 #include "ecs/ECSManager.h"
 #include "ecs/components/AComponent.h"
@@ -91,8 +90,8 @@ namespace mars {
             const std::string key = typeid(T).name();
             if ( componentsMap.contains(key)) {
                 int32_t status = 0;
-                char* demangledName = abi::__cxa_demangle(key.c_str(), nullptr, nullptr, &status);
-                const std::string name = status == 0 ? demangledName : key;
+                // char* demangledName = abi::__cxa_demangle(key.c_str(), nullptr, nullptr, &status);
+                const std::string name = key;
                 const std::string msg = "Component of type " + name + " is already added to the entity.";
                 framework.getLogger().error(msg.c_str());
                 throw std::runtime_error(msg);

@@ -1,5 +1,6 @@
 
 #include "box2d/physics2d/util/Box2DUtil.h"
+#include <stdexcept>
 
 namespace mars {
 

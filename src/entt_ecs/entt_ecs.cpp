@@ -9,6 +9,7 @@
 namespace mars_entt_ecs {
     EnttEcs::EnttEcs(mars::Framework &framework)
         : framework(framework) {
+        entityBuilder = std::make_unique<EntityBuilder>(*this);
         rectTransformSystem = std::make_unique<RectTransformSystem>(*this);
         spriteRendererSystem = std::make_unique<SpriteRendererSystem>(*this);
     }

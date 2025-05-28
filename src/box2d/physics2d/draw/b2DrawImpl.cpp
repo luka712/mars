@@ -38,7 +38,7 @@ namespace mars {
         const auto camera = framework.getSpriteBatch().getCamera();
         pipeline = framework.getPipelineFactory().createLinesRenderPipeline(
             camera.getProjectionViewBuffer(),
-            *modelBuffer.get());
+            *modelBuffer);
 
         currentState = INITIALIZED;
     }
@@ -115,9 +115,20 @@ namespace mars {
             throw std::runtime_error(msg);
         }
 
+        if (currentVertexCount == 0) {
+            return;
+        }
+
         vertexBuffer->update(vertexData.data(), currentVertexCount * VERTEX_FLOATS * sizeof(float), 0);
         pipeline->render(*vertexBuffer.get(), 1, currentVertexCount);
         currentVertexCount = 0;
         vertexDataIndex = 0;
+    }
+
+    void b2DrawImpl::destroy() {
+        // TODO:
+        // pipeline->destroy();
+        vertexBuffer->destroy();
+        modelBuffer->destroy();
     }
 }

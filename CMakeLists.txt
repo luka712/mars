@@ -7,14 +7,33 @@ set(CMAKE_CXX_STANDARD 20)
 # INCLUDE
 include(FetchContent)
 
+# PRE-SETUP
+if(WIN32)
+    # Find and set the manifest tool path
+    find_program(CMAKE_MT mt.exe
+            PATHS
+            "C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64"
+            DOC "Path to mt.exe"
+    )
+
+    if(NOT CMAKE_MT)
+        message(WARNING "mt.exe not found - manifest embedding may fail")
+    endif()
+endif()
+
 # Define a macro in debug mode
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(DEBUG)
 endif()
 
-# SYSTEM PACKAGES
+# SYSTEM PACKAGES ( OR INSTALLED THROUGH HOME-BREW, VCPKG, etc. )
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(lua CONFIG REQUIRED)
+
 if(APPLE)
-    find_package(lua REQUIRED)
+
     find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
     find_library(QUARTZ_CORE_LIBRARY QuartzCore REQUIRED)
     find_library(METAL_LIBRARY Metal REQUIRED)
@@ -26,14 +45,17 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 # VARIABLES
 if(WIN32)
-    # NOTE: SET DIFFERENT PATH FOR YOUR SDL2 INSTALLATION
-    set(SDL2_PATH "D:/_Windows/Libs/SDL2-devel-2.30.9-mingw/SDL2/x86_64-w64-mingw32")
-    set(SDL2_IMAGE_PATH "D:/_Windows/Libs/SDL2_image-devel-2.8.3-mingw/SDL2_image-2.8.3/x86_64-w64-mingw32")
 
-    set(LUA_PATH "D:/_Windows/lua")
-    set(LUA_INCLUDE_DIR "${LUA_PATH}")
+    set(DX11 d3d11 dxgi d3dcompiler)
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++ -pthread")
+    # set(LUA_PATH "D:\\_Windows\\lua")
+    # set(LUA_INCLUDE_DIR "${LUA_PATH}")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+    set(SDL2_LIBRARY $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
+    set(SDL2_IMAGE_LIBRARY $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
 elseif(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
 
@@ -52,9 +74,8 @@ elseif(APPLE)
 endif()
 
 # PACKAGES
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(glm REQUIRED)
+
+
 find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
@@ -62,7 +83,7 @@ find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
 find_package(sol REQUIRED)
 find_package(Entt REQUIRED)
-if(EMSCRIPTEN OR WIN32)
+if(EMSCRIPTEN)
     find_package(lua REQUIRED)
 endif()
 
@@ -93,28 +114,36 @@ add_executable(mars main.cpp
         ${GLAD_SRC}
         ${TINYXML2_SRC})
 
+# DEFINITIONS
+target_compile_definitions(mars PRIVATE
+        ALLOW_DX11=1
+)
+
 # LINK
 target_link_libraries(mars
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
-        ${GLM_LIBRARY}
+        glm::glm
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
-        ${LUA_LIBRARY}
+        ${LUA_LIBRARIES}
         ${OPENGL_LIBRARY}
 
         # APPLE DEVICES
         ${QUARTZ_CORE_LIBRARY}
         ${FOUNDATION_LIBRARY}
         ${METAL_LIBRARY}
+
+        # WINDOWS DEVICES
+        ${DX11}
 )
 
 # COPY SHARED LIBS
 if(WIN32)
-    file(COPY shared_libs/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
-    file(COPY shared_libs/SDL2_image.dll DESTINATION ${CMAKE_BINARY_DIR})
-    file(COPY shared_libs/lua54.dll DESTINATION ${CMAKE_BINARY_DIR})
+    #file(COPY shared_libs/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
+    #file(COPY shared_libs/SDL2_image.dll DESTINATION ${CMAKE_BINARY_DIR})
+    # file(COPY shared_libs/lua54.dll DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
 # COPY ASSETS/CONTENT/SHADERS
@@ -151,7 +180,8 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         src/metal/util/metal_converter.cpp
         include/metal/buffers/metal_index_buffer.h
         src/metal/buffers/metal_index_buffer.cpp
-        include/entt_ecs/layer/layer_tag.h)
+        include/entt_ecs/layer/layer_tag.h
+        include/entt_ecs/entity_builder/entity_builder.h)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
@@ -161,7 +191,7 @@ target_link_libraries(tests
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
-        ${LUA_LIBRARY}
+        ${LUA_LIBRARIES}
 )
 
 # GAMES
@@ -174,11 +204,11 @@ add_executable(chopper-shooter chopper-shooter.cpp
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
-        ${GLM_LIBRARY}
+        glm::glm
         ${SPDLOG_LIBRARY}
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
-        ${LUA_LIBRARY}
+        ${LUA_LIBRARIES}
         ${OPENGL_LIBRARY}
 
         # APPLE DEVICES

@@ -1,15 +1,35 @@
 # Mars
 
-### What is Mars?
+## What is Mars?
 
 Mars is C++ game framework created to run on variety of devices with different rendering backends.
 It can be used as low-level or as high level ECS framework.
 
-### Install dependencies
+### Install
 
-#### Conan
+#### Windows
 
-Run `conan install . -s compiler.cppstd=20`
+Windows is configured for usage with **Visual Studio 17 2022**.
+
+Cmake should be using
+- Toolchain: Visual Studio 17 2022
+- Generator: Visual Studio 17 2022
+
+For **Windows** or **WIN32** we use `vcpkg` to install dependencies.
+To install it see [here](https://learn.microsoft.com/hr-hr/vcpkg/get_started/get-started?pivots=shell-powershell).
+
+First we need to install vcpkg dependencies.
+Run `vcpkg install` to install dependencies.
+
+If you need to set up a path to vcpkg, try setting up `script/set-vcpkg.ps1` script. There is template for it.
+Make sure to modify path in template to your vcpkg installation path.
+
+Then run
+`cmake -B cmake-build-debugvisualstudio -S . -DCMAKE_TOOLCHAIN_FILE={{PATH_TO_VCPKG}}/vcpkg/scripts/buildsystems/vcpkg.cmake`
+
+for example:
+
+`cmake -B cmake-build-debugvisualstudio -S . -DCMAKE_TOOLCHAIN_FILE=D:/_Windows/vcpkg/scripts/buildsystems/vcpkg.cmake`
 
 ### Build
 
@@ -48,14 +68,11 @@ Note that `cmake-build-debug/_deps/lua-src/lua.c` will cause issues and should b
 
 ### TROUBLESHOOTING BUILD
 
-#### Windows
 
-Cmake should be using:
-- Toolchain: MinGW
-- Generator: MinGW Makefiles
 
 ### RENDERERS
 
- | rendering backend | Windows | MacOS | Linux | Android | iOS |
- | opengles          |   [x]   |  [ ]  |  [x]  |  [ ]    | [ ] |
- |   metal           |   [ ]   |  [x]  |  [ ]  |  [ ]    | [ ] |
+ | rendering backend | Windows | MacOS | Linux | Android | iOS | Browser |
+ |  opengles         |   [x]   |  [ ]  |  [x]  |  [ ]    | [ ] |  [x]    |
+ |   metal           |   [ ]   |  [x]  |  [ ]  |  [ ]    | [ ] |  [ ]    |
+ |   d3d11           |   [x]   |  [ ]  |  [ ]  |  [ ]    | [ ] |  [ ]    |

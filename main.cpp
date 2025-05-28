@@ -238,11 +238,10 @@ int main(int argc, char *argv[]) {
     // createCamera(entityManager);
     // loadLdtk(framework, entityManager);
 
-    const auto ecs_entity = ecs.getRegistry().create();
-    ecs.getRegistry().emplace<mars_entt_ecs::RectTransform>(ecs_entity).position = {100, 300};
+    const auto ecs_entity = ecs.getEntityBuilder().create2DEntity();
+    ecs.getComponent<mars_entt_ecs::RectTransform>(ecs_entity).position = {100, 300};
+    ecs.getComponent<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
     ecs.getRegistry().emplace<mars_entt_ecs::Layer0Tag>(ecs_entity);
-    ecs.getRegistry().emplace<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
-
 
     // FRAME START EVENT?
 
