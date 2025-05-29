@@ -56,17 +56,9 @@ namespace mars {
         return std::make_tuple(device, deviceContext);
     }
 
-    std::string DX11DeviceUtil::getDeviceName(Microsoft::WRL::ComPtr<ID3D11Device> device) {
-        Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice;
+    std::string DX11DeviceUtil::getDeviceName(Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice, Microsoft::WRL::ComPtr<ID3D11Device> device) {
 
-        HRESULT hr = device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(dxgiDevice.ReleaseAndGetAddressOf()));
-        if (FAILED(hr)) {
-            std::string msg = "DX11DeviceUtil::getDeviceName: Failed to query IDXGIDevice interface. HRESULT: " +
-                              std::to_string(hr);
-            logger.error(msg);
-            throw std::runtime_error(msg);
-        }
-
+        // TODO: move outside
         IDXGIAdapter* dxgiAdapter;
         hr = dxgiDevice->GetAdapter(&dxgiAdapter);
         if (FAILED(hr)) {

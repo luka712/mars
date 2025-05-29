@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 18.05.25.
 //
 
+#if ALLOW_METAL
+
 #include "metal/buffers/metal_uniform_buffer.h"
 #include "metal/util/metal_util.h"
 #include <sstream>
@@ -70,3 +72,5 @@ namespace mars {
         buffer->release();
     }
 }
+
+#endif

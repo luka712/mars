@@ -11,9 +11,16 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 .idea
+emscripten-build
+vcpkg_installed
+
+# BUILD
 cmake-build-debug
 cmake-build-release
 cmake-build-debugmingw
 cmake-build-debugvisualstudio
-emscripten-build
-vcpkg_installed
+cmake-build-debuglinux
+
+# SCRIPTS
+scripts/vcpkg_install_deps.ps1
+scripts/vcpkg_install_deps.sh

@@ -50,6 +50,9 @@ namespace mars {
         //! The factory for the DXGI objects, such as swap chains.
         Microsoft::WRL::ComPtr<IDXGIFactory1> dxgiFactory;
 
+        //! The DXGI device.
+        Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice;
+
         //! Swap chain for the window.
         Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
 

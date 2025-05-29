@@ -28,7 +28,6 @@ endif()
 
 # SYSTEM PACKAGES ( OR INSTALLED THROUGH HOME-BREW, VCPKG, etc. )
 find_package(SDL2 CONFIG REQUIRED)
-find_package(SDL2_image CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(lua CONFIG REQUIRED)
 
@@ -74,8 +73,7 @@ elseif(APPLE)
 endif()
 
 # PACKAGES
-
-
+find_package(SDL2_image CONFIG REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
@@ -115,9 +113,11 @@ add_executable(mars main.cpp
         ${TINYXML2_SRC})
 
 # DEFINITIONS
-target_compile_definitions(mars PRIVATE
+if(WIN32)
+target_compile_definitions(mars PUBLIC
         ALLOW_DX11=1
 )
+endif()
 
 # LINK
 target_link_libraries(mars

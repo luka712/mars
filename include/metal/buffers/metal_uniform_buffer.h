@@ -5,11 +5,12 @@
 #ifndef METAL_UNIFORM_BUFFER_H
 #define METAL_UNIFORM_BUFFER_H
 
+#if ALLOW_METAL
+
 #include "core/buffers/AUniformBuffer.h"
 #include "metal/metal.h"
 #include "Framework.h"
 #include "metal/renderer/metal_renderer.h"
-
 
 namespace mars {
     //! The Metal implementation of the Uniform Buffer.
@@ -69,5 +70,7 @@ namespace mars {
     //! @returns The @ref MetalUniformBuffer.
     std::shared_ptr<MetalUniformBuffer> toMetalUniformBuffer(const std::shared_ptr<AUniformBuffer> &uniformBuffer);
 }
+
+#endif
 
 #endif //METAL_UNIFORM_BUFFER_H

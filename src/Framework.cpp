@@ -36,11 +36,11 @@ namespace mars {
             this->renderer = std::make_unique<SDLRenderer>(*this);
             this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         }
-#if __APPLE__
+#if ALLOW_METAL
         else if (renderingBackend == RenderingBackend::Metal) {
             this->renderer = std::make_unique<MetalRenderer>(*this, options.frameBufferSize);
         }
-#elif __WIN32__
+#elif ALLOW_DX11 
         else if (renderingBackend == RenderingBackend::D3D11) {
             this->renderer = std::make_unique<DX11Renderer>(*this, options.frameBufferSize);
         }
@@ -108,7 +108,7 @@ namespace mars {
 
         // RENDERER
         renderer->initialize();
-        // spriteBatch->initialize();
+        spriteBatch->initialize();
         // TODO: uncomment
         // spriteFontManager->initialize();
 

@@ -31,13 +31,14 @@ namespace mars {
 
         DX11Util::initialize(*staticLogger);
 
-        dxgiFactory = DX11Util::getDxgiFactory().createFactory();
+        dxgiFactory = DX11Util::getDxgiFactory().create();
+		dxgiDevice = DX11Util::getDxgiDevice().create();
 
-        auto result = DX11Util::getDeviceUtil().createDeviceAndDeviceContext();
+        auto result = DX11Util::getDevice().createDeviceAndDeviceContext();
         device = std::get<0>(result);
         deviceContext = std::get<1>(result);
 
-        std::string deviceName = DX11Util::getDeviceUtil().getDeviceName(device);
+        std::string deviceName = DX11Util::getDevice().getDeviceName(device);
         logger.info("DX11Renderer::initialize: Created DirectX 11 device: " + deviceName);
     }
 

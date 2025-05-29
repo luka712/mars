@@ -3,7 +3,6 @@
 //
 
 #include <SDL.h>
-#include <format>
 #include "Framework.h"
 #include "opengles/renderer/OpenGLESRenderer.h"
 #include "opengles/util/OpenGLESUtil.h"
@@ -36,9 +35,7 @@ namespace mars {
                 break;
         }
 
-        std::string msg = std::format(
-            "GL CALLBACK: source = {}, type = {}, severity = {}, message = {}",
-            source, typeStr, severityStr, message);
+        const std::string msg = "OpenGLESDebugCallback: " + typeStr + " " + severityStr;
         staticLogger->warn(msg);
     }
 

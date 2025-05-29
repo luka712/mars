@@ -5,6 +5,8 @@
 #ifndef METAL_CONVERTER_H
 #define METAL_CONVERTER_H
 
+#if ALLOW_METAL
+
 #include "metal/metal.h"
 #include "core/buffers/BufferEnums.h"
 #include "core/log/Logger.h"
@@ -27,5 +29,7 @@ private:
     };
 
 }
+
+#endif
 
 #endif //METAL_CONVERTER_H

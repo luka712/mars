@@ -29,9 +29,10 @@ namespace mars {
         std::tuple<Microsoft::WRL::ComPtr<ID3D11Device>, Microsoft::WRL::ComPtr<ID3D11DeviceContext>>  createDeviceAndDeviceContext();
 
         //! Get the name of the DirectX 11 device.
+        //! @param dxgiDevice The DXGI device.
         //! @param device The DirectX 11 device.
         //! @return The name of the device as a string.
-        std::string getDeviceName(Microsoft::WRL::ComPtr<ID3D11Device> device);
+        std::string getDeviceName(Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice, Microsoft::WRL::ComPtr<ID3D11Device> device);
 
     private:
         Logger &logger;

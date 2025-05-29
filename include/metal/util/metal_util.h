@@ -5,6 +5,8 @@
 #ifndef METAL_UTIL_H
 #define METAL_UTIL_H
 
+#if ALLOW_METAL
+
 #include "metal/util/metal_buffer_util.h"
 #include "metal/util/metal_converter.h"
 
@@ -30,5 +32,7 @@ namespace mars {
         static MetalBufferUtil &getBufferUtil() { return *metalBufferUtil; }
     };
 }
+
+#endif
 
 #endif //METAL_UTIL_H
