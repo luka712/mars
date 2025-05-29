@@ -38,7 +38,7 @@ namespace mars {
         device = std::get<0>(result);
         deviceContext = std::get<1>(result);
 
-        std::string deviceName = DX11Util::getDevice().getDeviceName(device);
+        std::string deviceName = DX11Util::getDevice().getDeviceName(dxgiDevice, device);
         logger.info("DX11Renderer::initialize: Created DirectX 11 device: " + deviceName);
     }
 

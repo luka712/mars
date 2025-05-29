@@ -30,6 +30,7 @@ endif()
 find_package(SDL2 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(lua CONFIG REQUIRED)
+find_package(boost CONFIG REQUIRED)
 
 if(APPLE)
 
@@ -98,6 +99,9 @@ include_directories(
         ${LUA_INCLUDE_DIR}
         ${SOL_INCLUDE_DIR}
         ${ENTT_INCLUDE_DIR}
+        ${Boost_INCLUDE_DIRS}
+        vendor/ldtk
+        vendor/nlohmann
 
         # if APPLE
         ${METAL_INCLUDE_DIR}

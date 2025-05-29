@@ -60,7 +60,7 @@ namespace mars {
 
         // TODO: move outside
         IDXGIAdapter* dxgiAdapter;
-        hr = dxgiDevice->GetAdapter(&dxgiAdapter);
+        HRESULT hr = dxgiDevice->GetAdapter(&dxgiAdapter);
         if (FAILED(hr)) {
             std::string msg = "DX11DeviceUtil::getDeviceName: Failed to get IDXGIAdapter. HRESULT: " +
                               std::to_string(hr);

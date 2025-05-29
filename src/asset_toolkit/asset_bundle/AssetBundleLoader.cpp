@@ -1,7 +1,7 @@
 #include <fstream>
 #include <stdexcept>
 #include "asset_toolkit/asset_bundle/AssetBundleLoader.h"
-#include "asset_toolkit/nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace asset_toolkit {
 

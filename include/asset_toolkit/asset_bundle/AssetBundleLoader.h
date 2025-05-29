@@ -8,7 +8,7 @@
 #include "AssetBundle.h"
 #include <memory>
 #include <map>
-#include <asset_toolkit/nlohmann/json.hpp>
+#include <nlohmann/json.hpp>
 
 namespace asset_toolkit {
     //! The loader for the asset bundle.
