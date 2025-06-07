@@ -10,11 +10,13 @@
 #include "metal/util/metal_buffer_util.h"
 #include "metal/util/metal_converter.h"
 #include "metal/util/metal_texture_util.h"
+#include "util/metal/metal_sampler_state_util.h"
 
 namespace mars {
     static MetalConverter *metalConverter = nullptr;
     static MetalBufferUtil *metalBufferUtil = nullptr;
     static MetalTextureUtil *metalTextureUtil = nullptr;
+    static gpu_util::MetalSamplerStateUtil metalSamplerStateUtil;
 
     class MetalUtil {
     public:
@@ -37,6 +39,10 @@ namespace mars {
         //! Gets the MetalTextureUtil for working with textures.
         //! @return Tee MetalTextureUtil ptr.
         static MetalTextureUtil &getTexture() { return *metalTextureUtil; }
+
+        //! Gets the MetalSamplerStateUtil for working with sampler state.
+        //! @return The MetalSamplerStateUtil reference.
+        static gpu_util::MetalSamplerStateUtil &getSamplerState() { return metalSamplerStateUtil; }
     };
 }
 

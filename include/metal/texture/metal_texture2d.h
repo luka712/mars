@@ -30,7 +30,12 @@ namespace mars
             const std::string& label = "");
 
         //! Get the texture.
+        //! @return The pointer to the Metal texture.
         [[nodiscard]] MTL::Texture* getTexture() const { return texture; }
+
+        //! Get the sampler.
+        //! @return The pointer to the Metal sampler state.
+        [[nodiscard]] MTL::SamplerState* getSamplerState() const { return sampler; }
 
         //! @inheritDoc
         void destroy() override;
@@ -41,8 +46,9 @@ namespace mars
         Framework& framework;
         MetalRenderer& renderer;
         Logger& logger;
-        //! The OpenGL texture.
+
         MTL::Texture* texture;
+        MTL::SamplerState* sampler;
     };
 
     //! Converts the @ref Texture2D to the @ref MetalTexture2D.

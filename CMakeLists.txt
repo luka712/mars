@@ -198,7 +198,11 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         include/metal/texture/metal_texture2d.h
         src/metal/texture/metal_texture2d.cpp
         include/metal/util/metal_texture_util.h
-        src/metal/util/metal_texture_util.cpp)
+        src/metal/util/metal_texture_util.cpp
+        include/util/metal.h
+        include/util/metal/metal_sampler_state_util.h
+        src/util/metal/metal_sampler_state_util.cpp
+)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

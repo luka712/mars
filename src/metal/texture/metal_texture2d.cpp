@@ -19,6 +19,8 @@ namespace mars {
         this->label = label;
         this->width = imageData.getWidth();
         this->height = imageData.getHeight();
+
+        // TEXTURE
         texture = MetalUtil::getTexture().create(
             renderer.getDevice(),
             NS::UInteger(width),
@@ -28,10 +30,14 @@ namespace mars {
             imageData.getData(),
             label
         );
+
+        // SAMPLER
+        sampler = MetalUtil::getSamplerState().create(renderer.getDevice());
     }
 
     void MetalTexture2D::destroy()
     {
+        sampler->release();
         texture->release();
     }
 
