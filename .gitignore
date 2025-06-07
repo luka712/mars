@@ -13,13 +13,17 @@ CMakeUserPresets.json
 .idea
 emscripten-build
 vcpkg_installed
+.cmake
 
 # BUILD
+build
 cmake-build-debug
 cmake-build-release
 cmake-build-debugmingw
 cmake-build-debugvisualstudio
 cmake-build-debuglinux
+cmake-build-debug-macos-xcode
+cmake-build-debug-macos-ninja
 
 # SCRIPTS
 scripts/vcpkg_install_deps.ps1

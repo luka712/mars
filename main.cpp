@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "Hello, World!" << std::endl;
 
-	mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
+	mars::RenderingBackend backend = mars::RenderingBackend::Metal;
 #if __APPLE__
 	backend = mars::RenderingBackend::Metal;
 #endif
@@ -162,11 +162,15 @@ int main(int argc, char* argv[]) {
 		data.data(), "Hello", 16, mars::BufferUsage::Uniform_MapWrite);
 
 
-	std::string jsonString = framework.getFileReader().readFile("content/ldtk/basic_map.ldtk");
-	quicktype::LdtkJson ldtkData = nlohmann::json::parse(jsonString);
+	// std::string jsonString = framework.getFileReader().readFile("content/ldtk/basic_map.ldtk");
+	// quicktype::LdtkJson ldtkData = nlohmann::json::parse(jsonString);
 
 
 	//  ecsManager.initialize();
+
+	std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+	.getContentManager()
+	.load<mars::Texture2D>("images/heliport.png");
 
 #if __APPLE__
 	framework.subscribeToUpdateEvent([&](const mars::Time time) {
@@ -181,9 +185,7 @@ int main(int argc, char* argv[]) {
 	ecs.initialize();
 
 
-	std::shared_ptr<mars::Texture2D> tileMapTexture = framework
-		.getContentManager()
-		.load<mars::Texture2D>("images/heliport.png");
+
 	vertexBuffer->printInfo();
 	indexBuffer->printInfo();
 	uniformBuffer->printInfo();

@@ -2,7 +2,7 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
-#if __APPLE__
+#if ALLOW_METAL
 
 #include "metal/util/metal_buffer_util.h"
 

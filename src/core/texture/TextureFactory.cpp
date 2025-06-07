@@ -4,8 +4,13 @@
 
 #include <stdexcept>
 #include "Framework.h"
+#include "metal/texture/metal_texture2d.h"
 #include "sdl/texture/SDLTexture2D.h"
 #include "opengles/texture/OpenGLESTexture2D.h"
+
+#if __APPLE__
+#include "metal/texture/metal_texture2d.h"
+#endif
 
 namespace mars {
     TextureFactory::TextureFactory(Framework &framework)
@@ -23,6 +28,8 @@ namespace mars {
                 return std::make_shared<SDLTexture2D>(framework, data);
             case RenderingBackend::OpenGLES:
                 return std::make_shared<OpenGLESTexture2D>(framework, data);
+            case RenderingBackend::Metal:
+                return std::make_shared<MetalTexture2D>(framework, data);
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());
@@ -52,6 +59,8 @@ namespace mars {
                 return std::make_shared<SDLTexture2D>(framework, imageData);
             case RenderingBackend::OpenGLES:
                 return std::make_shared<OpenGLESTexture2D>(framework, imageData, label);
+            case RenderingBackend::Metal:
+                return std::make_shared<MetalTexture2D>(framework, imageData, label);
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());

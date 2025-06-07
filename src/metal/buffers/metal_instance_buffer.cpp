@@ -25,7 +25,7 @@ namespace mars {
         this->byteSize = byteSize;
         this->byteStride = strideInBytes;
 
-        buffer = MetalUtil::getBufferUtil().create(renderer.getDevice(), data, byteSize, label);
+        buffer = MetalUtil::getBuffer().create(renderer.getDevice(), data, byteSize, label);
     }
 
     void MetalInstanceBuffer::destroy() {

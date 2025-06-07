@@ -3,6 +3,7 @@ project(mars)
 
 # C++ STANDARD
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 # INCLUDE
 include(FetchContent)
@@ -28,6 +29,9 @@ endif()
 
 # SYSTEM PACKAGES ( OR INSTALLED THROUGH HOME-BREW, VCPKG, etc. )
 find_package(SDL2 CONFIG REQUIRED)
+set(SDL2_LIBRARY $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
+find_package(SDL2_image CONFIG REQUIRED)
+set(SDL2_IMAGE_LIBRARY $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
 find_package(glm CONFIG REQUIRED)
 find_package(lua CONFIG REQUIRED)
 find_package(boost CONFIG REQUIRED)
@@ -43,6 +47,8 @@ endif()
 # Pattern is `Find<module>.cmake`
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
+
+
 # VARIABLES
 if(WIN32)
 
@@ -53,8 +59,7 @@ if(WIN32)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-    set(SDL2_LIBRARY $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
-    set(SDL2_IMAGE_LIBRARY $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
 
 elseif(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
@@ -74,7 +79,7 @@ elseif(APPLE)
 endif()
 
 # PACKAGES
-find_package(SDL2_image CONFIG REQUIRED)
+
 find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
 find_package(tinyxml2 REQUIRED)
@@ -118,9 +123,13 @@ add_executable(mars main.cpp
 
 # DEFINITIONS
 if(WIN32)
-target_compile_definitions(mars PUBLIC
+    target_compile_definitions(mars PUBLIC
         ALLOW_DX11=1
 )
+elseif (APPLE)
+    target_compile_definitions(mars PUBLIC
+            ALLOW_METAL=1
+    )
 endif()
 
 # LINK
@@ -185,7 +194,11 @@ add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/
         include/metal/buffers/metal_index_buffer.h
         src/metal/buffers/metal_index_buffer.cpp
         include/entt_ecs/layer/layer_tag.h
-        include/entt_ecs/entity_builder/entity_builder.h)
+        include/entt_ecs/entity_builder/entity_builder.h
+        include/metal/texture/metal_texture2d.h
+        src/metal/texture/metal_texture2d.cpp
+        include/metal/util/metal_texture_util.h
+        src/metal/util/metal_texture_util.cpp)
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}

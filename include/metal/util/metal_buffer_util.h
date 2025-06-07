@@ -2,13 +2,13 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
-#if __APPLE__
+#if ALLOW_METAL
 
 #ifndef METAL_BUFFER_UTIL_H
 #define METAL_BUFFER_UTIL_H
 
-#include "core/log/Logger.h"
 #include "metal/metal.h"
+#include "core/log/Logger.h"
 
 namespace mars {
     class MetalBufferUtil {

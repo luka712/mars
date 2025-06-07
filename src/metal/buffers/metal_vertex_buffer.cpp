@@ -2,7 +2,7 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
-#if __APPLE__
+#if ALLOW_METAL
 
 #include <sstream>
 #include "Framework.h"
@@ -26,7 +26,7 @@ namespace mars {
         queue = renderer.getQueue();
 
         options = MetalUtil::getMetalConverter().convert(usage);
-        buffer = MetalUtil::getBufferUtil().create(device, queue, data, byteSize, label, options);
+        buffer = MetalUtil::getBuffer().create(device, queue, data, byteSize, label, options);
     }
 
     void MetalVertexBuffer::initialize(uint32_t byteSize, uint32_t vertexCount) {

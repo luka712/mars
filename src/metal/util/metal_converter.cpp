@@ -2,7 +2,7 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
-#if __APPLE__
+#if ALLOW_METAL
 
 #include <string>
 #include <stdexcept>

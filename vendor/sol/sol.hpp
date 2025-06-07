@@ -6757,7 +6757,9 @@ namespace sol {
 			new (static_cast<void*>(this)) optional(std::in_place, std::forward<Args>(args)...);
 			return **this;
 #else
-			this->construct(std::forward<Args>(args)...);
+			new (static_cast<void*>(this)) optional(std::in_place, std::forward<Args>(args)...);
+			return **this;
+			// this->construct(std::forward<Args>(args)...);
 #endif
 // ENDCHANGE
 		}

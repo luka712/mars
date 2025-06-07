@@ -27,7 +27,7 @@ namespace mars {
     void MetalUniformBuffer::update(void *data, uint32_t byteSize) {
 
         if (options == MTL::StorageModeShared) {
-            MetalUtil::getBufferUtil().updateSharedBuffer(buffer, data, byteSize);
+            MetalUtil::getBuffer().updateSharedBuffer(buffer, data, byteSize);
         }
         else {
             const std::string msg = "MetalUniformBuffer::update: Unable to update buffer. Update not implemented.";
