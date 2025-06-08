@@ -4,6 +4,9 @@
     "sdl2",
     "sdl2-image",
     "glm",
-    "boost-optional"
+    "boost-optional",
+    "spdlog",
+    "tinyxml2",
+    "entt"
   ]
 }

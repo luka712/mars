@@ -35,9 +35,12 @@ set(SDL2_IMAGE_LIBRARY $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::
 find_package(glm CONFIG REQUIRED)
 find_package(lua CONFIG REQUIRED)
 find_package(boost CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+find_package(tinyxml2 CONFIG REQUIRED)
+find_package(EnTT CONFIG REQUIRED)
+
 
 if(APPLE)
-
     find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
     find_library(QUARTZ_CORE_LIBRARY QuartzCore REQUIRED)
     find_library(METAL_LIBRARY Metal REQUIRED)
@@ -46,7 +49,6 @@ endif()
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
-
 
 
 # VARIABLES
@@ -80,13 +82,10 @@ endif()
 
 # PACKAGES
 
-find_package(spdlog REQUIRED)
 find_package(glad REQUIRED)
-find_package(tinyxml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(box2d REQUIRED)
 find_package(sol REQUIRED)
-find_package(Entt REQUIRED)
 if(EMSCRIPTEN)
     find_package(lua REQUIRED)
 endif()
@@ -95,10 +94,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/include
         ${SDL2_INCLUDE_DIR}
         ${SDL2_IMAGE_INCLUDE_DIR}
-        ${GLM_INCLUDE_DIR}
-        ${SPDLOG_INCLUDE_DIR}
         ${GLAD_INCLUDE_DIR}
-        ${TINYXML2_INCLUDE_DIR}
         ${CATCH2_INCLUDE_DIR}
         ${BOX2D_INCLUDE_DIR}
         ${LUA_INCLUDE_DIR}
@@ -118,8 +114,7 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 # EXECUTABLE
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
-        ${GLAD_SRC}
-        ${TINYXML2_SRC})
+        ${GLAD_SRC})
 
 # DEFINITIONS
 if(WIN32)
@@ -137,7 +132,9 @@ target_link_libraries(mars
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         glm::glm
-        ${SPDLOG_LIBRARY}
+        spdlog::spdlog_header_only
+        tinyxml2::tinyxml2
+        EnTT::EnTT
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARIES}
@@ -170,46 +167,20 @@ file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
 add_executable(tests tests/tests.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
         tests/geometry_tests.cpp)
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES} tests/asset_toolkit/ldtk_tests.cpp
-        include/entt_ecs/entt_ecs.h
-        include/entt_ecs/transform/rect_transform.h
-        include/entt_ecs/transform/rect_transform_system.h
-        src/entt_ecs/transform/rect_transform_system.cpp
-        include/entt_ecs/sprite/sprite_renderer.h
-        src/entt_ecs/entt_ecs.cpp
-        include/entt_ecs/sprite/sprite_renderer_system.h
-        src/entt_ecs/sprite/sprite_renderer_system.cpp
-        include/metal/buffers/metal_vertex_buffer.h
-        include/metal/util/metal_util.h
-        include/metal/util/metal_buffer_util.h
-        src/metal/util/metal_buffer_util.cpp
-        src/metal/buffers/metal_vertex_buffer.cpp
-        include/metal/util/metal_converter.h
-        src/metal/util/metal_converter.cpp
-        include/metal/buffers/metal_index_buffer.h
-        src/metal/buffers/metal_index_buffer.cpp
-        include/entt_ecs/layer/layer_tag.h
-        include/entt_ecs/entity_builder/entity_builder.h
-        include/metal/texture/metal_texture2d.h
-        src/metal/texture/metal_texture2d.cpp
-        include/metal/util/metal_texture_util.h
-        src/metal/util/metal_texture_util.cpp
-        include/util/metal.h
-        include/util/metal/metal_sampler_state_util.h
-        src/util/metal/metal_sampler_state_util.cpp
-)
+add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES})
 
 target_link_libraries(tests
         ${CATCH2_LIBRARY}
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         ${GLM_LIBRARY}
-        ${SPDLOG_LIBRARY}
+        spdlog::spdlog_header_only
+        tinyxml2::tinyxml2
+        EnTT::EnTT
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARIES}
@@ -219,14 +190,15 @@ target_link_libraries(tests
 add_executable(chopper-shooter chopper-shooter.cpp
         ${COMMON_SOURCES}
         ${GLAD_SRC}
-        ${TINYXML2_SRC}
 )
 
 target_link_libraries(chopper-shooter
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         glm::glm
-        ${SPDLOG_LIBRARY}
+        spdlog::spdlog_header_only
+        tinyxml2::tinyxml2
+        EnTT::EnTT
         ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARIES}

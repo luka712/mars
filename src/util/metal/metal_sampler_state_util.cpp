@@ -2,6 +2,8 @@
 // Created by Luka Erkapic on 07.06.25.
 //
 
+#if __APPLE__
+
 #include "util/metal/metal_sampler_state_util.h"
 
 namespace gpu_util {
@@ -24,5 +26,6 @@ namespace gpu_util {
         descriptor->release();
         return sampler;
     }
-
 }
+
+#endif 

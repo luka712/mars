@@ -28,8 +28,10 @@ namespace mars {
                 return std::make_shared<SDLTexture2D>(framework, data);
             case RenderingBackend::OpenGLES:
                 return std::make_shared<OpenGLESTexture2D>(framework, data);
+#if __APPLE__
             case RenderingBackend::Metal:
                 return std::make_shared<MetalTexture2D>(framework, data);
+#endif
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());
@@ -59,8 +61,10 @@ namespace mars {
                 return std::make_shared<SDLTexture2D>(framework, imageData);
             case RenderingBackend::OpenGLES:
                 return std::make_shared<OpenGLESTexture2D>(framework, imageData, label);
+#if __APPLE__
             case RenderingBackend::Metal:
                 return std::make_shared<MetalTexture2D>(framework, imageData, label);
+#endif 
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());
