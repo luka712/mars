@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 2.1.2025..
+// Created by Erkapic Luka on 2.1.2025.
 //
 
 #ifndef RENDERER_ENUMS_H
@@ -10,7 +10,7 @@ namespace mars {
     //! Represents the different rendering API backends.
     enum class RenderingBackend {
         //! If none is set, the default is WebGPU.
-        None = 0,
+        Default = 0,
         OpenGL,
         OpenGLES,
         D3D11,
@@ -25,7 +25,7 @@ namespace mars {
 
     //! The culling mode.
     enum class Culling {
-        None = 0,
+        NoCulling = 0,
         Back,
         Front
     };

@@ -5,7 +5,7 @@
 #ifndef DX11_DEVICE_UTIL_H
 #define DX11_DEVICE_UTIL_H
 
-#if ALLOW_DX11
+#ifdef _WIN32
 
 #include <stdexcept>
 #include "core/log/Logger.h"

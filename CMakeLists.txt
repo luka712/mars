@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 # INCLUDE
-include(FetchContent)
+# include(FetchContent)
+include(cmake/ConanDependencies.cmake)
+include(cmake/VendorDependencies.cmake)
 
 # PRE-SETUP
 if(WIN32)
@@ -28,6 +30,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # SYSTEM PACKAGES ( OR INSTALLED THROUGH HOME-BREW, VCPKG, etc. )
+if(WIN_32)
 find_package(SDL2 CONFIG REQUIRED)
 set(SDL2_LIBRARY $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
 find_package(SDL2_image CONFIG REQUIRED)
@@ -38,7 +41,7 @@ find_package(boost CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(tinyxml2 CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
-
+endif()
 
 if(APPLE)
     find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
@@ -82,18 +85,13 @@ endif()
 
 # PACKAGES
 
-find_package(glad REQUIRED)
-find_package(Catch2 REQUIRED)
-find_package(box2d REQUIRED)
-find_package(sol REQUIRED)
 if(EMSCRIPTEN)
     find_package(lua REQUIRED)
 endif()
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
-        ${SDL2_INCLUDE_DIR}
-        ${SDL2_IMAGE_INCLUDE_DIR}
+        ${PACKAGES_INCLUDE}
         ${GLAD_INCLUDE_DIR}
         ${CATCH2_INCLUDE_DIR}
         ${BOX2D_INCLUDE_DIR}
@@ -114,7 +112,7 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 # EXECUTABLE
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
-        ${GLAD_SRC})
+        ${PACKAGES_SOURCES})
 
 # DEFINITIONS
 if(WIN32)
@@ -129,10 +127,11 @@ endif()
 
 # LINK
 target_link_libraries(mars
+        ${PACKAGES_LIBRARIES}
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         glm::glm
-        spdlog::spdlog_header_only
+        # spdlog::spdlog_header_only
         tinyxml2::tinyxml2
         EnTT::EnTT
         ${GLAD_LIBRARY}
@@ -164,48 +163,33 @@ file(COPY content/shaders DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
 
 # TESTS
-add_executable(tests tests/tests.cpp
+add_executable(tests
+        tests/tests.cpp
         ${COMMON_SOURCES}
-        ${GLAD_SRC}
+        ${PACKAGES_SOURCES}
         tests/geometry_tests.cpp)
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES})
+# add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES})
 
 target_link_libraries(tests
-        ${CATCH2_LIBRARY}
+        ${PACKAGES_LIBRARIES}
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         ${GLM_LIBRARY}
-        spdlog::spdlog_header_only
+        # spdlog::spdlog_header_only
         tinyxml2::tinyxml2
         EnTT::EnTT
-        ${GLAD_LIBRARY}
         ${BOX2D_LIBRARY}
         ${LUA_LIBRARIES}
 )
 
 # GAMES
-add_executable(chopper-shooter chopper-shooter.cpp
-        ${COMMON_SOURCES}
-        ${GLAD_SRC}
-)
 
-target_link_libraries(chopper-shooter
-        ${SDL2_LIBRARY}
-        ${SDL2_IMAGE_LIBRARY}
-        glm::glm
-        spdlog::spdlog_header_only
-        tinyxml2::tinyxml2
-        EnTT::EnTT
-        ${GLAD_LIBRARY}
-        ${BOX2D_LIBRARY}
-        ${LUA_LIBRARIES}
-        ${OPENGL_LIBRARY}
+# add_executable(chopper-shooter chopper-shooter.cpp
+#        ${COMMON_SOURCES}
+#        ${GLAD_SRC}
+#)
 
-        # APPLE DEVICES
-        ${QUARTZ_CORE_LIBRARY}
-        ${FOUNDATION_LIBRARY}
-        ${METAL_LIBRARY}
-)
+#target_link_libraries(chopper-shooter)

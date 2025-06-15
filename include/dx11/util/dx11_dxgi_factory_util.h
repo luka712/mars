@@ -5,9 +5,8 @@
 #ifndef DXGI_FACTORY_UTIL_H
 #define DXGI_FACTORY_UTIL_H
 
-#if ALLOW_DX11
+#ifdef _WIN32
 
-#include <stdexcept>
 #include "core/log/Logger.h"
 #include "dx11/dx11.h"
 
@@ -23,7 +22,7 @@ namespace mars {
 
         //! Create a DXGI factory.
         //! @return The created DXGI factory.
-        Microsoft::WRL::ComPtr<IDXGIFactory1> create();
+        Microsoft::WRL::ComPtr<IDXGIFactory2> create();
 
         private:
         Logger &logger;

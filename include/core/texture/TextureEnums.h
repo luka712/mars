@@ -10,9 +10,6 @@ namespace mars {
     //! The usage of the texture.
     enum class TextureUsage {
 
-        //! Can be used in case where it's not relevant, such as in OpenGL.
-        None,
-
         //! Texture can be read from but has no other usages.
         //! Corresponds to WGPU_COPY_SRC in WebGPU.
         //! In D3D11 can be translated to following properties:

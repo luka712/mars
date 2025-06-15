@@ -148,6 +148,17 @@ int main(int argc, char* argv[]) {
 		});
 
 	framework.initialize();
+
+	if (backend == mars::RenderingBackend::D3D11) {
+		// JUST TO TEST WITH D3D11
+		framework.subscribeToUpdateEvent([&](const mars::Time time) {
+
+			});
+
+		framework.subscribeToRenderEvent([&]() {});
+		framework.runEventLoop();
+	}
+
 	std::vector vertex = {
 		0.0f, 0.0f, 0.0f,
 		100.0f, 0.0f, 0.0f,

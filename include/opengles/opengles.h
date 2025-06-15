@@ -9,6 +9,7 @@
 #include <GL/gl.h>
 #include <GLES3/gl3.h>
 #else
+#include <KHR/khrplatform.h>
 #include <glad/glad.h>
 #endif
 

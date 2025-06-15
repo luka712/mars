@@ -2,8 +2,8 @@
 // Created by lukaa on 18.1.2025..
 //
 
-#ifndef OPENGLESBUFFERUTIL_H
-#define OPENGLESBUFFERUTIL_H
+#ifndef OPEN_GLES_BUFFER_UTIL_H
+#define OPEN_GLES_BUFFER_UTIL_H
 
 #include "opengles/opengles.h"
 #include <string>
@@ -48,4 +48,4 @@ namespace mars {
 }
 
 
-#endif //OPENGLESBUFFERUTIL_H
+#endif //OPEN_GLES_BUFFER_UTIL_H

@@ -10,6 +10,7 @@
 #include <SDL.h>
 #include <vector>
 #include "core/window/WindowManagerOptions.h"
+#include <SDL_syswm.h>
 
 #if __APPLE__
 #include <metal-cpp/QuartzCore/CAMetalLayer.hpp>
@@ -33,16 +34,21 @@ namespace mars {
 
         //! Get the window.
         //! @return The window.
-        [[nodiscard]]
-        SDL_Window *getWindow() const { return window; }
+        [[nodiscard]] SDL_Window *getWindow() const { return window; }
 
         //! Get the window bounds.
         //! @return The window bounds.
         [[nodiscard]] WindowBounds getWindowBounds() const { return windowBounds; }
 
+#if _WIN32
+		//! Get the win32 handle of the window.
+        //! @return The HWND handle of the window.
+        HWND getWin32Handle();
+#endif 
+
 #if __APPLE__
         //! Gets the metal layer.
-        ////! The metal layer.
+        //! The metal layer.
         [[nodiscard]] CA::MetalLayer *getMetalLayer() const { return metalLayer; }
 #endif
 

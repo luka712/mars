@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
 #include "opengles/util/OpenGLESBufferUtil.h"

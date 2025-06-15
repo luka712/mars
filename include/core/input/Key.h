@@ -10,7 +10,7 @@ namespace mars
     //! The keys on the keyboard.
     enum class Key {
         // No result.
-        None,
+        Unknown,
 
         A,
         D,

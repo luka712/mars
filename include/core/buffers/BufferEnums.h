@@ -7,9 +7,6 @@
 
 namespace mars {
     enum class BufferUsage {
-        //! No buffer usage is defined.
-        None,
-
         //! The buffer is used for storing vertex data.
         //! Corresponding binding in WGPU is WGPU_VERTEX.
         Vertex,

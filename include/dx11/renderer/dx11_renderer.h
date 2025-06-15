@@ -5,10 +5,12 @@
 #ifndef DX11_RENDERER_H
 #define DX11_RENDERER_H
 
-#if ALLOW_DX11
+#ifdef _WIN32
 
 #include "dx11/dx11.h"
 #include "core/renderer/Renderer.h"
+
+using namespace Microsoft::WRL;
 
 namespace mars {
     class Framework;
@@ -22,13 +24,13 @@ namespace mars {
 
         //! Gets the DX11 device.
         //! @return The ID3D11Device pointer.
-        [[nodiscard]] const Microsoft::WRL::ComPtr<ID3D11Device> &getDevice() const {
+        [[nodiscard]] const ComPtr<ID3D11Device> &getDevice() const {
             return device;
         }
 
         //! Gets the DX11 device context.
         //! @return The ID3D11DeviceContext pointer.
-        [[nodiscard]] const Microsoft::WRL::ComPtr<ID3D11DeviceContext> &getDeviceContext() const {
+        [[nodiscard]] const ComPtr<ID3D11DeviceContext> &getDeviceContext() const {
             return deviceContext;
         }
 
@@ -45,24 +47,32 @@ namespace mars {
         void destroy() override;
 
     private:
-        SDL_Window *window;
-
         //! The factory for the DXGI objects, such as swap chains.
-        Microsoft::WRL::ComPtr<IDXGIFactory1> dxgiFactory;
+        ComPtr<IDXGIFactory2> dxgiFactory;
 
         //! The DXGI device.
-        Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice;
-
-        //! Swap chain for the window.
-        Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
+        ComPtr<IDXGIDevice> dxgiDevice;
 
         //! The device
-        Microsoft::WRL::ComPtr<ID3D11Device> device;
+        ComPtr<ID3D11Device> device;
 
         //! The device context
-        Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
+        ComPtr<ID3D11DeviceContext> deviceContext;
 
+        //! The swap chain.
+		ComPtr<IDXGISwapChain1> swapChain;
+
+        //! The render target view for the swap chain.
+        ComPtr<ID3D11Texture2D> swapChainBackBuffer;
+
+        //! The render target view for the back buffer.
+        ComPtr<ID3D11RenderTargetView> swapChainRenderTargetView;
+
+		//! Create a new DirectX 11 device and device context.
         void createDevice();
+
+		//! Create a new swap chain.
+		void createSwapChain();
 
         //! Create a new render pass.
         void setupNewRenderPass();

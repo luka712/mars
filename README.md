@@ -43,7 +43,13 @@ This will download all required dependencies in `cmake-build-debug` folder.
 Main project is called `mars`.
 
 #### Linux 
-From `cmake-build-debug` folder run `cmake ..`
+
+For Linux CLion integration with `conan` is used.
+For more see https://www.jetbrains.com/help/clion/conan-plugin.html#add-lib
+After integration is done, simply run `DebugLinux` from CLion.
+
+Then to build run 
+`ninja -C /datadisk1/Projects/mars/cmake-build-debuglinux`
 
 ### EMSCRIPTEN
 

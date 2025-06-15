@@ -60,6 +60,6 @@ namespace mars
             downKeys[key] = isDown;
             return key;
         }
-        return Key::None;
+        return Key::Unknown;
     }
-    }
+}

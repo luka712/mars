@@ -2,7 +2,7 @@
 // Created by Erkapic Luka on 27.5.2025.
 //
 
-#if ALLOW_DX11
+#ifdef _WIN32
 
 #include <stdexcept>
 #include <tuple>
