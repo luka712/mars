@@ -7,7 +7,11 @@ set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 # INCLUDE
 # include(FetchContent)
-include(cmake/ConanDependencies.cmake)
+if(APPLE OR WIN32)
+    include(cmake/VcpkgDependencies.cmake)
+else ()
+    include(cmake/ConanDependencies.cmake)
+endif ()
 include(cmake/VendorDependencies.cmake)
 
 # PRE-SETUP
@@ -112,7 +116,12 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 # EXECUTABLE
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
-        ${PACKAGES_SOURCES})
+        ${PACKAGES_SOURCES}
+        include/util/metal/metal_library_utility.h
+        src/util/metal/metal_library_utility.cpp
+        include/util/metal/metal_function_utility.h
+        src/util/metal/metal_function_utility.cpp
+        src/metal/util/metal_util.cpp)
 
 # DEFINITIONS
 if(WIN32)

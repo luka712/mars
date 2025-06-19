@@ -2,7 +2,7 @@
 // Created by Luka Erkapic on 11.05.25.
 //
 
-#if ALLOW_METAL
+#if __APPLE__
 
 #include <sstream>
 #include "Framework.h"

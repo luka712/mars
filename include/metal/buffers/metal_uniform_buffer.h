@@ -5,7 +5,7 @@
 #ifndef METAL_UNIFORM_BUFFER_H
 #define METAL_UNIFORM_BUFFER_H
 
-#if ALLOW_METAL
+#if __APPLE__
 
 #include "core/buffers/AUniformBuffer.h"
 #include "metal/metal.h"

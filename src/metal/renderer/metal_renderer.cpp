@@ -10,12 +10,10 @@
 #include <Metal/Metal.hpp>
 #include <QuartzCore/QuartzCore.hpp>
 
-
 #include <format>
 #include "Framework.h"
 #include "metal/util/metal_util.h"
 #include "metal/renderer/metal_renderer.h"
-
 
 namespace mars {
     static Logger *staticLogger = nullptr;

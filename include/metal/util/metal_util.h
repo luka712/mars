@@ -11,21 +11,27 @@
 #include "metal/util/metal_converter.h"
 #include "metal/util/metal_texture_util.h"
 #include "util/metal/metal_sampler_state_util.h"
+#include "util/metal/metal_render_pipeline_state_utility.h"
+#include "util/metal/metal_library_utility.h"
+#include "util/metal/metal_function_utility.h"
 
 namespace mars {
-    static MetalConverter *metalConverter = nullptr;
-    static MetalBufferUtil *metalBufferUtil = nullptr;
-    static MetalTextureUtil *metalTextureUtil = nullptr;
-    static gpu_util::MetalSamplerStateUtil metalSamplerStateUtil;
+
 
     class MetalUtil {
     public:
         //! Initialize the MetalUtil.
         //! @param logger The logger.
         static void initialize(Logger &logger) {
+            logger.info("metal util initialize");
             metalConverter = new MetalConverter(logger);
             metalBufferUtil = new MetalBufferUtil(logger);
             metalTextureUtil = new MetalTextureUtil(logger);
+            metalRenderPipelineStateUtil = new gpu_util::MetalRenderPipelineStateUtility(&logger);
+            metalLibraryUtility = new gpu_util::MetalLibraryUtility(&logger);
+            metalFunctionUtility = new gpu_util::MetalFunctionUtility(&logger);
+
+            // TODO: create sampler util
         }
 
         //! Gets the MetalConverter. Used to convert framework formats to Metal formats.
@@ -42,7 +48,28 @@ namespace mars {
 
         //! Gets the MetalSamplerStateUtil for working with sampler state.
         //! @return The MetalSamplerStateUtil reference.
-        static gpu_util::MetalSamplerStateUtil &getSamplerState() { return metalSamplerStateUtil; }
+        static gpu_util::MetalSamplerStateUtil &getSamplerState() { return *metalSamplerStateUtil; }
+
+        //! Gets the MetalRenderPipelineStateUtility for working with MTL::RenderPipelineState.
+        //! @return The MetalRenderPipelineStateUtility reference.
+        static gpu_util::MetalRenderPipelineStateUtility &getRenderPipelineState() { return *metalRenderPipelineStateUtil; }
+
+        //! Gets the MetalLibraryUtility for working with MTL::Library.
+        //! @return The MetalLibraryUtility reference.
+        static gpu_util::MetalLibraryUtility &getLibrary() { return *metalLibraryUtility; }
+
+        //! Gets the MetalFunctionUtility for working with MTL::Function.
+        //! @return The MetalFunctionUtility reference.
+        static gpu_util::MetalFunctionUtility &getFunction() { return *metalFunctionUtility; }
+
+    private:
+        static MetalConverter *metalConverter;
+        static MetalBufferUtil *metalBufferUtil;
+        static MetalTextureUtil *metalTextureUtil;
+        static gpu_util::MetalSamplerStateUtil* metalSamplerStateUtil;
+        static gpu_util::MetalRenderPipelineStateUtility *metalRenderPipelineStateUtil;
+        static gpu_util::MetalLibraryUtility *metalLibraryUtility;
+        static gpu_util::MetalFunctionUtility *metalFunctionUtility;
     };
 }
 

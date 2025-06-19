@@ -1,0 +1,109 @@
+Detecting compiler hash for triplet arm64-osx...
+Compiler found: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+The following packages are already installed:
+  * boost-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d6e23ac8a35da1fa74839bde3a863d279a6059a3
+  * boost-cmake:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1a36be4443ec1c0be66984a1e82914a5181b37b1
+  * boost-config:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@08220601e68293ce84acafc748856e45db90b6e0
+  * boost-core:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@4c65d7305461035adb983409910487493fbc3c17
+  * boost-headers:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@89fca00b9db236eb0cb0ea97b9db246c2db7b3e1
+    boost-optional:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1c8c7aa2e1a750a5faf818b3bc8e0491f415b489
+  * boost-static-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@2cb92121f4df9c9b122c4837cb8e41ac1f4800b6
+  * boost-throw-exception:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@cce052773fa40ae37c9497cf38739945720cf104
+  * boost-type-traits:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@5c25a4ff2c1fd4d4eb993dfed7cba2b32fd020a6
+  * boost-uninstall:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@3b2f9f82076f2d15124a4e449700848c25bcadcc
+    box2d:arm64-osx@2.4.1#3 -- git+https://github.com/microsoft/vcpkg@bef68937d8b4101d0df330a399a7fc043f7ec5e5
+    entt:arm64-osx@3.15.0 -- git+https://github.com/microsoft/vcpkg@b27478e44a27785f939170cfb8c910d87194b289
+  * fmt:arm64-osx@11.0.2#1 -- git+https://github.com/microsoft/vcpkg@07a73a7565e5de9eb42e90c16c133bdfdfebbcda
+    glm:arm64-osx@1.0.1#3 -- git+https://github.com/microsoft/vcpkg@f8b09027afe97c717e95bd81d1d4f37c057d1c78
+  * libpng:arm64-osx@1.6.47 -- git+https://github.com/microsoft/vcpkg@2e16dddb1925ae47b5f1ea95d16d6d78f2a711b8
+    lua:arm64-osx@5.4.7 -- git+https://github.com/microsoft/vcpkg@97783a4c337df419c0a6a75e9599545c54259d86
+    sdl2:arm64-osx@2.32.6 -- git+https://github.com/microsoft/vcpkg@02245464dc9b2b91921c4a11c0609b80faf3b68d
+    sdl2-image:arm64-osx@2.8.8#1 -- git+https://github.com/microsoft/vcpkg@5cc9de78d44947f2029569202beba4b5af8ea2cc
+    sol2:arm64-osx@3.5.0 -- git+https://github.com/microsoft/vcpkg@1335e18b0ecb699219ed36d3cad23309181d34a7
+    spdlog:arm64-osx@1.15.3 -- git+https://github.com/microsoft/vcpkg@c2b47286b0759373acecdfaa3be4219711f6d059
+    tinyxml2:arm64-osx@11.0.0 -- git+https://github.com/microsoft/vcpkg@642c5abe1171318729a73bdf95ce6c2ca58e079c
+  * vcpkg-boost:arm64-osx@2025-03-29 -- git+https://github.com/microsoft/vcpkg@858b0333b773b5650c3f19ef271e3205542d7ceb
+  * vcpkg-cmake:arm64-osx@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:arm64-osx@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+  * zlib:arm64-osx@1.3.1 -- git+https://github.com/microsoft/vcpkg@3f05e04b9aededb96786a911a16193cdb711f0c9
+The package boost-optional is compatible with built-in CMake targets of FindBoost.cmake:
+
+    find_package(Boost REQUIRED COMPONENTS optional)
+    target_link_libraries(main PRIVATE Boost::optional)
+
+or the generated cmake configs via:
+
+    find_package( REQUIRED CONFIG)
+    target_link_libraries(main PRIVATE Boost::optional)
+
+box2d provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(box2d CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE box2d::box2d)
+
+entt provides CMake targets:
+
+    find_package(EnTT CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE EnTT::EnTT)
+
+The package glm provides CMake targets:
+
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm)
+
+    # Or use the header-only version
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm-header-only)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+sdl2 provides CMake targets:
+
+    find_package(SDL2 CONFIG REQUIRED)
+    target_link_libraries(main
+        PRIVATE
+        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+    )
+
+sdl2-image provides CMake targets:
+
+    find_package(SDL2_image CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
+sol2 is header-only and can be used from CMake via:
+
+  find_path(SOL2_INCLUDE_DIRS "sol/abort.hpp")
+  target_include_directories(main PRIVATE ${SOL2_INCLUDE_DIRS})
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package spdlog provides CMake targets:
+
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog)
+
+    # Or use the header-only version
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
+
+tinyxml2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(tinyxml2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE tinyxml2::tinyxml2)
+
+tinyxml2 provides pkg-config modules:
+
+  # simple, small, C++ XML parser
+  tinyxml2
+
+All requested installations completed successfully in: 471 us

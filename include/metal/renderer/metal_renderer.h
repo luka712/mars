@@ -22,11 +22,15 @@ namespace mars {
 
         //! Gets the Metal device.
         //! @return The MTL::Device pointer.
-        [[nodiscard]] MTL::Device* getDevice() const { return  device; }
+        [[nodiscard]] MTL::Device *getDevice() const { return device; }
 
         //! Gets the Metal queue.
         //! @return The MTL::Queue pointer.
-            [[nodiscard]] MTL::CommandQueue * getQueue() const { return queue; }
+        [[nodiscard]] MTL::CommandQueue *getQueue() const { return queue; }
+
+        //! Gets the RenderCommandEncoder.
+        //! @return The pointer to the RenderCommandEncoder.
+        [[nodiscard]] MTL::RenderCommandEncoder *getRenderCommandEncoder() const { return renderCommandEncoder; }
 
         //! @copydoc Renderer::initialize()
         void initialize() override;
@@ -43,10 +47,10 @@ namespace mars {
     private:
         SDL_Window *window;
         //! The metal layer.
-        CA::MetalLayer* metalLayer;
+        CA::MetalLayer *metalLayer;
         //! The window surface to draw to.
-        CA::MetalDrawable* currentDrawable;
-        MTL::Device* device;
+        CA::MetalDrawable *currentDrawable;
+        MTL::Device *device;
         MTL::CommandQueue *queue;
 
         // RENDERING
@@ -60,7 +64,7 @@ namespace mars {
     //! Convert the renderer to the Metal renderer.
     //! @param renderer The renderer.
     //! @return The MetalRenderer.
-    static MetalRenderer& toMetalRenderer(Renderer& renderer);
+    static MetalRenderer &toMetalRenderer(Renderer &renderer);
 }
 
 #endif

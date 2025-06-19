@@ -5,7 +5,7 @@
 #ifndef METAL_CONVERTER_H
 #define METAL_CONVERTER_H
 
-#if ALLOW_METAL
+#if __APPLE__
 
 #include "metal/metal.h"
 #include "core/buffers/BufferEnums.h"

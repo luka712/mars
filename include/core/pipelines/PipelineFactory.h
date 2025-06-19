@@ -6,8 +6,12 @@
 #define PIPELINE_FACTORY_H
 
 #include <memory>
+
+#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/future"
+#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "core/pipelines/lines/ALinesRenderPipeline.h"
+#include "core/pipelines/test/a_triangle_test_pipeline.h"
 #include "core/camera/core/OrthographicCamera.h"
 #include "core/renderer/enums.h"
 
@@ -32,6 +36,11 @@ namespace mars {
         std::shared_ptr<ALinesRenderPipeline> createLinesRenderPipeline(
             AUniformBuffer &projectionViewBuffer,
             AInstanceBuffer &modelBuffer) const;
+
+        //! Creates a test pipeline that renders simple triangle centered around origin,
+        //! NOTE: Intended to be used for test purposes only.
+        //! @return The shared pointer for ATriangleTestPipeline.
+        std::shared_ptr<ATriangleTestPipeline> createTriangleTestPipeline();
 
     private:
         Framework &framework;

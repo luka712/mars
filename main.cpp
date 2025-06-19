@@ -19,6 +19,7 @@
 #include "entt_ecs/sprite/sprite_renderer.h"
 #include "entt_ecs/transform/rect_transform.h"
 #include "ldtk.h"
+#include "include/core/pipelines/test/a_triangle_test_pipeline.h"
 
 class MovePlayer final : public mars::AScript {
 	mars::RectTransform* transform;
@@ -149,13 +150,18 @@ int main(int argc, char* argv[]) {
 
 	framework.initialize();
 
-	if (backend == mars::RenderingBackend::D3D11) {
+	if (backend == mars::RenderingBackend::Metal) {
+
+		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
+
 		// JUST TO TEST WITH D3D11
 		framework.subscribeToUpdateEvent([&](const mars::Time time) {
 
 			});
 
-		framework.subscribeToRenderEvent([&]() {});
+		framework.subscribeToRenderEvent([&]() {
+			pipeline->render();
+		});
 		framework.runEventLoop();
 	}
 

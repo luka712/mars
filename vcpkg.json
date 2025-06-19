@@ -7,6 +7,14 @@
     "boost-optional",
     "spdlog",
     "tinyxml2",
-    "entt"
+    "entt",
+    "box2d",
+    "sol2"
+  ],
+  "overrides": [
+    {
+      "name": "box2d",
+      "version": "2.4.1#3"
+    }
   ]
 }
