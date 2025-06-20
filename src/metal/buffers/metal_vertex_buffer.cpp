@@ -7,7 +7,7 @@
 #include <sstream>
 #include "Framework.h"
 #include "metal/buffers/metal_vertex_buffer.h"
-#include "metal/util/metal_util.h"
+#include "../../../include/util/metal/metal_utility.h"
 #include "metal/renderer/metal_renderer.h"
 
 namespace mars {
@@ -25,8 +25,8 @@ namespace mars {
         device = renderer.getDevice();
         queue = renderer.getQueue();
 
-        options = MetalUtil::getMetalConverter().convert(usage);
-        buffer = MetalUtil::getBuffer().create(device, queue, data, byteSize, label, options);
+        options = MetalConverter::convert(usage);
+        buffer = gpu_util::MetalUtility::getBuffer().create(device, queue, data, byteSize, label, options);
     }
 
     void MetalVertexBuffer::initialize(uint32_t byteSize, uint32_t vertexCount) {

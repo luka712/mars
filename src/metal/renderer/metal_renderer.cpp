@@ -12,7 +12,7 @@
 
 #include <format>
 #include "Framework.h"
-#include "metal/util/metal_util.h"
+#include "../../../include/util/metal/metal_utility.h"
 #include "metal/renderer/metal_renderer.h"
 
 namespace mars {
@@ -32,7 +32,8 @@ namespace mars {
         Logger &logger = framework.getLogger();
         staticLogger = &logger;
 
-        MetalUtil::initialize(logger);
+        gpu_util::MetalUtility::initialize(true);
+        MetalConverter::initialize(&logger);
 
         metalLayer = framework.getWindowManager().getMetalLayer();
         device = CreateSystemDefaultDevice();

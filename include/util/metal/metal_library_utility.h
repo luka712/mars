@@ -9,14 +9,14 @@
 
 #include <string>
 #include "util/metal.h"
-#include "core/log/Logger.h"
+#include "util/logger.h"
 
 namespace gpu_util {
     class MetalLibraryUtility {
     public:
         //! The constructor.
         //! @param logger The optional logger.
-        explicit MetalLibraryUtility(mars::Logger *logger = nullptr) : logger(logger) {
+        explicit MetalLibraryUtility(Logger &logger) : logger(logger) {
         }
 
         //! Creates a Metal shader library from a precompiled `.metallib` file.
@@ -41,7 +41,7 @@ namespace gpu_util {
         MTL::Library *create(MTL::Device *device, const std::string &filePath);
 
     private:
-        mars::Logger *logger;
+        Logger &logger;
     };
 }
 

@@ -13,19 +13,20 @@
 
 namespace mars {
 
+    //! The class that helps with converting <b>mars</b> types to <b>metal</b> types and vice-versa.
     class MetalConverter {
 
     public:
-        //! The constructor.
+        //! Initialize the converted and assign logger.
         //! @param logger The logger.
-        explicit MetalConverter(Logger &logger);
+        static void initialize(Logger *logger);
 
         //! Converts the BufferUsage to MTL::ResourceOptions
         //! @param usage The BufferUsage enum.
         //! @return The MTL::ResourceOptions.
-        MTL::ResourceOptions convert(const BufferUsage usage);
+        static MTL::ResourceOptions convert(const BufferUsage usage);
 private:
-        Logger& logger;
+        static Logger* logger;
     };
 
 }

@@ -8,14 +8,15 @@
 #define METAL_BUFFER_UTIL_H
 
 #include "metal/metal.h"
-#include "core/log/Logger.h"
+#include "util/logger.h"
 
-namespace mars {
-    class MetalBufferUtil {
+namespace gpu_util {
+    //! The utility class for working with MTL::Buffer.
+    class MetalBufferUtility {
     public:
         //! Construct a new MetalBufferUtil object.
         //! @param logger The logger.
-        explicit MetalBufferUtil(Logger &logger) : logger(logger) {
+        explicit MetalBufferUtility(Logger &logger) : logger(logger) {
         }
 
         //! Create a new Metal buffer. Use this overload only if creating buffers that can be written to from CPU.

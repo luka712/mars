@@ -10,17 +10,18 @@
 #include <string>
 #include "core/log/Logger.h"
 #include "util/metal.h"
+#include "util/logger.h"
 
 namespace gpu_util {
     class MetalFunctionUtility {
         public:
-        explicit MetalFunctionUtility(mars::Logger* logger)
+        explicit MetalFunctionUtility(Logger& logger)
         : logger(logger) {}
 
         MTL::Function* create(MTL::Library* library, const std::string& functionName);
 
     private:
-        mars::Logger* logger;
+        Logger& logger;
     };
 }
 

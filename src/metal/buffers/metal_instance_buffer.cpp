@@ -6,7 +6,7 @@
 
 #include "Framework.h"
 #include "metal/buffers/metal_instance_buffer.h"
-#include "metal/util/metal_util.h"
+#include "../../../include/util/metal/metal_utility.h"
 
 namespace mars {
     MetalInstanceBuffer::MetalInstanceBuffer(Framework &framework, std::string label)
@@ -25,7 +25,7 @@ namespace mars {
         this->byteSize = byteSize;
         this->byteStride = strideInBytes;
 
-        buffer = MetalUtil::getBuffer().create(renderer.getDevice(), data, byteSize, label);
+        buffer = gpu_util::MetalUtility::getBuffer().create(renderer.getDevice(), data, byteSize, label);
     }
 
     void MetalInstanceBuffer::destroy() {

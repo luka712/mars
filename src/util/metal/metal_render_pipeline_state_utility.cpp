@@ -5,14 +5,9 @@
 #if __APPLE__
 
 #include <stdexcept>
-#include "../../../include/util/metal/metal_render_pipeline_state_utility.h"
-
-#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string"
+#include "util/metal/metal_render_pipeline_state_utility.h"
 
 namespace gpu_util {
-
-MetalRenderPipelineStateUtility::MetalRenderPipelineStateUtility(mars::Logger* logger)
-: logger(logger) {}
 
     MTL::RenderPipelineState *MetalRenderPipelineStateUtility::create(
                                                                       MTL::Device* device,
@@ -39,9 +34,7 @@ MetalRenderPipelineStateUtility::MetalRenderPipelineStateUtility(mars::Logger* l
         if (error) {
             const char* c_str = error->debugDescription()->cString(NS::StringEncoding::UTF8StringEncoding);
             const std::string msg = "MetalRenderPipelineStateUtility::create: Failed to create render pipeline. Error: " + std::string(c_str);
-            if(logger != nullptr){
-                logger->error(msg);
-            }
+            logger.error(msg);
             error->release();
             throw std::runtime_error(msg);
         }

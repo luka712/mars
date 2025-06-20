@@ -8,9 +8,8 @@
 #ifndef METAL_RENDER_PIPELINE_STATE_UTILITY_H
 #define METAL_RENDER_PIPELINE_STATE_UTILITY_H
 
-#include "util/metal.h"
 #include "metal/metal.h"
-#include "core/log/Logger.h"
+#include "util/logger.h"
 
 namespace gpu_util {
     class MetalRenderPipelineStateUtility {
@@ -18,7 +17,7 @@ namespace gpu_util {
 
         //! The constructor.
         //! @param logger The optional logger.
-        explicit MetalRenderPipelineStateUtility(mars::Logger *logger);
+        explicit MetalRenderPipelineStateUtility(Logger &logger) : logger(logger) {}
 
         //! Creates a new MTL::RenderPipelineState.
         //!
@@ -38,7 +37,7 @@ namespace gpu_util {
             const std::string& label = "");
 
         private:
-        mars::Logger *logger;
+            Logger &logger;
     };
 }
 

@@ -1,15 +1,12 @@
-//
-// Created by lukaa on 30.11.2024.
-//
 
+#ifndef GPU_UTIL_LOGGER_H
 
-#ifndef LOGGING_H
-#define LOGGING_H
-
+#define GPU_UTIL_LOGGER_H
 
 #include <string>
 
-namespace mars {
+namespace gpu_util {
+
     //! The logger class.
     class Logger {
     public:
@@ -39,6 +36,27 @@ namespace mars {
         //! @param msg The log message.
         virtual void error(const std::string& msg);
     };
+
+    //! The spdlog implementation of a \see Logger
+    class SpdLogger final : public Logger {
+    public:
+        void info(const char *msg) override;
+
+        void warn(const char *msg) override;
+
+        void error(const char *msg) override;
+    };
+
+    //! The mock implementation of a \see Logger.
+    //! Does not do anything.
+    class MockLogger final : public Logger {
+    public:
+        void info(const char *msg) override;
+
+        void warn(const char *msg) override;
+
+        void error(const char *msg) override;
+    };
 }
 
-#endif //LOGGING_H
+#endif

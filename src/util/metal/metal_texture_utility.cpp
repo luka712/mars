@@ -4,11 +4,11 @@
 
 #if __APPLE__
 
-#include "metal/util/metal_texture_util.h"
+#include "util/metal/metal_texture_utility.h"
 
-namespace mars {
+namespace gpu_util {
 
-    MTL::Texture* MetalTextureUtil::create(
+    MTL::Texture* MetalTextureUtility::create(
         MTL::Device* device,
         NS::UInteger width,
         NS::UInteger height,

@@ -10,15 +10,13 @@
 namespace gpu_util {
     MTL::Library *MetalLibraryUtility::create(MTL::Device *device, const std::string &filePath) {
 
-        logger->info("Creating Metal library");
+        logger.info("Creating Metal library");
 
         // Check if file exists.
         std::ifstream file(filePath);
         if (!file.good()) {
             const std::string msg = "MetalLibraryUtility::create: Cannot find file under path " + filePath + ".";
-            if (logger != nullptr) {
-                logger->error(msg);
-            }
+            logger.error(msg);
             file.close();
             return nullptr;
         }
@@ -36,9 +34,7 @@ namespace gpu_util {
             const char *c_str = error->debugDescription()->cString(NS::StringEncoding::UTF8StringEncoding);
             const std::string msg = "MetalLibraryUtility::create: Failed to create new library. Error: " +
                                     std::string(c_str);
-            if (logger != nullptr) {
-                logger->error(msg);
-            }
+            logger.error(msg);
             error->release();
             return nullptr;
         }

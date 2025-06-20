@@ -10,16 +10,16 @@
 
 #include <string>
 #include "metal/metal.h"
-#include "core/log/Logger.h"
+#include "util/logger.h"
 
-namespace mars {
+namespace gpu_util {
 
     //! The utility class for working with Metal textures.
-    class MetalTextureUtil {
+    class MetalTextureUtility {
     public:
         //! Construct a new MetalBufferUtil object.
         //! @param logger The logger.
-        explicit MetalTextureUtil(Logger &logger) : logger(logger) {
+        explicit MetalTextureUtility(Logger &logger) : logger(logger) {
         }
 
         //! Create a new texture.

@@ -121,7 +121,8 @@ add_executable(mars main.cpp
         src/util/metal/metal_library_utility.cpp
         include/util/metal/metal_function_utility.h
         src/util/metal/metal_function_utility.cpp
-        src/metal/util/metal_util.cpp)
+        src/util/metal/metal_utility.cpp
+        src/util/logger.cpp)
 
 # DEFINITIONS
 if(WIN32)
