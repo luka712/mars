@@ -1,18 +1,21 @@
 cmake_minimum_required(VERSION 3.30)
 project(mars)
 
+SET(TARGET_NAME mars)
+
 # C++ STANDARD
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_OSX_ARCHITECTURES "arm64")
+SET(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_OSX_ARCHITECTURES "arm64")
 
 # INCLUDE
 # include(FetchContent)
+INCLUDE(cmake/AppleSetup.cmake) # guards are already in file
 if(APPLE OR WIN32)
-    include(cmake/VcpkgDependencies.cmake)
+    INCLUDE(cmake/VcpkgDependencies.cmake)
 else ()
-    include(cmake/ConanDependencies.cmake)
+    INCLUDE(cmake/ConanDependencies.cmake)
 endif ()
-include(cmake/VendorDependencies.cmake)
+INCLUDE(cmake/VendorDependencies.cmake)
 
 # PRE-SETUP
 if(WIN32)
@@ -47,16 +50,9 @@ find_package(tinyxml2 CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
 endif()
 
-if(APPLE)
-    find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
-    find_library(QUARTZ_CORE_LIBRARY QuartzCore REQUIRED)
-    find_library(METAL_LIBRARY Metal REQUIRED)
-endif()
-
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
-
 
 # VARIABLES
 if(WIN32)
@@ -67,24 +63,20 @@ if(WIN32)
     # set(LUA_INCLUDE_DIR "${LUA_PATH}")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-
-
-
 elseif(APPLE)
-    set(CMAKE_OSX_ARCHITECTURES "arm64")
 
     # Set Homebrew paths for macOS
-    set(CMAKE_PREFIX_PATH "/opt/homebrew;/usr/local" CACHE PATH "Path to Homebrew libraries")
+    SET(CMAKE_PREFIX_PATH "/opt/homebrew;/usr/local" CACHE PATH "Path to Homebrew libraries")
 
-    find_library(OPENGL_LIBRARY OpenGL REQUIRED) # Find OpenGL framework
+    FIND_LIBRARY(OPENGL_LIBRARY OpenGL REQUIRED) # Find OpenGL framework
     if(NOT OPENGL_LIBRARY)
-        message(FATAL_ERROR "OpenGL framework not found")
+        MESSAGE(FATAL_ERROR "OpenGL framework not found")
     endif()
-    message(STATUS "OpenGL framework: ${OPENGL_LIBRARY}")
+    MESSAGE(STATUS "OpenGL framework: ${OPENGL_LIBRARY}")
 
-    SET(METAL_INCLUDE_DIR ${CMAKE_BINARY_DIR}/vendor/metal-cpp)
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+
 endif()
 
 # PACKAGES
@@ -107,7 +99,7 @@ include_directories(
         vendor/nlohmann
 
         # if APPLE
-        ${METAL_INCLUDE_DIR}
+        ${APPLE_INCLUDE}
 )
 
 # SOURCES
@@ -150,9 +142,7 @@ target_link_libraries(mars
         ${OPENGL_LIBRARY}
 
         # APPLE DEVICES
-        ${QUARTZ_CORE_LIBRARY}
-        ${FOUNDATION_LIBRARY}
-        ${METAL_LIBRARY}
+        ${APPLE_LIBRARIES}
 
         # WINDOWS DEVICES
         ${DX11}
@@ -165,12 +155,12 @@ if(WIN32)
     # file(COPY shared_libs/lua54.dll DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
-# COPY ASSETS/CONTENT/SHADERS
-file(COPY content DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY content/shaders DESTINATION ${CMAKE_BINARY_DIR})
+# Copy 'contents' and 'vendor' files.
+INCLUDE(cmake/CopyContents.cmake)
 
-# COPY VENDOR
-file(COPY vendor DESTINATION ${CMAKE_BINARY_DIR})
+
+# Copy 'contents' as post build script to executable directory.
+INCLUDE(cmake/CopyContentsAfterBuild.cmake)
 
 # TESTS
 add_executable(tests
