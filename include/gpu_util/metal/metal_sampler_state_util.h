@@ -5,7 +5,7 @@
 #ifndef METAL_SAMPLER_UTIL_H
 #define METAL_SAMPLER_UTIL_H
 
-#include "util/metal.h"
+#include "gpu_util/metal.h"
 
 namespace gpu_util {
 

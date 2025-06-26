@@ -4,7 +4,7 @@
 
 #if __APPLE__
 
-#include "util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 
 namespace gpu_util {
     Logger *MetalUtility::logger = nullptr;

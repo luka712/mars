@@ -4,7 +4,7 @@
 
 #if __APPLE__
 
-#include "util/metal/metal_sampler_state_util.h"
+#include "gpu_util/metal/metal_sampler_state_util.h"
 
 namespace gpu_util {
 

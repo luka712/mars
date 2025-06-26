@@ -5,7 +5,7 @@
 #if __APPLE__
 
 #include <stdexcept>
-#include "util/metal/metal_render_pipeline_state_utility.h"
+#include "gpu_util/metal/metal_render_pipeline_state_utility.h"
 
 namespace gpu_util {
 

@@ -10,7 +10,7 @@
 
 #include <string>
 #include "metal/metal.h"
-#include "util/logger.h"
+#include "gpu_util/logger.h"
 
 namespace gpu_util {
 

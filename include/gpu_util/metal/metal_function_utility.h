@@ -9,8 +9,8 @@
 
 #include <string>
 #include "core/log/Logger.h"
-#include "util/metal.h"
-#include "util/logger.h"
+#include "gpu_util/metal.h"
+#include "gpu_util/logger.h"
 
 namespace gpu_util {
     class MetalFunctionUtility {

@@ -141,6 +141,9 @@ int main(int argc, char* argv[]) {
 #if __APPLE__
 	backend = mars::RenderingBackend::Metal;
 #endif
+#if _WIN32
+	backend = mars::RenderingBackend::D3D11;
+#endif
 
 	mars::Framework framework(mars::FrameworkOptions{
 		mars::WindowBounds(1280, 720),
@@ -150,7 +153,7 @@ int main(int argc, char* argv[]) {
 
 	framework.initialize();
 
-	if (backend == mars::RenderingBackend::Metal) {
+	if (backend == mars::RenderingBackend::Metal || backend == mars::RenderingBackend::D3D11) {
 
 		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
 

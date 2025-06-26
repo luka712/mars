@@ -4,7 +4,7 @@
 
 #if __APPLE__
 
-#include "util/metal/metal_buffer_utility.h"
+#include "gpu_util/metal/metal_buffer_utility.h"
 
 #include <memory>
 

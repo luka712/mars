@@ -2,7 +2,7 @@
 // Created by Luka Erkapic on 20.06.25.
 //
 
-#include "util/logger.h"
+#include "gpu_util/logger.h"
 #include "spdlog/spdlog.h"
 
 namespace gpu_util {

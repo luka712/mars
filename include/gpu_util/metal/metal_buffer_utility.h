@@ -8,7 +8,7 @@
 #define METAL_BUFFER_UTIL_H
 
 #include "metal/metal.h"
-#include "util/logger.h"
+#include "gpu_util/logger.h"
 
 namespace gpu_util {
     //! The utility class for working with MTL::Buffer.

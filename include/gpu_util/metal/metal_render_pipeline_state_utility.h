@@ -9,7 +9,7 @@
 #define METAL_RENDER_PIPELINE_STATE_UTILITY_H
 
 #include "metal/metal.h"
-#include "util/logger.h"
+#include "gpu_util/logger.h"
 
 namespace gpu_util {
     class MetalRenderPipelineStateUtility {

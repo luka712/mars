@@ -7,14 +7,14 @@
 
 #if __APPLE__
 
-#include "util/metal/metal_buffer_utility.h"
+#include "gpu_util/metal/metal_buffer_utility.h"
 #include "metal/util/metal_converter.h"
 #include "metal_texture_utility.h"
 #include "spdlog/logger.h"
-#include "util/metal/metal_sampler_state_util.h"
-#include "util/metal/metal_render_pipeline_state_utility.h"
-#include "util/metal/metal_library_utility.h"
-#include "util/metal/metal_function_utility.h"
+#include "gpu_util/metal/metal_sampler_state_util.h"
+#include "gpu_util/metal/metal_render_pipeline_state_utility.h"
+#include "gpu_util/metal/metal_library_utility.h"
+#include "gpu_util/metal/metal_function_utility.h"
 
 
 namespace gpu_util {

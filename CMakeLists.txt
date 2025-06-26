@@ -108,13 +108,7 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 # EXECUTABLE
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
-        ${PACKAGES_SOURCES}
-        include/util/metal/metal_library_utility.h
-        src/util/metal/metal_library_utility.cpp
-        include/util/metal/metal_function_utility.h
-        src/util/metal/metal_function_utility.cpp
-        src/util/metal/metal_utility.cpp
-        src/util/logger.cpp)
+        ${PACKAGES_SOURCES})
 
 # DEFINITIONS
 if(WIN32)

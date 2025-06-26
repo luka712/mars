@@ -5,7 +5,7 @@
 #if __APPLE__
 
 #include <fstream>
-#include "util/metal/metal_library_utility.h"
+#include "gpu_util/metal/metal_library_utility.h"
 
 namespace gpu_util {
     MTL::Library *MetalLibraryUtility::create(MTL::Device *device, const std::string &filePath) {

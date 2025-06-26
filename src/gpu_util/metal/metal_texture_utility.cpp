@@ -4,7 +4,7 @@
 
 #if __APPLE__
 
-#include "util/metal/metal_texture_utility.h"
+#include "gpu_util/metal/metal_texture_utility.h"
 
 namespace gpu_util {
 
