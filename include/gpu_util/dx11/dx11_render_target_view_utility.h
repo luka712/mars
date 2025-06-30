@@ -8,12 +8,12 @@
 #define DX11_RENDER_TARGET_VIEW_UTILITY_H
 
 #include <stdexcept>
-#include "core/log/Logger.h"
-#include "dx11/dx11.h"
+#include "gpu_util/dx11.h"
+#include "gpu_util/logger.h"
 
 using namespace Microsoft::WRL;
 
-namespace mars {
+namespace gpu_util {
     //! Utility class for creating and managing DirectX 11 render target views.
     class DX11RenderTargetViewUtility {
     public:

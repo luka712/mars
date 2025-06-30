@@ -8,9 +8,9 @@
 
 #ifdef _WIN32
 
-#include "dx11/util/dx11_dxgi_device_util.h"
+#include "gpu_util/dx11/dx11_dxgi_device_util.h"
 
-namespace mars {
+namespace gpu_util {
     ComPtr<IDXGIDevice> DX11DxgiDeviceUtil::create(ComPtr<ID3D11Device> device) {
         ComPtr<IDXGIDevice> dxgiDevice;
         HRESULT hr = device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(dxgiDevice.GetAddressOf()));

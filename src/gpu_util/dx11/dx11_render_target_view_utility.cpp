@@ -4,9 +4,9 @@
 
 #ifdef _WIN32
 
-#include "dx11/util/dx11_render_target_view_utility.h"
+#include "gpu_util/dx11/dx11_render_target_view_utility.h"
 
-namespace mars {
+namespace gpu_util {
 
     ComPtr<ID3D11RenderTargetView> DX11RenderTargetViewUtility::createRenderTargetView(
         ComPtr<ID3D11Device> device,

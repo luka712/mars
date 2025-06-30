@@ -8,12 +8,12 @@
 #ifdef _WIN32
 
 #include <stdexcept>
-#include "core/log/Logger.h"
-#include "dx11/dx11.h"
+#include "gpu_util/dx11.h"
+#include "gpu_util/logger.h"
 
 using namespace Microsoft::WRL;
 
-namespace mars {
+namespace gpu_util {
 
     class DX11DxgiDeviceUtil {
     public:

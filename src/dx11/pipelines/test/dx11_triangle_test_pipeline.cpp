@@ -6,7 +6,9 @@
 
 #include "Framework.h"
 #include "dx11/pipelines/test/dx11_triangle_test_pipeline.h"
-#include "dx11/util/dx11_util.h"
+#include "gpu_util/dx11/dx11_util.h"
+
+using namespace gpu_util;
 
 mars::DX11TriangleTestPipeline::DX11TriangleTestPipeline(Framework& framework)
 	: framework(framework), renderer(*dynamic_cast<mars::DX11Renderer*>(&framework.getRenderer()))

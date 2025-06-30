@@ -7,10 +7,10 @@
 
 #ifdef _WIN32
 
-#include "core/log/Logger.h"
-#include "dx11/dx11.h"
+#include "gpu_util/dx11.h"
+#include "gpu_util/logger.h"
 
-namespace mars {
+namespace gpu_util {
 
     class DX11DxgiFactoryUtil {
           public:

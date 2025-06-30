@@ -108,7 +108,9 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 # EXECUTABLE
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
-        ${PACKAGES_SOURCES})
+        ${PACKAGES_SOURCES}
+        include/gpu_util/dx11/dx11_util.h
+        include/gpu_util/dx11/dx11_util.h)
 
 # DEFINITIONS
 if(WIN32)

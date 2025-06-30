@@ -4,10 +4,10 @@
 
 #ifdef _WIN32
 
-#include "dx11/util/dx11_dxgi_swap_chain_util.h"
+#include "gpu_util/dx11/dx11_dxgi_swap_chain_util.h"
 #include <stdexcept>
 
-namespace mars {
+namespace gpu_util {
 
     ComPtr<IDXGISwapChain1> DX11DxgiSwapChainUtil::create(
         const ComPtr<IDXGIFactory2>& factory,

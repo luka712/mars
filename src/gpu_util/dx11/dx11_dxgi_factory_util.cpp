@@ -4,10 +4,10 @@
 
 #ifdef _WIN32
 
-#include "dx11/util/dx11_dxgi_factory_util.h"
+#include "gpu_util/dx11/dx11_dxgi_factory_util.h"
 #include <stdexcept>
 
-namespace mars {
+namespace gpu_util {
     Microsoft::WRL::ComPtr<IDXGIFactory2> DX11DxgiFactoryUtil::create() {
         Microsoft::WRL::ComPtr<IDXGIFactory2> factory;
         HRESULT hr = CreateDXGIFactory(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(factory.GetAddressOf()));

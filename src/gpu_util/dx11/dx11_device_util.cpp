@@ -7,10 +7,10 @@
 #include <stdexcept>
 #include <tuple>
 #include <string>
-#include "dx11/dx11.h"
-#include "dx11/util/dx11_device_util.h"
+#include "gpu_util/dx11.h"
+#include "gpu_util/dx11/dx11_device_util.h"
 
-namespace mars {
+namespace gpu_util {
     //! Create a DirectX 11 device and device context.
     //! @return A tuple containing the created ID3D11Device and ID3D11DeviceContext.
     std::tuple<Microsoft::WRL::ComPtr<ID3D11Device>, Microsoft::WRL::ComPtr<ID3D11DeviceContext> >

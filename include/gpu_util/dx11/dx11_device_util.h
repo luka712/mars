@@ -8,12 +8,12 @@
 #ifdef _WIN32
 
 #include <stdexcept>
-#include "core/log/Logger.h"
-#include "dx11/dx11.h"
+#include "gpu_util/dx11.h"
+#include "gpu_util/logger.h"
 #include <tuple>
 #include <string>
 
-namespace mars {
+namespace gpu_util {
 
     //! Utility class for creating and managing DirectX 11 devices and related resources.
     class DX11DeviceUtil {
