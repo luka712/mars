@@ -9,7 +9,7 @@
 #include <core/renderer/enums.h>
 #include "opengles/opengles.h"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
-#include "opengles/renderer/OpenGLESRenderer.h"
+#include "opengles/renderer/opengles_renderer.h"
 #include "core/camera/core/OrthographicCamera.h"
 #include "opengles/texture/OpenGLESTexture2D.h"
 

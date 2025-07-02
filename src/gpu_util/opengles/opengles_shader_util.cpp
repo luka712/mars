@@ -3,9 +3,10 @@
 //
 
 #include <stdexcept>
-#include "opengles/util/OpenGLESShaderUtil.h"
+#include "gpu_util/opengles/opengles_shader_util.h"
+#include "gpu_util/util/file_reader.h"
 
-namespace mars {
+namespace gpu_util {
     OpenGLESShaderUtil::OpenGLESShaderUtil(Logger &logger)
         : logger(logger) {
     }
@@ -45,5 +46,23 @@ namespace mars {
         return create(source, GL_FRAGMENT_SHADER, label);
     }
 
+    GLuint OpenGLESShaderUtil::createFromFile(const std::string& filePath, const GLenum type, const std::string& label) const {
+      
+		std::string source = FileReader::readFile(filePath);
+
+		return create(
+			source,
+			type,
+			label
+		);
+    }
+
+    GLuint OpenGLESShaderUtil::createVertexShaderFromFile(const std::string& filePath, const std::string& label) const {
+        return createFromFile(filePath, GL_VERTEX_SHADER, label);
+    }
+
+    GLuint OpenGLESShaderUtil::createFragmentShaderFromFile(const std::string& filePath, const std::string& label) const {
+        return createFromFile(filePath, GL_FRAGMENT_SHADER, label);
+    }
 
 }

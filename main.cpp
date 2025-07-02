@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
 	backend = mars::RenderingBackend::Metal;
 #endif
 #if _WIN32
-	backend = mars::RenderingBackend::D3D11;
+	backend = mars::RenderingBackend::OpenGLES;
 #endif
 
 	mars::Framework framework(mars::FrameworkOptions{
@@ -153,7 +153,9 @@ int main(int argc, char* argv[]) {
 
 	framework.initialize();
 
-	if (backend == mars::RenderingBackend::Metal || backend == mars::RenderingBackend::D3D11) {
+	if (backend == mars::RenderingBackend::Metal 
+		|| backend == mars::RenderingBackend::D3D11 
+		|| backend == mars::RenderingBackend::OpenGLES) {
 
 		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
 

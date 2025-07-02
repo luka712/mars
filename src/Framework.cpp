@@ -4,7 +4,7 @@
 
 #include "Framework.h"
 #include "sdl/renderer/SDLRenderer.h"
-#include "opengles/renderer/OpenGLESRenderer.h"
+#include "opengles/renderer/opengles_renderer.h"
 #include "sdl/sprite/SDLSpriteBatch.h"
 
 #ifdef __EMSCRIPTEN__

@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include "Framework.h"
-#include "opengles/renderer/OpenGLESRenderer.h"
+#include "opengles/renderer/opengles_renderer.h"
 #include "opengles/util/OpenGLESUtil.h"
 
 namespace mars {
@@ -35,7 +35,7 @@ namespace mars {
                 break;
         }
 
-        const std::string msg = "OpenGLESDebugCallback: " + typeStr + " " + severityStr;
+        const std::string msg = "OpenGLESDebugCallback: " + typeStr + " " + severityStr + ": " + std::string(message);
         staticLogger->warn(msg);
     }
 

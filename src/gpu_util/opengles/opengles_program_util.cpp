@@ -2,12 +2,11 @@
 // Created by luka on 14.02.25.
 //
 
-#include "../../../include/opengles/util/OpenGLESProgramUtil.h"
-
+#include "gpu_util/opengles/opengles_program_util.h"
 #include <stdexcept>
 #include <vector>
 
-namespace mars {
+namespace gpu_util {
 
     OpenGLESProgramUtil::OpenGLESProgramUtil(Logger &logger)
         :logger(logger){

@@ -5,8 +5,10 @@
 #include <stdexcept>
 #include "Framework.h"
 #include "core/pipelines/PipelineFactory.h"
+#include "opengles/pipelines/test/opengles_triangle_test_pipeline.h"
 #include "opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h"
 #include "opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h"
+
 
 #if __APPLE__
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
@@ -62,6 +64,8 @@ namespace mars {
 		case RenderingBackend::D3D11:
 			return std::make_shared<DX11TriangleTestPipeline>(framework);
 #endif 
+		case RenderingBackend::OpenGLES:
+			return std::make_shared<OpenGLESTriangleTestPipeline>(framework);
 		default:
 			const std::string msg = "Rendering backend not supported.";
 			framework.getLogger().error(msg);

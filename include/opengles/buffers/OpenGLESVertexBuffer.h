@@ -7,7 +7,7 @@
 
 #include "Framework.h"
 #include "core/log/Logger.h"
-#include "opengles/renderer/OpenGLESRenderer.h"
+#include "opengles/renderer/opengles_renderer.h"
 #include "core/buffers/AVertexBuffer.h"
 #include "opengles/util/OpenGLESUtil.h"
 
