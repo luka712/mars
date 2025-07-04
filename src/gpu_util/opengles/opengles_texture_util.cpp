@@ -3,9 +3,9 @@
 //
 
 #include <stdexcept>
-#include "opengles/util/OpenGLESTextureUtil.h"
+#include "gpu_util/opengles/opengles_texture_util.h"
 
-namespace mars {
+namespace gpu_util {
     OpenGLESTextureUtil::OpenGLESTextureUtil(Logger &logger) : logger(logger) {
     }
 

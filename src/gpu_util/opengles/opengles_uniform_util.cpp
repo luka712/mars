@@ -1,11 +1,11 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
-#include "../../../include/opengles/util/OpenGLESUniformUtil.h"
+#include "gpu_util/opengles/opengles_uniform_util.h"
 #include <stdexcept>
 
-namespace mars {
+namespace gpu_util {
 
     OpenGLESUniformUtil::OpenGLESUniformUtil(Logger& logger)
         : logger(logger) {}

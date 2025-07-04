@@ -4,8 +4,10 @@
 
 #include "Framework.h"
 #include "opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
 #include "opengles/opengles.h"
+
+using namespace gpu_util;
 
 namespace mars {
     OpenGLESLinesRenderPipeline::OpenGLESLinesRenderPipeline(

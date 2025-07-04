@@ -1,15 +1,14 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
 #ifndef OPEN_GLES_BUFFER_UTIL_H
 #define OPEN_GLES_BUFFER_UTIL_H
 
-#include "opengles/opengles.h"
-#include <string>
-#include "core/log/Logger.h"
+#include "gpu_util/opengles.h"
+#include "gpu_util/logger.h"
 
-namespace mars {
+namespace gpu_util {
     //! The OpenGLESBufferUtil class for working with OpenGLES buffers.
     class OpenGLESBufferUtil {
     public:

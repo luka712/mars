@@ -5,7 +5,9 @@
 #include <SDL.h>
 #include "Framework.h"
 #include "opengles/renderer/opengles_renderer.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
+
+using namespace gpu_util;
 
 namespace mars {
     static Logger *staticLogger = nullptr;
@@ -49,7 +51,7 @@ namespace mars {
         Logger &logger = framework.getLogger();
         staticLogger = &logger;
 
-        OpenGLESUtil::initialize(logger);
+        OpenGLESUtil::initialize(true);
 
 #ifndef __EMSCRIPTEN__
         // gladLoadGLLoader(SDL_GL_GetProcAddress);

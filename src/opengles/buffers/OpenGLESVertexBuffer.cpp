@@ -1,9 +1,12 @@
 //
-// Created by luka erkapic on 18.1.2025.
+// Created by Erkapic Luka on 18.1.2025.
 //
 
 #include <sstream>
 #include "opengles/buffers/OpenGLESVertexBuffer.h"
+#include "opengles/util/opengles_converter.h"
+
+using namespace gpu_util;
 
 namespace mars {
     OpenGLESVertexBuffer::OpenGLESVertexBuffer(const Framework &framework, const std::string &label)
@@ -16,7 +19,7 @@ namespace mars {
                                           const BufferUsage usage) {
         this->byteSize = byteSize;
         this->vertexCount = vertexCount;
-        glHint = OpenGLESUtil::getConverter()->convertToGLHint(usage);
+        glHint = OpenGLESConverter::convertToGLHint(usage);
         buffer = OpenGLESUtil::getBuffer()->createBuffer(
             glTarget,
             data,

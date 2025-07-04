@@ -5,10 +5,10 @@
 #ifndef OPEN_GLES_UNIFORM_UTIL_H
 #define OPEN_GLES_UNIFORM_UTIL_H
 
-#include "opengles/opengles.h"
-#include "core/log/Logger.h"
+#include "gpu_util/opengles.h"
+#include "gpu_util/logger.h"
 
-namespace mars {
+namespace gpu_util {
     class OpenGLESUniformUtil {
         public:
         //! The constructor.
@@ -31,7 +31,5 @@ namespace mars {
         Logger& logger;
     };
 }
-
-
 
 #endif //OPEN_GLES_UNIFORM_UTIL_H

@@ -2,10 +2,10 @@
 // Created by Erkapic Luka on 18.1.2025.
 //
 
-#include "opengles/util/OpenGLESBufferUtil.h"
+#include "gpu_util/opengles/opengles_buffer_util.h"
 #include <stdexcept>
 
-namespace mars {
+namespace gpu_util {
     GLuint OpenGLESBufferUtil::createBuffer(const GLenum target,
                               const void *data,
                               const uint32_t byteSize,

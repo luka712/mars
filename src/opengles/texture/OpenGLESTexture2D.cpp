@@ -1,11 +1,13 @@
 //
-// Created by luka on 11.02.25.
+// Created by Erkapic Luka on 11.02.25.
 //
 
 #include <sstream>
 #include "Framework.h"
 #include "opengles/texture/OpenGLESTexture2D.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
+
+using namespace gpu_util;
 
 namespace mars
 {

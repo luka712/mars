@@ -9,7 +9,7 @@
 #include "core/log/Logger.h"
 #include "opengles/renderer/opengles_renderer.h"
 #include "core/buffers/AVertexBuffer.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
 
 namespace mars {
     //! The OpenGLES implementation of the vertex buffer.

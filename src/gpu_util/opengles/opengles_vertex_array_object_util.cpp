@@ -2,9 +2,9 @@
 // Created by Erkapic Luka on 14.02.25.
 //
 
-#include "opengles/util/OpenGLESVertexArrayObjectUtil.h"
+#include "gpu_util/opengles/opengles_vertex_array_object_util.h"
 
-namespace mars {
+namespace gpu_util {
 
     GLuint OpenGLESVertexArrayObjectUtil::create(const std::string &label) {
 

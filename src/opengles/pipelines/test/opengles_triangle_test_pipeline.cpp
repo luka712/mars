@@ -3,8 +3,10 @@
 //
 
 #include "Framework.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
 #include "opengles/pipelines/test/opengles_triangle_test_pipeline.h"
+
+using namespace gpu_util;
 
 namespace mars {
 

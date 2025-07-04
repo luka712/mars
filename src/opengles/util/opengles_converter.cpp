@@ -1,15 +1,14 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#include "opengles/util/OpenGLESConverter.h"
+#include "opengles/util/opengles_converter.h"
+#include <stdexcept>
+#include <string>
 
 namespace mars {
 
-    OpenGLESConverter::OpenGLESConverter(Logger &logger) : logger(logger) {
-    }
-
-    GLenum OpenGLESConverter::convertToGLHint(const BufferUsage usage) const {
+    GLenum OpenGLESConverter::convertToGLHint(const BufferUsage usage) {
         switch (usage) {
             case BufferUsage::Vertex:
                 return GL_STATIC_DRAW;
@@ -22,8 +21,8 @@ namespace mars {
             case BufferUsage::Vertex_CopyDst:
                 return GL_DYNAMIC_DRAW;
             default:
-                logger.error("Unknown buffer usage.");
-                return GL_STATIC_DRAW;
+                std::string msg = "Unsupported buffer usage: " + std::to_string(static_cast<int>(usage));
+                throw std::runtime_error(msg);
         }
     }
 }

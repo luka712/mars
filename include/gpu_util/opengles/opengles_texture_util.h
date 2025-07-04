@@ -1,16 +1,16 @@
 //
-// Created by luka on 11.02.25.
+// Created by Erkapic Luka on 11.02.25.
 //
 
-#ifndef OPENGLESTEXTUREUTIL_H
-#define OPENGLESTEXTUREUTIL_H
+#ifndef OPEN_GLES_TEXTURE_UTIL_H
+#define OPEN_GLES_TEXTURE_UTIL_H
 
 #include <cstdint>
-#include <core/log/Logger.h>
-#include "opengles/opengles.h"
+#include "gpu_util/opengles.h"
+#include "gpu_util/logger.h"
 #include <string>
 
-namespace mars {
+namespace gpu_util {
 
     //! The OpenGLESTextureUtil class for working with OpenGLES textures.
     class OpenGLESTextureUtil {
@@ -52,4 +52,4 @@ namespace mars {
 
 
 
-#endif //OPENGLESTEXTUREUTIL_H
+#endif //OPEN_GLES_TEXTURE_UTIL_H

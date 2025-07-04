@@ -1,14 +1,14 @@
 //
-// Created by luka on 14.02.25.
+// Created by Erkapic Luka on 14.02.25.
 //
 
 #ifndef OPENGLES_VERTEX_ARRAY_OBJECT_UTIL_H
 #define OPENGLES_VERTEX_ARRAY_OBJECT_UTIL_H
 
-#include <string>
-#include "opengles/opengles.h"
+#include "gpu_util/opengles.h"
+#include "gpu_util/logger.h"
 
-namespace mars {
+namespace gpu_util {
     //! The utility class for Vertex Array Object.
     class OpenGLESVertexArrayObjectUtil {
     public:
