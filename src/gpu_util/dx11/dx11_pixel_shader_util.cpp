@@ -6,8 +6,6 @@
 
 #include "gpu_util/dx11/dx11_pixel_shader_util.h"
 
-#endif
-
 ComPtr<ID3D11PixelShader> gpu_util::DX11PixelShaderUtil::create(ComPtr<ID3D11Device> device, ComPtr<ID3D10Blob> shaderBlob)
 {
 	ComPtr<ID3D11PixelShader> pixelShader;
@@ -27,3 +25,5 @@ ComPtr<ID3D11PixelShader> gpu_util::DX11PixelShaderUtil::create(ComPtr<ID3D11Dev
 	logger.info("DX11PixelShaderUtil::create: Successfully created pixel shader.");
 	return pixelShader;
 }
+
+#endif

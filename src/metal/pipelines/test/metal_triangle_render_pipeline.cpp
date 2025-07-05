@@ -6,7 +6,7 @@
 
 #include "Framework.h"
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
-#include "../../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 
 namespace mars {
 

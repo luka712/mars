@@ -7,7 +7,7 @@
 #include <sstream>
 #include "Framework.h"
 #include "metal/buffers/metal_vertex_buffer.h"
-#include "../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 #include "metal/renderer/metal_renderer.h"
 
 namespace mars {

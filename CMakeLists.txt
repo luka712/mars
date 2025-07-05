@@ -59,6 +59,7 @@ include_directories(
         ${Boost_INCLUDE_DIRS}
         vendor/ldtk
         vendor/nlohmann
+        vendor/angle
 
         # if APPLE
         ${APPLE_INCLUDE}

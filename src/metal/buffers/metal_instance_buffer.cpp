@@ -6,7 +6,7 @@
 
 #include "Framework.h"
 #include "metal/buffers/metal_instance_buffer.h"
-#include "../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 
 namespace mars {
     MetalInstanceBuffer::MetalInstanceBuffer(Framework &framework, std::string label)

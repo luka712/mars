@@ -12,7 +12,7 @@
 
 #include <format>
 #include "Framework.h"
-#include "../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 #include "metal/renderer/metal_renderer.h"
 
 namespace mars {

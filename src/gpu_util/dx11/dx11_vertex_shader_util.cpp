@@ -6,8 +6,6 @@
 
 #include "gpu_util/dx11/dx11_vertex_shader_util.h"
 
-#endif
-
 ComPtr<ID3D11VertexShader> gpu_util::DX11VertexShaderUtil::create(ComPtr<ID3D11Device> device, ComPtr<ID3D10Blob> shaderBlob)
 {
 	ComPtr<ID3D11VertexShader> vertexShader;
@@ -27,3 +25,5 @@ ComPtr<ID3D11VertexShader> gpu_util::DX11VertexShaderUtil::create(ComPtr<ID3D11D
 
 	return vertexShader;
 }
+
+#endif

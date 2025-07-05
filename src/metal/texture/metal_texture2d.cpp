@@ -7,7 +7,7 @@
 #include <sstream>
 #include "Framework.h"
 #include "metal/texture/metal_texture2d.h"
-#include "../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 
 namespace mars {
 

@@ -10,13 +10,14 @@
 #include <Metal/Metal.hpp>
 #endif
 
-
 #include "Framework.h"
-#include "core/window/WindowManager.h"
+#include "core/window/window_manager.h"
 #include "opengles/opengles.h"
 #include <iostream>
 #include <core/log/Logger.h>
 #include <SDL_syswm.h>
+#include <SDL2/SDL_egl.h>
+#include <EGL/eglext.h>
 
 
 using namespace mars;
@@ -39,7 +40,18 @@ HWND mars::WindowManager::getWin32Handle()
 	return wmInfo.info.win.window;
 }
 
-#endif 
+#endif
+
+#if __APPLE__
+
+NSWindow* mars::WindowManager::getCocoaWindowHandle() {
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(window, &wmInfo);
+    return wmInfo.info.cocoa.window;
+}
+
+#endif
 
 void WindowManager::subscribeToRenderEvent(const std::function<void()>& callback) {
 	renderEvents.push_back(callback);
@@ -115,6 +127,55 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
 		logger.error(msg);
 		throw std::runtime_error(msg);
 	}
+}
+
+void WindowManager::initializeForAngleOpenGLES(const int major, const int minor) {
+    Logger& logger = framework.getLogger();
+
+#if __APPLE__
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal"); // Force to use metal if apple device
+#endif
+
+    SDL_SetHint(SDL_HINT_OPENGL_ES_DRIVER, "1"); // Use "Angle".
+    
+    InitializeSDL();
+
+    // Set SDL to use EGL
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+    logger.info(
+        "WindowManager::initializeForOpenGLES: Window initialized for OpenGLES(" + std::to_string(major) + ", " +
+        std::to_string(minor) + ").");
+    logger.info(
+        "WindowManager::initializeForOpenGLES: Client size: " + std::to_string(windowBounds.width) + ", " +
+        std::to_string(windowBounds.height) + ".");
+
+    window = SDL_CreateWindow("Mars Framework",
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        windowBounds.width, windowBounds.height,
+        SDL_WINDOW_OPENGL);
+
+    if (window == nullptr) {
+        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") +
+            SDL_GetError();
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
+
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+    if (context == nullptr) {
+        const std::string msg = std::string(
+            "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ")
+            + SDL_GetError();
+        logger.error(msg);
+        throw std::runtime_error(msg);
+    }
+
 }
 
 #if __APPLE__

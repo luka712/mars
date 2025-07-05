@@ -2,7 +2,7 @@
 // Created by Erkapic Luka on 26.6.2025..
 //
 
-#ifndef _DX11
+#ifdef _DX11
 
 #define _DX11
 

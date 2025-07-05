@@ -14,5 +14,8 @@ if(APPLE)
             ${QUARTZ_CORE_LIBRARY}
             ${FOUNDATION_LIBRARY}
             ${METAL_LIBRARY}
+            libEGL.dylib
+            libGLESv2.dylib
+            "-framework Metal" "-framework QuartzCore"
     )
 endif()

@@ -8,7 +8,7 @@
 #include <memory>
 #include <core/loaders/FileReader.h>
 #include "core/life_management/State.h"
-#include "core/window/WindowManager.h"
+#include "core/window/window_manager.h"
 #include "core/renderer/Renderer.h"
 #include "core/sprite/SpriteBatch.h"
 #include "core/time/TimeManager.h"

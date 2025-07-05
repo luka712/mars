@@ -139,7 +139,7 @@ int main(int argc, char* argv[]) {
 
 	mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
 #if __APPLE__
-	backend = mars::RenderingBackend::Metal;
+	backend = mars::RenderingBackend::OpenGLES;
 #endif
 #if _WIN32
 	backend = mars::RenderingBackend::OpenGLES;

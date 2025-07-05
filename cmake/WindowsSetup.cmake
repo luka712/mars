@@ -10,7 +10,7 @@ if(WIN32)
     if(NOT CMAKE_MT)
         MESSAGE(WARNING "mt.exe not found - manifest embedding may fail")
     endif()
+
+    SET(WINDOWS_LIBRARIES d3d11 dxgi d3dcompiler)
 endif()
 
-
-SET(WINDOWS_LIBRARIES d3d11 dxgi d3dcompiler)

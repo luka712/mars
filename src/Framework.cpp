@@ -36,7 +36,7 @@ namespace mars {
             this->renderer = std::make_unique<SDLRenderer>(*this);
             this->spriteBatch = std::make_unique<SDLSpriteBatch>(*this);
         }
-#if ALLOW_METAL
+#if __APPLE__
         else if (renderingBackend == RenderingBackend::Metal) {
             this->renderer = std::make_unique<MetalRenderer>(*this, options.frameBufferSize);
         }
@@ -92,11 +92,11 @@ namespace mars {
         }
 #endif
         else {
-#if __EMSCRIPTEN__
-            windowManager->initializeForOpenGLES(3, 0);
-#else
+    #if __APPLE__
+            windowManager->initializeForAngleOpenGLES(3,0);
+    #else
             windowManager->initializeForOpenGLES();
-#endif
+    #endif
         }
 
         windowManager->subscribeToUpdateEvent([&] {

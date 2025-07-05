@@ -1,4 +1,3 @@
-// version 300 es for OpenGL ES 3.0. Use #version 100 for ES 2.0
 #version 300 es
 precision mediump float;
 

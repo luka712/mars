@@ -7,10 +7,10 @@
 #define WINDOWMANAGER_H
 
 #include <functional>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 #include "core/window/WindowManagerOptions.h"
-#include <SDL_syswm.h>
+#include <SDL2/SDL_syswm.h>
 
 #if __APPLE__
 #include <metal-cpp/QuartzCore/CAMetalLayer.hpp>
@@ -41,15 +41,21 @@ namespace mars {
         [[nodiscard]] WindowBounds getWindowBounds() const { return windowBounds; }
 
 #if _WIN32
-		//! Get the win32 handle of the window.
+        //! Get the win32 handle of the window.
         //! @return The HWND handle of the window.
         HWND getWin32Handle();
 #endif 
 
 #if __APPLE__
+
+        //! Gets the cocoa window handle.
+        //! The cocoa window handle.
+        NSWindow* getCocoaWindowHandle();
+
         //! Gets the metal layer.
         //! The metal layer.
         [[nodiscard]] CA::MetalLayer *getMetalLayer() const { return metalLayer; }
+
 #endif
 
         //! Subscribe to the update event.
@@ -67,6 +73,11 @@ namespace mars {
         //! @param major The major version of OpenGLES.
         //! @param minor The minor version of OpenGLES.
         void initializeForOpenGLES(int major = 3, int minor = 0);
+
+            //! Initialize the window for OpenGLES API throught the ANGLE project.
+            //! @param major The major version of OpenGLES.
+            //! @param minor The minor version of OpenGLES.
+        void initializeForAngleOpenGLES(int major = 3, int minor = 0);
 
 #if __APPLE__
         //! Initialize the window for working with Metal API.

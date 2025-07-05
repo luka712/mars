@@ -5,7 +5,7 @@
 #if __APPLE__
 
 #include "metal/buffers/metal_uniform_buffer.h"
-#include "../../../include/util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_utility.h"
 #include <sstream>
 
 namespace mars {
