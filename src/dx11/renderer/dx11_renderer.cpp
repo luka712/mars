@@ -6,7 +6,7 @@
 
 #include "Framework.h"
 #include "dx11/renderer/dx11_renderer.h"
-#include "dx11/util/dx11_util.h"
+#include "gpu_util/dx11/dx11_util.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 
@@ -14,6 +14,8 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
+
+using namespace gpu_util;
 
 namespace mars {
 	static Logger* staticLogger = nullptr;
@@ -28,7 +30,7 @@ namespace mars {
 		Logger& logger = framework.getLogger();
 		staticLogger = &logger;
 
-		DX11Util::initialize(*staticLogger);
+		DX11Util::initialize(true);
 
 		dxgiFactory = DX11Util::getDxgiFactory().create();
 

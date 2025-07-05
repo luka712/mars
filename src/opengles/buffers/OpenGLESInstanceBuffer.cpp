@@ -6,7 +6,9 @@
 
 #include "Framework.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
+
+using namespace gpu_util;
 
 namespace  mars {
     OpenGLESInstanceBuffer::OpenGLESInstanceBuffer(Framework &framework, std::string label)

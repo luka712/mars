@@ -1,11 +1,13 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
 #include <sstream>
 #include "Framework.h"
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "gpu_util/opengles/opengles_util.h"
+
+using namespace gpu_util;
 
 namespace mars {
     OpenGLESIndexBuffer::OpenGLESIndexBuffer(const Framework &framework, const std::string &label)

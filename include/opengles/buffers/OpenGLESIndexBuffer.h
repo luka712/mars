@@ -5,7 +5,7 @@
 #ifndef OPENGLESINDEXBUFFER_H
 #define OPENGLESINDEXBUFFER_H
 
-#include "opengles/renderer/OpenGLESRenderer.h"
+#include "opengles/renderer/opengles_renderer.h"
 #include "opengles/opengles.h"
 #include "core/buffers/AIndexBuffer.h"
 

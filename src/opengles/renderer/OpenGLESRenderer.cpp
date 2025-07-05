@@ -4,8 +4,10 @@
 
 #include <SDL.h>
 #include "Framework.h"
-#include "opengles/renderer/OpenGLESRenderer.h"
-#include "opengles/util/OpenGLESUtil.h"
+#include "opengles/renderer/opengles_renderer.h"
+#include "gpu_util/opengles/opengles_util.h"
+
+using namespace gpu_util;
 
 namespace mars {
     static Logger *staticLogger = nullptr;
@@ -35,7 +37,7 @@ namespace mars {
                 break;
         }
 
-        const std::string msg = "OpenGLESDebugCallback: " + typeStr + " " + severityStr;
+        const std::string msg = "OpenGLESDebugCallback: " + typeStr + " " + severityStr + ": " + std::string(message);
         staticLogger->warn(msg);
     }
 
@@ -49,7 +51,7 @@ namespace mars {
         Logger &logger = framework.getLogger();
         staticLogger = &logger;
 
-        OpenGLESUtil::initialize(logger);
+        OpenGLESUtil::initialize(true);
 
 #ifndef __EMSCRIPTEN__
         // gladLoadGLLoader(SDL_GL_GetProcAddress);

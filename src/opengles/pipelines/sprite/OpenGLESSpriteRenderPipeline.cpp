@@ -1,5 +1,5 @@
 //
-// Created by luka on 10.02.25.
+// Created by Erkapic Luka on 10.02.25.
 //
 
 #include <glm/gtc/type_ptr.hpp>
@@ -8,8 +8,9 @@
 #include <core/math/Matrix.h>
 #include <opengles/buffers/OpenGLESIndexBuffer.h>
 #include <opengles/buffers/OpenGLESVertexBuffer.h>
-#include <opengles/util/OpenGLESUtil.h>
+#include "gpu_util/opengles/opengles_util.h"
 
+using namespace gpu_util;
 
 namespace mars {
     OpenGLESSpriteRenderPipeline::OpenGLESSpriteRenderPipeline(

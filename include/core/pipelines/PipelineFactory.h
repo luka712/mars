@@ -7,8 +7,6 @@
 
 #include <memory>
 
-#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/future"
-#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "core/pipelines/lines/ALinesRenderPipeline.h"
 #include "core/pipelines/test/a_triangle_test_pipeline.h"
