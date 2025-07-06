@@ -40,7 +40,7 @@ namespace mars {
         else if (renderingBackend == RenderingBackend::Metal) {
             this->renderer = std::make_unique<MetalRenderer>(*this, options.frameBufferSize);
         }
-#elif ALLOW_DX11 
+#elif _WIN32 
         else if (renderingBackend == RenderingBackend::D3D11) {
             this->renderer = std::make_unique<DX11Renderer>(*this, options.frameBufferSize);
         }

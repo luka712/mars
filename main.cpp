@@ -137,12 +137,12 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "Hello, World!" << std::endl;
 
-	mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
+	mars::RenderingBackend backend = mars::RenderingBackend::D3D11;
 #if __APPLE__
 	backend = mars::RenderingBackend::OpenGLES;
 #endif
 #if _WIN32
-	backend = mars::RenderingBackend::OpenGLES;
+	backend = mars::RenderingBackend::D3D11;
 #endif
 
 	mars::Framework framework(mars::FrameworkOptions{

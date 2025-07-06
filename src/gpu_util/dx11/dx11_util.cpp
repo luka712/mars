@@ -2,9 +2,7 @@
 // Created by Erkapic Luka on 26.6.2025..
 //
 
-#ifdef _DX11
-
-#define _DX11
+#ifdef _WIN32
 
 #include "gpu_util/dx11/dx11_util.h"
 

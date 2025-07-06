@@ -1,0 +1,35 @@
+{
+  "cuda": [],
+  "fxc": [
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/triangle_vs.slang",
+      "output": "D:/Projects/mars/content/shaders/fxc/test/triangle_vs.fxc",
+      "stage": "vertex",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/triangle_ps.slang",
+      "output": "D:/Projects/mars/content/shaders/fxc/test/triangle_ps.fxc",
+      "stage": "fragment",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    }
+  ],
+  "hlsl": [
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/triangle_vs.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/triangle_vs.hlsl",
+      "stage": "vertex",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/triangle_ps.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/triangle_ps.hlsl",
+      "stage": "fragment",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    }
+  ]
+}
