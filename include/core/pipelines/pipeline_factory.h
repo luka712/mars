@@ -1,5 +1,5 @@
 //
-// Created by luka on 09.02.25.
+// Created by Erkapic Luka on 09.02.25.
 //
 
 #ifndef PIPELINE_FACTORY_H
@@ -10,6 +10,7 @@
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "core/pipelines/lines/ALinesRenderPipeline.h"
 #include "core/pipelines/test/a_triangle_test_pipeline.h"
+#include "core/pipelines/test/a_position_color_test_pipeline.h"
 #include "core/camera/core/OrthographicCamera.h"
 #include "core/renderer/enums.h"
 
@@ -39,6 +40,11 @@ namespace mars {
         //! NOTE: Intended to be used for test purposes only.
         //! @return The shared pointer for ATriangleTestPipeline.
         std::shared_ptr<ATriangleTestPipeline> createTriangleTestPipeline();
+
+        //! Creates a test pipeline that renders that uses buffer object that takes position and color attributes,
+        //! NOTE: Intended to be used for test purposes only.
+        //! @return The shared pointer for ATriangleTestPipeline.
+        std::shared_ptr<APositionColorTestPipeline> createPositionColorTestPipeline();
 
     private:
         Framework &framework;

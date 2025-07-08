@@ -7,7 +7,7 @@
 
 #include "core/pipelines/lines/ALinesRenderPipeline.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
-#include "opengles/buffers/OpenGLESVertexBuffer.h"
+#include "opengles/buffers/opengles_vertex_buffer.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
 
 namespace mars {

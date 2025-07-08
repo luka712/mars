@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "AInstanceBuffer.h"
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/AIndexBuffer.h"
 #include "core/buffers/AUniformBuffer.h"
 

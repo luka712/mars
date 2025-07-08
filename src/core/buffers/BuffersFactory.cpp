@@ -10,7 +10,7 @@
 #include "opengles/buffers/OpenGLESIndexBuffer.h"
 #include "opengles/buffers/OpenGLESInstanceBuffer.h"
 #include "opengles/buffers/OpenGLESUniformBuffer.h"
-#include "opengles/buffers/OpenGLESVertexBuffer.h"
+#include "opengles/buffers/opengles_vertex_buffer.h"
 
 #if __APPLE__
 #include "metal/buffers/metal_index_buffer.h"

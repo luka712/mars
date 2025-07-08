@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
 	backend = mars::RenderingBackend::OpenGLES;
 #endif
 #if _WIN32
-	backend = mars::RenderingBackend::D3D11;
+	backend = mars::RenderingBackend::OpenGLES;
 #endif
 
 	mars::Framework framework(mars::FrameworkOptions{
@@ -153,11 +153,22 @@ int main(int argc, char* argv[]) {
 
 	framework.initialize();
 
-	if (backend == mars::RenderingBackend::Metal 
-		|| backend == mars::RenderingBackend::D3D11 
+	if (backend == mars::RenderingBackend::Metal
+		|| backend == mars::RenderingBackend::D3D11
 		|| backend == mars::RenderingBackend::OpenGLES) {
 
 		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
+		std::shared_ptr<mars::APositionColorTestPipeline> pipelineWithBuffer = framework.getPipelineFactory().createPositionColorTestPipeline();
+
+		std::shared_ptr<mars::AVertexBuffer> vertexBuffer = framework.getBuffersFactory().createVertexBuffer(
+			{
+				0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // V1,
+				-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // V2
+				0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // V3
+			},
+			3,
+			mars::BufferUsage::Vertex,
+			"Test Vertex Buffer");
 
 		// JUST TO TEST WITH D3D11
 		framework.subscribeToUpdateEvent([&](const mars::Time time) {
@@ -166,142 +177,143 @@ int main(int argc, char* argv[]) {
 
 		framework.subscribeToRenderEvent([&]() {
 			pipeline->render();
+			pipelineWithBuffer->render(*vertexBuffer);
 		});
 		framework.runEventLoop();
-	}
+		}
 
-	std::vector vertex = {
-		0.0f, 0.0f, 0.0f,
-		100.0f, 0.0f, 0.0f,
-		100.0f, 100.0f, 0.0f,
-		0.0f, 100.0f, 0.0f
-	};
-	auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
-	auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({ 0, 1, 2, 2, 3, 0 }, "Hello");
+			std::vector vertex = {
+				0.0f, 0.0f, 0.0f,
+				100.0f, 0.0f, 0.0f,
+				100.0f, 100.0f, 0.0f,
+				0.0f, 100.0f, 0.0f
+		};
+		auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
+		auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({ 0, 1, 2, 2, 3, 0 }, "Hello");
 
-	std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };
-	auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(
-		data.data(), "Hello", 16, mars::BufferUsage::Uniform_MapWrite);
-
-
-	// std::string jsonString = framework.getFileReader().readFile("content/ldtk/basic_map.ldtk");
-	// quicktype::LdtkJson ldtkData = nlohmann::json::parse(jsonString);
+		std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };
+		auto uniformBuffer = framework.getBuffersFactory().createUniformBuffer(
+			data.data(), "Hello", 16, mars::BufferUsage::Uniform_MapWrite);
 
 
-	//  ecsManager.initialize();
+		// std::string jsonString = framework.getFileReader().readFile("content/ldtk/basic_map.ldtk");
+		// quicktype::LdtkJson ldtkData = nlohmann::json::parse(jsonString);
 
-	std::shared_ptr<mars::Texture2D> tileMapTexture = framework
-	.getContentManager()
-	.load<mars::Texture2D>("images/heliport.png");
+
+		//  ecsManager.initialize();
+
+		std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+			.getContentManager()
+			.load<mars::Texture2D>("images/heliport.png");
 
 #if __APPLE__
-	framework.subscribeToUpdateEvent([&](const mars::Time time) {
+		framework.subscribeToUpdateEvent([&](const mars::Time time) {
 
-		});
+			});
 
-	framework.subscribeToRenderEvent([&]() {});
-	framework.runEventLoop();
+		framework.subscribeToRenderEvent([&]() {});
+		framework.runEventLoop();
 #endif
 
-	mars_entt_ecs::EnttEcs ecs(framework);
-	ecs.initialize();
+		mars_entt_ecs::EnttEcs ecs(framework);
+		ecs.initialize();
 
 
 
-	vertexBuffer->printInfo();
-	indexBuffer->printInfo();
-	uniformBuffer->printInfo();
-	tileMapTexture->printInfo();
+		vertexBuffer->printInfo();
+		indexBuffer->printInfo();
+		uniformBuffer->printInfo();
+		tileMapTexture->printInfo();
 
-	std::shared_ptr<mars::OrthographicCamera> camera = framework.getCameraFactory().createOrthographicCamera(
-		-10, 10, 10, -10, 0.0, 100);
-	camera->printInfo();
+		std::shared_ptr<mars::OrthographicCamera> camera = framework.getCameraFactory().createOrthographicCamera(
+			-10, 10, 10, -10, 0.0, 100);
+		camera->printInfo();
 
-	std::shared_ptr<mars::ASpriteRenderPipeline> pipeline = framework.getPipelineFactory().
-		createSpriteRenderPipeline(camera.get());
-	pipeline->setSpriteTexture(tileMapTexture.get());
+		std::shared_ptr<mars::ASpriteRenderPipeline> pipeline = framework.getPipelineFactory().
+			createSpriteRenderPipeline(camera.get());
+		pipeline->setSpriteTexture(tileMapTexture.get());
 
-	std::shared_ptr<mars::Geometry> geometry = framework.getGeometryBuilder().quadGeometry();
-	std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(
-		*geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
+		std::shared_ptr<mars::Geometry> geometry = framework.getGeometryBuilder().quadGeometry();
+		std::shared_ptr<mars::Mesh> mesh = framework.getMeshFactory().create(
+			*geometry, mars::GeometryFormat::Pos3_Color4_TextureCoords2_Normal3);
 
-	// PHYSICS.
-	mars::WorldDefinition2D worldDef{};
-	worldDef.gravity = glm::vec2(0, -9.8f);
+		// PHYSICS.
+		mars::WorldDefinition2D worldDef{};
+		worldDef.gravity = glm::vec2(0, -9.8f);
 
-	// STATIC BODY - GROUND
-	/*
-	std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(framework, worldDef);
-	world2D->initialize();
+		// STATIC BODY - GROUND
+		/*
+		std::unique_ptr<mars::AWorld2D> world2D = std::make_unique<mars::Box2DWorld2D>(framework, worldDef);
+		world2D->initialize();
 
-	mars::BodyDefinition2D groundBodyDef{};
-	groundBodyDef.position = glm::vec2(300, 400);
-	std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef);
-	mars::Box2DPolygonShape groundBox;
-	groundBox.setAsBox(200, 50);
-	groundBody->createFixture(&groundBox, 0);
+		mars::BodyDefinition2D groundBodyDef{};
+		groundBodyDef.position = glm::vec2(300, 400);
+		std::shared_ptr<mars::ABody2D> groundBody = world2D->createBody(groundBodyDef);
+		mars::Box2DPolygonShape groundBox;
+		groundBox.setAsBox(200, 50);
+		groundBody->createFixture(&groundBox, 0);
 
-	// DYNAMIC BODY - BOX
-	mars::BodyDefinition2D bodyDef{};
-	bodyDef.type = mars::BodyType2D::DynamicBody;
-	bodyDef.position = glm::vec2(350, 100);
-	bodyDef.angle = 1.0f;
-	std::shared_ptr<mars::ABody2D> body = world2D->createBody(bodyDef);
+		// DYNAMIC BODY - BOX
+		mars::BodyDefinition2D bodyDef{};
+		bodyDef.type = mars::BodyType2D::DynamicBody;
+		bodyDef.position = glm::vec2(350, 100);
+		bodyDef.angle = 1.0f;
+		std::shared_ptr<mars::ABody2D> body = world2D->createBody(bodyDef);
 
-	mars::Box2DPolygonShape dynamicBox{};
-	dynamicBox.setAsBox(25, 25);
+		mars::Box2DPolygonShape dynamicBox{};
+		dynamicBox.setAsBox(25, 25);
 
-	mars::FixtureDefinition2D fixtureDef{};
-	fixtureDef.density = 1.0;
-	fixtureDef.friction = 0.3f;
-	fixtureDef.shape = &dynamicBox;
+		mars::FixtureDefinition2D fixtureDef{};
+		fixtureDef.density = 1.0;
+		fixtureDef.friction = 0.3f;
+		fixtureDef.shape = &dynamicBox;
 
-	body->createFixture(fixtureDef);
-*/
-// createCamera(entityManager);
-// loadLdtk(framework, entityManager);
+		body->createFixture(fixtureDef);
+	*/
+	// createCamera(entityManager);
+	// loadLdtk(framework, entityManager);
 
-	const auto ecs_entity = ecs.getEntityBuilder().create2DEntity();
-	ecs.getComponent<mars_entt_ecs::RectTransform>(ecs_entity).position = { 100, 300 };
-	ecs.getComponent<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
-	ecs.getRegistry().emplace<mars_entt_ecs::Layer0Tag>(ecs_entity);
+		const auto ecs_entity = ecs.getEntityBuilder().create2DEntity();
+		ecs.getComponent<mars_entt_ecs::RectTransform>(ecs_entity).position = { 100, 300 };
+		ecs.getComponent<mars_entt_ecs::SpriteRenderer>(ecs_entity).sprite = std::make_shared<mars::GameSprite>(tileMapTexture);
+		ecs.getRegistry().emplace<mars_entt_ecs::Layer0Tag>(ecs_entity);
 
-	// FRAME START EVENT?
+		// FRAME START EVENT?
 
-	framework.subscribeToUpdateEvent([&](const mars::Time time) {
-		// ecsManager.frameStart();
+		framework.subscribeToUpdateEvent([&](const mars::Time time) {
+			// ecsManager.frameStart();
 
-		// world2D->update(time, 6, 2);
+			// world2D->update(time, 6, 2);
 
-	   //  ecsManager.update(time);
+		   //  ecsManager.update(time);
 
-		});
+			});
 
-	framework.subscribeToRenderEvent([&]() {
-		framework.getSpriteBatch().begin();
+		framework.subscribeToRenderEvent([&]() {
+			framework.getSpriteBatch().begin();
 
-		//  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-	  //  framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
-		framework.getSpriteBatch().end();
+			//  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+		  //  framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
+			framework.getSpriteBatch().end();
 
-		ecs.render();
+			ecs.render();
 
-		//   world2D->render();
-		  // ecsManager.render();
+			//   world2D->render();
+			  // ecsManager.render();
 
-		   // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
-		});
+			   // pipeline->render(vertexBuffer.get(), indexBuffer.get(), 6, 0);
+			});
 
-	//  createScene(framework, entityManager);
+		//  createScene(framework, entityManager);
 
-	framework.runEventLoop();
-	framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");
+		framework.runEventLoop();
+		framework.destroy(); // SPDLOG_TRACE("Sample Trace output.");
 
-	return 0;
-}
+		return 0;
+	}
 
 
-// TIP See CLion help at <a
-// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
-//  Also, you can try interactive lessons for CLion by selecting
-//  'Help | Learn IDE Features' from the main menu.
+	// TIP See CLion help at <a
+	// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
+	//  Also, you can try interactive lessons for CLion by selecting
+	//  'Help | Learn IDE Features' from the main menu.

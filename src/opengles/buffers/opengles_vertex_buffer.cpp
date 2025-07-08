@@ -3,7 +3,7 @@
 //
 
 #include <sstream>
-#include "opengles/buffers/OpenGLESVertexBuffer.h"
+#include "opengles/buffers/opengles_vertex_buffer.h"
 #include "opengles/util/opengles_converter.h"
 
 using namespace gpu_util;

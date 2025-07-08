@@ -1,13 +1,13 @@
 //
-// Created by luka on 09.02.25.
+// Created by Erkapic Luka on 09.02.25.
 //
 
-#ifndef ASPRITERENDERPIPELINE_H
-#define ASPRITERENDERPIPELINE_H
+#ifndef A_SPRITE_RENDER_PIPELINE_H
+#define A_SPRITE_RENDER_PIPELINE_H
 
 
 #include "core/texture/Texture2D.h"
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/AIndexBuffer.h"
 
 namespace mars
@@ -41,4 +41,4 @@ namespace mars
     };
 }
 
-#endif //ASPRITERENDERPIPELINE_H
+#endif //A_SPRITE_RENDER_PIPELINE_H

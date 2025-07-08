@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#ifndef AVERTEXBUFFER_H
-#define AVERTEXBUFFER_H
+#ifndef A_VERTEX_BUFFER_H
+#define A_VERTEX_BUFFER_H
 
 #include <cstdint>
 #include <string>
@@ -70,4 +70,4 @@ namespace mars {
     };
 }
 
-#endif //AVERTEXBUFFER_H
+#endif //A_VERTEX_BUFFER_H

@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <memory>
 #include "core/geometry/Geometry.h"
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/AIndexBuffer.h"
 
 namespace mars {

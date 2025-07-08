@@ -6,7 +6,7 @@
 #define A_LINES_RENDER_PIPELINE_H
 
 #include "core/math/Color.h"
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 
 namespace mars {
     //! Simple pipeline for drawing lines.

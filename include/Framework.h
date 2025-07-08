@@ -22,7 +22,7 @@
 #include "core/fonts/SpriteFontManager.h"
 #include "core/buffers/BuffersFactory.h"
 #include "core/camera/CameraFactory.h"
-#include "core/pipelines/PipelineFactory.h"
+#include "core/pipelines/pipeline_factory.h"
 #include "core/mesh/MeshFactory.h"
 #include "core/geometry/GeometryBuilder.h"
 #include "core/sprite/SpriteBatch.h"

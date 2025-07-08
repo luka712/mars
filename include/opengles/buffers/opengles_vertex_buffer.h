@@ -8,7 +8,7 @@
 #include "Framework.h"
 #include "core/log/Logger.h"
 #include "opengles/renderer/opengles_renderer.h"
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 #include "gpu_util/opengles/opengles_util.h"
 
 namespace mars {
