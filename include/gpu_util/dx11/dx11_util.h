@@ -16,41 +16,45 @@
 #include "gpu_util/dx11/dx11_blob_util.h"
 #include "gpu_util/dx11/dx11_vertex_shader_util.h"
 #include "gpu_util/dx11/dx11_pixel_shader_util.h"
+#include "gpu_util/dx11/dx11_input_layout_util.h"
+#include "gpu_util/dx11/dx11_buffer_util.h"
 
 namespace gpu_util {
 
 	//! The utility class for working with DirectX 11.
-    class DX11Util {
-    public:
-        //! Initialize the MetalUtil.
-        //! @param logger The logger.
-        static void initialize(Logger &logger) {
-            dxgiFactoryUtil = new DX11DxgiFactoryUtil(logger);
-            dxgiDeviceUtil = new DX11DxgiDeviceUtil(logger);
-            dx11DeviceUtil = new DX11DeviceUtil(logger);
-            dxgiSwapChainUtil = new DX11DxgiSwapChainUtil(logger);
-            renderTargetViewUtility = new DX11RenderTargetViewUtility(logger);
+	class DX11Util {
+	public:
+		//! Initialize the MetalUtil.
+		//! @param logger The logger.
+		static void initialize(Logger& logger) {
+			dxgiFactoryUtil = new DX11DxgiFactoryUtil(logger);
+			dxgiDeviceUtil = new DX11DxgiDeviceUtil(logger);
+			dx11DeviceUtil = new DX11DeviceUtil(logger);
+			dxgiSwapChainUtil = new DX11DxgiSwapChainUtil(logger);
+			renderTargetViewUtility = new DX11RenderTargetViewUtility(logger);
 			dx11BlobUtil = new DX11BlobUtil(logger);
 			dx11VertexShaderUtil = new DX11VertexShaderUtil(logger);
 			dx11PixelShaderUtil = new DX11PixelShaderUtil(logger);
-        }
+			dx11InputLayoutUtil = new DX11InputLayoutUtil(logger);
+			dx11BufferUtil = new DX11BufferUtil(logger);
+		}
 
-        //! Initialize the MetalUtil.
-  		//! @param withDefaultLogger If <code>true</code>,  creates default logger.
-  		static void initialize(bool withDefaultLogger) {
+		//! Initialize the MetalUtil.
+		//! @param withDefaultLogger If <code>true</code>,  creates default logger.
+		static void initialize(bool withDefaultLogger) {
 
-      	if (DX11Util::logger != nullptr) {
-          delete DX11Util::logger;
-      	}
+			if (DX11Util::logger != nullptr) {
+				delete DX11Util::logger;
+			}
 
-      	if (withDefaultLogger) {
-      	    DX11Util::logger = new SpdLogger();
-      	}
-      	else {
-      	    DX11Util::logger = new MockLogger();
-     	 }
-      	DX11Util::initialize(*logger);
- 		 }
+			if (withDefaultLogger) {
+				DX11Util::logger = new SpdLogger();
+			}
+			else {
+				DX11Util::logger = new MockLogger();
+			}
+			DX11Util::initialize(*logger);
+		}
 
 		//! Gets the DX11BlobUtil for working with DirectX 11 blobs.
 		//! @return The DX11BlobUtil ptr.
@@ -64,37 +68,47 @@ namespace gpu_util {
 		//! @return The DX11PixelShaderUtil ptr.
 		static DX11PixelShaderUtil& getPixelShader() { return *dx11PixelShaderUtil; }
 
-        //! Gets the DXGIFactoryUtil. Used to create DXGI factories.
-        //! @return The DXGIFactoryUtil pointer.
-        static DX11DxgiFactoryUtil &getDxgiFactory() { return *dxgiFactoryUtil; }
+		//! Gets the DXGIFactoryUtil. Used to create DXGI factories.
+		//! @return The DXGIFactoryUtil pointer.
+		static DX11DxgiFactoryUtil& getDxgiFactory() { return *dxgiFactoryUtil; }
 
-        //! Gets the DXGIDeviceUtil. Used to create DXGI devices.
-        //! @return The DXGIDeviceUtil pointer.
-        static DX11DxgiDeviceUtil &getDxgiDevice() { return *dxgiDeviceUtil; }
+		//! Gets the DXGIDeviceUtil. Used to create DXGI devices.
+		//! @return The DXGIDeviceUtil pointer.
+		static DX11DxgiDeviceUtil& getDxgiDevice() { return *dxgiDeviceUtil; }
 
-        //! Gets the DX11DeviceUtil for working with DirectX 11 devices.
-        //! @return The DX11DeviceUtil ptr.
-        static DX11DeviceUtil &getDevice() { return *dx11DeviceUtil; }
+		//! Gets the DX11DeviceUtil for working with DirectX 11 devices.
+		//! @return The DX11DeviceUtil ptr.
+		static DX11DeviceUtil& getDevice() { return *dx11DeviceUtil; }
 
-        // Gets the DX11DxgiSwapChainUtil for working with DirectX 11 swap chains.
-        //! @return The DX11DxgiSwapChainUtil ptr.
-        static DX11DxgiSwapChainUtil &getDxgiSwapChain() { return *dxgiSwapChainUtil; }
+		// Gets the DX11DxgiSwapChainUtil for working with DirectX 11 swap chains.
+		//! @return The DX11DxgiSwapChainUtil ptr.
+		static DX11DxgiSwapChainUtil& getDxgiSwapChain() { return *dxgiSwapChainUtil; }
 
-        // Gets the DX11RenderTargetViewUtility for working with DirectX 11 render target views.
-        //! @return The DX11RenderTargetViewUtility ptr.
-        static DX11RenderTargetViewUtility &getRenderTargetView() {return *renderTargetViewUtility;}
+		// Gets the DX11RenderTargetViewUtility for working with DirectX 11 render target views.
+		//! @return The DX11RenderTargetViewUtility ptr.
+		static DX11RenderTargetViewUtility& getRenderTargetView() { return *renderTargetViewUtility; }
 
-    private:
-        static Logger* logger;
-        static DX11DxgiFactoryUtil* dxgiFactoryUtil;
-        static DX11DeviceUtil* dx11DeviceUtil;
-        static DX11DxgiDeviceUtil* dxgiDeviceUtil;
-        static DX11DxgiSwapChainUtil* dxgiSwapChainUtil;
-        static DX11RenderTargetViewUtility* renderTargetViewUtility;
+		//! Gets the DX11InputLayoutUtil for working with DirectX 11 input layouts.
+		//! @return The DX11InputLayoutUtil ptr.
+		static DX11InputLayoutUtil& getInputLayout() { return *dx11InputLayoutUtil; }
+
+		//! Gets the DX11BufferUtil for working with DirectX 11 buffers.
+		//! @return The DX11BufferUtil ptr.
+		static DX11BufferUtil& getBuffer() { return *dx11BufferUtil; }
+
+	private:
+		static Logger* logger;
+		static DX11DxgiFactoryUtil* dxgiFactoryUtil;
+		static DX11DeviceUtil* dx11DeviceUtil;
+		static DX11DxgiDeviceUtil* dxgiDeviceUtil;
+		static DX11DxgiSwapChainUtil* dxgiSwapChainUtil;
+		static DX11RenderTargetViewUtility* renderTargetViewUtility;
 		static DX11BlobUtil* dx11BlobUtil;
 		static DX11VertexShaderUtil* dx11VertexShaderUtil;
 		static DX11PixelShaderUtil* dx11PixelShaderUtil;
-};
+		static DX11InputLayoutUtil* dx11InputLayoutUtil;
+		static DX11BufferUtil* dx11BufferUtil;
+	};
 }
 
 #endif

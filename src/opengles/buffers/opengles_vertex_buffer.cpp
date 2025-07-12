@@ -15,8 +15,11 @@ namespace mars {
           logger(framework.getLogger()) {
     }
 
-    void OpenGLESVertexBuffer::initialize(const void *data, const uint32_t byteSize, const uint32_t vertexCount,
-                                          const BufferUsage usage) {
+    void OpenGLESVertexBuffer::initialize(const void *data,
+        const uint32_t byteSize, 
+		const uint32_t byteStride,
+        const uint32_t vertexCount,                                  
+        const BufferUsage usage) {
         this->byteSize = byteSize;
         this->vertexCount = vertexCount;
         glHint = OpenGLESConverter::convertToGLHint(usage);
@@ -29,7 +32,7 @@ namespace mars {
         );
     }
 
-    void OpenGLESVertexBuffer::initialize(const uint32_t byteSize, const uint32_t vertexCount) {
+    void OpenGLESVertexBuffer::initialize(const uint32_t byteSize, const uint32_t byteStride, const uint32_t vertexCount) {
         glHint = GL_DYNAMIC_DRAW;
         this->byteSize = byteSize;
         this->vertexCount = vertexCount;

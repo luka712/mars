@@ -2,12 +2,12 @@
 // Created by luka on 09.02.25.
 //
 
-#ifndef AUNIFORMBUFFER_H
-#define AUNIFORMBUFFER_H
+#ifndef A_UNIFORM_BUFFER_H
+#define A_UNIFORM_BUFFER_H
 
 #include <cstdint>
 #include <string>
-#include "core/buffers/BufferEnums.h"
+#include "core/buffers/buffer_enums.h"
 
 namespace mars
 {

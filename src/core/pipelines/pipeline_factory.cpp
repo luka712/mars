@@ -17,6 +17,8 @@
 
 #if _WIN32
 #include "dx11/pipelines/test/dx11_triangle_test_pipeline.h"
+#include "dx11/pipelines/test/dx11_position_color_test_pipeline.h"
+
 #endif 
 
 namespace mars {
@@ -81,8 +83,8 @@ namespace mars {
             return std::make_shared<MetalPositionColorTestPipeline>(framework);
 #endif
 #if _WIN32
-		//case RenderingBackend::D3D11:
-		//	return std::make_shared<DX11TriangleTestPipeline>(framework);
+		case RenderingBackend::D3D11:
+			return std::make_shared<DX11PositionColorTestPipeline>(framework);
 #endif 
 		case RenderingBackend::OpenGLES:
 			return std::make_shared<OpenGLESPositionColorTestPipeline>(framework);

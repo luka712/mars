@@ -9,7 +9,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "core/buffers/BufferEnums.h"
+#include "core/buffers/buffer_enums.h"
 
 namespace mars {
 

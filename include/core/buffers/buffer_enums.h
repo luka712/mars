@@ -1,9 +1,9 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#ifndef BUFFERENUMS_H
-#define BUFFERENUMS_H
+#ifndef BUFFER_ENUMS_H
+#define BUFFER_ENUMS_H
 
 namespace mars {
     enum class BufferUsage {

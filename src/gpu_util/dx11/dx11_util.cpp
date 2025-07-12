@@ -17,7 +17,8 @@ namespace gpu_util {
 	DX11BlobUtil* DX11Util::dx11BlobUtil = nullptr;
 	DX11VertexShaderUtil* DX11Util::dx11VertexShaderUtil = nullptr;
 	DX11PixelShaderUtil* DX11Util::dx11PixelShaderUtil = nullptr;
-
+	DX11InputLayoutUtil* DX11Util::dx11InputLayoutUtil = nullptr;
+	DX11BufferUtil* DX11Util::dx11BufferUtil = nullptr;
 } // namespace mars
 
 #endif

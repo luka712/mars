@@ -1,12 +1,12 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#ifndef OPENGLESCONVERTERUTIL_H
-#define OPENGLESCONVERTERUTIL_H
+#ifndef OPEN_GLES_CONVERTER_UTIL_H
+#define OPEN_GLES_CONVERTER_UTIL_H
 
 #include "opengles/opengles.h"
-#include "core/buffers/BufferEnums.h"
+#include "core/buffers/buffer_enums.h"
 
 namespace mars {
     //! Converts the Mars enums to OpenGLES enums.
@@ -17,4 +17,4 @@ namespace mars {
     };
 }
 
-#endif //OPENGLESCONVERTERUTIL_H
+#endif //OPEN_GLES_CONVERTER_UTIL_H

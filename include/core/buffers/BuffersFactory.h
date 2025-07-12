@@ -27,13 +27,15 @@ namespace mars {
 
         //! Create a new vertex buffer.
         //! @param data The data to initialize the buffer with.
+		//! @param byteStride The stride of a vertex in the buffer in bytes.
         //! @param vertexCount The number of vertices.
         //! @param usage The usage of the buffer.
         //! @param label The label of the buffer.
         //! @return The shared pointer to the vertex buffer.
         std::shared_ptr<AVertexBuffer> createVertexBuffer(
             const std::vector<float>& data,
-            uint32_t vertexCount,
+			const uint32_t byteStride,
+            const uint32_t vertexCount,
             BufferUsage usage,
             const std::string& label) const;
 

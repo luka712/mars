@@ -1,5 +1,3 @@
-// Simple shaders used for testing of passing position and color data.
-
 struct VSOutput
 {
     float4 position : SV_Position;

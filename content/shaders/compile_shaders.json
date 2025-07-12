@@ -30,6 +30,20 @@
       "stage": "fragment",
       "profile": "hlsl_5_0",
       "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/position_color_vs.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/position_color_vs.hlsl",
+      "stage": "vertex",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/position_color_ps.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/position_color_ps.hlsl",
+      "stage": "fragment",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
     }
   ]
 }

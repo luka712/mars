@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
 	backend = mars::RenderingBackend::Metal;
 #endif
 #if _WIN32
-	backend = mars::RenderingBackend::OpenGLES;
+	backend = mars::RenderingBackend::D3D11;
 #endif
 
 	mars::Framework framework(mars::FrameworkOptions{
@@ -167,6 +167,7 @@ int main(int argc, char* argv[]) {
 				0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // V3
 			},
 			3,
+			(3 * 4) * sizeof(float), // 3 positions + 4 colors 
 			mars::BufferUsage::Vertex,
 			"Test Vertex Buffer");
 
@@ -188,7 +189,7 @@ int main(int argc, char* argv[]) {
 				100.0f, 100.0f, 0.0f,
 				0.0f, 100.0f, 0.0f
 		};
-		auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, mars::BufferUsage::Vertex, "Hello");
+		auto vertexBuffer = framework.getBuffersFactory().createVertexBuffer(vertex, 4, (3 * 4) * sizeof(float), mars::BufferUsage::Vertex, "Hello");
 		auto indexBuffer = framework.getBuffersFactory().createIndexBuffer({ 0, 1, 2, 2, 3, 0 }, "Hello");
 
 		std::vector<float> data = { 1.0f, 2.0f, 3.0f, 4.0f };

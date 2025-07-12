@@ -26,9 +26,9 @@ namespace mars {
 
         [[nodiscard]] bool isWritable() const override { return glHint != GL_STATIC_DRAW; }
 
-        void initialize(const void *data, uint32_t byteSize, uint32_t vertexCount, BufferUsage usage) override;
+        void initialize(const void *data, uint32_t byteSize, uint32_t byteStride, uint32_t vertexCount, BufferUsage usage) override;
 
-        void initialize(uint32_t byteSize, uint32_t vertexCount) override;
+        void initialize(uint32_t byteSize, uint32_t byteStride, uint32_t vertexCount) override;
 
         void update(void *data, uint32_t byteSize, uint32_t offset) override;
 

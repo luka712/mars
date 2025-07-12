@@ -32,6 +32,7 @@ namespace mars {
     void SpriteBatchMesh::initialize() {
         vertexBuffer = framework.getBuffersFactory().createVertexBuffer(
             vertexData,
+            (3 + 4 + 2) * sizeof(float),
             maxInstances * 4,
             BufferUsage::Vertex_CopyDst,
             "SpriteBatchMesh.vertexBuffer");
