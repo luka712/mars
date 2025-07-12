@@ -5,7 +5,7 @@
 #ifndef METAL_VERTEX_BUFFER_H
 #define METAL_VERTEX_BUFFER_H
 
-#include "core/buffers/AVertexBuffer.h"
+#include "core/buffers/a_vertex_buffer.h"
 #include "metal/metal.h"
 #include "metal/renderer/metal_renderer.h"
 #include "Framework.h"

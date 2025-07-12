@@ -13,13 +13,18 @@ namespace gpu_util {
                                                                       MTL::Device* device,
                                                                       MTL::Function* vertexFunction,
                                                                       MTL::Function* fragmentFunction,
+                                                                      MTL::VertexDescriptor *vertexDescriptor,
                                                                       const std::string& label) {
-        
+
         MTL::RenderPipelineDescriptor* descriptor = MTL::RenderPipelineDescriptor::alloc()->init();
         descriptor->setVertexFunction(vertexFunction);
         descriptor->setFragmentFunction(fragmentFunction);
         descriptor->colorAttachments()->object(0)->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
-        
+
+        if (vertexDescriptor != nullptr) {
+            descriptor->setVertexDescriptor(vertexDescriptor);
+        }
+
         // Set the label.
         if(label != "") {
             const NS::String *nsLabel = NS::String::string(label.c_str(), NS::StringEncoding::UTF8StringEncoding);

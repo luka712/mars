@@ -22,7 +22,12 @@ namespace mars {
         MTL::Function* vertexFunction = gpu_util::MetalUtility::getFunction().create(library, "main_vs");
         MTL::Function* fragmentFunction = gpu_util::MetalUtility::getFunction().create(library, "main_fs");
 
-        pipeline = gpu_util::MetalUtility::getRenderPipelineState().create(device, vertexFunction, fragmentFunction, "TrianglePipeline");
+        pipeline = gpu_util::MetalUtility::getRenderPipelineState().create(
+                                                                           device,
+                                                                           vertexFunction,
+                                                                           fragmentFunction,
+                                                                           nullptr,
+                                                                           "TrianglePipeline");
 
         fragmentFunction->release();
         vertexFunction->release();

@@ -24,7 +24,8 @@ namespace gpu_util {
         //! @param device The pointer to the MTL::Device.
         //! @param vertexFunction The pointer to the MTL::Function used by vertex shader.
         //! @param fragmentFunction The pointer to the MTL::Function used by fragment shader.
-        //! @parma label The label. By default, it is empty string.
+        //! @param vertexDescriptor The vertex descriptor. By default, it is <code>null</code>.
+        //! @param label The label. By default, it is empty string.
         //!
         //! @return A new pointer to MTL::RenderPipelineState if successful, or nullptr if failed.
         //!
@@ -34,6 +35,7 @@ namespace gpu_util {
         MTL::RenderPipelineState *create(MTL::Device* device,
             MTL::Function* vertexFunction,
             MTL::Function* fragmentFunction,
+            MTL::VertexDescriptor *vertexDescriptor = nullptr,
             const std::string& label = "");
 
         private:

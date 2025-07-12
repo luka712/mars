@@ -12,6 +12,7 @@
 
 #if __APPLE__
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
+#include "metal/pipelines/test/metal_position_color_test_pipeline.h"
 #endif
 
 #if _WIN32
@@ -76,9 +77,9 @@ namespace mars {
 	std::shared_ptr<APositionColorTestPipeline> PipelineFactory::createPositionColorTestPipeline() {
 		switch (framework.getRenderingBackend()) {
 #if __APPLE__
-		//case RenderingBackend::Metal:
-		//	return std::make_shared<MetalTriangleTestPipeline>(framework);
-#endif 
+		case RenderingBackend::Metal:
+            return std::make_shared<MetalPositionColorTestPipeline>(framework);
+#endif
 #if _WIN32
 		//case RenderingBackend::D3D11:
 		//	return std::make_shared<DX11TriangleTestPipeline>(framework);
