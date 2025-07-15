@@ -1,11 +1,11 @@
 //
-// Created by lukaa on 2.1.2025..
+// Created by Erkapic Luka on 2.1.2025.
 //
 
 #ifndef OPENGLES_RENDERER_H
 #define OPENGLES_RENDERER_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "core/renderer/Renderer.h"
 
 namespace mars {

@@ -1,8 +1,8 @@
 {
   "dependencies": [
     "lua",
-    "sdl2",
-    "sdl2-image",
+    "sdl3",
+    "sdl3-image",
     "glm",
     "boost-optional",
     "spdlog",

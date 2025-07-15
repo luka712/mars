@@ -5,7 +5,7 @@
 #ifndef SDLSPRITEBATCH_H
 #define SDLSPRITEBATCH_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "core/sprite/SpriteBatch.h"
 #include <array>
 
@@ -48,8 +48,8 @@ namespace mars {
         SDL_Renderer* renderer{};
         SDLTexture2D* currentTexture;
         int32_t currentItemIndex;
-        std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> drawRects{};
-        std::array<SDL_Rect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> srcRects{};
+        std::array<SDL_FRect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> drawRects{};
+        std::array<SDL_FRect, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> srcRects{};
         std::array<SDL_Color, SDL_SPRITEBATCH_MAX_DRAW_ITEMS> colors{};
     };
 }

@@ -15,8 +15,9 @@
 #include "opengles/opengles.h"
 #include <iostream>
 #include <core/log/Logger.h>
-#include <SDL_syswm.h>
-#include <SDL2/SDL_egl.h>
+#include <SDL3/SDL_system.h>
+#include <SDL3/SDL_egl.h>
+#include <SDL3/SDL_properties.h>
 #include <EGL/eglext.h>
 
 
@@ -34,10 +35,9 @@ WindowManager::WindowManager(Framework& framework, const WindowManagerOptions op
 
 HWND mars::WindowManager::getWin32Handle()
 {
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(window, &wmInfo);
-	return wmInfo.info.win.window;
+	SDL_PropertiesID props = SDL_GetWindowProperties(window);
+	HWND hwnd = (HWND)SDL_GetPointerProperty(props, SDL_PROP_WINDOW_WIN32_HWND_POINTER, nullptr);
+	return hwnd;
 }
 
 #endif
@@ -48,7 +48,7 @@ NSWindow* mars::WindowManager::getCocoaWindowHandle() {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(window, &wmInfo);
-    return wmInfo.info.cocoa.window;
+	return wmInfo.info.cocoa.window;
 }
 
 #endif
@@ -74,7 +74,6 @@ void WindowManager::initializeForSDL() {
 		std::to_string(windowBounds.height));
 
 	window = SDL_CreateWindow("Mars Framework",
-		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		windowBounds.width, windowBounds.height,
 		0);
 }
@@ -82,9 +81,8 @@ void WindowManager::initializeForSDL() {
 void WindowManager::InitializeSDL() const {
 	Logger& logger = framework.getLogger();
 
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
-		const std::string msg = std::string("WindowManager::InitializeSDL: Failed to initialize SDL. Error: ") +
-			SDL_GetError();
+	if (!SDL_InitSubSystem(SDL_INIT_VIDEO | SDL_INIT_EVENTS)) {
+		const std::string msg = "WindowManager::InitializeSDL: Failed to initialize SDL. Error: " + std::string(SDL_GetError());
 		logger.error(msg);
 		throw std::runtime_error(msg);
 	}
@@ -108,7 +106,6 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
 		std::to_string(windowBounds.height) + ".");
 
 	window = SDL_CreateWindow("Mars Framework",
-		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		windowBounds.width, windowBounds.height,
 		SDL_WINDOW_OPENGL);
 
@@ -130,51 +127,49 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
 }
 
 void WindowManager::initializeForAngleOpenGLES(const int major, const int minor) {
-    Logger& logger = framework.getLogger();
+	Logger& logger = framework.getLogger();
 
 #if __APPLE__
-    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal"); // Force to use metal if apple device
+	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal"); // Force to use metal if apple device
 #endif
 
-    SDL_SetHint(SDL_HINT_OPENGL_ES_DRIVER, "1"); // Use "Angle".
-    
-    InitializeSDL();
+	SDL_SetHint(SDL_HINT_OPENGL_ES_DRIVER, "1"); // Use "Angle".
 
-    // Set SDL to use EGL
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	InitializeSDL();
 
-    logger.info(
-        "WindowManager::initializeForOpenGLES: Window initialized for OpenGLES(" + std::to_string(major) + ", " +
-        std::to_string(minor) + ").");
-    logger.info(
-        "WindowManager::initializeForOpenGLES: Client size: " + std::to_string(windowBounds.width) + ", " +
-        std::to_string(windowBounds.height) + ".");
+	// Set SDL to use EGL
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    window = SDL_CreateWindow("Mars Framework",
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        windowBounds.width, windowBounds.height,
-        SDL_WINDOW_OPENGL);
+	logger.info(
+		"WindowManager::initializeForOpenGLES: Window initialized for OpenGLES(" + std::to_string(major) + ", " +
+		std::to_string(minor) + ").");
+	logger.info(
+		"WindowManager::initializeForOpenGLES: Client size: " + std::to_string(windowBounds.width) + ", " +
+		std::to_string(windowBounds.height) + ".");
 
-    if (window == nullptr) {
-        std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") +
-            SDL_GetError();
-        logger.error(msg);
-        throw std::runtime_error(msg);
-    }
+	window = SDL_CreateWindow("Mars Framework",
+		windowBounds.width, windowBounds.height,
+		SDL_WINDOW_OPENGL);
 
-    SDL_GLContext context = SDL_GL_CreateContext(window);
-    if (context == nullptr) {
-        const std::string msg = std::string(
-            "WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ")
-            + SDL_GetError();
-        logger.error(msg);
-        throw std::runtime_error(msg);
-    }
+	if (window == nullptr) {
+		std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") +
+			SDL_GetError();
+		logger.error(msg);
+		throw std::runtime_error(msg);
+	}
+
+	SDL_GLContext context = SDL_GL_CreateContext(window);
+	if (context == nullptr) {
+		const std::string msg = std::string(
+			"WindowManager::initializeForOpenGLES: Failed to create OpenGL ES context. Error: ")
+			+ SDL_GetError();
+		logger.error(msg);
+		throw std::runtime_error(msg);
+	}
 
 }
 
@@ -219,7 +214,7 @@ void WindowManager::initializeForMetal() {
 	const NS::String* nsDeviceName = metalLayer->device()->name();
 	const auto deviceName = std::string(nsDeviceName->cString(NS::StringEncoding::ASCIIStringEncoding));
 	logger.info("SDLWindowManager::InitializeForMetal: Metal Enabled. Metal Device: " + deviceName + ".");
-	}
+}
 #endif
 
 
@@ -234,13 +229,13 @@ static void mainLoop() {
 	if (SDL_PollEvent(&event)) {
 		frameworkInstance->getInputManager().processEvent(event);
 
-		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym == SDLK_ESCAPE) {
+		if (event.type == SDL_EVENT_KEY_DOWN) {
+			if (event.key.key == SDLK_ESCAPE) {
 				windowManagerInstance->running = false;
 			}
 		}
 
-		if (event.type == SDL_QUIT) {
+		if (event.type == SDL_EVENT_QUIT) {
 			windowManagerInstance->running = false;
 		}
 	}
@@ -270,7 +265,7 @@ void WindowManager::runEventLoop() {
 		mainLoop();
 	}
 #endif
-}
+	}
 
 void WindowManager::destroy() {
 	SDL_DestroyWindow(window);

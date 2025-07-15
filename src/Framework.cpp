@@ -17,7 +17,7 @@
 #include "metal/renderer/metal_renderer.h"
 #endif
 
-#if __WIN32__
+#if _WIN32
 #include "dx11/renderer/dx11_renderer.h"
 #endif
 

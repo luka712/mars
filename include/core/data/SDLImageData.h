@@ -2,10 +2,10 @@
 // Created by lukaa on 21.12.2024..
 //
 
-#ifndef SDLIMAGEDATA_H
-#define SDLIMAGEDATA_H
+#ifndef SDL_IMAGE_DATA_H
+#define SDL_IMAGE_DATA_H
 
-#include <SDL_image.h>
+#include <SDL3_image/SDL_image.h>
 #include "core/data/ImageData.h"
 
 namespace mars {

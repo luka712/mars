@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SDL_image.h>
+#include <SDL3_image/SDL_image.h>
 #include <ecs/entity/Entity.h>
 #include <ecs/sprite/AnimatedSpriteRenderer.h>
 #include <sdl/renderer/SDLRenderer.h>

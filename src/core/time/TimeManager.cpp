@@ -4,7 +4,7 @@
 
 #include "core/time/TimeManager.h"
 #include <chrono>
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 #include <iostream>
 
 namespace mars {

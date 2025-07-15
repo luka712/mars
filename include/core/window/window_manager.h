@@ -7,15 +7,19 @@
 #define WINDOWMANAGER_H
 
 #include <functional>
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #include <vector>
 #include "core/window/WindowManagerOptions.h"
-#include <SDL2/SDL_syswm.h>
+#include <SDL3/SDL_system.h>
 
 #if __APPLE__
 #include <metal-cpp/QuartzCore/CAMetalLayer.hpp>
 using namespace MTL;
 #endif
+
+#if _WIN32
+#include <wtypes.h>
+#endif 
 
 namespace mars {
     class Framework;

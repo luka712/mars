@@ -2,7 +2,7 @@
 // Created by lukaa on 21.12.2024..
 //
 
-#include <SDL_image.h>
+#include <SDL3_image/SDL_image.h>
 #include <filesystem>
 #include "core/loaders/ImageLoader.h"
 
@@ -38,19 +38,20 @@ namespace mars {
 
         SDL_Surface* surface = IMG_Load(path.c_str());
         if (!surface) {
-            const std::string msg = "Failed to load image from path: \"" + path + "\". Error: " + IMG_GetError();
+            const std::string msg = "Failed to load image from path: \"" + path + "\". Error: " + SDL_GetError();
             framework.getLogger().error(msg.c_str());
             throw std::runtime_error(msg);
         }
 
         // We must ensure that the image is in RGBA format. Try to convert it if not.
-        if (surface->format->BytesPerPixel != 4) {
+		uint8_t bytesPerPixel = SDL_GetPixelFormatDetails(surface->format)->bytes_per_pixel;
+        if (bytesPerPixel != 4) {
 
             // Convert to 32-bit RGBA
-            SDL_Surface* converted = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_RGBA32, 0);
+            SDL_Surface* converted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
 
             if (!converted) {
-                SDL_FreeSurface(surface);
+                SDL_DestroySurface(surface);
                 const std::string msg = "Image under path \"" + path + "\" is not in RGBA format.";
                 framework.getLogger().error(msg.c_str());
                 throw std::runtime_error(msg);

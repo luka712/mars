@@ -5,7 +5,7 @@
 #ifndef SDLCONVERTER_H
 #define SDLCONVERTER_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "core/texture/TextureEnums.h"
 
 namespace mars {

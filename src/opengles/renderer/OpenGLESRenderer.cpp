@@ -2,7 +2,7 @@
 // Created by Erkapic Luka on 2.1.2025.
 //
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "Framework.h"
 #include "opengles/renderer/opengles_renderer.h"
 #include "gpu_util/opengles/opengles_util.h"
@@ -55,7 +55,7 @@ namespace mars {
 
 #ifndef __EMSCRIPTEN__
         // gladLoadGLLoader(SDL_GL_GetProcAddress);
-        gladLoadGLES2Loader(SDL_GL_GetProcAddress);
+        gladLoadGLES2Loader((GLADloadproc) SDL_GL_GetProcAddress);
 #endif
         std::string msg = "Open GLES initialized.\n";
         msg += "Vendor  : " + std::string((char *) glGetString(GL_VENDOR)) + "\n";

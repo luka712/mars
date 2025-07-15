@@ -15,7 +15,7 @@ namespace mars {
         WindowManager& windowManager = framework.getWindowManager();
         SDL_Window* window = windowManager.getWindow();
 
-        renderer = SDL_CreateRenderer(window, -1, 0);
+        renderer = SDL_CreateRenderer(window, "Renderer");
         if(!renderer) {
             std::string msg = "Failed to create renderer: " + std::string(SDL_GetError());
             framework.getLogger().error(msg);

@@ -25,7 +25,7 @@ namespace mars {
             currentTexture = nullptr;
         }
 
-        drawRects[currentItemIndex] = {drawRect.x, drawRect.y, drawRect.width, drawRect.height};
+        drawRects[currentItemIndex] = { (float)drawRect.x,(float)drawRect.y, (float)drawRect.width, (float)drawRect.height};
         colors[currentItemIndex] = {
             static_cast<uint8_t>(color.r * 255),
             static_cast<uint8_t>(color.g * 255),
@@ -40,11 +40,11 @@ namespace mars {
             end();
             currentTexture = dynamic_cast<SDLTexture2D *>(texture);
         }
-        drawRects[currentItemIndex] = {drawRect.x, drawRect.y, drawRect.width, drawRect.height};
+        drawRects[currentItemIndex] = { (float)drawRect.x, (float)drawRect.y, (float)drawRect.width, (float)drawRect.height};
         srcRects[currentItemIndex] = {
             0, 0,
-            static_cast<int>(texture->getWidth()),
-            static_cast<int>(texture->getHeight())
+            (float) texture->getWidth(),
+            (float) texture->getHeight()
         };
         colors[currentItemIndex] = {
             static_cast<uint8_t>(color.r * 255),
@@ -60,8 +60,8 @@ namespace mars {
             end();
             currentTexture = dynamic_cast<SDLTexture2D *>(texture);
         }
-        drawRects[currentItemIndex] = {drawRect.x, drawRect.y, drawRect.width, drawRect.height};
-        srcRects[currentItemIndex] = {sourceRect.x, sourceRect.y, sourceRect.width, sourceRect.height};
+        drawRects[currentItemIndex] = { (float)drawRect.x, (float)drawRect.y, (float)drawRect.width, (float)drawRect.height};
+        srcRects[currentItemIndex] = { (float)sourceRect.x, (float)sourceRect.y, (float)sourceRect.width, (float)sourceRect.height};
         colors[currentItemIndex] = {
             static_cast<uint8_t>(color.r * 255),
             static_cast<uint8_t>(color.g * 255),
@@ -92,10 +92,10 @@ namespace mars {
             const Quad quad = spriteFontCharacter->getTextureCoords();
 
             drawRects[currentItemIndex] = {
-                static_cast<int32_t>(x),
-                static_cast<int32_t>(y),
-                static_cast<int32_t>(size.x),
-                static_cast<int32_t>(size.y)
+                x,
+                y,
+                size.x,
+                size.y
             };
             // Texture coordinates are normalized. We need to convert them to pixel coordinates.
             const auto texWidth = static_cast<float>(spriteFont->getTexture()->getWidth());
@@ -107,10 +107,10 @@ namespace mars {
             size.y = quad.d.y * texHeight;
 
             srcRects[currentItemIndex] = {
-                static_cast<int32_t>(x),
-                static_cast<int32_t>(y),
-             static_cast<int32_t>(size.x - x),
-             static_cast<int32_t>(size.y - y)
+                x,
+                y,
+                size.x - x,
+                size.y - y
             };
             colors[currentItemIndex] = {
                 static_cast<uint8_t>(setColor.r * 255),
@@ -127,7 +127,7 @@ namespace mars {
         for (int i = 0; i < currentItemIndex; i++) {
             SDL_SetRenderDrawColor(renderer, colors[i].r, colors[i].g, colors[i].b, colors[i].a);
             if (currentTexture != nullptr) {
-                SDL_RenderCopy(renderer, currentTexture->getTexture(), &srcRects[i], &drawRects[i]);
+                SDL_RenderTexture(renderer, currentTexture->getTexture(), &srcRects[i], &drawRects[i]);
             } else {
                 SDL_RenderFillRect(renderer, &drawRects[i]);
             }

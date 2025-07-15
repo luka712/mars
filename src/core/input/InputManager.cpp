@@ -11,10 +11,10 @@ namespace mars
         : framework(framework) {
 
         mapSDLKeyToMarsKey = {
-            { SDLK_a, Key::A },
-            { SDLK_d, Key::D },
-            { SDLK_s, Key::S },
-            { SDLK_w, Key::W },
+            { SDLK_A, Key::A },
+            { SDLK_D, Key::D },
+            { SDLK_S, Key::S },
+            { SDLK_W, Key::W },
             { SDLK_SPACE, Key::Space },
            // { SDLK_ESCAPE, Key:: },
            // { SDLK_RETURN, Key:: },
@@ -37,11 +37,11 @@ namespace mars
     }
 
     void InputManager::processEvent(const SDL_Event &event) {
-        if (event.type == SDL_KEYDOWN) {
-            SDL_Keycode sdlKeyCode = event.key.keysym.sym;
+        if (event.type == SDL_EVENT_KEY_DOWN) {
+            SDL_Keycode sdlKeyCode = event.key.key;
             mapKey(sdlKeyCode, true);
-        } else if (event.type == SDL_KEYUP) {
-            SDL_Keycode sdlKeyCode = event.key.keysym.sym;
+        } else if (event.type == SDL_EVENT_KEY_UP) {
+            SDL_Keycode sdlKeyCode = event.key.key;
             mapKey(sdlKeyCode, false);
         }
     }

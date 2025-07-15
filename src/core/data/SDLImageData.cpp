@@ -1,5 +1,5 @@
 //
-// Created by lukaa on 21.12.2024..
+// Created by Erkapic Luka on 21.12.2024.
 //
 
 #include "core/data/SDLImageData.h"
@@ -7,8 +7,9 @@
 namespace mars {
 
     SDLImageData::SDLImageData(SDL_Surface *surface)
-        : ImageData(surface->w, surface->h, static_cast<unsigned char *>(surface->pixels), surface->format->BytesPerPixel) {
+        : ImageData(surface->w, surface->h, static_cast<unsigned char *>(surface->pixels), 0) {
         this->surface = surface;
+		this->channels = SDL_GetPixelFormatDetails(surface->format)->bytes_per_pixel;
     }
 
     uint32_t SDLImageData::getWidth() const {
@@ -24,12 +25,12 @@ namespace mars {
     }
 
     uint32_t SDLImageData::getChannels() const {
-        return surface->format->BytesPerPixel;
+        return SDL_GetPixelFormatDetails(surface->format)->bytes_per_pixel;
     }
 
     void SDLImageData::destroy() {
         if (surface != nullptr) {
-            SDL_FreeSurface(surface);
+            SDL_DestroySurface(surface);
             surface = nullptr;
         }
     }

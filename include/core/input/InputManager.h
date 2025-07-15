@@ -1,12 +1,12 @@
 //
-// Created by lukaa on 1.1.2025..
+// Created by Erkapic Luka on 1.1.2025.
 //
 
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
 #include <map>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "core/input/KeyboardState.h"
 
 namespace mars {

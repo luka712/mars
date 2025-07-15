@@ -5,7 +5,7 @@
 #ifndef SDLTEXTURE2D_H
 #define SDLTEXTURE2D_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "core/texture/Texture2D.h"
 #include "core/data/ImageData.h"
 

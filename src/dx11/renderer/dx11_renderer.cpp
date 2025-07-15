@@ -7,8 +7,7 @@
 #include "Framework.h"
 #include "dx11/renderer/dx11_renderer.h"
 #include "gpu_util/dx11/dx11_util.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_syswm.h>
+#include <SDL3/SDL.h>
 
 // Link automatically if using MSVC and CMake is configured right
 #pragma comment(lib, "d3d11.lib")
