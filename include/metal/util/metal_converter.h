@@ -8,7 +8,7 @@
 #if __APPLE__
 
 #include "metal/metal.h"
-#include "core/buffers/BufferEnums.h"
+#include "core/buffers/buffer_enums.h"
 #include "core/log/Logger.h"
 
 namespace mars {

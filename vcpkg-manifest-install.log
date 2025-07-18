@@ -15,17 +15,67 @@ The following packages are already installed:
     entt:arm64-osx@3.15.0 -- git+https://github.com/microsoft/vcpkg@b27478e44a27785f939170cfb8c910d87194b289
   * fmt:arm64-osx@11.0.2#1 -- git+https://github.com/microsoft/vcpkg@07a73a7565e5de9eb42e90c16c133bdfdfebbcda
     glm:arm64-osx@1.0.1#3 -- git+https://github.com/microsoft/vcpkg@f8b09027afe97c717e95bd81d1d4f37c057d1c78
-  * libpng:arm64-osx@1.6.47 -- git+https://github.com/microsoft/vcpkg@2e16dddb1925ae47b5f1ea95d16d6d78f2a711b8
     lua:arm64-osx@5.4.7 -- git+https://github.com/microsoft/vcpkg@97783a4c337df419c0a6a75e9599545c54259d86
-    sdl2:arm64-osx@2.32.6 -- git+https://github.com/microsoft/vcpkg@02245464dc9b2b91921c4a11c0609b80faf3b68d
-    sdl2-image:arm64-osx@2.8.8#1 -- git+https://github.com/microsoft/vcpkg@5cc9de78d44947f2029569202beba4b5af8ea2cc
     sol2:arm64-osx@3.5.0 -- git+https://github.com/microsoft/vcpkg@1335e18b0ecb699219ed36d3cad23309181d34a7
     spdlog:arm64-osx@1.15.3 -- git+https://github.com/microsoft/vcpkg@c2b47286b0759373acecdfaa3be4219711f6d059
     tinyxml2:arm64-osx@11.0.0 -- git+https://github.com/microsoft/vcpkg@642c5abe1171318729a73bdf95ce6c2ca58e079c
   * vcpkg-boost:arm64-osx@2025-03-29 -- git+https://github.com/microsoft/vcpkg@858b0333b773b5650c3f19ef271e3205542d7ceb
   * vcpkg-cmake:arm64-osx@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
   * vcpkg-cmake-config:arm64-osx@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
-  * zlib:arm64-osx@1.3.1 -- git+https://github.com/microsoft/vcpkg@3f05e04b9aededb96786a911a16193cdb711f0c9
+The following packages will be removed:
+    libpng:arm64-osx
+    sdl2:arm64-osx
+    sdl2-image:arm64-osx
+    zlib:arm64-osx
+The following packages will be built and installed:
+    sdl3:arm64-osx@3.2.14 -- git+https://github.com/microsoft/vcpkg@4036f9ab31a96a110f90c2bb754ef1c0a938d160
+    sdl3-image:arm64-osx@3.2.4 -- git+https://github.com/microsoft/vcpkg@a92c8e50efec244d45c4152ff27b0c2dd2666400
+Restored 0 package(s) from /Users/lerkapic/.cache/vcpkg/archives in 320 us. Use --debug to see more details.
+Removing 1/6 sdl2-image:arm64-osx
+Elapsed time to handle sdl2-image:arm64-osx: 4.2 ms
+Removing 2/6 libpng:arm64-osx
+Elapsed time to handle libpng:arm64-osx: 6.52 ms
+Removing 3/6 zlib:arm64-osx
+Elapsed time to handle zlib:arm64-osx: 1.91 ms
+Removing 4/6 sdl2:arm64-osx
+Elapsed time to handle sdl2:arm64-osx: 7.97 ms
+Installing 5/6 sdl3:arm64-osx@3.2.14...
+Building sdl3:arm64-osx@3.2.14...
+/Users/lerkapic/.cache/vcpkg/registries/git-trees/4036f9ab31a96a110f90c2bb754ef1c0a938d160: info: installing from git registry git+https://github.com/microsoft/vcpkg@4036f9ab31a96a110f90c2bb754ef1c0a938d160
+Downloading https://github.com/libsdl-org/SDL/archive/release-3.2.14.tar.gz -> libsdl-org-SDL-release-3.2.14.tar.gz
+Successfully downloaded libsdl-org-SDL-release-3.2.14.tar.gz
+-- Extracting source /Users/lerkapic/Desktop/Development/vcpkg/downloads/libsdl-org-SDL-release-3.2.14.tar.gz
+-- Using source at /Users/lerkapic/Desktop/Development/vcpkg/buildtrees/sdl3/src/ase-3.2.14-a543f399d8.clean
+-- Configuring arm64-osx
+-- Building arm64-osx-dbg
+-- Building arm64-osx-rel
+-- Fixing pkgconfig file: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3_arm64-osx/lib/pkgconfig/sdl3.pc
+-- Fixing pkgconfig file: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3_arm64-osx/debug/lib/pkgconfig/sdl3.pc
+-- Installing: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3_arm64-osx/share/sdl3/usage
+-- Performing post-build validation
+Starting submission of sdl3:arm64-osx@3.2.14 to 1 binary cache(s) in the background
+Elapsed time to handle sdl3:arm64-osx: 35 s
+sdl3:arm64-osx package ABI: d8132b2ba8c7b88cf67a8debcd476dbffadec4e75e00bfa19e6443deedcea19d
+Installing 6/6 sdl3-image:arm64-osx@3.2.4...
+Building sdl3-image:arm64-osx@3.2.4...
+/Users/lerkapic/.cache/vcpkg/registries/git-trees/a92c8e50efec244d45c4152ff27b0c2dd2666400: info: installing from git registry git+https://github.com/microsoft/vcpkg@a92c8e50efec244d45c4152ff27b0c2dd2666400
+Downloading https://github.com/libsdl-org/SDL_image/archive/release-3.2.4.tar.gz -> libsdl-org-SDL_image-release-3.2.4.tar.gz
+Successfully downloaded libsdl-org-SDL_image-release-3.2.4.tar.gz
+-- Extracting source /Users/lerkapic/Desktop/Development/vcpkg/downloads/libsdl-org-SDL_image-release-3.2.4.tar.gz
+-- Applying patch dependencies.diff
+-- Applying patch pkgconfig-libname.diff
+-- Using source at /Users/lerkapic/Desktop/Development/vcpkg/buildtrees/sdl3-image/src/ease-3.2.4-f22def61fe.clean
+-- Configuring arm64-osx
+-- Building arm64-osx-dbg
+-- Building arm64-osx-rel
+-- Fixing pkgconfig file: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3-image_arm64-osx/lib/pkgconfig/sdl3-image.pc
+-- Fixing pkgconfig file: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3-image_arm64-osx/debug/lib/pkgconfig/sdl3-image.pc
+-- Installing: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3-image_arm64-osx/share/sdl3-image/usage
+-- Installing: /Users/lerkapic/Desktop/Development/vcpkg/packages/sdl3-image_arm64-osx/share/sdl3-image/copyright
+-- Performing post-build validation
+Starting submission of sdl3-image:arm64-osx@3.2.4 to 1 binary cache(s) in the background
+Elapsed time to handle sdl3-image:arm64-osx: 4.2 s
+sdl3-image:arm64-osx package ABI: 4cf4d687de7ec23e003a72b3ed3e07eded02b5cd6c594b486e7727c555a124ff
 The package boost-optional is compatible with built-in CMake targets of FindBoost.cmake:
 
     find_package(Boost REQUIRED COMPONENTS optional)
@@ -62,19 +112,20 @@ Use this package via the module FindLua that comes with CMake. To use in your CM
     target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
     target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
 
-sdl2 provides CMake targets:
+sdl3 provides CMake targets:
 
-    find_package(SDL2 CONFIG REQUIRED)
-    target_link_libraries(main
-        PRIVATE
-        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
-        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
-    )
+  find_package(SDL3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE SDL3::SDL3)
 
-sdl2-image provides CMake targets:
+sdl3-image provides CMake targets:
 
-    find_package(SDL2_image CONFIG REQUIRED)
-    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+  find_package(SDL3_image CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>)
+
+sdl3-image provides pkg-config modules:
+
+  # image loading library for Simple DirectMedia Layer
+  sdl3-image
 
 sol2 is header-only and can be used from CMake via:
 
@@ -106,4 +157,7 @@ tinyxml2 provides pkg-config modules:
   # simple, small, C++ XML parser
   tinyxml2
 
-All requested installations completed successfully in: 501 us
+Completed submission of sdl3:arm64-osx@3.2.14 to 1 binary cache(s) in 557 ms
+Waiting for 1 remaining binary cache submissions...
+Completed submission of sdl3-image:arm64-osx@3.2.4 to 1 binary cache(s) in 29.3 ms (1/1)
+All requested installations completed successfully in: 39 s

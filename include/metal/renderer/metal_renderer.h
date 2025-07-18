@@ -6,7 +6,8 @@
 #define METAL_RENDERER_H
 
 #if __APPLE__
-#include <SDL.h>
+
+#include <SDL3/SDL.h>
 #include "metal/metal.h"
 #include "core/renderer/Renderer.h"
 

@@ -25,9 +25,18 @@ namespace mars {
 
         [[nodiscard]] bool isWritable() const override { return true; }
 
-        void initialize(const void *data, uint32_t byteSize, uint32_t vertexCount, BufferUsage usage) override;
-
-        void initialize(uint32_t byteSize, uint32_t vertexCount) override;
+        //! @copyDoc AVertexBuffer::initialize
+        void initialize(const void *data,
+                        const uint32_t byteSize,
+                        const uint32_t byteStride,
+                        const uint32_t vertexCount,
+                        const BufferUsage usage) override;
+        
+        //! @copyDoc AVertexBuffer::initialize
+        void initialize(const uint32_t byteSize,
+                        const uint32_t byteStride,
+                        const uint32_t vertexCount
+                        ) override;
 
         void update(void *data, uint32_t byteSize, uint32_t offset) override;
 

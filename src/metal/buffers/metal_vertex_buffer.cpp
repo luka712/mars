@@ -19,7 +19,8 @@ namespace mars {
     void MetalVertexBuffer::initialize(
         const void *data,
         const uint32_t byteSize,
-        uint32_t vertexCount,
+        const uint32_t byteStride,
+        const uint32_t vertexCount,
         const BufferUsage usage)
     {
         device = renderer.getDevice();
@@ -29,7 +30,9 @@ namespace mars {
         buffer = gpu_util::MetalUtility::getBuffer().create(device, queue, data, byteSize, label, options);
     }
 
-    void MetalVertexBuffer::initialize(uint32_t byteSize, uint32_t vertexCount) {
+    void MetalVertexBuffer::initialize(const uint32_t byteSize,
+                                       const uint32_t byteStride,
+                                       const uint32_t vertexCount) {
         device = renderer.getDevice();
 
     }

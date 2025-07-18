@@ -137,9 +137,9 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "Hello, World!" << std::endl;
 
-	mars::RenderingBackend backend = mars::RenderingBackend::Metal;
+	mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
 #if __APPLE__
-	backend = mars::RenderingBackend::Metal;
+	// backend = mars::RenderingBackend::Metal;
 #endif
 #if _WIN32
 	backend = mars::RenderingBackend::D3D11;

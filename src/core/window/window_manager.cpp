@@ -7,7 +7,8 @@
 #endif
 
 #if __APPLE__
-#include <Metal/Metal.hpp>
+#include <metal/metal.h>
+#include <SDL3/SDL_metal.h>
 #endif
 
 #include "Framework.h"
@@ -18,7 +19,7 @@
 #include <SDL3/SDL_system.h>
 #include <SDL3/SDL_egl.h>
 #include <SDL3/SDL_properties.h>
-#include <EGL/eglext.h>
+// #include <EGL/eglext.h>
 
 
 using namespace mars;
@@ -44,12 +45,12 @@ HWND mars::WindowManager::getWin32Handle()
 
 #if __APPLE__
 
-NSWindow* mars::WindowManager::getCocoaWindowHandle() {
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(window, &wmInfo);
-	return wmInfo.info.cocoa.window;
+/*
+void* mars::WindowManager::getCocoaWindowHandle() {
+    SDL_PropertiesID props = SDL_GetWindowProperties(window);
+    return SDL_GetPointerProperty(props, SDL_PROPERTY_WINDOW_COCOA_WINDOW_POINTER, nullptr);
 }
+*/
 
 #endif
 
@@ -129,18 +130,18 @@ void WindowManager::initializeForOpenGLES(const int major, const int minor) {
 void WindowManager::initializeForAngleOpenGLES(const int major, const int minor) {
 	Logger& logger = framework.getLogger();
 
+	InitializeSDL();
+    
 #if __APPLE__
-	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal"); // Force to use metal if apple device
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal"); // Force to use metal if apple device
 #endif
 
-	SDL_SetHint(SDL_HINT_OPENGL_ES_DRIVER, "1"); // Use "Angle".
-
-	InitializeSDL();
+    SDL_SetHint(SDL_HINT_OPENGL_ES_DRIVER, "1"); // Use "Angle".
 
 	// Set SDL to use EGL
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
@@ -153,7 +154,7 @@ void WindowManager::initializeForAngleOpenGLES(const int major, const int minor)
 
 	window = SDL_CreateWindow("Mars Framework",
 		windowBounds.width, windowBounds.height,
-		SDL_WINDOW_OPENGL);
+        SDL_WINDOW_OPENGL);
 
 	if (window == nullptr) {
 		std::string msg = std::string("WindowManager::initializeForOpenGLES: Failed to create window. Error: ") +
@@ -183,7 +184,9 @@ void WindowManager::initializeForMetal() {
 		"WindowManager::initializeForMetal: Client size: " + std::to_string(windowBounds.width) + ", " +
 		std::to_string(windowBounds.height) + ".");
 
-	SDL_CreateWindowAndRenderer(windowBounds.width, windowBounds.height,
+	SDL_CreateWindowAndRenderer(
+        "Mars Framework",
+        windowBounds.width, windowBounds.height,
 		0,
 		&window,
 		&renderer);
@@ -202,7 +205,7 @@ void WindowManager::initializeForMetal() {
 		throw std::runtime_error(msg);
 	}
 
-	metalLayer = static_cast<CA::MetalLayer*>(SDL_RenderGetMetalLayer(renderer));
+	metalLayer = static_cast<CA::MetalLayer*>(SDL_GetRenderMetalLayer(renderer));
 
 	if (metalLayer == nullptr) {
 		const std::string msg = "WindowManager::InitializeForMetal: Failed to get metal layer: " + std::string(SDL_GetError());

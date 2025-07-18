@@ -54,7 +54,7 @@ namespace mars {
 
         //! Gets the cocoa window handle.
         //! The cocoa window handle.
-        NSWindow* getCocoaWindowHandle();
+        // void* getCocoaWindowHandle();
 
         //! Gets the metal layer.
         //! The metal layer.
