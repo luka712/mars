@@ -5,7 +5,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "core/math/Color.h"
+#include "core/math/color.h"
 #include "glm/vec2.hpp"
 
 namespace mars {

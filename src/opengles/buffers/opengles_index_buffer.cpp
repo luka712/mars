@@ -4,7 +4,7 @@
 
 #include <sstream>
 #include "Framework.h"
-#include "opengles/buffers/OpenGLESIndexBuffer.h"
+#include "opengles/buffers/opengles_index_buffer.h"
 #include "gpu_util/opengles/opengles_util.h"
 
 using namespace gpu_util;

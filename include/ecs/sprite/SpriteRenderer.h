@@ -5,7 +5,7 @@
 #ifndef SPRITERENDERER_H
 #define SPRITERENDERER_H
 
-#include "core/math/Color.h"
+#include "core/math/color.h"
 #include "core/sprite/game_sprite.h"
 #include "ecs/layering/Layer.h"
 #include "ecs/transform/RectTransform.h"

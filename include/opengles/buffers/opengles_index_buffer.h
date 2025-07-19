@@ -1,13 +1,13 @@
 //
-// Created by lukaa on 18.1.2025..
+// Created by Erkapic Luka on 18.1.2025.
 //
 
-#ifndef OPENGLESINDEXBUFFER_H
-#define OPENGLESINDEXBUFFER_H
+#ifndef OPEN_GLES_INDEX_BUFFER_H
+#define OPEN_GLES_INDEX_BUFFER_H
 
 #include "opengles/renderer/opengles_renderer.h"
 #include "opengles/opengles.h"
-#include "core/buffers/AIndexBuffer.h"
+#include "core/buffers/a_index_buffer.h"
 
 namespace mars {
     class Framework;
@@ -45,4 +45,4 @@ namespace mars {
 }
 
 
-#endif //OPENGLESINDEXBUFFER_H
+#endif //OPEN_GLES_INDEX_BUFFER_H

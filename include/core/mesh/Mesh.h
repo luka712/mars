@@ -10,7 +10,7 @@
 #include <memory>
 #include "core/geometry/Geometry.h"
 #include "core/buffers/a_vertex_buffer.h"
-#include "core/buffers/AIndexBuffer.h"
+#include "core/buffers/a_index_buffer.h"
 
 namespace mars {
 

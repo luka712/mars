@@ -5,7 +5,7 @@
 #ifndef SPRITE_BATCH_MESH_H
 #define SPRITE_BATCH_MESH_H
 
-#include <core/math/Color.h>
+#include <core/math/color.h>
 
 #include "core/mesh/Mesh.h"
 #include <glm/glm.hpp>

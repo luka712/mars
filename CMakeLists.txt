@@ -75,7 +75,8 @@ add_executable(mars main.cpp
         include/gpu_util/dx11/dx11_util.h
         include/gpu_util/dx11/dx11_util.h
         include/metal/pipelines/test/metal_position_color_test_pipeline.h
-        src/metal/pipelines/test/metal_position_color_test_pipeline.cpp)
+        src/metal/pipelines/test/metal_position_color_test_pipeline.cpp
+        include/core/vertex/vertex.h)
 
 # LINK
 target_link_libraries(mars

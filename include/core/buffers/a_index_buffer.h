@@ -1,5 +1,5 @@
 //
-// Created by luka on 18.1.2025.
+// Created by Erkapic Luka on 18.1.2025.
 //
 
 #ifndef A_INDEX_BUFFER_H
@@ -19,8 +19,8 @@ namespace mars {
     public:
         //! Construct a new AIndexBuffer object.
         //! @param label The label of the buffer.
-        explicit AIndexBuffer(std::string label)
-            : label(std::move(label)) {
+        explicit AIndexBuffer(const std::string& label)
+            : label(label) {
         }
 
         virtual ~AIndexBuffer() = default;

@@ -30,6 +30,18 @@ namespace mars {
         //! Returns a new red color.
         static Color red() { return Color(1.0f, 0.0f, 0.0f ,1.0f); }
 
+        //! Returns a new green color.
+        static Color green() { return Color(0.0f, 1.0f, 0.0f, 1.0f); }
+
+        //! Returns a new blue color.
+        static Color blue() { return Color(0.0f, 0.0f, 1.0f, 1.0f); }
+
+        //! Returns a new black color.
+        static Color black() { return Color(0.0f, 0.0f, 0.0f, 1.0f); }
+
+        //! Returns a new yellow color.
+        static Color yellow() { return Color(1.0f, 1.0f, 0.0f, 1.0f); }
+
         //! Returns a new light pink color.
         static Color lightPink() { return Color(1.0f, 0.71f, 0.76f, 1.0f); }
     };

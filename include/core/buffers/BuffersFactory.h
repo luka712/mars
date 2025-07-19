@@ -9,8 +9,9 @@
 #include <vector>
 
 #include "AInstanceBuffer.h"
+#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory"
 #include "core/buffers/a_vertex_buffer.h"
-#include "core/buffers/AIndexBuffer.h"
+#include "core/buffers/a_index_buffer.h"
 #include "core/buffers/AUniformBuffer.h"
 
 namespace mars {
@@ -38,6 +39,43 @@ namespace mars {
             const uint32_t vertexCount,
             BufferUsage usage,
             const std::string& label) const;
+
+        //! Create a new vertex buffer.
+        //! @param data The data to initialize the buffer with.
+		//! @param byteStride The stride of a vertex in the buffer in bytes.
+        //! @param vertexCount The number of vertices.
+        //! @param usage The usage of the buffer.
+        //! @param label The label of the buffer.
+        //! @return The shared pointer to the vertex buffer.
+        std::shared_ptr<AVertexBuffer> createVertexBuffer(
+            const void* data,
+            const uint32_t byteStride,
+            const uint32_t vertexCount,
+            BufferUsage usage,
+            const std::string& label) const;
+
+        //! Create a new vertex buffer.
+        //! @param data The data to initialize the buffer with.
+        //! @param usage The usage of the buffer.
+        //! @param label The label of the buffer.
+        //! @return The shared pointer to the vertex buffer.
+        template<typename T>
+        std::shared_ptr<AVertexBuffer> createVertexBuffer(
+            const std::vector<T>& data,
+            BufferUsage usage,
+            const std::string& label) const {
+            {
+                const uint32_t byteStride = static_cast<uint32_t>(sizeof(T));
+                const uint32_t vertexCount = static_cast<uint32_t>(data.size());
+
+                return createVertexBuffer(
+                    data.data(),
+                    byteStride,
+                    vertexCount,
+                    usage,
+                    label);
+            }
+        }
 
         //! Create a new index buffer.
         //! @param data The data to initialize the buffer with.

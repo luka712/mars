@@ -5,7 +5,7 @@
 #ifndef A_LINES_RENDER_PIPELINE_H
 #define A_LINES_RENDER_PIPELINE_H
 
-#include "core/math/Color.h"
+#include "core/math/color.h"
 #include "core/buffers/a_vertex_buffer.h"
 
 namespace mars {

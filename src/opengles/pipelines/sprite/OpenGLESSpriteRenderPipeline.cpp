@@ -6,7 +6,7 @@
 #include "opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h"
 #include <Framework.h>
 #include <core/math/Matrix.h>
-#include <opengles/buffers/OpenGLESIndexBuffer.h>
+#include <opengles/buffers/opengles_index_buffer.h>
 #include <opengles/buffers/opengles_vertex_buffer.h>
 #include "gpu_util/opengles/opengles_util.h"
 

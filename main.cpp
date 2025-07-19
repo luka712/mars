@@ -20,6 +20,7 @@
 #include "entt_ecs/transform/rect_transform.h"
 #include "ldtk.h"
 #include "include/core/pipelines/test/a_triangle_test_pipeline.h"
+#include "core/vertex/vertex.h"
 
 class MovePlayer final : public mars::AScript {
 	mars::RectTransform* transform;
@@ -160,16 +161,22 @@ int main(int argc, char* argv[]) {
 		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
 		std::shared_ptr<mars::APositionColorTestPipeline> pipelineWithBuffer = framework.getPipelineFactory().createPositionColorTestPipeline();
 
-		std::shared_ptr<mars::AVertexBuffer> vertexBuffer = framework.getBuffersFactory().createVertexBuffer(
-			{
-				0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // V1,
-				-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // V2
-				0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // V3
-			},
-			3,
-			(3 * 4) * sizeof(float), // 3 positions + 4 colors 
-			mars::BufferUsage::Vertex,
-			"Test Vertex Buffer");
+        std::vector<mars::PositionColorVertex> vertices = {
+            mars::PositionColorVertex(glm::vec3(-0.5f, 0.5f, 0.0f), mars::Color::red()),
+            mars::PositionColorVertex(glm::vec3(0.5f, 0.5f, 0.0f), mars::Color::green()),
+            mars::PositionColorVertex(glm::vec3(0.5f, -0.5f, 0.0f), mars::Color::blue()),
+            mars::PositionColorVertex(glm::vec3(-0.5f, -0.5f, 0.0f), mars::Color::yellow()),
+        };
+        
+        std::vector<uint16_t> indices = { 0,1,2, 2,3,0};
+        
+		std::shared_ptr<mars::AVertexBuffer> vertexBuffer = framework.getBuffersFactory()
+            .createVertexBuffer(
+                                vertices,
+                                mars::BufferUsage::Vertex,
+                                "Test Vertex Buffer");
+        std::shared_ptr<mars::AIndexBuffer> indexBuffer = framework.getBuffersFactory()
+            .createIndexBuffer(indices, "Test Index Buffer");
 
 		// JUST TO TEST WITH D3D11
 		framework.subscribeToUpdateEvent([&](const mars::Time time) {
@@ -177,8 +184,8 @@ int main(int argc, char* argv[]) {
 			});
 
 		framework.subscribeToRenderEvent([&]() {
-			pipeline->render();
-			pipelineWithBuffer->render(*vertexBuffer);
+			//pipeline->render();
+			pipelineWithBuffer->render(*vertexBuffer, *indexBuffer);
 		});
 		framework.runEventLoop();
 		}

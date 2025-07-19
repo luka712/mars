@@ -24,7 +24,11 @@ namespace mars
         //! @param framework The framework to use for rendering.
         OpenGLESPositionColorTestPipeline(Framework& framework);
 
+        //! @copydoc APositionColorTestPipeline::render
         void render(AVertexBuffer& vertexBuffer) override;
+
+        //! @copydoc APositionColorTestPipeline::render
+        void render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) override;
 
         void destroy() override;
     private:

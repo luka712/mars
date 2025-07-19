@@ -6,6 +6,7 @@
 #include "gpu_util/opengles/opengles_util.h"
 #include "opengles/pipelines/test/opengles_position_color_test_pipeline.h"
 #include "opengles/buffers/opengles_vertex_buffer.h"
+#include "opengles/buffers/opengles_index_buffer.h"
 #include "gpu_util/opengles/opengles_util.h"
 
 using namespace gpu_util;
@@ -61,7 +62,26 @@ namespace mars {
 
 		glUseProgram(programId);
 		glBindVertexArray(vaoId);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, openGLESVertexBuffer.getVertexCount());
+	}
+
+	void OpenGLESPositionColorTestPipeline::render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer)
+	{
+		OpenGLESVertexBuffer& openGLESVertexBuffer = *toOpenGLESVertexBuffer(&vertexBuffer);
+		OpenGLESIndexBuffer& openGLESIndexBuffer = *toOpenGLESIndexBuffer(&indexBuffer);
+
+		createVAO(openGLESVertexBuffer);
+
+		glUseProgram(programId);
+		glBindVertexArray(vaoId);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, openGLESIndexBuffer.getBuffer());
+
+		const GLenum indexType = openGLESIndexBuffer.getType() == IndexBufferType::Uint16 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT;
+		glDrawElements(
+			GL_TRIANGLES,
+			openGLESIndexBuffer.getIndicesCount(),
+			indexType,
+			nullptr);
 	}
 
 	void OpenGLESPositionColorTestPipeline::destroy() {

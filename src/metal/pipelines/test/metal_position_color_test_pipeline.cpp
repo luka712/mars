@@ -64,6 +64,19 @@ namespace mars {
         commandEncoder->drawPrimitives(MTL::PrimitiveTypeTriangle, 0, vertexBuffer.getVertexCount(), 1);
     }
 
+void MetalPositionColorTestPipeline::render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) {
+
+    throw std::runtime_error("Not Implemented!");
+    
+    const MetalVertexBuffer* metalVertexBuffer = toMetalVertexBuffer(&vertexBuffer);
+
+    RenderCommandEncoder* commandEncoder = renderer.getRenderCommandEncoder();
+
+    commandEncoder->setVertexBuffer(metalVertexBuffer->getBuffer(),0,0);
+    commandEncoder->setRenderPipelineState(pipeline);
+    commandEncoder->drawPrimitives(MTL::PrimitiveTypeTriangle, 0, vertexBuffer.getVertexCount(), 1);
+}
+
     void MetalPositionColorTestPipeline::destroy() {
 
         pipeline->release();

@@ -23,8 +23,13 @@ namespace mars {
         //! @param framework The framework.
         explicit MetalPositionColorTestPipeline(Framework &framework);
 
+        //! @copydoc APositionColorTestPipeline::render
         void render(AVertexBuffer& vertexBuffer) override;
 
+        //! @copydoc APositionColorTestPipeline::render
+        void render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) override;
+
+        //! @copydoc APositionColorTestPipeline::destroy
         void destroy() override;
 
     private:

@@ -7,7 +7,7 @@
 
 #include "metal/metal.h"
 #include "Framework.h"
-#include "core/buffers/AIndexBuffer.h"
+#include "core/buffers/a_index_buffer.h"
 #include "metal/renderer/metal_renderer.h"
 
 namespace mars {

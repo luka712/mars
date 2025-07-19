@@ -6,7 +6,7 @@
 #define SPRITE_RENDERER_H
 
 #include "core/sprite/game_sprite.h"
-#include "core/math/Color.h"
+#include "core/math/color.h"
 
 namespace mars_entt_ecs {
     struct SpriteRenderer {
