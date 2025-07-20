@@ -6,7 +6,7 @@
 
 #include "Framework.h"
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 
 namespace mars {
 
@@ -18,11 +18,11 @@ namespace mars {
     }
 
     void MetalTriangleTestPipeline::createPipeline() {
-        MTL::Library* library = gpu_util::MetalUtility::getLibrary().create(device, "content/shaders/metallib/2_0/test/triangle.metallib");
-        MTL::Function* vertexFunction = gpu_util::MetalUtility::getFunction().create(library, "main_vs");
-        MTL::Function* fragmentFunction = gpu_util::MetalUtility::getFunction().create(library, "main_fs");
+        MTL::Library* library = gpu_util::MetalUtil::getLibrary().create(device, "content/shaders/metallib/2_0/test/triangle.metallib");
+        MTL::Function* vertexFunction = gpu_util::MetalUtil::getFunction().create(library, "main_vs");
+        MTL::Function* fragmentFunction = gpu_util::MetalUtil::getFunction().create(library, "main_fs");
 
-        pipeline = gpu_util::MetalUtility::getRenderPipelineState().create(
+        pipeline = gpu_util::MetalUtil::getRenderPipelineState().create(
                                                                            device,
                                                                            vertexFunction,
                                                                            fragmentFunction,

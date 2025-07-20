@@ -7,8 +7,9 @@
 #include <sstream>
 #include "Framework.h"
 #include "metal/buffers/metal_vertex_buffer.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 #include "metal/renderer/metal_renderer.h"
+#include "metal/util/metal_converter.h"
 
 namespace mars {
     MetalVertexBuffer::MetalVertexBuffer(const Framework &framework, const std::string &label): AVertexBuffer(label),
@@ -27,7 +28,7 @@ namespace mars {
         queue = renderer.getQueue();
 
         options = MetalConverter::convert(usage);
-        buffer = gpu_util::MetalUtility::getBuffer().create(device, queue, data, byteSize, label, options);
+        buffer = gpu_util::MetalUtil::getBuffer().create(device, queue, data, byteSize, label, options);
     }
 
     void MetalVertexBuffer::initialize(const uint32_t byteSize,

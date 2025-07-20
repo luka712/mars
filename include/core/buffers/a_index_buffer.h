@@ -32,7 +32,7 @@ namespace mars {
         [[nodiscard]] uint32_t getIndicesCount() const { return indicesCount; }
 
         //! Gets the byte size.
-        [[nodiscard]] uint32_t getByteSize() const { return byteSize; }
+        [[nodiscard]] uint64_t getByteSize() const { return byteSize; }
 
         //! Gets the type of the index buffer.
         [[nodiscard]] IndexBufferType getType() const { return type; }
@@ -60,7 +60,7 @@ namespace mars {
     protected:
         std::string label;
         uint32_t indicesCount{};
-        uint32_t byteSize{};
+        uint64_t byteSize{};
         IndexBufferType type{};
     };
 }

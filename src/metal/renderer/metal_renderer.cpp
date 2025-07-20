@@ -12,8 +12,9 @@
 
 #include <format>
 #include "Framework.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 #include "metal/renderer/metal_renderer.h"
+#include "metal/util/metal_converter.h"
 
 namespace mars {
     static Logger *staticLogger = nullptr;
@@ -32,7 +33,7 @@ namespace mars {
         Logger &logger = framework.getLogger();
         staticLogger = &logger;
 
-        gpu_util::MetalUtility::initialize(true);
+        gpu_util::MetalUtil::initialize(true);
         MetalConverter::initialize(&logger);
 
         metalLayer = framework.getWindowManager().getMetalLayer();

@@ -7,10 +7,8 @@
 
 #if __APPLE__
 
-#include "gpu_util/metal/metal_buffer_utility.h"
-#include "metal/util/metal_converter.h"
+#include "gpu_util/metal/metal_buffer_util.h"
 #include "metal_texture_utility.h"
-#include "spdlog/logger.h"
 #include "gpu_util/metal/metal_sampler_state_util.h"
 #include "gpu_util/metal/metal_render_pipeline_state_utility.h"
 #include "gpu_util/metal/metal_library_utility.h"
@@ -20,13 +18,13 @@
 namespace gpu_util {
 
     //! The helper class for working with Metal.
-    class MetalUtility {
+    class MetalUtil {
     public:
         //! Initialize the MetalUtil.
         //! @param logger The logger.
         static void initialize(Logger *logger) {
             logger->info("metal util initialize");
-            metalBufferUtil = new MetalBufferUtility(*logger);
+            metalBufferUtil = new MetalBufferUtil(*logger);
             metalTextureUtil = new MetalTextureUtility(*logger);
             metalRenderPipelineStateUtil = new MetalRenderPipelineStateUtility(*logger);
             metalLibraryUtility = new MetalLibraryUtility(*logger);
@@ -39,22 +37,22 @@ namespace gpu_util {
         //! @param withDefaultLogger If <code>true</code>,  creates default logger.
         static void initialize(bool withDefaultLogger) {
 
-            if (MetalUtility::logger != nullptr) {
-                delete MetalUtility::logger;
+            if (MetalUtil::logger != nullptr) {
+                delete MetalUtil::logger;
             }
 
             if (withDefaultLogger) {
-                MetalUtility::logger = new SpdLogger();
+                MetalUtil::logger = new SpdLogger();
             }
             else {
-                MetalUtility::logger = new MockLogger();
+                MetalUtil::logger = new MockLogger();
             }
-            MetalUtility::initialize(logger);
+            MetalUtil::initialize(logger);
         }
 
         //! Gets the MetalBufferUtil for working with buffers.
         //! @return The MetalBufferUtil ptr.
-        static MetalBufferUtility &getBuffer() { return *metalBufferUtil; }
+        static MetalBufferUtil &getBuffer() { return *metalBufferUtil; }
 
         //! Gets the MetalTextureUtil for working with textures.
         //! @return Tee MetalTextureUtil ptr.
@@ -78,7 +76,7 @@ namespace gpu_util {
 
     private:
         static Logger* logger;
-        static MetalBufferUtility *metalBufferUtil;
+        static MetalBufferUtil *metalBufferUtil;
         static MetalTextureUtility *metalTextureUtil;
         static MetalSamplerStateUtil* metalSamplerStateUtil;
         static MetalRenderPipelineStateUtility *metalRenderPipelineStateUtil;

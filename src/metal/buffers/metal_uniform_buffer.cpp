@@ -5,7 +5,7 @@
 #if __APPLE__
 
 #include "metal/buffers/metal_uniform_buffer.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 #include <sstream>
 
 namespace mars {
@@ -27,7 +27,7 @@ namespace mars {
     void MetalUniformBuffer::update(void *data, uint32_t byteSize) {
 
         if (options == MTL::StorageModeShared) {
-            gpu_util::MetalUtility::getBuffer().updateSharedBuffer(buffer, data, byteSize);
+            gpu_util::MetalUtil::getBuffer().updateSharedBuffer(buffer, data, byteSize);
         }
         else {
             const std::string msg = "MetalUniformBuffer::update: Unable to update buffer. Update not implemented.";

@@ -6,8 +6,9 @@
 
 #include "Framework.h"
 #include "metal/pipelines/test/metal_position_color_test_pipeline.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 #include "metal/buffers/metal_vertex_buffer.h"
+#include "metal/buffers/metal_index_buffer.h"
 
 namespace mars {
 
@@ -19,9 +20,9 @@ namespace mars {
     }
 
     void MetalPositionColorTestPipeline::createPipeline() {
-        MTL::Library* library = gpu_util::MetalUtility::getLibrary().create(device, "content/shaders/metallib/2_0/test/position_color.metallib");
-        MTL::Function* vertexFunction = gpu_util::MetalUtility::getFunction().create(library, "main_vs");
-        MTL::Function* fragmentFunction = gpu_util::MetalUtility::getFunction().create(library, "main_fs");
+        MTL::Library* library = gpu_util::MetalUtil::getLibrary().create(device, "content/shaders/metallib/2_0/test/position_color.metallib");
+        MTL::Function* vertexFunction = gpu_util::MetalUtil::getFunction().create(library, "main_vs");
+        MTL::Function* fragmentFunction = gpu_util::MetalUtil::getFunction().create(library, "main_fs");
 
         MTL::VertexDescriptor *vertexDescriptor = MTL::VertexDescriptor::alloc()->init();
         
@@ -40,7 +41,7 @@ namespace mars {
         vertexDescriptor->layouts()->object(0)->setStepRate(1);
         vertexDescriptor->layouts()->object(0)->setStepFunction(MTL::VertexStepFunctionPerVertex);
 
-        pipeline = gpu_util::MetalUtility::getRenderPipelineState().create(
+        pipeline = gpu_util::MetalUtil::getRenderPipelineState().create(
             device,
             vertexFunction,
             fragmentFunction,
@@ -65,16 +66,23 @@ namespace mars {
     }
 
 void MetalPositionColorTestPipeline::render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) {
-
-    throw std::runtime_error("Not Implemented!");
     
     const MetalVertexBuffer* metalVertexBuffer = toMetalVertexBuffer(&vertexBuffer);
+    const MetalIndexBuffer* metalIndexBuffer = toMetalIndexBuffer(&indexBuffer);
 
     RenderCommandEncoder* commandEncoder = renderer.getRenderCommandEncoder();
 
     commandEncoder->setVertexBuffer(metalVertexBuffer->getBuffer(),0,0);
     commandEncoder->setRenderPipelineState(pipeline);
-    commandEncoder->drawPrimitives(MTL::PrimitiveTypeTriangle, 0, vertexBuffer.getVertexCount(), 1);
+    MTL::IndexType indexType = indexBuffer.getType() == IndexBufferType::Uint16
+             ? MTL::IndexTypeUInt16 : MTL::IndexTypeUInt32;
+    commandEncoder->drawIndexedPrimitives(
+                                          MTL::PrimitiveTypeTriangle,
+                                          indexBuffer.getIndicesCount(),
+                                          indexType,
+                                          metalIndexBuffer->getBuffer(),
+                                          0,
+                                          1);
 }
 
     void MetalPositionColorTestPipeline::destroy() {

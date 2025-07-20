@@ -7,20 +7,28 @@
 #include <sstream>
 #include "metal/buffers/metal_index_buffer.h"
 #include "metal/renderer/metal_renderer.h"
+#include <gpu_util/metal/metal_util.h>
 
 namespace mars {
 
     MetalIndexBuffer::MetalIndexBuffer(const Framework &framework, const std::string &label)
         : AIndexBuffer(label), renderer(dynamic_cast<MetalRenderer &>(framework.getRenderer())), logger(framework.getLogger()),
           usage(), options(MTL::ResourceStorageModePrivate) {
+              device = renderer.getDevice();
     }
 
     void MetalIndexBuffer::initialize(const std::vector<uint16_t>& data) {
-
+        byteSize = data.size() * sizeof(uint16_t);
+        indicesCount = data.size();
+        buffer = gpu_util::MetalUtil::getBuffer()
+            .create(device,data.data(),byteSize);
     }
 
     void  MetalIndexBuffer::initialize(const std::vector<uint32_t>& data) {
-
+        byteSize = data.size() * sizeof(uint32_t);
+        indicesCount = data.size();
+        buffer = gpu_util::MetalUtil::getBuffer()
+            .create( device, data.data(),byteSize);
     }
 
     std::string  MetalIndexBuffer::printInfo() {
@@ -56,6 +64,13 @@ namespace mars {
     void  MetalIndexBuffer::destroy() {
         buffer->release();
     }
+
+    MetalIndexBuffer* toMetalIndexBuffer(AIndexBuffer* indexBuffer) {
+        return dynamic_cast<MetalIndexBuffer *>(indexBuffer);
+
+    }
 }
+
+
 
 #endif

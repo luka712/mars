@@ -4,13 +4,13 @@
 
 #if __APPLE__
 
-#include "gpu_util/metal/metal_buffer_utility.h"
+#include "gpu_util/metal/metal_buffer_util.h"
 
 #include <memory>
 
 namespace gpu_util {
 
-    MTL::Buffer *MetalBufferUtility::create(
+    MTL::Buffer *MetalBufferUtil::create(
         MTL::Device *device,
         const void *data,
         const uint32_t byteSize,
@@ -38,7 +38,7 @@ namespace gpu_util {
         return buffer;
     }
 
-    MTL::Buffer *MetalBufferUtility::create(
+    MTL::Buffer *MetalBufferUtil::create(
        MTL::Device *device,
        MTL::CommandQueue *queue,
        const void *data,
@@ -92,7 +92,7 @@ namespace gpu_util {
         return buffer;
     }
 
-    void MetalBufferUtility::updateSharedBuffer(MTL::Buffer *buffer, void* data, const uint32_t byteSize) {
+    void MetalBufferUtil::updateSharedBuffer(MTL::Buffer *buffer, void* data, const uint32_t byteSize) {
         memcpy(buffer->contents(), data, byteSize);
     }
 }

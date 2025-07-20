@@ -7,7 +7,7 @@
 #include <sstream>
 #include "Framework.h"
 #include "metal/texture/metal_texture2d.h"
-#include "gpu_util/metal/metal_utility.h"
+#include "gpu_util/metal/metal_util.h"
 
 namespace mars {
 
@@ -21,7 +21,7 @@ namespace mars {
         this->height = imageData.getHeight();
 
         // TEXTURE
-        texture = gpu_util::MetalUtility::getTexture().create(
+        texture = gpu_util::MetalUtil::getTexture().create(
             renderer.getDevice(),
             NS::UInteger(width),
             NS::UInteger(height),
@@ -32,7 +32,7 @@ namespace mars {
         );
 
         // SAMPLER
-        sampler = gpu_util::MetalUtility::getSamplerState().create(renderer.getDevice());
+        sampler = gpu_util::MetalUtil::getSamplerState().create(renderer.getDevice());
     }
 
     void MetalTexture2D::destroy()

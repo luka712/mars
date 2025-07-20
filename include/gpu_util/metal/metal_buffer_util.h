@@ -12,11 +12,11 @@
 
 namespace gpu_util {
     //! The utility class for working with MTL::Buffer.
-    class MetalBufferUtility {
+    class MetalBufferUtil {
     public:
         //! Construct a new MetalBufferUtil object.
         //! @param logger The logger.
-        explicit MetalBufferUtility(Logger &logger) : logger(logger) {
+        explicit MetalBufferUtil(Logger &logger) : logger(logger) {
         }
 
         //! Create a new Metal buffer. Use this overload only if creating buffers that can be written to from CPU.
