@@ -8,6 +8,7 @@
 #define DX11_BUFFER_UTIL_H
 
 #include <string>
+#include <vector>
 #include "gpu_util/dx11.h"
 #include "gpu_util/logger.h"
 
@@ -44,6 +45,29 @@ namespace gpu_util {
             UINT cpuAccessFlags = 0,
             UINT miscFlags = 0,
             const std::string& label = "");
+
+		//! Create a DirectX 11 buffer which is setup as index buffer.
+		//! Buffer is created with D3D11_BIND_INDEX_BUFFER flag and D3D11_USAGE_IMMUTABLE usage.
+		//! @param device The DirectX 11 device to create the buffer on.
+		//! @param data Pointer to the data to initialize the buffer with.
+		//! @param label The label for the buffer (default is empty string).
+		//! @param T The type of the index data (e.g., uint16_t or uint32_t).
+		//! @return A ComPtr to the created ID3D11Buffer, or nullptr if creation failed.
+		template<typename T>
+        ComPtr<ID3D11Buffer> createIndexBuffer(ComPtr<ID3D11Device> device, const std::vector<T>& data, const std::string& label = "")
+        {
+			// Create the buffer using the create method
+			return create(
+				device,
+				data.data(),
+				data.size() * sizeof(T),
+				sizeof(T),
+		        D3D11_USAGE_IMMUTABLE,
+				D3D11_BIND_INDEX_BUFFER,
+				0, // No CPU access for index buffers
+				0, // No miscellaneous flags
+				label);
+        }
 
     private:
         Logger& logger;

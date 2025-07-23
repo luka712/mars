@@ -9,7 +9,6 @@
 #include <vector>
 
 #include "AInstanceBuffer.h"
-#include "../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory"
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
 #include "core/buffers/AUniformBuffer.h"

@@ -13,7 +13,6 @@
 
 namespace mars {
 
-
     //! The index buffer.
     class AIndexBuffer {
     public:

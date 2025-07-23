@@ -25,7 +25,11 @@ namespace mars
 		//! @param framework The framework to use for rendering.
 		explicit DX11PositionColorTestPipeline(Framework& framework);
 
+		//! @copyDoc APositionColorTestPipeline::render(AVertexBuffer& vertexBuffer)
 		void render(AVertexBuffer& vertexBuffer) override;
+
+		//! @copyDoc APositionColorTestPipeline::render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer)
+		void render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) override;
 
 		void destroy() override;
 
@@ -42,7 +46,6 @@ namespace mars
 
 		void createShaders(ComPtr<ID3D10Blob> vertexBlob);
 		void createInputLayout(ComPtr<ID3D10Blob> vertexBlob);
-
 	};
 
 }

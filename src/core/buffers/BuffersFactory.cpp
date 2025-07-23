@@ -20,42 +20,43 @@
 
 #if _WIN32
 #include "dx11/buffers/dx11_vertex_buffer.h"
+#include "dx11/buffers/dx11_index_buffer.h"
 #endif 
 
 namespace mars {
 	BuffersFactory::BuffersFactory(Framework& framework) : framework(framework) {
 	}
 
-std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
-    const void* data,
-    const uint32_t byteStride,
-    const uint32_t vertexCount,
-    const BufferUsage usage,
-    const std::string& label) const {
-    AVertexBuffer* buffer = nullptr;
+	std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
+		const void* data,
+		const uint32_t byteStride,
+		const uint32_t vertexCount,
+		const BufferUsage usage,
+		const std::string& label) const {
+		AVertexBuffer* buffer = nullptr;
 
-    switch (framework.getRenderingBackend()) {
-    case RenderingBackend::OpenGLES:
-        buffer = new OpenGLESVertexBuffer(framework, label);
-        break;
+		switch (framework.getRenderingBackend()) {
+		case RenderingBackend::OpenGLES:
+			buffer = new OpenGLESVertexBuffer(framework, label);
+			break;
 #if __APPLE__
-    case RenderingBackend::Metal:
-        buffer = new MetalVertexBuffer(framework, label);
-        break;
+		case RenderingBackend::Metal:
+			buffer = new MetalVertexBuffer(framework, label);
+			break;
 #endif
 #if _WIN32
-    case RenderingBackend::D3D11:
-        buffer = new DX11VertexBuffer(framework, label);
-        break;
+		case RenderingBackend::D3D11:
+			buffer = new DX11VertexBuffer(framework, label);
+			break;
 #endif
-    default:
-        throw std::runtime_error("BuffersFactory::createVertexBuffer: Rendering backend not supported.");
-    }
-    const uint32_t byteSize = vertexCount * byteStride;
-    buffer->initialize(data, byteSize, byteStride, vertexCount, usage);
+		default:
+			throw std::runtime_error("BuffersFactory::createVertexBuffer: Rendering backend not supported.");
+		}
+		const uint32_t byteSize = vertexCount * byteStride;
+		buffer->initialize(data, byteSize, byteStride, vertexCount, usage);
 
-    return std::shared_ptr<AVertexBuffer>(buffer);
-}
+		return std::shared_ptr<AVertexBuffer>(buffer);
+	}
 
 	std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
 		const std::vector<float>& data,
@@ -64,12 +65,12 @@ std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
 		const BufferUsage usage,
 		const std::string& label) const {
 
-        return createVertexBuffer(data.data(), byteStride, vertexCount, usage, label);
+		return createVertexBuffer(data.data(), byteStride, vertexCount, usage, label);
 	}
 
 	std::shared_ptr<AIndexBuffer> BuffersFactory::createIndexBuffer(const std::vector<uint16_t>& data,
 		const std::string& label) const {
-        AIndexBuffer* buffer = nullptr;
+		AIndexBuffer* buffer = nullptr;
 
 		switch (framework.getRenderingBackend()) {
 		case RenderingBackend::OpenGLES:
@@ -78,6 +79,11 @@ std::shared_ptr<AVertexBuffer> BuffersFactory::createVertexBuffer(
 #if __APPLE__
 		case RenderingBackend::Metal:
 			buffer = new MetalIndexBuffer(framework, label);
+			break;
+#endif
+#if _WIN32
+		case RenderingBackend::D3D11:
+			buffer = new DX11IndexBuffer(framework, label);
 			break;
 #endif
 		default:
