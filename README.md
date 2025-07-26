@@ -31,25 +31,19 @@ for example:
 
 `cmake -B cmake-build-debugvisualstudio -S . -DCMAKE_TOOLCHAIN_FILE=D:/_Windows/vcpkg/scripts/buildsystems/vcpkg.cmake`
 
+
 ### Build
 
-It is tested with C-Lion as IDE.
-CMakeLists.txt should be built.
+All builds are contained within scripts.
+It uses `vcpkg` in combination with some system or packages that are pulled to `vendor` folder.
+To build create script for your system from `scripts` folder.
 
-To build simply run `cmake`.
+For example create new file from `build_linux.template.sh` named `build_linux.sh`.
 
-This will download all required dependencies in `cmake-build-debug` folder.
+Make sure to set `VCPKG_ROOT` and `DCMAKE_TOOLCHAIN_FILE` to correct folder.
 
-Main project is called `mars`.
+Then simply run from root, `./scripts/build_linux.sh`
 
-#### Linux 
-
-For Linux CLion integration with `conan` is used.
-For more see https://www.jetbrains.com/help/clion/conan-plugin.html#add-lib
-After integration is done, simply run `DebugLinux` from CLion.
-
-Then to build run 
-`ninja -C /datadisk1/Projects/mars/cmake-build-debuglinux`
 
 ### EMSCRIPTEN
 
@@ -79,6 +73,6 @@ Note that `cmake-build-debug/_deps/lua-src/lua.c` will cause issues and should b
 ### RENDERERS
 
  | rendering backend | Windows | MacOS | Linux | Android | iOS | Browser |
- |  opengles         |   [x]   |  [ ]  |  [x]  |  [ ]    | [ ] |  [x]    |
+ |  opengles         |   [x]   |  [x]  |  [x]  |  [ ]    | [ ] |  [x]    |
  |   metal           |   [ ]   |  [x]  |  [ ]  |  [ ]    | [ ] |  [ ]    |
  |   d3d11           |   [x]   |  [ ]  |  [ ]  |  [ ]    | [ ] |  [ ]    |

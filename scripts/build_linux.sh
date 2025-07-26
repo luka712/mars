@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Create build directory
-mkdir -p cmake-build-debug-linux
-cd cmake-build-debug-linux
-
-# Install dependencies via Conan (with build missing to compile any missing libs)
-conan install .. --build=missing
-
-# Configure project with CMake, specify Ninja generator if you want
-cmake .. -G Ninja
+export VCPKG_ROOT=/home/luka/Desktop/Development/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
 
 # Build
-cmake --build .
+cmake \
+  -G Ninja \
+  -B cmake-build-debug \
+  -S . \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+  -DCMAKE_TOOLCHAIN_FILE=/home/luka/Desktop/Development/vcpkg/scripts/buildsystems/vcpkg.cmake \

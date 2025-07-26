@@ -11,11 +11,7 @@ SET(CMAKE_OSX_ARCHITECTURES "arm64")
 # include(FetchContent)
 INCLUDE(cmake/AppleSetup.cmake) # guards are already in file
 INCLUDE(cmake/WindowsSetup.cmake) # guards are already in file
-if(APPLE OR WIN32)
-    INCLUDE(cmake/VcpkgDependencies.cmake)
-else ()
-    INCLUDE(cmake/ConanDependencies.cmake)
-endif ()
+INCLUDE(cmake/VcpkgDependencies.cmake)
 INCLUDE(cmake/VendorDependencies.cmake)
 
 
