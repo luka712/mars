@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "core/math/Rect.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "glm/vec2.hpp"
 
 namespace mars {

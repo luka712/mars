@@ -1,10 +1,12 @@
 //
-// Created by lukaa on 21.12.2024..
+// Created by Erkapic Luka on 21.12.2024.
 //
 
+
+#define USE_STB_IMAGE
 #include <SDL3_image/SDL_image.h>
 #include <filesystem>
-#include "core/loaders/ImageLoader.h"
+#include "core/loaders/image_loader.h"
 
 #include <Framework.h>
 

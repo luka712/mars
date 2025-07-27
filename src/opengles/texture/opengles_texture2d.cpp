@@ -4,7 +4,7 @@
 
 #include <sstream>
 #include "Framework.h"
-#include "opengles/texture/OpenGLESTexture2D.h"
+#include "opengles/texture/opengles_texture2d.h"
 #include "gpu_util/opengles/opengles_util.h"
 
 using namespace gpu_util;

@@ -2,13 +2,14 @@
 // Created by lukaa on 21.12.2024.
 //
 
-#ifndef IMAGELOADER_H
-#define IMAGELOADER_H
+#ifndef IMAGE_LOADER_H
+#define IMAGE_LOADER_H
 
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include "core/data/ImageData.h"
+
 
 namespace mars {
 
@@ -38,4 +39,4 @@ namespace mars {
     };
 }
 
-#endif //IMAGELOADER_H
+#endif //IMAGE_LOADER_H

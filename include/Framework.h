@@ -13,7 +13,7 @@
 #include "core/sprite/SpriteBatch.h"
 #include "core/time/TimeManager.h"
 #include "core/log/Logger.h"
-#include "core/loaders/ImageLoader.h"
+#include "core/loaders/image_loader.h"
 #include "core/texture/TextureFactory.h"
 #include "core/content/ContentManager.h"
 #include "core/input/InputManager.h"

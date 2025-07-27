@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "core/mesh/SpriteBatchMesh.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "core/camera/core/OrthographicCamera.h"
 

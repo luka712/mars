@@ -7,7 +7,7 @@
 
 #include <string>
 #include <map>
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/sprite/game_sprite.h"
 
 namespace mars {

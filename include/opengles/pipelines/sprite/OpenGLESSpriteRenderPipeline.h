@@ -11,7 +11,7 @@
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "opengles/renderer/opengles_renderer.h"
 #include "core/camera/core/OrthographicCamera.h"
-#include "opengles/texture/OpenGLESTexture2D.h"
+#include "opengles/texture/opengles_texture2d.h"
 
 namespace mars {
     class Framework;

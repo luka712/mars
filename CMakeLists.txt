@@ -14,10 +14,15 @@ INCLUDE(cmake/WindowsSetup.cmake) # guards are already in file
 INCLUDE(cmake/VcpkgDependencies.cmake)
 INCLUDE(cmake/VendorDependencies.cmake)
 
+# Questionable to we need this
+# set the output directory for built objects.
+# This makes sure that the dynamic library goes into the build directory automatically.
+#SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+#SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
 # Define a macro in debug mode
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_compile_definitions(DEBUG)
+    ADD_COMPILE_DEFINITIONS(DEBUG)
 endif()
 
 # MODULES - we set modules in cmake_modules folder.
@@ -72,13 +77,14 @@ add_executable(mars main.cpp
         include/gpu_util/dx11/dx11_util.h
         include/metal/pipelines/test/metal_position_color_test_pipeline.h
         src/metal/pipelines/test/metal_position_color_test_pipeline.cpp
-        include/core/vertex/vertex.h)
+        include/core/vertex/vertex.h
+        include/core/pipelines/test/a_texture_test_pipeline.h
+        include/opengles/pipelines/test/opengles_texture_test_pipeline.h
+        src/opengles/pipelines/test/opengles_texture_test_pipeline.cpp)
 
 # LINK
 target_link_libraries(mars
         ${PACKAGES_LIBRARIES}
-        ${SDL2_LIBRARY}
-        ${SDL2_IMAGE_LIBRARY}
         glm::glm
         # spdlog::spdlog_header_only
         tinyxml2::tinyxml2
@@ -114,8 +120,6 @@ file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.c
 
 target_link_libraries(tests
         ${PACKAGES_LIBRARIES}
-        ${SDL2_LIBRARY}
-        ${SDL2_IMAGE_LIBRARY}
         ${GLM_LIBRARY}
         # spdlog::spdlog_header_only
         tinyxml2::tinyxml2

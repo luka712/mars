@@ -7,7 +7,7 @@
 
 #include <map>
 #include "core/fonts/SpriteFont.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/math/Math.h"
 #include "core/sprite/SpriteBatchDrawable.h"
 

@@ -13,6 +13,7 @@
 #include "core/pipelines/test/a_position_color_test_pipeline.h"
 #include "core/camera/core/OrthographicCamera.h"
 #include "core/renderer/enums.h"
+#include "core/pipelines/test/a_texture_test_pipeline.h"
 
 namespace mars {
     class Framework;
@@ -39,12 +40,17 @@ namespace mars {
         //! Creates a test pipeline that renders simple triangle centered around origin,
         //! NOTE: Intended to be used for test purposes only.
         //! @return The shared pointer for ATriangleTestPipeline.
-        std::shared_ptr<ATriangleTestPipeline> createTriangleTestPipeline();
+        std::shared_ptr<ATriangleTestPipeline> createTriangleTestPipeline() const;
 
         //! Creates a test pipeline that renders that uses buffer object that takes position and color attributes,
         //! NOTE: Intended to be used for test purposes only.
         //! @return The shared pointer for ATriangleTestPipeline.
-        std::shared_ptr<APositionColorTestPipeline> createPositionColorTestPipeline();
+        std::shared_ptr<APositionColorTestPipeline> createPositionColorTestPipeline() const;
+
+        //! Create a text pipeline which allows texture to be used.
+        //! NOTE: Intended to be used for test purposes only.
+        //! @return The shared pointer for ATextureTestPipeline.
+        std::shared_ptr<ATextureTestPipeline> createTextureTestPipeline() const;
 
     private:
         Framework &framework;

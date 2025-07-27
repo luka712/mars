@@ -6,7 +6,7 @@
 #define SDLTEXTURE2D_H
 
 #include <SDL3/SDL.h>
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/data/ImageData.h"
 
 namespace mars {

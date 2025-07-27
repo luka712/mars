@@ -9,6 +9,7 @@
 #include "opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h"
 #include "opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h"
 #include "opengles/pipelines/test/opengles_position_color_test_pipeline.h"
+#include "opengles/pipelines/test/opengles_texture_test_pipeline.h"
 
 #if __APPLE__
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
@@ -57,7 +58,7 @@ namespace mars {
 		}
 	}
 
-	std::shared_ptr<ATriangleTestPipeline> PipelineFactory::createTriangleTestPipeline() {
+	std::shared_ptr<ATriangleTestPipeline> PipelineFactory::createTriangleTestPipeline() const {
 		switch (framework.getRenderingBackend()) {
 #if __APPLE__
 		case RenderingBackend::Metal:
@@ -76,7 +77,7 @@ namespace mars {
 		}
 	}
 
-	std::shared_ptr<APositionColorTestPipeline> PipelineFactory::createPositionColorTestPipeline() {
+	std::shared_ptr<APositionColorTestPipeline> PipelineFactory::createPositionColorTestPipeline() const {
 		switch (framework.getRenderingBackend()) {
 #if __APPLE__
 		case RenderingBackend::Metal:
@@ -92,6 +93,25 @@ namespace mars {
 			const std::string msg = "Rendering backend not supported.";
 			framework.getLogger().error(msg);
 			throw std::runtime_error(msg);
+		}
+	}
+
+	std::shared_ptr<ATextureTestPipeline> PipelineFactory::createTextureTestPipeline() const {
+		switch (framework.getRenderingBackend()) {
+#if __APPLE__
+			case RenderingBackend::Metal:
+				return std::make_shared<MetalPositionColorTestPipeline>(framework);
+#endif
+#if _WIN32
+			case RenderingBackend::D3D11:
+				return std::make_shared<DX11PositionColorTestPipeline>(framework);
+#endif
+			case RenderingBackend::OpenGLES:
+				return std::make_shared<OpenGLESTextureTestPipeline>(framework);
+			default:
+				const std::string msg = "Rendering backend not supported.";
+				framework.getLogger().error(msg);
+				throw std::runtime_error(msg);
 		}
 	}
 }

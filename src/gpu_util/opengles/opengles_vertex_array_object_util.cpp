@@ -22,5 +22,21 @@ namespace gpu_util {
         return vao;
     }
 
+    GLuint OpenGLESVertexArrayObjectUtil::createPositionColorTextureCoordinatesVAO(const GLuint interleavedBuffer,
+        const std::string &label) {
 
+        const GLuint vao = create(label);
+
+        // Bind the vertex buffer
+        glBindBuffer(GL_ARRAY_BUFFER, interleavedBuffer);
+        constexpr GLuint stride = sizeof(float) * 9;
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, static_cast<void *>(0)); // Position attribute
+        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void *>(sizeof(float) * 3)); // Color attribute
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void *>(sizeof(float) * (3 + 4))); // Tex coords attribute
+        glEnableVertexAttribArray(0); // Enable position attribute
+        glEnableVertexAttribArray(1); // Enable color attribute
+        glEnableVertexAttribArray(2); // Enable texture coords attribute
+
+        return vao;
+    }
 }

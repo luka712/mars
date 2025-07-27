@@ -8,7 +8,7 @@
 #include <memory>
 #include <map>
 #include "core/life_management/State.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/fonts/SpriteFontCharacter.h"
 
 namespace mars {

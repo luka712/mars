@@ -1,20 +1,29 @@
 //
-// Created by Erkapic Luka on 8.7.2025.
+// Created by Erkapic Luka on 27.07.25.
 //
 
-#ifndef A_POSITION_COLOR_TEST_PIPELINE_H
-#define A_POSITION_COLOR_TEST_PIPELINE_H
+#ifndef A_TEXTURE_TEST_PIPELINE_H
+#define A_TEXTURE_TEST_PIPELINE_H
 
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
+#include "core/texture/texture2d.h"
 
 namespace mars {
-    //! The test pipeline for rendering a simple texture.
+    //! The test pipeline for rendering a simple mesh with position and color attributes.
     //! Mainly used for testing purposes.
-    class APositionColorTestPipeline {
+    class ATextureTestPipeline {
     public:
         //! The destructor.
-        virtual ~APositionColorTestPipeline() = default;
+        virtual ~ATextureTestPipeline() = default;
+
+        //! Gets the texture.
+        //! @return The texture 2d.
+        virtual Texture2D* getTexture2D() = 0;
+
+        //! Sets the texture.
+        //! @param texture The texture.
+        virtual void setTexture2D(Texture2D* texture) = 0;
 
         //! Render the triangle from the pipeline.
         //! @param vertexBuffer The vertex buffer containing the position and color attributes.
@@ -30,4 +39,4 @@ namespace mars {
     };
 }
 
-#endif //A_POSITION_COLOR_TEST_PIPELINE_H
+#endif //A_TEXTURE_TEST_PIPELINE_H

@@ -1,15 +1,19 @@
 {
   "dependencies": [
+    "boost",
+    "box2d",
+    "entt",
+    "glm",
     "lua",
     "sdl3",
-    "sdl3-image",
-    "glm",
-    "boost",
+    {
+      "name": "sdl3-image",
+      "features": [ "png" ]
+    },
+    "sol2",
     "spdlog",
     "tinyxml2",
-    "entt",
-    "box2d",
-    "sol2"
+    "stb"
   ],
   "overrides": [
     {

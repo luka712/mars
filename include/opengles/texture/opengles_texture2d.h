@@ -2,13 +2,13 @@
 // Created by luka erkapic on 11.02.25.
 //
 
-#ifndef OPENGLESTEXTURE2D_H
-#define OPENGLESTEXTURE2D_H
+#ifndef OPEN_GLES_TEXTURE2D_H
+#define OPEN_GLES_TEXTURE2D_H
 
 #include <string>
 #include "opengles/opengles.h"
 #include "core/log/Logger.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/data/ImageData.h"
 
 namespace mars
@@ -47,4 +47,4 @@ namespace mars
     OpenGLESTexture2D* asOpenGLESTexture(Texture2D* texture);
 }
 
-#endif //OPENGLESTEXTURE2D_H
+#endif //OPEN_GLES_TEXTURE2D_H

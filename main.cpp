@@ -160,6 +160,7 @@ int main(int argc, char* argv[]) {
 
 		std::shared_ptr<mars::ATriangleTestPipeline> pipeline = framework.getPipelineFactory().createTriangleTestPipeline();
 		std::shared_ptr<mars::APositionColorTestPipeline> pipelineWithBuffer = framework.getPipelineFactory().createPositionColorTestPipeline();
+		std::shared_ptr<mars::ATextureTestPipeline> texturePipeline = framework.getPipelineFactory().createTextureTestPipeline();
 
         std::vector<mars::PositionColorVertex> vertices = {
             mars::PositionColorVertex(glm::vec3(-0.5f, 0.5f, 0.0f), mars::Color::red()),
@@ -178,6 +179,24 @@ int main(int argc, char* argv[]) {
         std::shared_ptr<mars::AIndexBuffer> indexBuffer = framework.getBuffersFactory()
             .createIndexBuffer(indices, "Test Index Buffer");
 
+		std::vector<mars::PositionColorTexCoordVertex> textureVertices = {
+			mars::PositionColorTexCoordVertex(glm::vec3(-0.5f, 0.5f, 0.0f), mars::Color::white(), glm::vec2(0.0f, 0.0f)),
+			 mars::PositionColorTexCoordVertex(glm::vec3(0.5f, 0.5f, 0.0f), mars::Color::white(), glm::vec2(1.0f, 0.0f)),
+			 mars::PositionColorTexCoordVertex(glm::vec3(0.5f, -0.5f, 0.0f), mars::Color::white(), glm::vec2(1.0f, 1.0f)),
+			 mars::PositionColorTexCoordVertex(glm::vec3(-0.5f, -0.5f, 0.0f), mars::Color::white(), glm::vec2(0.0f, 1.0f)),
+		};
+		std::shared_ptr<mars::AVertexBuffer> textureVertexBuffer = framework.getBuffersFactory()
+			.createVertexBuffer(
+						textureVertices,
+						mars::BufferUsage::Vertex,
+						"Test Vertex Texture Buffer");
+
+		std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+			.getContentManager()
+			.load<mars::Texture2D>("texture/uv_test.png");
+
+		texturePipeline->setTexture2D(tileMapTexture.get());
+
 		// JUST TO TEST WITH D3D11
 		framework.subscribeToUpdateEvent([&](const mars::Time time) {
 
@@ -185,7 +204,8 @@ int main(int argc, char* argv[]) {
 
 		framework.subscribeToRenderEvent([&]() {
 			//pipeline->render();
-			pipelineWithBuffer->render(*vertexBuffer, *indexBuffer);
+			// pipelineWithBuffer->render(*vertexBuffer, *indexBuffer);
+				texturePipeline->render(*textureVertexBuffer, *indexBuffer);
 		});
 		framework.runEventLoop();
 		}

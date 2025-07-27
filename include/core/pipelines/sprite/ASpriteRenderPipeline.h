@@ -6,7 +6,7 @@
 #define A_SPRITE_RENDER_PIPELINE_H
 
 
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
 

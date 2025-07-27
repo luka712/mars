@@ -6,7 +6,7 @@
 #include "Framework.h"
 #include "metal/texture/metal_texture2d.h"
 #include "sdl/texture/SDLTexture2D.h"
-#include "opengles/texture/OpenGLESTexture2D.h"
+#include "opengles/texture/opengles_texture2d.h"
 
 #if __APPLE__
 #include "metal/texture/metal_texture2d.h"

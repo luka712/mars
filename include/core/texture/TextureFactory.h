@@ -7,7 +7,7 @@
 
 #include <string>
 #include <memory>
-#include "core/texture/Texture2D.h"
+#include "core/texture/texture2d.h"
 #include "core/texture/TextureEnums.h"
 
 namespace mars {
