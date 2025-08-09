@@ -8,7 +8,7 @@
 #include <core/math/Rect.h>
 
 #include "core/math/Quad.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 
 namespace mars {
     //! The class that represents a chunk of the tile map.

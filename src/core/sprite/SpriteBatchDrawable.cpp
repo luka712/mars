@@ -8,7 +8,7 @@
 namespace mars {
     SpriteBatchDrawable::SpriteBatchDrawable(
         Framework &framework,
-        Texture2D& texture,
+        ATexture2D& texture,
         OrthographicCamera& camera,
         const size_t maxBatchSize)
         : framework(framework), camera(camera), texture(texture), maxBatchSize(maxBatchSize) {

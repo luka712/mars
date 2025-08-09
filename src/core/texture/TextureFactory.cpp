@@ -12,12 +12,16 @@
 #include "metal/texture/metal_texture2d.h"
 #endif
 
+#if _WIN32
+#include "dx11/texture/dx11_texture2d.h"
+#endif 
+
 namespace mars {
     TextureFactory::TextureFactory(Framework &framework)
         : framework(framework) {
     }
 
-    std::shared_ptr<Texture2D> TextureFactory::createTextureFromImageFile(
+    std::shared_ptr<ATexture2D> TextureFactory::createTextureFromImageFile(
         const std::string &filePath, const TextureUsage usage, const std::string &label) const {
         const std::shared_ptr<ImageData> imageData = framework.getImageLoader().load(filePath);
         ImageData &data = *imageData;
@@ -32,6 +36,11 @@ namespace mars {
             case RenderingBackend::Metal:
                 return std::make_shared<MetalTexture2D>(framework, data);
 #endif
+#if _WIN32
+            case RenderingBackend::D3D11:
+                return std::make_shared<DX11Texture2D>(framework, data);
+
+#endif 
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());
@@ -39,7 +48,7 @@ namespace mars {
         }
     }
 
-    std::shared_ptr<Texture2D> TextureFactory::createEmpty(
+    std::shared_ptr<ATexture2D> TextureFactory::createEmpty(
         const uint32_t width,
         const uint32_t height,
         const Color defaultColor,

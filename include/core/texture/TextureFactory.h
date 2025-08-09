@@ -7,7 +7,7 @@
 
 #include <string>
 #include <memory>
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/texture/TextureEnums.h"
 
 namespace mars {
@@ -25,7 +25,7 @@ namespace mars {
         //! @param usage The usage of the texture. By default, it is set to CopyDst_TextureBinding.
         //! @param label The label of the texture. By default, it is set to an empty string.
         //! @return The texture.
-        [[nodiscard]] std::shared_ptr<Texture2D> createTextureFromImageFile(
+        [[nodiscard]] std::shared_ptr<ATexture2D> createTextureFromImageFile(
             const std::string &filePath,
             TextureUsage usage = TextureUsage::CopyDst_TextureBinding,
             const std::string &label = "") const;
@@ -37,7 +37,7 @@ namespace mars {
         //! @param usage The usage of the texture. By default, it is set to CopyDst_TextureBinding.
         //! @param label The label of the texture. By default, it is set to an empty string.
         //! @return The texture.
-        [[nodiscard]] std::shared_ptr<Texture2D> createEmpty(
+        [[nodiscard]] std::shared_ptr<ATexture2D> createEmpty(
             uint32_t width,
             uint32_t height,
             Color defaultColor = Color::white(),

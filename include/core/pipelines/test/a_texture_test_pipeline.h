@@ -7,7 +7,7 @@
 
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 
 namespace mars {
     //! The test pipeline for rendering a simple mesh with position and color attributes.
@@ -19,11 +19,11 @@ namespace mars {
 
         //! Gets the texture.
         //! @return The texture 2d.
-        virtual Texture2D* getTexture2D() = 0;
+        virtual ATexture2D* getTexture2D() = 0;
 
         //! Sets the texture.
         //! @param texture The texture.
-        virtual void setTexture2D(Texture2D* texture) = 0;
+        virtual void setTexture2D(ATexture2D* texture) = 0;
 
         //! Render the triangle from the pipeline.
         //! @param vertexBuffer The vertex buffer containing the position and color attributes.

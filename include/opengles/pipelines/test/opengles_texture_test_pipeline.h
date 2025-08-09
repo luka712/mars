@@ -24,10 +24,10 @@ namespace mars
         OpenGLESTextureTestPipeline(Framework& framework);
 
         //! @copydoc ATextureTestPipeline::getTexture2D
-        Texture2D* getTexture2D() override;
+        ATexture2D* getTexture2D() override;
 
         //! @copydoc ATextureTestPipeline::setTexture2D
-        void setTexture2D(Texture2D* texture) override;
+        void setTexture2D(ATexture2D* texture) override;
 
         //! @copydoc ATextureTestPipeline::render
         void render(AVertexBuffer& vertexBuffer) override;

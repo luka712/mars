@@ -14,7 +14,7 @@ namespace mars {
 
     std::shared_ptr<SpriteFont> SpriteFontLoader::createSnowBSpriteFont(
         tinyxml2::XMLNode &fontNode,
-        const std::shared_ptr<Texture2D>& texture) const {
+        const std::shared_ptr<ATexture2D>& texture) const {
 
         tinyxml2::XMLNode *commonNode = fontNode.FirstChildElement("common");
         if (commonNode == nullptr) {
@@ -137,7 +137,7 @@ namespace mars {
             texturePath = directory + "/" + texturePath;
         }
 
-        std::shared_ptr<Texture2D> texture = framework
+        std::shared_ptr<ATexture2D> texture = framework
                 .getTextureFactory()
                 .createTextureFromImageFile(texturePath);
 

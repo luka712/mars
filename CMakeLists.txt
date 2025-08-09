@@ -80,7 +80,9 @@ add_executable(mars main.cpp
         include/core/vertex/vertex.h
         include/core/pipelines/test/a_texture_test_pipeline.h
         include/opengles/pipelines/test/opengles_texture_test_pipeline.h
-        src/opengles/pipelines/test/opengles_texture_test_pipeline.cpp)
+        include/dx11/pipelines/test/dx11_texture_test_pipeline.h
+        src/opengles/pipelines/test/opengles_texture_test_pipeline.cpp
+        include/gpu_util/dx11/dx11_util.h)
 
 # LINK
 target_link_libraries(mars

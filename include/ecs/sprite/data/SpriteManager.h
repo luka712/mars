@@ -7,7 +7,7 @@
 
 #include <string>
 #include <map>
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/sprite/game_sprite.h"
 
 namespace mars {
@@ -32,7 +32,7 @@ namespace mars {
         //! Add a sprite to the manager.
         //! @param texture The texture of the sprite.
         //! @param spriteName The name of the sprite. This is the key to the sprite.
-        void addSprite(const std::shared_ptr<Texture2D> &texture, const std::string &spriteName);
+        void addSprite(const std::shared_ptr<ATexture2D> &texture, const std::string &spriteName);
 
     private:
         Framework& framework;

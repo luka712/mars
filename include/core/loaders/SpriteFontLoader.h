@@ -33,7 +33,7 @@ namespace mars {
 
         std::shared_ptr<SpriteFont> createSnowBSpriteFont(
             tinyxml2::XMLNode &fontNode,
-            const std::shared_ptr<Texture2D>& texture) const;
+            const std::shared_ptr<ATexture2D>& texture) const;
     };
 }
 

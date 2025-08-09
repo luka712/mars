@@ -35,7 +35,7 @@ namespace mars {
         currentItemIndex++;
     }
 
-    void SDLSpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Color color) {
+    void SDLSpriteBatch::draw(ATexture2D*texture, const Rect drawRect, const Color color) {
         if (currentTexture != texture || currentItemIndex >= SDL_SPRITEBATCH_MAX_DRAW_ITEMS) {
             end();
             currentTexture = dynamic_cast<SDLTexture2D *>(texture);
@@ -55,7 +55,7 @@ namespace mars {
         currentItemIndex++;
     }
 
-    void SDLSpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Rect sourceRect, const Color color) {
+    void SDLSpriteBatch::draw(ATexture2D*texture, const Rect drawRect, const Rect sourceRect, const Color color) {
         if (currentTexture != texture || currentItemIndex >= SDL_SPRITEBATCH_MAX_DRAW_ITEMS) {
             end();
             currentTexture = dynamic_cast<SDLTexture2D *>(texture);

@@ -29,11 +29,11 @@ namespace mars {
 
         //! Get the texture of the tile map.
         //! @return The texture of the tile map.
-        [[nodiscard]] const std::shared_ptr<Texture2D> &getTexture() const { return texture; }
+        [[nodiscard]] const std::shared_ptr<ATexture2D> &getTexture() const { return texture; }
 
         //! Set the texture of the tile map.
         //! @param texture The texture of the tile map.
-        void setTexture(const std::shared_ptr<Texture2D> &texture) { this->texture = texture; }
+        void setTexture(const std::shared_ptr<ATexture2D> &texture) { this->texture = texture; }
 
         void initialize() override;
 
@@ -62,7 +62,7 @@ namespace mars {
     protected:
         RectTransform* rectTransform{};
         std::vector<TileMapChunk> chunks;
-        std::shared_ptr<Texture2D> texture;
+        std::shared_ptr<ATexture2D> texture;
     };
 }
 

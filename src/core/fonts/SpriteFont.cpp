@@ -7,7 +7,7 @@
 #include "core/fonts/SpriteFont.h"
 
 namespace mars {
-    SpriteFont::SpriteFont(const std::shared_ptr<Texture2D> &texture, float lineHeight)
+    SpriteFont::SpriteFont(const std::shared_ptr<ATexture2D> &texture, float lineHeight)
         : texture(texture), lineHeight(lineHeight) {
         state = CREATED;
     }

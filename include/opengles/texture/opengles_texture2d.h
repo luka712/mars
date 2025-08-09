@@ -8,7 +8,7 @@
 #include <string>
 #include "opengles/opengles.h"
 #include "core/log/Logger.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/data/ImageData.h"
 
 namespace mars
@@ -16,7 +16,7 @@ namespace mars
     class Framework;
 
     //! The OpenGLES implementation of the Texture2D.
-    class OpenGLESTexture2D : public Texture2D {
+    class OpenGLESTexture2D : public ATexture2D {
     public:
         //! Construct a new OpenGLESTexture2D object.
         //! @param framework The framework.
@@ -41,10 +41,10 @@ namespace mars
         GLuint texture = 0;
     };
 
-    //! Converts the @ref Texture2D to the @ref OpenGLESTexture2D
-    //! @param texture The @ref Texture2D
+    //! Converts the @ref ATexture2D to the @ref OpenGLESTexture2D
+    //! @param texture The @ref ATexture2D
     //! @returns The OpenGLESTexture2D.
-    OpenGLESTexture2D* asOpenGLESTexture(Texture2D* texture);
+    OpenGLESTexture2D* asOpenGLESTexture(ATexture2D* texture);
 }
 
 #endif //OPEN_GLES_TEXTURE2D_H

@@ -21,7 +21,7 @@ namespace mars {
         glProjectionViewMatrixLocation = OpenGLESUtil::getUniform()->getUniformLocation(glProgram, "u_projectionView");
     }
 
-    void OpenGLESSpriteRenderPipeline::setSpriteTexture(Texture2D *spriteTexture) {
+    void OpenGLESSpriteRenderPipeline::setSpriteTexture(ATexture2D*spriteTexture) {
         this->texture = asOpenGLESTexture(spriteTexture);
     }
 

@@ -11,6 +11,6 @@ if(WIN32)
         MESSAGE(WARNING "mt.exe not found - manifest embedding may fail")
     endif()
 
-    SET(WINDOWS_LIBRARIES d3d11 dxgi d3dcompiler)
+    SET(WINDOWS_LIBRARIES d3d11 dxgi d3dcompiler dxguid)
 endif()
 

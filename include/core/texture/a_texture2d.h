@@ -12,7 +12,7 @@
 namespace mars {
     //! The Texture2D class.
     //! Represents a 2D texture.
-    class Texture2D : public AContent {
+    class ATexture2D : public AContent {
     public:
         //! Get the width of the texture.
         //! @return The width of the texture.
