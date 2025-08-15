@@ -1,5 +1,8 @@
 #include "gpu_util/dx11/dx11_sampler_state_util.h"
 #include <stdexcept>
+
+#ifdef _WIN32
+
 //
 // Created by lukaa on 9.8.2025..
 //
@@ -43,3 +46,5 @@ ComPtr<ID3D11SamplerState> gpu_util::DX11SamplerStateUtil::createSamplerState(
 
     return samplerState;
 }
+
+#endif 

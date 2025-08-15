@@ -2,6 +2,8 @@
 // Created by Erkapic Luka on 11.02.25.
 //
 
+#ifdef _WIN32
+
 #include <sstream>
 #include "Framework.h"
 #include "dx11/texture/dx11_texture2d.h"
@@ -72,3 +74,6 @@ namespace mars
 	}
 
 }
+
+
+#endif 

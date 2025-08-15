@@ -10,7 +10,7 @@
 #include <string>
 #include "metal/metal.h"
 #include "core/log/Logger.h"
-#include "core/texture/Texture2D.h"
+#include "core/texture/a_texture2d.h"
 #include "core/data/ImageData.h"
 #include "metal/renderer/metal_renderer.h"
 
@@ -19,7 +19,7 @@ namespace mars
     class Framework;
 
     //! The Metal implementation of the Texture2D.
-    class MetalTexture2D : public Texture2D {
+    class MetalTexture2D : public ATexture2D {
     public:
         //! Construct a new  MetalTexture2D object.
         //! @param framework The framework.
@@ -51,10 +51,10 @@ namespace mars
         MTL::SamplerState* sampler;
     };
 
-    //! Converts the @ref Texture2D to the @ref MetalTexture2D.
-    //! @param texture The @ref Texture2D
+    //! Converts the @ref ATexture2D to the @ref MetalTexture2D.
+    //! @param texture The @ref ATexture2D
     //! @returns The MetalTexture2D.
-    MetalTexture2D* asMetalTexture(Texture2D* texture);
+    MetalTexture2D* asMetalTexture(ATexture2D* texture);
 }
 
 #endif //METAL_TEXTURE2D_H

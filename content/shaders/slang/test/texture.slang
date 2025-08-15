@@ -26,7 +26,7 @@ Texture2D t_texture;
 SamplerState s_sampler;
 
 [shader("fragment")]
-float4 main_vf(VSOutput input) : SV_TARGET
+float4 main_fs(VSOutput input) : SV_TARGET
 {
     // texture
     float4 texture = t_texture.Sample(s_sampler, input.texCoord);

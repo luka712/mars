@@ -2,6 +2,8 @@
 // Created by Erkapic Luka on 9.8.2025.
 //
 
+#ifdef _WIN32
+
 #ifndef DX11_SHADER_RESOURCE_VIEW_UTIL_H
 #define DX11_SHADER_RESOURCE_VIEW_UTIL_H
 
@@ -42,3 +44,5 @@ namespace gpu_util {
 } // namespace gpu_util
 
 #endif //DX11_SHADER_RESOURCE_VIEW_UTIL_H
+
+#endif 

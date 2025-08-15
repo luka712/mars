@@ -2,6 +2,8 @@
 // Created by lukaa on 9.8.2025..
 //
 
+#ifdef _WIN32
+
 #ifndef DX11_SAMPLER_STATE_UTIL_H
 #define DX11_SAMPLER_STATE_UTIL_H
 
@@ -44,3 +46,5 @@ namespace gpu_util {
 	};
 }
 #endif //DX11_SAMPLER_STATE_UTIL_H
+
+#endif 

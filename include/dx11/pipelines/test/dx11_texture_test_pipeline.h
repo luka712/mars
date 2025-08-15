@@ -37,6 +37,7 @@ namespace mars
         //! @copydoc ATextureTestPipeline::render
         void render(AVertexBuffer& vertexBuffer, AIndexBuffer& indexBuffer) override;
 
+        //! @copydoc ATextureTestPipeline::destroy
         void destroy() override;
     private:
         Framework& framework;
@@ -50,7 +51,6 @@ namespace mars
         ComPtr<ID3D11VertexShader> vertexShader;
         ComPtr<ID3D11PixelShader> pixelShader;
         ComPtr<ID3D11InputLayout> inputLayout;
-
 
         void createShaders(ComPtr<ID3D10Blob> vertexBlob);
         void createInputLayout(ComPtr<ID3D10Blob> vertexBlob);

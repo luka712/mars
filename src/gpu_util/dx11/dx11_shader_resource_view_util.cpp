@@ -1,6 +1,7 @@
 #include "gpu_util/dx11/dx11_shader_resource_view_util.h"
 #include <stdexcept>
 
+#ifdef _WIN32
 
 ComPtr<ID3D11ShaderResourceView> gpu_util::DX11ShaderResourceViewUtil::createTexure2DView(
     ComPtr<ID3D11Device> device, 
@@ -36,3 +37,5 @@ ComPtr<ID3D11ShaderResourceView> gpu_util::DX11ShaderResourceViewUtil::createTex
 
     return shaderResourceView;
 }
+
+#endif

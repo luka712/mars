@@ -14,6 +14,7 @@
 #if __APPLE__
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
 #include "metal/pipelines/test/metal_position_color_test_pipeline.h"
+#include "metal/pipelines/test/metal_texture_test_pipeline.h"
 #endif
 
 #if _WIN32
@@ -100,7 +101,7 @@ namespace mars {
 		switch (framework.getRenderingBackend()) {
 #if __APPLE__
 			case RenderingBackend::Metal:
-				return std::make_shared<MetalPositionColorTestPipeline>(framework);
+				return std::make_shared<MetalTextureTestPipeline>(framework);
 #endif
 #if _WIN32
 			case RenderingBackend::D3D11:

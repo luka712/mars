@@ -1,32 +1,7 @@
 Loading dependency information for 164 packages...
 Detecting compiler hash for triplet arm64-osx...
-Compiler found: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+Compiler found: /usr/bin/c++
 The following packages are already installed:
-  * boost-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d6e23ac8a35da1fa74839bde3a863d279a6059a3
-  * boost-cmake:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1a36be4443ec1c0be66984a1e82914a5181b37b1
-  * boost-config:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@08220601e68293ce84acafc748856e45db90b6e0
-  * boost-core:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@4c65d7305461035adb983409910487493fbc3c17
-  * boost-headers:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@89fca00b9db236eb0cb0ea97b9db246c2db7b3e1
-  * boost-optional:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1c8c7aa2e1a750a5faf818b3bc8e0491f415b489
-  * boost-static-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@2cb92121f4df9c9b122c4837cb8e41ac1f4800b6
-  * boost-throw-exception:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@cce052773fa40ae37c9497cf38739945720cf104
-  * boost-type-traits:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@5c25a4ff2c1fd4d4eb993dfed7cba2b32fd020a6
-  * boost-uninstall:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@3b2f9f82076f2d15124a4e449700848c25bcadcc
-    box2d:arm64-osx@2.4.1#3 -- git+https://github.com/microsoft/vcpkg@bef68937d8b4101d0df330a399a7fc043f7ec5e5
-    entt:arm64-osx@3.15.0 -- git+https://github.com/microsoft/vcpkg@b27478e44a27785f939170cfb8c910d87194b289
-  * fmt:arm64-osx@11.0.2#1 -- git+https://github.com/microsoft/vcpkg@07a73a7565e5de9eb42e90c16c133bdfdfebbcda
-    glm:arm64-osx@1.0.1#3 -- git+https://github.com/microsoft/vcpkg@f8b09027afe97c717e95bd81d1d4f37c057d1c78
-    lua:arm64-osx@5.4.7 -- git+https://github.com/microsoft/vcpkg@97783a4c337df419c0a6a75e9599545c54259d86
-    sdl3:arm64-osx@3.2.14 -- git+https://github.com/microsoft/vcpkg@4036f9ab31a96a110f90c2bb754ef1c0a938d160
-    sol2:arm64-osx@3.5.0 -- git+https://github.com/microsoft/vcpkg@1335e18b0ecb699219ed36d3cad23309181d34a7
-    spdlog:arm64-osx@1.15.3 -- git+https://github.com/microsoft/vcpkg@c2b47286b0759373acecdfaa3be4219711f6d059
-    tinyxml2:arm64-osx@11.0.0 -- git+https://github.com/microsoft/vcpkg@642c5abe1171318729a73bdf95ce6c2ca58e079c
-  * vcpkg-boost:arm64-osx@2025-03-29 -- git+https://github.com/microsoft/vcpkg@858b0333b773b5650c3f19ef271e3205542d7ceb
-  * vcpkg-cmake:arm64-osx@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
-  * vcpkg-cmake-config:arm64-osx@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
-The following packages will be rebuilt:
-    sdl3-image[core,png]:arm64-osx@3.2.4 -- git+https://github.com/microsoft/vcpkg@a92c8e50efec244d45c4152ff27b0c2dd2666400
-The following packages will be built and installed:
     boost:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@b90f6b0ab269ee223ec11e021b558d708183aa74
   * boost-accumulators:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@594b00177763d338a42298b0c9a3f1b241dfc040
   * boost-algorithm:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ad439228ad08c78b1db8a59d33f36a53cb2da963
@@ -34,6 +9,7 @@ The following packages will be built and installed:
   * boost-any:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d58b4fbb3de4aa97fcbd4ddede97df239656d4e4
   * boost-array:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ac9d6b735393768df04f6dafaf12d503cb133e6d
   * boost-asio:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@923e111ca4b1138efb1b58499edf5f04797de72f
+  * boost-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d6e23ac8a35da1fa74839bde3a863d279a6059a3
   * boost-assign:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@e1ae89aa9345ef26f7d6f608339be37a4ab512c5
   * boost-atomic:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@9b2f531f06494c18e7aea107338d1ebcd986208f
   * boost-beast:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1928ac98dd3771b4210550c980e3cfc259d31a0f
@@ -43,16 +19,19 @@ The following packages will be built and installed:
   * boost-charconv:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@774cea931cf10e80061780d8467e7ea5f494ca03
   * boost-chrono:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@bb43f877d11b220cf9156794ba14b203a97c5233
   * boost-circular-buffer:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@98bd9858a5dc6e01bad26df91cf86c9841d30d0e
+  * boost-cmake:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1a36be4443ec1c0be66984a1e82914a5181b37b1
   * boost-cobalt:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@82eaf555e3e7c48fe645828fe8e20726e23d04a4
   * boost-compat:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@83621f514c2950756baa2deac824f0756ebc2ea4
   * boost-compute:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@7865676d2afdb8e54c20e59363b286fe97a8f372
   * boost-concept-check:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@c0ca6d1964dab6ed90d303669d4b7f793984c51f
+  * boost-config:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@08220601e68293ce84acafc748856e45db90b6e0
   * boost-container:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@718d272c732f63acb5fd80814fc85563f171c735
   * boost-container-hash:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ea1718341f6ab05a1e8de70803f2217501121b22
   * boost-context:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@8d20de9b1b6f8a9a913d4b6356fd23fec0c906d6
   * boost-contract:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@2ac523613857e8bb1ac1bdcd0e922feaf69ab6b4
   * boost-conversion:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@c42652f6df8bd8617a314dfe5fe4c2faf1a7dedd
   * boost-convert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1459be2057e0dee300dec85b407ee4dd65784180
+  * boost-core:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@4c65d7305461035adb983409910487493fbc3c17
   * boost-coroutine:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@c842dd2fae0ba041bb0eb5e4da122d800e6f8b68
   * boost-coroutine2:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@f5da601cbd763f3c09d88aff2ff7cdf77717bf4b
   * boost-crc:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d3ec31c09d6eaffb7080b0fd6c2eab151f8bf529
@@ -77,6 +56,7 @@ The following packages will be built and installed:
   * boost-graph:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@69ef36141b8d456f8bc7198f849b012f546b1891
   * boost-hana:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d4c9c91d9bde0ce5c5d3224bd45df5a19567f637
   * boost-hash2:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@a5d3f68267341dcfef8b57681ec099c017926c51
+  * boost-headers:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@89fca00b9db236eb0cb0ea97b9db246c2db7b3e1
   * boost-heap:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@d5aee73175815d261e6b7a0802da2cf6b91f54f7
   * boost-histogram:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@8eaef044cf8a40d9147703e1818d54d72161e5d9
   * boost-hof:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@99e18b88087cb71b680733b9796b81b2173efb48
@@ -112,6 +92,7 @@ The following packages will be built and installed:
   * boost-nowide:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ce9752f87dc2bdb61f7167678034feef7bc69afa
   * boost-numeric-conversion:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@79af9270e64b3948e4fe3c0c911614c090450bae
   * boost-odeint:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@5e45cdd18f61619b5d782afb1c139b4535a6b160
+  * boost-optional:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1c8c7aa2e1a750a5faf818b3bc8e0491f415b489
   * boost-outcome:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@867b39e53e905db43b6efbabed863a7af2c22c94
   * boost-parameter:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@86e2c7b42f18203836314d327e95b3ab8dab7dab
   * boost-parameter-python:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ce88a5d5b9416f6888b2d76d95f2c9816b26e74b
@@ -147,19 +128,23 @@ The following packages will be built and installed:
   * boost-spirit:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@67ea00f2df8f137abbe58fb5836287d0ab0a764a
   * boost-stacktrace[backtrace,core]:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@fe537a001e74482c1950ac8408f81e968e17e428
   * boost-statechart:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@4059bd01e275de4c5cedbde19c8189b5b50e1fd8
+  * boost-static-assert:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@2cb92121f4df9c9b122c4837cb8e41ac1f4800b6
   * boost-static-string:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@83065a30423a1c44652bd30ad85d7a44cf77a416
   * boost-stl-interfaces:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@ae772affb8321eb7661023f01a141f23f00273bf
   * boost-system:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@737c0b0cf6378ebcf004985963d7d5503b4a0cce
   * boost-test:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@836cf9db1b6df94db3f1ea530b57d73409fd5ec2
   * boost-thread:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@f83f7bb80a58cdc72756fe3ecb21886788a3089b
+  * boost-throw-exception:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@cce052773fa40ae37c9497cf38739945720cf104
   * boost-timer:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@f77d8cbc6a589921d2b65e44dcc63baf93dc17c9
   * boost-tokenizer:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@221203f5ced5b51f2908b045dcacc1e9b5140b33
   * boost-tti:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@16f4b260d3d07858c48fc5cb2b6339daea53fa29
   * boost-tuple:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@55ab535f246ac9b26b4a76d5182fc593914bd691
   * boost-type-erasure:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@835c59e3ae83ab2a8acd8a146616a72868cc576b
   * boost-type-index:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@1c20e548a4ac12208597cbbb20df76f23ab62261
+  * boost-type-traits:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@5c25a4ff2c1fd4d4eb993dfed7cba2b32fd020a6
   * boost-typeof:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@75c8940f03c4002bb502d869a77288d59081d026
   * boost-ublas:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@c6db0ce4fce9ad23e8df1e4e86b2b3ad0821f6ff
+  * boost-uninstall:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@3b2f9f82076f2d15124a4e449700848c25bcadcc
   * boost-units:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@517d32ac4dcac542b0d156cc8953eb5f88bcec8f
   * boost-unordered:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@0c41c1a7f1cbf9fa1c6f2c88050fc5a4100fc0de
   * boost-url:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@f14f51d7a6af47b42b31114d4e7680a7d834f13b
@@ -172,294 +157,110 @@ The following packages will be built and installed:
   * boost-winapi:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@8b3ab1e64c2ac905bd598e30fba1101c5b8a2e72
   * boost-xpressive:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@0544ad4c62b2b15941af4949912282d87f79777c
   * boost-yap:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@647e7e94490ee46f3b669a97becf2b63245d6b74
+    box2d:arm64-osx@2.4.1#3 -- git+https://github.com/microsoft/vcpkg@bef68937d8b4101d0df330a399a7fc043f7ec5e5
   * bzip2[core,tool]:arm64-osx@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+    entt:arm64-osx@3.15.0 -- git+https://github.com/microsoft/vcpkg@b27478e44a27785f939170cfb8c910d87194b289
   * expat:arm64-osx@2.7.1 -- git+https://github.com/microsoft/vcpkg@37702e8740157c39e52d0d254487c1811b7e1d7c
+  * fmt:arm64-osx@11.0.2#1 -- git+https://github.com/microsoft/vcpkg@07a73a7565e5de9eb42e90c16c133bdfdfebbcda
   * gettext:arm64-osx@0.22.5#2 -- git+https://github.com/microsoft/vcpkg@26b118cdddb84cdc2e8cc6b0330ca39e2799055b
   * gettext-libintl:arm64-osx@0.22.5#3 -- git+https://github.com/microsoft/vcpkg@89734e29d2753df206cdd0e45f2f6c9b3f3fbc4f
+    glm:arm64-osx@1.0.1#3 -- git+https://github.com/microsoft/vcpkg@f8b09027afe97c717e95bd81d1d4f37c057d1c78
   * libbacktrace:arm64-osx@2024-11-30 -- git+https://github.com/microsoft/vcpkg@c231fe43ac03b2250f605fac80e2cc80eb025bb8
   * libffi:arm64-osx@3.4.8 -- git+https://github.com/microsoft/vcpkg@5fd30ba6f17570ca9900212dbaa3a6179d2dbd64
   * libiconv:arm64-osx@1.18#1 -- git+https://github.com/microsoft/vcpkg@c7ce740f9836b013ac115182995c89efca3327c9
   * liblzma:arm64-osx@5.8.1 -- git+https://github.com/microsoft/vcpkg@55eb3803f1d0388aebca8fd293963721bbf0092c
   * libpng:arm64-osx@1.6.47 -- git+https://github.com/microsoft/vcpkg@2e16dddb1925ae47b5f1ea95d16d6d78f2a711b8
+    lua:arm64-osx@5.4.7 -- git+https://github.com/microsoft/vcpkg@97783a4c337df419c0a6a75e9599545c54259d86
   * openssl:arm64-osx@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@6819498ce6c5c3e379b3ffbd2b5d93e3fc271933
   * python3[core,extensions]:arm64-osx@3.12.9 -- git+https://github.com/microsoft/vcpkg@49a5d9f6c71382e9eff7135d12d0d074af0540eb
+    sdl3:arm64-osx@3.2.14 -- git+https://github.com/microsoft/vcpkg@4036f9ab31a96a110f90c2bb754ef1c0a938d160
+    sdl3-image[core,png]:arm64-osx@3.2.4 -- git+https://github.com/microsoft/vcpkg@a92c8e50efec244d45c4152ff27b0c2dd2666400
+    sol2:arm64-osx@3.5.0 -- git+https://github.com/microsoft/vcpkg@1335e18b0ecb699219ed36d3cad23309181d34a7
+    spdlog:arm64-osx@1.15.3 -- git+https://github.com/microsoft/vcpkg@c2b47286b0759373acecdfaa3be4219711f6d059
   * sqlite3[core,json1]:arm64-osx@3.49.2 -- git+https://github.com/microsoft/vcpkg@a337f5fe100f83026072765ea63a8776f984f6fd
     stb:arm64-osx@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinyxml2:arm64-osx@11.0.0 -- git+https://github.com/microsoft/vcpkg@642c5abe1171318729a73bdf95ce6c2ca58e079c
+  * vcpkg-boost:arm64-osx@2025-03-29 -- git+https://github.com/microsoft/vcpkg@858b0333b773b5650c3f19ef271e3205542d7ceb
+  * vcpkg-cmake:arm64-osx@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:arm64-osx@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
   * vcpkg-cmake-get-vars:arm64-osx@2024-09-22 -- git+https://github.com/microsoft/vcpkg@f23148add155147f3d95ae622d3b0031beb25acf
   * vcpkg-get-python:arm64-osx@2025-02-09 -- git+https://github.com/microsoft/vcpkg@0a0384810888b341ad84b0e08559481ff9a82150
   * vcpkg-make:arm64-osx@2025-04-25 -- git+https://github.com/microsoft/vcpkg@04845a7307c8b44a551bebca82a584470dcd5f1c
   * zlib:arm64-osx@1.3.1 -- git+https://github.com/microsoft/vcpkg@3f05e04b9aededb96786a911a16193cdb711f0c9
   * zstd:arm64-osx@1.5.7 -- git+https://github.com/microsoft/vcpkg@31b7320fab13790c6861cb3c2d50dc8f60ca3602
-Additional packages (*) will be modified to complete this operation.
-Restored 81 package(s) from /Users/lerkapic/.cache/vcpkg/archives in 1.4 s. Use --debug to see more details.
-Removing 1/165 sdl3-image:arm64-osx
-Elapsed time to handle sdl3-image:arm64-osx: 3.73 ms
-Installing 2/165 boost-mp11:arm64-osx@1.88.0...
-Elapsed time to handle boost-mp11:arm64-osx: 20.7 ms
-boost-mp11:arm64-osx package ABI: 9c08b8eea4215b907eff90af514b536d7072c4dde1087fb9d64645075d9435ec
-Installing 3/165 boost-describe:arm64-osx@1.88.0...
-Elapsed time to handle boost-describe:arm64-osx: 8.88 ms
-boost-describe:arm64-osx package ABI: 5ffc3fb1fa595762e3e754b57039d6ab44ce88bbae066dd80232657abbb2b3bb
-Installing 4/165 boost-container-hash:arm64-osx@1.88.0...
-Elapsed time to handle boost-container-hash:arm64-osx: 11.5 ms
-boost-container-hash:arm64-osx package ABI: 7fae241760a646167fba9420a8c279969131b4ba880125951b3989b7dc4f501c
-Installing 5/165 boost-type-index:arm64-osx@1.88.0...
-Elapsed time to handle boost-type-index:arm64-osx: 7.74 ms
-boost-type-index:arm64-osx package ABI: be0cc82ab794ef3d869151c0ee459eed1522676d3cf64cb9aae0c2e9933c4d86
-Installing 6/165 boost-preprocessor:arm64-osx@1.88.0...
-Elapsed time to handle boost-preprocessor:arm64-osx: 141 ms
-boost-preprocessor:arm64-osx package ABI: 4830281cd4c6b0c9c3673a4dd0667c702de48a429ff4e8a7d15f6b25c0842749
-Installing 7/165 boost-tuple:arm64-osx@1.88.0...
-Elapsed time to handle boost-tuple:arm64-osx: 4.38 ms
-boost-tuple:arm64-osx package ABI: 3ab9942e291b84473da89e2a32c75bd40a9784a761457c4f3bcfb9c996a1206a
-Installing 8/165 boost-io:arm64-osx@1.88.0...
-Elapsed time to handle boost-io:arm64-osx: 5.47 ms
-boost-io:arm64-osx package ABI: bd1a242fe9869fb4fe23b48a245887daf49afd4c566b27c033cb296d0da00a7a
-Installing 9/165 boost-utility:arm64-osx@1.88.0...
-Elapsed time to handle boost-utility:arm64-osx: 10.4 ms
-boost-utility:arm64-osx package ABI: fedba2108665539510f3e8a8fcd1ec1c66e79f0298c57efc1494f9947094d740
-Installing 10/165 boost-predef:arm64-osx@1.88.0...
-Elapsed time to handle boost-predef:arm64-osx: 44.7 ms
-boost-predef:arm64-osx package ABI: 6129d12c52dab083de43d94b2f22ab99fe4865c6ec44e818e7c9e808374711fd
-Installing 11/165 boost-mpl:arm64-osx@1.88.0...
-Elapsed time to handle boost-mpl:arm64-osx: 311 ms
-boost-mpl:arm64-osx package ABI: 0c57533a21cf61ac033f39878b447391618f32139e9b2739b15623c5ce844e35
-Installing 12/165 boost-typeof:arm64-osx@1.88.0...
-Elapsed time to handle boost-typeof:arm64-osx: 9.38 ms
-boost-typeof:arm64-osx package ABI: 5ad84cadc7af56fcf720c37a670f7cfa891ca13a2fb5cafebd0c0c90599cb28e
-Installing 13/165 boost-detail:arm64-osx@1.88.0...
-Elapsed time to handle boost-detail:arm64-osx: 9.7 ms
-boost-detail:arm64-osx package ABI: 937f0cb8d43415324659b79fd64132235d0e20f6891abba3d2529fe550f65e40
-Installing 14/165 boost-function-types:arm64-osx@1.88.0...
-Elapsed time to handle boost-function-types:arm64-osx: 23.1 ms
-boost-function-types:arm64-osx package ABI: 67f36ae6042d69cdb8f4fe49471d5f28866429822eaa88fcd10e8c4374b2fb5f
-Installing 15/165 boost-bind:arm64-osx@1.88.0...
-Elapsed time to handle boost-bind:arm64-osx: 32.3 ms
-boost-bind:arm64-osx package ABI: 58b258d8061d4537806b58ff1d2666be22d71e14880cedef5fa16aff36b56a69
-Installing 16/165 boost-function:arm64-osx@1.88.0...
-Elapsed time to handle boost-function:arm64-osx: 11.1 ms
-boost-function:arm64-osx package ABI: b10cd9229d0baeb17f69cc96ded7064d84c522777485cecdb32e5ae129936888
-Installing 17/165 boost-functional:arm64-osx@1.88.0...
-Elapsed time to handle boost-functional:arm64-osx: 15.2 ms
-boost-functional:arm64-osx package ABI: 4ac679fc06fc7761de001f233c59c3d009b535bd23c7f2a8dd3e0caede3f9abb
-Installing 18/165 boost-fusion:arm64-osx@1.88.0...
-Elapsed time to handle boost-fusion:arm64-osx: 269 ms
-boost-fusion:arm64-osx package ABI: 018c3f4df2d45873566fee82b89410a2cca92a7e1250b9040a702d57bc850310
-Installing 19/165 boost-hana:arm64-osx@1.88.0...
-Elapsed time to handle boost-hana:arm64-osx: 147 ms
-boost-hana:arm64-osx package ABI: 2cfcaa8cead2f60ac75ee61806e0e591abf5d88ff32caf092e46b5bb741e590c
-Installing 20/165 boost-yap:arm64-osx@1.88.0...
-Elapsed time to handle boost-yap:arm64-osx: 7.04 ms
-boost-yap:arm64-osx package ABI: 2ec735b4e0e646fa02d3c7d9e156037cff7d63155a09e8922f5f3fe642207e5f
-Installing 21/165 boost-integer:arm64-osx@1.88.0...
-Elapsed time to handle boost-integer:arm64-osx: 7.09 ms
-boost-integer:arm64-osx package ABI: 08242a4f203bee368517fd35df82047b8dc8019a8fa5780fae134aec19506344
-Installing 22/165 boost-variant:arm64-osx@1.88.0...
-Elapsed time to handle boost-variant:arm64-osx: 13 ms
-boost-variant:arm64-osx package ABI: 9766bb163b1dd4fb3267986109f53ace67bdad028b4a4537806f509e0b526edb
-Installing 23/165 boost-unordered:arm64-osx@1.88.0...
-Elapsed time to handle boost-unordered:arm64-osx: 19.5 ms
-boost-unordered:arm64-osx package ABI: 3c3263c4ce0b15a9bcdd1a23e3d3021be47bcc3e11140b23b9d2b32cb4c566f3
-Installing 24/165 boost-winapi:arm64-osx@1.88.0...
-Elapsed time to handle boost-winapi:arm64-osx: 32.8 ms
-boost-winapi:arm64-osx package ABI: 879e3dd5b7accde67b0b9a2ef1974dfdfe233d26b998fe9882c1b06c972e2d7e
-Installing 25/165 boost-variant2:arm64-osx@1.88.0...
-Elapsed time to handle boost-variant2:arm64-osx: 5.25 ms
-boost-variant2:arm64-osx package ABI: a7adfd3654c7e4d6237411e2b6be415aae37b98d854f847b163a150000f32140
-Installing 26/165 boost-system:arm64-osx@1.88.0...
-Elapsed time to handle boost-system:arm64-osx: 14.6 ms
-boost-system:arm64-osx package ABI: 07f173b461c4eae4bba662278f3616850a1209ec758745a6f1da9eee2d502d72
-Installing 27/165 boost-smart-ptr:arm64-osx@1.88.0...
-Elapsed time to handle boost-smart-ptr:arm64-osx: 28.6 ms
-boost-smart-ptr:arm64-osx package ABI: a93d3a233b12c110f2e6ba5a5b37f50275f1fd1ec3d58970621af09707c07602
-Installing 28/165 boost-move:arm64-osx@1.88.0...
-Elapsed time to handle boost-move:arm64-osx: 15.4 ms
-boost-move:arm64-osx package ABI: 2b9eb8e9a9072ef154e0ccf64f1d1c384a315984744b6c7bc26dae415259be23
-Installing 29/165 boost-exception:arm64-osx@1.88.0...
-Elapsed time to handle boost-exception:arm64-osx: 10.7 ms
-boost-exception:arm64-osx package ABI: 960383a4b8121a09dc109d5cc098df2a7a32a75db293ab0af7a31a3ca6587951
-Installing 30/165 boost-concept-check:arm64-osx@1.88.0...
-Elapsed time to handle boost-concept-check:arm64-osx: 8.36 ms
-boost-concept-check:arm64-osx package ABI: f775e822bace8e21a1680353f87eb28e28c711a53c54fae6d8c349c38731233b
-Installing 31/165 boost-iterator:arm64-osx@1.88.0...
-Elapsed time to handle boost-iterator:arm64-osx: 15.3 ms
-boost-iterator:arm64-osx package ABI: 02c4762f96de893d89b697fb33f8f0d4becdbb8ea2aa1b22b0603c0d82e65eb9
-Installing 32/165 boost-tokenizer:arm64-osx@1.88.0...
-Elapsed time to handle boost-tokenizer:arm64-osx: 4.61 ms
-boost-tokenizer:arm64-osx package ABI: 67c06850eea3f4658e729fafa5f3b8fafe6079a2a6d71ac2199f2b3d2540e082
-Installing 33/165 boost-regex:arm64-osx@1.88.0...
-Elapsed time to handle boost-regex:arm64-osx: 29.1 ms
-boost-regex:arm64-osx package ABI: 69ebb89df3114a3d33a21fa3d528dffbddf7adce54823fac67f95dc8b465cd1d
-Installing 34/165 boost-conversion:arm64-osx@1.88.0...
-Elapsed time to handle boost-conversion:arm64-osx: 4.44 ms
-boost-conversion:arm64-osx package ABI: 3e00828e32d3e4fa3fddb1e416393155b5f764040e3ab047f60ade307c52bc1e
-Installing 35/165 boost-array:arm64-osx@1.88.0...
-Elapsed time to handle boost-array:arm64-osx: 4.17 ms
-boost-array:arm64-osx package ABI: d755c4f58aa7ea80c38d955de7aa04ea3d643795e3a767e27dfcdb8b7d7c6453
-Installing 36/165 boost-range:arm64-osx@1.88.0...
-Elapsed time to handle boost-range:arm64-osx: 41.9 ms
-boost-range:arm64-osx package ABI: ef4b0d53e1bd33641bc2550ab1af8d64046d0119a5f05cf2ba0c69db020e356c
-Installing 37/165 boost-numeric-conversion:arm64-osx@1.88.0...
-Elapsed time to handle boost-numeric-conversion:arm64-osx: 10.2 ms
-boost-numeric-conversion:arm64-osx package ABI: 79046f699a963e31fa384180e486d18dadafb36c207e01ad5ab8cd4e95274edc
-Installing 38/165 boost-intrusive:arm64-osx@1.88.0...
-Elapsed time to handle boost-intrusive:arm64-osx: 28.2 ms
-boost-intrusive:arm64-osx package ABI: 4d9c64a6b0f5e5232756a6e9c8831e20916f0c5acf20682b983b3d9cad54bbba
-Installing 39/165 boost-container:arm64-osx@1.88.0...
-Elapsed time to handle boost-container:arm64-osx: 29 ms
-boost-container:arm64-osx package ABI: 76dd5fb0fbd92f27e972f88094bd81ab045d002812dec446dd2c6506bda22810
-Installing 40/165 boost-lexical-cast:arm64-osx@1.88.0...
-Elapsed time to handle boost-lexical-cast:arm64-osx: 8.19 ms
-boost-lexical-cast:arm64-osx package ABI: 238f004dc2a949a7351eeba736a5882eb3f8f4151582493ec3d79d4b19e497f2
-Installing 41/165 boost-algorithm:arm64-osx@1.88.0...
-Elapsed time to handle boost-algorithm:arm64-osx: 24.8 ms
-boost-algorithm:arm64-osx package ABI: bab2fe74ff7e5568938d86f6aaa54e669c4dda326fecf8de3118102f2fa0039e
-Installing 42/165 boost-date-time:arm64-osx@1.88.0...
-Elapsed time to handle boost-date-time:arm64-osx: 31.3 ms
-boost-date-time:arm64-osx package ABI: d665980c0dc973bac26149bcaa0aad370bfb222800551af5fdb879ca400cbc05
-Installing 43/165 boost-ratio:arm64-osx@1.88.0...
-Elapsed time to handle boost-ratio:arm64-osx: 6.47 ms
-boost-ratio:arm64-osx package ABI: b0afd98acf16cc6695c52d86f6f10d1f4e2bb1bdc5bbeed6b60e1a0a23953878
-Installing 44/165 boost-chrono:arm64-osx@1.88.0...
-Elapsed time to handle boost-chrono:arm64-osx: 18.8 ms
-boost-chrono:arm64-osx package ABI: 73a58f1af654cbea5a1570d05f7b38acd9d71a22a7a2b78ebd71ef2ecfbff534
-Installing 45/165 boost-align:arm64-osx@1.88.0...
-Elapsed time to handle boost-align:arm64-osx: 15.7 ms
-boost-align:arm64-osx package ABI: 1ff5ecc78d5343b9184525d7056470edf8697377f7ac6379843a2b97c3efe2df
-Installing 46/165 boost-atomic:arm64-osx@1.88.0...
-Elapsed time to handle boost-atomic:arm64-osx: 42.5 ms
-boost-atomic:arm64-osx package ABI: a2033845ad4865574448d369e0361528825c64d62a2a919e9b038c180691e818
-Installing 47/165 boost-thread:arm64-osx@1.88.0...
-Elapsed time to handle boost-thread:arm64-osx: 45.7 ms
-boost-thread:arm64-osx package ABI: 53e282930a38ef3472f3571a26472b212fa0a89481a9df8e5089d92dea19ed59
-Installing 48/165 boost-proto:arm64-osx@1.88.0...
-Elapsed time to handle boost-proto:arm64-osx: 40.9 ms
-boost-proto:arm64-osx package ABI: ada26c13a9cd6704e8cc06be6bf2400fa365cd8db52c42ea2a7a456efcea4521
-Installing 49/165 boost-pool:arm64-osx@1.88.0...
-Elapsed time to handle boost-pool:arm64-osx: 8.58 ms
-boost-pool:arm64-osx package ABI: b17ec5190753641cc8b49c0128a102d8fa4b09b8be2060317f5f02166ea027e4
-Installing 50/165 boost-phoenix:arm64-osx@1.88.0...
-Elapsed time to handle boost-phoenix:arm64-osx: 112 ms
-boost-phoenix:arm64-osx package ABI: b7e85bff573d27f8512487d52ffb5c2452d484620fc0c33b7f4a7e311d261b0e
-Installing 51/165 boost-endian:arm64-osx@1.88.0...
-Elapsed time to handle boost-endian:arm64-osx: 8.61 ms
-boost-endian:arm64-osx package ABI: b10a8ec6c365b81a78bd95596e4c437653bf3cd8b6f76826cf6ee15fb7238b54
-Installing 52/165 boost-spirit:arm64-osx@1.88.0...
-Elapsed time to handle boost-spirit:arm64-osx: 265 ms
-boost-spirit:arm64-osx package ABI: 4e29d6a6d391b3e3f3e83251cac42be732badcf5218fe74489b2508e96b430a9
-Installing 53/165 boost-xpressive:arm64-osx@1.88.0...
-Elapsed time to handle boost-xpressive:arm64-osx: 35.5 ms
-boost-xpressive:arm64-osx package ABI: 0c286a900a3069c757a08ecb6112c786347520ae485c8be06d8fdb3031235dd3
-Installing 54/165 boost-serialization:arm64-osx@1.88.0...
-Elapsed time to handle boost-serialization:arm64-osx: 87.3 ms
-boost-serialization:arm64-osx package ABI: 023d6f55af29a2c38ef6b7710e702a4a425ec648ef531a472312625b17d1d23e
-Installing 55/165 boost-multi-index:arm64-osx@1.88.0...
-Elapsed time to handle boost-multi-index:arm64-osx: 26.2 ms
-boost-multi-index:arm64-osx package ABI: 5713187a6d151aea0e5c90f366dde93db569b6ff36fc1bdac3a52909846daf1d
-Installing 56/165 boost-format:arm64-osx@1.88.0...
-Elapsed time to handle boost-format:arm64-osx: 10.6 ms
-boost-format:arm64-osx package ABI: 5d95a9b2c9def4bc56bd247f6a6ca4c7a2c9952fec17f1dd1570d165e958c2b2
-Installing 57/165 boost-scope:arm64-osx@1.88.0...
-Elapsed time to handle boost-scope:arm64-osx: 12 ms
-boost-scope:arm64-osx package ABI: 21ce2f1ad1745774c9589e690280e437837ec2de7d0bdb4c87957cfde3325d8e
-Installing 58/165 boost-filesystem:arm64-osx@1.88.0...
-Elapsed time to handle boost-filesystem:arm64-osx: 10.8 ms
-boost-filesystem:arm64-osx package ABI: c79c7cd53d513401ec7b7ac66d74a10644be7dd6ee56eea3762e0e8f024c3cf1
-Installing 59/165 boost-wave:arm64-osx@1.88.0...
-Elapsed time to handle boost-wave:arm64-osx: 21.6 ms
-boost-wave:arm64-osx package ABI: 6df4ee567c1ecc12eb0078feaa926a48e01c2f2ad235e661824188fcb85b8823
-Installing 60/165 boost-vmd:arm64-osx@1.88.0...
-Elapsed time to handle boost-vmd:arm64-osx: 42.7 ms
-boost-vmd:arm64-osx package ABI: 3da102b30a49a0359265b38e86d6b0d7dfb2a18ebc6683cf4374b65445ae62a1
-Installing 61/165 boost-uuid:arm64-osx@1.88.0...
-Elapsed time to handle boost-uuid:arm64-osx: 14.1 ms
-boost-uuid:arm64-osx package ABI: 04ca2c7451b48b0f233b53663d6d5a800b44fa9b3abb07af48d6dd87b4257806
-Installing 62/165 boost-url:arm64-osx@1.88.0...
-Elapsed time to handle boost-url:arm64-osx: 37.4 ms
-boost-url:arm64-osx package ABI: 65c69c4398a48b1aa30956e6c9fabea1a77feeb9360e6857bb502321309db624
-Installing 63/165 boost-dynamic-bitset:arm64-osx@1.88.0...
-Elapsed time to handle boost-dynamic-bitset:arm64-osx: 7.02 ms
-boost-dynamic-bitset:arm64-osx package ABI: 9d09bc107412217b0a803b1e7a1506ae1defdd97b272502404d0321bcd7f7991
-Installing 64/165 boost-random:arm64-osx@1.88.0...
-Elapsed time to handle boost-random:arm64-osx: 27.1 ms
-boost-random:arm64-osx package ABI: 9ec12e6bee89427ed1bd126ad515181cae3a5804afd1123245f527188eee5ba8
-Installing 65/165 boost-math:arm64-osx@1.88.0...
-Elapsed time to handle boost-math:arm64-osx: 126 ms
-boost-math:arm64-osx package ABI: 45e587e0577bee2faf7ad2153f3a894df9694c9281007d8108336cc3ef840bd4
-Installing 66/165 boost-lambda:arm64-osx@1.88.0...
-Elapsed time to handle boost-lambda:arm64-osx: 12.9 ms
-boost-lambda:arm64-osx package ABI: 83bd2aac909d68802f29ec1e43a20b98cccae7c320ef9efea09cd1bd768ba29f
-Installing 67/165 boost-units:arm64-osx@1.88.0...
-Elapsed time to handle boost-units:arm64-osx: 84.4 ms
-boost-units:arm64-osx package ABI: 5cae983855a1629573f1890c6e3a6a7e0255c2bea6018a9cd032c58652d66247
-Installing 68/165 boost-logic:arm64-osx@1.88.0...
-Elapsed time to handle boost-logic:arm64-osx: 6.24 ms
-boost-logic:arm64-osx package ABI: 7aafef9c2c680f21cf79f31e63e902f0a3c166a2b0c9fb6e79718773bc1527e0
-Installing 69/165 boost-interval:arm64-osx@1.88.0...
-Elapsed time to handle boost-interval:arm64-osx: 15.4 ms
-boost-interval:arm64-osx package ABI: 487e4909c8827b125c1b30fcd314f0f60b6d19988284caea6428958e0bd0458c
-Installing 70/165 boost-any:arm64-osx@1.88.0...
-Elapsed time to handle boost-any:arm64-osx: 7.52 ms
-boost-any:arm64-osx package ABI: 742706fb33a7757cb78e0c824191e7a59ddcc96e1abcec4f39c7eae1d3e28775
-Installing 71/165 boost-property-tree:arm64-osx@1.88.0...
-Elapsed time to handle boost-property-tree:arm64-osx: 15.1 ms
-boost-property-tree:arm64-osx package ABI: 838f09c29e4a672ff07d81189cab0cac45cc79ee8e93d4b617a90815b63bbdb3
-Installing 72/165 boost-compute:arm64-osx@1.88.0...
-Elapsed time to handle boost-compute:arm64-osx: 83.3 ms
-boost-compute:arm64-osx package ABI: 65b43f395c3fa12914a30b527bc2ca2b4c2e2f4d0616dc14170c6a0218100297
-Installing 73/165 boost-ublas:arm64-osx@1.88.0...
-Elapsed time to handle boost-ublas:arm64-osx: 25.7 ms
-boost-ublas:arm64-osx package ABI: 1fe3f47f6df38fca5f7dfddb3d585110f2a593210f3082d290b73b3c26a2e691
-Installing 74/165 boost-type-erasure:arm64-osx@1.88.0...
-Elapsed time to handle boost-type-erasure:arm64-osx: 20.8 ms
-boost-type-erasure:arm64-osx package ABI: 71e12e1f04b27681a1a0b73abcbfc1714c58d2c658aa134c0351927cd4ec1b2d
-Installing 75/165 boost-tti:arm64-osx@1.88.0...
-Elapsed time to handle boost-tti:arm64-osx: 21.2 ms
-boost-tti:arm64-osx package ABI: 112c1bf5da4efdc88d1da25612eb7854de2c650db2feab33817387f01b32f52d
-Installing 76/165 boost-timer:arm64-osx@1.88.0...
-Elapsed time to handle boost-timer:arm64-osx: 8.7 ms
-boost-timer:arm64-osx package ABI: 7867c164c900e5007b44640558547c699b16a122269544f983f8459c35ff4e08
-Installing 77/165 boost-test:arm64-osx@1.88.0...
-Elapsed time to handle boost-test:arm64-osx: 78.5 ms
-boost-test:arm64-osx package ABI: 06b3133d901953f28691c438068318d47b72f12a8d025fd5c8a7ae392252bdcb
-Installing 78/165 boost-stl-interfaces:arm64-osx@1.88.0...
-Elapsed time to handle boost-stl-interfaces:arm64-osx: 8.11 ms
-boost-stl-interfaces:arm64-osx package ABI: 95cbf623cbe69a3533adef965beceead9ac9f186ed42aa9e20044916a952cc1f
-Installing 79/165 boost-static-string:arm64-osx@1.88.0...
-Elapsed time to handle boost-static-string:arm64-osx: 7.91 ms
-boost-static-string:arm64-osx package ABI: 9ad80d2ab2264c05411b32aae51417bac7749b602de77004b940a89ad04f198b
-Installing 80/165 boost-statechart:arm64-osx@1.88.0...
-Elapsed time to handle boost-statechart:arm64-osx: 13.1 ms
-boost-statechart:arm64-osx package ABI: 1b7ac7dd54e4ac9e1c48385dcf811e3162ca314b99f9d4a8aafba9291c38adfb
-Installing 81/165 libbacktrace:arm64-osx@2024-11-30...
-Building libbacktrace:arm64-osx@2024-11-30...
-/Users/lerkapic/.cache/vcpkg/registries/git-trees/c231fe43ac03b2250f605fac80e2cc80eb025bb8: info: installing from git registry git+https://github.com/microsoft/vcpkg@c231fe43ac03b2250f605fac80e2cc80eb025bb8
--- Using cached ianlancetaylor-libbacktrace-1db85642e3fca189cf4e076f840a45d6934b2456.tar.gz
--- Cleaning sources at /Users/lerkapic/Desktop/Development/vcpkg/buildtrees/libbacktrace/src/d6934b2456-6c6e472fdb.clean. Use --editable to skip cleaning for the packages you specify.
--- Extracting source /Users/lerkapic/Desktop/Development/vcpkg/downloads/ianlancetaylor-libbacktrace-1db85642e3fca189cf4e076f840a45d6934b2456.tar.gz
--- Using source at /Users/lerkapic/Desktop/Development/vcpkg/buildtrees/libbacktrace/src/d6934b2456-6c6e472fdb.clean
--- Getting CMake variables for arm64-osx-dbg
--- Getting CMake variables for arm64-osx-rel
--- Generating configure for arm64-osx
-CMake Error at scripts/cmake/vcpkg_execute_required_process.cmake:127 (message):
-    Command failed: /opt/homebrew/bin/autoreconf -vfi
-    Working Directory: /Users/lerkapic/Desktop/Development/vcpkg/buildtrees/libbacktrace/src/d6934b2456-6c6e472fdb.clean/
-    Error code: no such file or directory
-    See logs for more information:
+box2d provides CMake targets:
 
-Call Stack (most recent call first):
-  scripts/cmake/vcpkg_configure_make.cmake:731 (vcpkg_execute_required_process)
-  /Users/lerkapic/.cache/vcpkg/registries/git-trees/c231fe43ac03b2250f605fac80e2cc80eb025bb8/portfile.cmake:12 (vcpkg_configure_make)
-  scripts/ports.cmake:206 (include)
+  # this is heuristically generated, and may not be correct
+  find_package(box2d CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE box2d::box2d)
 
+entt provides CMake targets:
 
-error: building libbacktrace:arm64-osx failed with: BUILD_FAILED
-See https://learn.microsoft.com/vcpkg/troubleshoot/build-failures?WT.mc_id=vcpkg_inproduct_cli for more information.
-Elapsed time to handle libbacktrace:arm64-osx: 747 ms
-Please ensure you're using the latest port files with `git pull` and `vcpkg update`.
-Then check for known issues at:
-  https://github.com/microsoft/vcpkg/issues?q=is%3Aissue+is%3Aopen+in%3Atitle+libbacktrace
-You can submit a new issue at:
-  https://github.com/microsoft/vcpkg/issues/new?title=[libbacktrace]+Build+error+on+arm64-osx&body=Copy%20issue%20body%20from%20%2FUsers%2Flerkapic%2FDesktop%2FProjects%2Fmars%2Fvcpkg_installed%2Fvcpkg%2Fissue_body.md
-You can also submit an issue by running (GitHub CLI must be installed):
-  /opt/homebrew/bin/gh issue create -R microsoft/vcpkg --title "[libbacktrace] Build failure on arm64-osx" --body-file /Users/lerkapic/Desktop/Projects/mars/vcpkg_installed/vcpkg/issue_body.md
+    find_package(EnTT CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE EnTT::EnTT)
+
+The package glm provides CMake targets:
+
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm)
+
+    # Or use the header-only version
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm-header-only)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+sdl3 provides CMake targets:
+
+  find_package(SDL3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE SDL3::SDL3)
+
+sdl3-image provides CMake targets:
+
+  find_package(SDL3_image CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>)
+
+sdl3-image provides pkg-config modules:
+
+  # image loading library for Simple DirectMedia Layer
+  sdl3-image
+
+sol2 is header-only and can be used from CMake via:
+
+  find_path(SOL2_INCLUDE_DIRS "sol/abort.hpp")
+  target_include_directories(main PRIVATE ${SOL2_INCLUDE_DIRS})
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package spdlog provides CMake targets:
+
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog)
+
+    # Or use the header-only version
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinyxml2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(tinyxml2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE tinyxml2::tinyxml2)
+
+tinyxml2 provides pkg-config modules:
+
+  # simple, small, C++ XML parser
+  tinyxml2
+
+All requested installations completed successfully in: 1e+03 us

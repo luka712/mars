@@ -2,6 +2,7 @@
 // Created by Erkapic Luka on 26.6.2025.
 //
 
+#ifdef _WIN32
 
 #include "Framework.h"
 #include "dx11/pipelines/test/dx11_texture_test_pipeline.h"
@@ -117,3 +118,6 @@ namespace mars
 	}
 
 }
+
+
+#endif
