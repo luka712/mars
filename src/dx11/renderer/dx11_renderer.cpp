@@ -35,6 +35,8 @@ namespace mars {
 
 		createDevice();
 		createSwapChain();
+
+		blendState = DX11Util::getBlendState().create(device, true);
 	}
 
 	void DX11Renderer::createDevice()
@@ -90,6 +92,12 @@ namespace mars {
 			swapChainRenderTargetView.Get()
 		};
 		deviceContext->OMSetRenderTargets(1, renderTargets, nullptr);
+
+		// - BLEND STATE
+		ID3D11BlendState* blendStates[] = {
+			blendState.Get()
+		};
+		deviceContext->OMSetBlendState(blendStates[0], nullptr, 0xFFFFFFFF); // Set blend state with no mask
 	}
 
 	void DX11Renderer::endRenderPass() {
