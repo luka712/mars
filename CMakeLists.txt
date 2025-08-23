@@ -86,7 +86,8 @@ add_executable(mars main.cpp
         include/metal/pipelines/test/metal_texture_test_pipeline.h
         src/metal/pipelines/test/metal_texture_pipeline.cpp
         include/gpu_util/metal/metal_vertex_descriptor_util.h
-        src/gpu_util/metal/metal_vertex_descriptor_util.cpp)
+        src/gpu_util/metal/metal_vertex_descriptor_util.cpp
+)
 
 # LINK
 target_link_libraries(mars
