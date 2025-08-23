@@ -21,6 +21,7 @@
 #include "gpu_util/dx11/dx11_texture2d_util.h"
 #include "gpu_util/dx11/dx11_shader_resource_view_util.h"
 #include "gpu_util/dx11/dx11_sampler_state_util.h"
+#include "gpu_util/dx11/dx11_blend_state_util.h"
 
 namespace gpu_util {
 
@@ -43,6 +44,7 @@ namespace gpu_util {
 			dx11Texture2DUtil = new DX11Texture2DUtil(logger);
 			dx11ShaderResourceViewUtil = new DX11ShaderResourceViewUtil(logger);
                                     dx11SamplerStateUtil = new DX11SamplerStateUtil(logger);
+                                    dx11BlendStateUtil = new DX11BlendStateUtil(logger);
 		}
 
 		//! Initialize the MetalUtil.
@@ -114,6 +116,10 @@ namespace gpu_util {
                       //! @return The DX11SamplerStateUtil.
                       static DX11SamplerStateUtil& getSamplerState() { return *dx11SamplerStateUtil; }
 
+                        //! Gets the DX11BlendStateUtil for working with DirectX 11 blend states.
+                        //! @return The DX11BlendStateUtil.
+                        static DX11BlendStateUtil& getBlendState() { return *dx11BlendStateUtil; }
+
 	private:
 		static Logger* logger;
 		static DX11DxgiFactoryUtil* dxgiFactoryUtil;
@@ -129,6 +135,7 @@ namespace gpu_util {
         static DX11Texture2DUtil* dx11Texture2DUtil;
 		static DX11ShaderResourceViewUtil* dx11ShaderResourceViewUtil;
                         static DX11SamplerStateUtil* dx11SamplerStateUtil;
+                        static DX11BlendStateUtil* dx11BlendStateUtil;
 	};
 }
 
