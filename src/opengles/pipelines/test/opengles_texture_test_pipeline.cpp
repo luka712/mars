@@ -8,6 +8,7 @@
 #include "opengles/buffers/opengles_vertex_buffer.h"
 #include "opengles/buffers/opengles_index_buffer.h"
 #include "gpu_util/opengles/opengles_util.h"
+#include <stdexcept>
 
 using namespace gpu_util;
 
@@ -20,11 +21,11 @@ namespace mars {
 		vertexBufferId = 0;
 	}
 
-	Texture2D* OpenGLESTextureTestPipeline::getTexture2D() {
+	ATexture2D* OpenGLESTextureTestPipeline::getTexture2D() {
 		return texture;
 	}
 
-	void OpenGLESTextureTestPipeline::setTexture2D(Texture2D *texture) {
+	void OpenGLESTextureTestPipeline::setTexture2D(ATexture2D*texture) {
 		if (this->texture != nullptr) {
 			this->texture = asOpenGLESTexture(texture);
 		} else {

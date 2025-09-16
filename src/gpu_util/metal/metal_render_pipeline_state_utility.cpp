@@ -20,6 +20,13 @@ namespace gpu_util {
         descriptor->setVertexFunction(vertexFunction);
         descriptor->setFragmentFunction(fragmentFunction);
         descriptor->colorAttachments()->object(0)->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
+        descriptor->colorAttachments()->object(0)->setBlendingEnabled(true);
+        descriptor->colorAttachments()->object(0)->setRgbBlendOperation(MTL::BlendOperationAdd);
+        descriptor->colorAttachments()->object(0)->setAlphaBlendOperation(MTL::BlendOperationAdd);
+        descriptor->colorAttachments()->object(0)->setSourceRGBBlendFactor(MTL::BlendFactorSourceAlpha);
+        descriptor->colorAttachments()->object(0)->setDestinationRGBBlendFactor(MTL::BlendFactorOneMinusSourceAlpha);
+        descriptor->colorAttachments()->object(0)->setSourceAlphaBlendFactor(MTL::BlendFactorSourceAlpha);
+        descriptor->colorAttachments()->object(0)->setDestinationAlphaBlendFactor(MTL::BlendFactorOneMinusSourceAlpha);
 
         if (vertexDescriptor != nullptr) {
             descriptor->setVertexDescriptor(vertexDescriptor);

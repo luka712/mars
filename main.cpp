@@ -51,9 +51,9 @@ public:
 
 
 void createScene(const mars::Framework& framework, mars::EntityManager& entityManager) {
-	std::shared_ptr<mars::Texture2D> uvTestTexture = framework
+	std::shared_ptr<mars::ATexture2D> uvTestTexture = framework
 		.getContentManager()
-		.load<mars::Texture2D>("texture/uv_test.png");
+		.load<mars::ATexture2D>("texture/uv_test.png");
 
 	std::shared_ptr<mars::Entity> player = entityManager.createEntity("player");
 	auto playerTransform = player->addComponent<mars::RectTransform>();
@@ -86,9 +86,9 @@ void loadLdtk(const mars::Framework& framework, mars::EntityManager& entityManag
 
 	quicktype::Level level1 = ldtk.get_levels()[0];
 
-	const std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+	const std::shared_ptr<mars::ATexture2D> tileMapTexture = framework
 		.getContentManager()
-		.load<mars::Texture2D>("tilemaps/tilemap.png");
+		.load<mars::ATexture2D>("tilemaps/tilemap.png");
 
 	int32_t tilesInRow = tileMapTexture->getWidth() / 8;
 
@@ -140,7 +140,7 @@ int main(int argc, char* argv[]) {
 
 	mars::RenderingBackend backend = mars::RenderingBackend::OpenGLES;
 #if __APPLE__
-	// backend = mars::RenderingBackend::Metal;
+	backend = mars::RenderingBackend::Metal;
 #endif
 #if _WIN32
 	backend = mars::RenderingBackend::D3D11;
@@ -191,9 +191,9 @@ int main(int argc, char* argv[]) {
 						mars::BufferUsage::Vertex,
 						"Test Vertex Texture Buffer");
 
-		std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+		std::shared_ptr<mars::ATexture2D> tileMapTexture = framework
 			.getContentManager()
-			.load<mars::Texture2D>("texture/uv_test.png");
+			.load<mars::ATexture2D>("texture/uv_test.png");
 
 		texturePipeline->setTexture2D(tileMapTexture.get());
 
@@ -236,9 +236,9 @@ int main(int argc, char* argv[]) {
 
 		//  ecsManager.initialize();
 
-		std::shared_ptr<mars::Texture2D> tileMapTexture = framework
+		std::shared_ptr<mars::ATexture2D> tileMapTexture = framework
 			.getContentManager()
-			.load<mars::Texture2D>("images/heliport.png");
+			.load<mars::ATexture2D>("images/heliport.png");
 
 
 		mars_entt_ecs::EnttEcs ecs(framework);

@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "core/mesh/SpriteBatchMesh.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/pipelines/sprite/ASpriteRenderPipeline.h"
 #include "core/camera/core/OrthographicCamera.h"
 
@@ -23,7 +23,7 @@ public:
     //! @param camera The camera.
     //! @param maxBatchSize The maximum batch size.
     SpriteBatchDrawable(Framework& framework,
-        Texture2D& texture,
+        ATexture2D& texture,
         OrthographicCamera& camera,
         size_t maxBatchSize);
 
@@ -65,7 +65,7 @@ private:
     Framework& framework;
     std::shared_ptr<ASpriteRenderPipeline> renderPipeline;
     OrthographicCamera& camera;
-    Texture2D& texture;
+    ATexture2D& texture;
     std::unique_ptr<SpriteBatchMesh> drawingMesh;
     size_t maxBatchSize;
     bool needsResize{};

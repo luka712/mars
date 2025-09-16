@@ -46,7 +46,7 @@ namespace mars
         return oss.str();
     }
 
-    OpenGLESTexture2D *asOpenGLESTexture(Texture2D *texture) {
+    OpenGLESTexture2D *asOpenGLESTexture(ATexture2D*texture) {
         return dynamic_cast<OpenGLESTexture2D*>(texture);
     }
 

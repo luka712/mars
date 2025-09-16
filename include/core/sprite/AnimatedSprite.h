@@ -21,7 +21,7 @@ namespace mars {
 
         //! Construct a new AnimatedSprite object.
         //! @param texture The texture.
-        explicit AnimatedSprite(const std::shared_ptr<Texture2D> &texture);
+        explicit AnimatedSprite(const std::shared_ptr<ATexture2D> &texture);
 
         //! @copydoc Sprite::getSourceRect()
         [[nodiscard]] Rect getSourceRect() const override;

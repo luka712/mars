@@ -12,6 +12,7 @@
 #include <dxgi.h>
 #include <dxgi1_2.h>
 #include <d3dcompiler.h>
+#include <debugapi.h>
 
 #endif //DX11_H
 

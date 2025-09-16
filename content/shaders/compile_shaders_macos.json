@@ -19,6 +19,16 @@
       "input": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/slang/test/triangle_fs.slang",
       "output": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/generated/test/triangle_fs.metallib",
       "stage": "fragment"
+    },
+    {
+      "input": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/slang/test/texture.slang",
+      "output": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/generated/test/texture.metallib"
+    }
+  ],
+  "metal": [
+    {
+      "input": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/slang/test/texture.slang",
+      "output": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/generated/test/texture.metal"
     }
   ],
   "cuda": []

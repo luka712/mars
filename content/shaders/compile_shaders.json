@@ -44,6 +44,20 @@
       "stage": "fragment",
       "profile": "hlsl_5_0",
       "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/texture_vs.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/texture_vs.hlsl",
+      "stage": "vertex",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
+    },
+    {
+      "input": "D:/Projects/mars/content/shaders/slang/test/texture_ps.slang",
+      "output": "D:/Projects/mars/content/shaders/hlsl/5_0/test/texture_ps.hlsl",
+      "stage": "fragment",
+      "profile": "hlsl_5_0",
+      "columnMajor": true
     }
   ]
 }

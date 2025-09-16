@@ -7,7 +7,7 @@
 
 #include <map>
 #include "core/fonts/SpriteFont.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/math/Math.h"
 #include "core/sprite/SpriteBatchDrawable.h"
 
@@ -45,14 +45,14 @@ namespace mars {
         //! @param texture The texture to draw.
         //! @param drawRect The region where to draw.
         //! @param color The color of a rectangle that's drawn.
-        virtual void draw(Texture2D* texture, Rect drawRect, Color color);
+        virtual void draw(ATexture2D* texture, Rect drawRect, Color color);
 
         //! Draw a sprite.
         //! @param texture The texture to draw.
         //! @param drawRect The region where to draw.
         //! @param sourceRect The region of the texture to draw.
         //! @param color The color of a rectangle that's drawn.
-        virtual void draw(Texture2D* texture, Rect drawRect, Rect sourceRect, Color color);
+        virtual void draw(ATexture2D* texture, Rect drawRect, Rect sourceRect, Color color);
 
         //! Draws a text string.
         //! @param spriteFont The sprite font.
@@ -70,15 +70,15 @@ namespace mars {
 
     protected:
         Framework& framework;
-        std::map<Texture2D*, SpriteBatchDrawable*> drawables;
-        Texture2D* currentTexture = nullptr;
+        std::map<ATexture2D*, SpriteBatchDrawable*> drawables;
+        ATexture2D* currentTexture = nullptr;
         //! Texture to be used when one of overload without texture is called.
-        std::shared_ptr<Texture2D> defaultWhiteTexture;
+        std::shared_ptr<ATexture2D> defaultWhiteTexture;
         SpriteBatchDrawable* currentDrawable = nullptr;
         std::shared_ptr<OrthographicCamera> camera;
 
     private:
-        void checkIfNewDrawableShouldBeCreated(Texture2D* texture);
+        void checkIfNewDrawableShouldBeCreated(ATexture2D* texture);
     };
 }
 

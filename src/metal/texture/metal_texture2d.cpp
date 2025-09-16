@@ -26,7 +26,7 @@ namespace mars {
             NS::UInteger(width),
             NS::UInteger(height),
             MTL::TextureUsageShaderRead,
-            PixelFormat::PixelFormatRGBA8Uint,
+            PixelFormat::PixelFormatRGBA8Unorm,
             imageData.getData(),
             label
         );
@@ -54,7 +54,7 @@ namespace mars {
         return oss.str();
     }
 
-    MetalTexture2D *asMetalTexture(Texture2D *texture) {
+    MetalTexture2D *asMetalTexture(ATexture2D *texture) {
         return dynamic_cast<MetalTexture2D*>(texture);
     }
 }

@@ -6,7 +6,7 @@
 #define A_SPRITE_RENDER_PIPELINE_H
 
 
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
 
@@ -19,11 +19,11 @@ namespace mars
         virtual ~ASpriteRenderPipeline() = default;
 
         //! Get the current texture.
-        virtual Texture2D* getSpriteTexture() = 0;
+        virtual ATexture2D* getSpriteTexture() = 0;
 
         //! Sets the current texture.
         //! @param spriteTexture The texture to set.
-        virtual void setSpriteTexture(Texture2D* spriteTexture) = 0;
+        virtual void setSpriteTexture(ATexture2D* spriteTexture) = 0;
 
         //! Draws the pipeline.
         //! @param vertexBuffer The vertex buffer.

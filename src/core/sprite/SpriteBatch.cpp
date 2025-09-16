@@ -9,7 +9,7 @@ namespace mars {
     SpriteBatch::SpriteBatch(Framework &framework) : framework(framework) {
     }
 
-    void SpriteBatch::checkIfNewDrawableShouldBeCreated(Texture2D *texture) {
+    void SpriteBatch::checkIfNewDrawableShouldBeCreated(ATexture2D*texture) {
         // If there was a texture change we need to end the current sprite batch drawable and start a new one.
         if (texture != currentTexture) {
             // End will draw. This draws with previously set sprite batch drawable.
@@ -50,7 +50,7 @@ namespace mars {
         currentTexture = nullptr;
     }
 
-    void SpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Rect sourceRect, const Color color) {
+    void SpriteBatch::draw(ATexture2D*texture, const Rect drawRect, const Rect sourceRect, const Color color) {
         checkIfNewDrawableShouldBeCreated(texture);
 
         // Safe to assign current texture.
@@ -72,7 +72,7 @@ namespace mars {
         );
     }
 
-    void SpriteBatch::draw(Texture2D *texture, const Rect drawRect, const Color color) {
+    void SpriteBatch::draw(ATexture2D*texture, const Rect drawRect, const Color color) {
         checkIfNewDrawableShouldBeCreated(texture);
 
         // Safe to assign current texture.

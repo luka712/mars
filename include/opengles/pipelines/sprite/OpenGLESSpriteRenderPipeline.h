@@ -29,10 +29,10 @@ namespace mars {
             Culling culling = Culling::Back);
 
         //! @inheritDoc
-        Texture2D *getSpriteTexture() override { return texture; }
+        ATexture2D*getSpriteTexture() override { return texture; }
 
         //! @inheritDoc
-        void setSpriteTexture(Texture2D *spriteTexture) override;
+        void setSpriteTexture(ATexture2D*spriteTexture) override;
 
         //! @inheritDoc
         void render(

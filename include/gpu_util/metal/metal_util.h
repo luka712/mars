@@ -13,7 +13,7 @@
 #include "gpu_util/metal/metal_render_pipeline_state_utility.h"
 #include "gpu_util/metal/metal_library_utility.h"
 #include "gpu_util/metal/metal_function_utility.h"
-
+#include "gpu_util/metal/metal_vertex_descriptor_util.h"
 
 namespace gpu_util {
 
@@ -29,6 +29,7 @@ namespace gpu_util {
             metalRenderPipelineStateUtil = new MetalRenderPipelineStateUtility(*logger);
             metalLibraryUtility = new MetalLibraryUtility(*logger);
             metalFunctionUtility = new MetalFunctionUtility(*logger);
+            metalVertexDescriptorUtil = new MetalVertexDescriptorUtil();
 
             // TODO: create sampler util
         }
@@ -74,6 +75,10 @@ namespace gpu_util {
         //! @return The MetalFunctionUtility reference.
         static MetalFunctionUtility &getFunction() { return *metalFunctionUtility; }
 
+        // Gets the MetalVertexDescriptorUtil for working with MTL::VertexDescriptor.
+        //! @return The MetalVertexDescriptorUtil reference.
+        static MetalVertexDescriptorUtil& getVertexDescriptor() { return *metalVertexDescriptorUtil; }
+
     private:
         static Logger* logger;
         static MetalBufferUtil *metalBufferUtil;
@@ -82,6 +87,7 @@ namespace gpu_util {
         static MetalRenderPipelineStateUtility *metalRenderPipelineStateUtil;
         static MetalLibraryUtility *metalLibraryUtility;
         static MetalFunctionUtility *metalFunctionUtility;
+        static MetalVertexDescriptorUtil *metalVertexDescriptorUtil;
     };
 }
 

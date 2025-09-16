@@ -68,6 +68,9 @@ namespace mars {
         //! The render target view for the back buffer.
         ComPtr<ID3D11RenderTargetView> swapChainRenderTargetView;
 
+		//! The default blend state for the renderer.
+		ComPtr<ID3D11BlendState> blendState;
+
 		//! Create a new DirectX 11 device and device context.
         void createDevice();
 

@@ -14,6 +14,7 @@ namespace gpu_util {
     MetalRenderPipelineStateUtility *MetalUtil::metalRenderPipelineStateUtil = nullptr;
     MetalLibraryUtility *MetalUtil::metalLibraryUtility = nullptr;
     MetalFunctionUtility *MetalUtil::metalFunctionUtility = nullptr;
+    MetalVertexDescriptorUtil *MetalUtil::metalVertexDescriptorUtil = nullptr;
 }
 
 #endif

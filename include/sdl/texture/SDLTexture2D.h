@@ -6,7 +6,7 @@
 #define SDLTEXTURE2D_H
 
 #include <SDL3/SDL.h>
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/data/ImageData.h"
 
 namespace mars {
@@ -14,7 +14,7 @@ namespace mars {
     class SDLRenderer;
 
     //! The SDL implementation of the Texture2D.
-    class SDLTexture2D : public Texture2D {
+    class SDLTexture2D : public ATexture2D {
     public:
 
         //! Construct a new SDLTexture2D object.

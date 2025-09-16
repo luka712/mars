@@ -8,7 +8,7 @@
 #include <memory>
 #include <map>
 #include "core/life_management/State.h"
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 #include "core/fonts/SpriteFontCharacter.h"
 
 namespace mars {
@@ -19,11 +19,11 @@ namespace mars {
         //! Construct a new SpriteFont object.
         //! @param texture The texture of the font.
         //! @param lineHeight The line height of the font.
-        SpriteFont(const std::shared_ptr<Texture2D>& texture, float lineHeight);
+        SpriteFont(const std::shared_ptr<ATexture2D>& texture, float lineHeight);
 
         //! Gets the texture of the font.
         //! @return The texture of the font.
-        [[nodiscard]] Texture2D* getTexture() const {
+        [[nodiscard]] ATexture2D* getTexture() const {
             return texture.get();
         }
 
@@ -62,7 +62,7 @@ namespace mars {
     private:
         State state;
         std::map<char, SpriteFontCharacter*> characters;
-        std::shared_ptr<Texture2D> texture;
+        std::shared_ptr<ATexture2D> texture;
         float lineHeight;
     };
 }

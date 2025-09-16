@@ -16,7 +16,7 @@ namespace mars {
         return sprites.find(name)->second;
     }
 
-    void SpriteManager::addSprite(const std::shared_ptr<Texture2D> &texture, const std::string &spriteName) {
+    void SpriteManager::addSprite(const std::shared_ptr<ATexture2D> &texture, const std::string &spriteName) {
 
         // We cannot add new one if it already exists.
         if (sprites.contains(spriteName)) {

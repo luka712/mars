@@ -12,6 +12,8 @@
 #include "gpu_util/logger.h"
 #include <vector>
 
+using Microsoft::WRL::ComPtr;
+
 namespace gpu_util {
 
     //! Utility class for creating DirectX 11 input layouts.
@@ -27,10 +29,18 @@ namespace gpu_util {
         //! @param shaderBlob The compiled shader blob.
         //! @param inputElementDesc The input element description array.
         //! @return A ComPtr to the created ID3D11InputLayout.
-        Microsoft::WRL::ComPtr<ID3D11InputLayout> create(
-            Microsoft::WRL::ComPtr<ID3D11Device> device,
-            Microsoft::WRL::ComPtr<ID3D10Blob> shaderBlob,
-			std::vector<D3D11_INPUT_ELEMENT_DESC> inputElementDesc);
+        ComPtr<ID3D11InputLayout> create(
+            ComPtr<ID3D11Device> device,
+            ComPtr<ID3D10Blob> shaderBlob,
+			std::vector<D3D11_INPUT_ELEMENT_DESC>& inputElementDesc);
+
+		//! Creates a DirectX 11 input layout for position, color, and texture coordinates in interleaved format.
+		//! @param device The DirectX 11 device.
+		//! @param shaderBlob The compiled shader blob.
+		//! @return A ComPtr to the created ID3D11InputLayout.
+        ComPtr<ID3D11InputLayout> createPositionColorTextureCoordinatesInputLayout(
+            ComPtr<ID3D11Device> device,
+            ComPtr<ID3D10Blob> shaderBlob);
 
     private:
         Logger &logger; // Logger for logging messages

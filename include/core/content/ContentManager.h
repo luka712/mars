@@ -8,7 +8,7 @@
 #include <memory>
 #include <string>
 #include <map>
-#include "core/texture/texture2d.h"
+#include "core/texture/a_texture2d.h"
 
 namespace mars {
 

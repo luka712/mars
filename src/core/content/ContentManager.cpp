@@ -37,7 +37,7 @@ namespace mars {
         }
 
         // Load the content.
-        if (typeInfo.name() == typeid(Texture2D).name()) {
+        if (typeInfo.name() == typeid(ATexture2D).name()) {
             std::shared_ptr<AContent> content = framework.getTextureFactory().createTextureFromImageFile(fullPath);
 
             if (!key.empty()) {
