@@ -206,6 +206,12 @@ int main(int argc, char* argv[]) {
 			//pipeline->render();
 			// pipelineWithBuffer->render(*vertexBuffer, *indexBuffer);
 				texturePipeline->render(*textureVertexBuffer, *indexBuffer);
+
+			framework.getSpriteBatch().begin();
+
+		//framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+		framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
+		framework.getSpriteBatch().end();
 		});
 		framework.runEventLoop();
 		}
@@ -234,14 +240,6 @@ int main(int argc, char* argv[]) {
 			.getContentManager()
 			.load<mars::Texture2D>("images/heliport.png");
 
-#if __APPLE__
-		framework.subscribeToUpdateEvent([&](const mars::Time time) {
-
-			});
-
-		framework.subscribeToRenderEvent([&]() {});
-		framework.runEventLoop();
-#endif
 
 		mars_entt_ecs::EnttEcs ecs(framework);
 		ecs.initialize();
@@ -320,8 +318,8 @@ int main(int argc, char* argv[]) {
 		framework.subscribeToRenderEvent([&]() {
 			framework.getSpriteBatch().begin();
 
-			//  framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
-		  //  framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
+			//framework.getSpriteBatch().drawString(spriteFont.get(), "Hello World!", glm::vec2(100, 300));
+			framework.getSpriteBatch().draw(tileMapTexture.get(), {100, 100, 200, 200}, {1, 1, 1, 1});
 			framework.getSpriteBatch().end();
 
 			ecs.render();
