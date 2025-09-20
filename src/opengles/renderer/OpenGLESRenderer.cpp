@@ -88,7 +88,7 @@ namespace mars {
 
     void OpenGLESRenderer::beginRenderPass() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glViewport(0, 0, 1280, 720);
+        glViewport(0, 0, frameBufferSize.x, frameBufferSize.y);
         glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     }
 

@@ -21,32 +21,32 @@ INCLUDE(cmake/VendorDependencies.cmake)
 #SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
 # Define a macro in debug mode
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     ADD_COMPILE_DEFINITIONS(DEBUG)
-endif()
+endif ()
 
 # MODULES - we set modules in cmake_modules folder.
 # Pattern is `Find<module>.cmake`
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 # VARIABLES
-if(APPLE)
+if (APPLE)
 
     # Set Homebrew paths for macOS
     SET(CMAKE_PREFIX_PATH "/opt/homebrew;/usr/local" CACHE PATH "Path to Homebrew libraries")
 
     FIND_LIBRARY(OPENGL_LIBRARY OpenGL REQUIRED) # Find OpenGL framework
-    if(NOT OPENGL_LIBRARY)
+    if (NOT OPENGL_LIBRARY)
         MESSAGE(FATAL_ERROR "OpenGL framework not found")
-    endif()
+    endif ()
     MESSAGE(STATUS "OpenGL framework: ${OPENGL_LIBRARY}")
-endif()
+endif ()
 
 # PACKAGES
 
-if(EMSCRIPTEN)
+if (EMSCRIPTEN)
     find_package(lua REQUIRED)
-endif()
+endif ()
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
@@ -73,20 +73,6 @@ file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.c
 add_executable(mars main.cpp
         ${COMMON_SOURCES}
         ${PACKAGES_SOURCES}
-        include/gpu_util/dx11/dx11_util.h
-        include/gpu_util/dx11/dx11_util.h
-        include/metal/pipelines/test/metal_position_color_test_pipeline.h
-        src/metal/pipelines/test/metal_position_color_test_pipeline.cpp
-        include/core/vertex/vertex.h
-        include/core/pipelines/test/a_texture_test_pipeline.h
-        include/opengles/pipelines/test/opengles_texture_test_pipeline.h
-        include/dx11/pipelines/test/dx11_texture_test_pipeline.h
-        src/opengles/pipelines/test/opengles_texture_test_pipeline.cpp
-        include/gpu_util/dx11/dx11_util.h
-        include/metal/pipelines/test/metal_texture_test_pipeline.h
-        src/metal/pipelines/test/metal_texture_pipeline.cpp
-        include/gpu_util/metal/metal_vertex_descriptor_util.h
-        src/gpu_util/metal/metal_vertex_descriptor_util.cpp
 )
 
 # LINK
@@ -137,9 +123,33 @@ target_link_libraries(tests
 
 # GAMES
 
-# add_executable(chopper-shooter chopper-shooter.cpp
-#        ${COMMON_SOURCES}
-#        ${GLAD_SRC}
-#)
+file(GLOB GAME_SOURCES game/*.cpp game/**/*.cpp game/**/**/*.cpp game/**/**/**/*.cpp)
 
-#target_link_libraries(chopper-shooter)
+include_directories(
+        ${CMAKE_SOURCE_DIR}/game)
+
+add_executable(game game.cpp
+        ${COMMON_SOURCES}
+        ${GAME_SOURCES}
+        ${PACKAGES_SOURCES}
+        game/GameConstants.h
+)
+
+# LINK
+target_link_libraries(game
+        ${PACKAGES_LIBRARIES}
+        glm::glm
+        # spdlog::spdlog_header_only
+        tinyxml2::tinyxml2
+        EnTT::EnTT
+        ${GLAD_LIBRARY}
+        ${BOX2D_LIBRARY}
+        ${LUA_LIBRARIES}
+        ${OPENGL_LIBRARY}
+
+        # APPLE DEVICES
+        ${APPLE_LIBRARIES}
+
+        # WINDOWS DEVICES
+        ${WINDOWS_LIBRARIES}
+)
