@@ -10,6 +10,7 @@
 #include "dx11/dx11.h"
 #include "dx11/renderer/dx11_renderer.h"
 #include "core/texture/a_texture2d.h"
+#include "core/data/ImageData.h"
 
 namespace mars {
 
@@ -22,9 +23,10 @@ namespace mars {
 		//! @param framework The framework.
 		//! @param imageData The image data.
 		//! @param label The label.
-		DX11Texture2D(Framework& framework,
-			const ImageData& imageData,
+		DX11Texture2D(Framework* framework, const ImageData* imageData,
 			const std::string& label = "");
+
+		DX11Texture2D() = delete;
 
 		//! Get the texture.
 		//! @return The D3D11 texture.
@@ -44,10 +46,10 @@ namespace mars {
 		//! @inheritDoc
 		std::string printInfo() override;
 	private:
-		Framework& framework;
-		Logger& logger;
+		Framework* framework;
+		Logger* logger;
 
-		DX11Renderer& renderer;
+		DX11Renderer* renderer;
 
 		ComPtr<ID3D11Device> device;
 		ComPtr<ID3D11DeviceContext> deviceContext;
@@ -71,8 +73,8 @@ namespace mars {
 		UINT d3d11BindFlags;
 	};
 
-	//! Converts the @ref Texture2D to the @ref DX11Texture2D
-	//! @param texture The @ref Texture2D
+	//! Converts the Texture2D to the DX11Texture2D
+	//! @param texture The Texture2D.
 	//! @returns The DX11Texture2D.
 	DX11Texture2D* toDX11Texture2D(ATexture2D* texture);
 }

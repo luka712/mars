@@ -35,6 +35,7 @@ namespace gpu_util {
 			std::vector<D3D11_INPUT_ELEMENT_DESC>& inputElementDesc);
 
 		//! Creates a DirectX 11 input layout for position, color, and texture coordinates in interleaved format.
+		//! Position is a vec3 (3 floats), color is a vec4 (4 floats), and texture coordinates is a vec2 (2 floats).
 		//! @param device The DirectX 11 device.
 		//! @param shaderBlob The compiled shader blob.
 		//! @return A ComPtr to the created ID3D11InputLayout.

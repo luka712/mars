@@ -20,7 +20,7 @@ namespace mars {
 
             // If drawable is not in dictionary, create a new one.
             if (!drawables.contains(texture)) {
-                drawable = new SpriteBatchDrawable(framework, *texture, *camera, MAX_BATCH_SIZE);
+                drawable = new SpriteBatchDrawable(framework, texture, *camera, MAX_BATCH_SIZE);
                 drawable->initialize();
                 drawables[texture] = drawable;
             } else {

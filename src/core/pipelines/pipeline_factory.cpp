@@ -7,7 +7,7 @@
 #include "core/pipelines/pipeline_factory.h"
 #include "opengles/pipelines/test/opengles_triangle_test_pipeline.h"
 #include "opengles/pipelines/lines/OpenGLESLinesRenderPipeline.h"
-#include "opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h"
+#include "opengles/pipelines/sprite/opengles_sprite_render_pipeline.h"
 #include "opengles/pipelines/test/opengles_position_color_test_pipeline.h"
 #include "opengles/pipelines/test/opengles_texture_test_pipeline.h"
 

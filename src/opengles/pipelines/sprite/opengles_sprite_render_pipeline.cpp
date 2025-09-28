@@ -3,7 +3,7 @@
 //
 
 #include <glm/gtc/type_ptr.hpp>
-#include "opengles/pipelines/sprite/OpenGLESSpriteRenderPipeline.h"
+#include "opengles/pipelines/sprite/opengles_sprite_render_pipeline.h"
 #include <Framework.h>
 #include <core/math/Matrix.h>
 #include <opengles/buffers/opengles_index_buffer.h>

@@ -38,7 +38,7 @@ namespace mars {
 #endif
 #if _WIN32
             case RenderingBackend::D3D11:
-                return std::make_shared<DX11Texture2D>(framework, data);
+                return std::make_shared<DX11Texture2D>(&framework, &data);
 
 #endif 
             default:

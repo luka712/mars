@@ -84,7 +84,7 @@ namespace mars {
     //! Convert the renderer to the DX11 renderer.
     //! @param renderer The renderer.
     //! @return The DX11Renderer.
-    static DX11Renderer &toDX11Renderer(Renderer &renderer);
+    DX11Renderer *toDX11Renderer(Renderer *renderer);
 }
 
 #endif

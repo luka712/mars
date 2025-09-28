@@ -14,6 +14,7 @@ namespace mars {
     //! Represents a 2D texture.
     class ATexture2D : public AContent {
     public:
+
         //! Get the width of the texture.
         //! @return The width of the texture.
         [[nodiscard]] uint32_t getWidth() const { return width; }

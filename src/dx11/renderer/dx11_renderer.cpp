@@ -13,10 +13,12 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "dxguid.lib")
 
 using namespace gpu_util;
 
 namespace mars {
+
 	static Logger* staticLogger = nullptr;
 
 	DX11Renderer::DX11Renderer(Framework& framework, const glm::vec2 frameBufferSize)
@@ -108,8 +110,10 @@ namespace mars {
 	void DX11Renderer::destroy() {
 	}
 
-	DX11Renderer& toDX11Renderer(Renderer& renderer) {
-		return *dynamic_cast<DX11Renderer*>(&renderer);
+
+	DX11Renderer* toDX11Renderer(Renderer* renderer)
+	{
+		return dynamic_cast<DX11Renderer*>(renderer);
 	}
 }
 

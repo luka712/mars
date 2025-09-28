@@ -8,7 +8,7 @@
 namespace mars {
     SpriteBatchDrawable::SpriteBatchDrawable(
         Framework &framework,
-        ATexture2D& texture,
+        ATexture2D* texture,
         OrthographicCamera& camera,
         const size_t maxBatchSize)
         : framework(framework), camera(camera), texture(texture), maxBatchSize(maxBatchSize) {
@@ -16,7 +16,7 @@ namespace mars {
 
     void SpriteBatchDrawable::initialize() {
         renderPipeline = framework.getPipelineFactory().createSpriteRenderPipeline(&camera);
-        renderPipeline->setSpriteTexture(&texture);
+        renderPipeline->setSpriteTexture(texture);
 
         drawingMesh = std::make_unique<SpriteBatchMesh>(framework, maxBatchSize);
         drawingMesh->initialize();
