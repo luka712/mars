@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <glm/glm.hpp>
-#include "core/buffers/AUniformBuffer.h"
+#include "core/buffers/a_uniform_buffer.h"
 #include "core/time/Time.h"
 
 namespace mars

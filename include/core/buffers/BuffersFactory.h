@@ -11,7 +11,7 @@
 #include "AInstanceBuffer.h"
 #include "core/buffers/a_vertex_buffer.h"
 #include "core/buffers/a_index_buffer.h"
-#include "core/buffers/AUniformBuffer.h"
+#include "core/buffers/a_uniform_buffer.h"
 
 namespace mars {
 

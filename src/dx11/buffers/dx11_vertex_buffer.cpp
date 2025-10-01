@@ -17,7 +17,6 @@ namespace mars {
         logger(framework.getLogger()), usage(BufferUsage::Vertex), buffer() {
 
 		device = renderer.getDevice();
-
     }
 
     void DX11VertexBuffer::initialize(

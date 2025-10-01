@@ -69,6 +69,34 @@ namespace gpu_util {
 				label);
         }
 
+		//! Create a DirectX 11 constant buffer.
+		//! @param device The DirectX 11 device to create the buffer on.
+		//! @param byteSize The size of the buffer in bytes (default is sizeof(T)).
+		//! @param usage The usage of the buffer (default is D3D11_USAGE_DEFAULT).
+		//! @param cpuAccessFlags The CPU access flags for the buffer (default is 0).
+		//! @param label The label for the buffer (default is empty string).
+		//! @return A ComPtr to the created ID3D11Buffer, or nullptr if creation failed.
+        ComPtr<ID3D11Buffer> createConstantBuffer(
+            ComPtr<ID3D11Device> device,
+            uint32_t byteSize,
+            D3D11_USAGE usage = D3D11_USAGE_DEFAULT,
+            UINT cpuAccessFlags = 0,
+            const std::string& label = "");
+
+		//! Write data to a DirectX 11 uniform buffer.
+		//! @param context The DirectX 11 device context to use for the update.
+		//! @param buffer The DirectX 11 buffer to update.
+		//! @param data Pointer to the data to write to the buffer.
+		//! @param dataSize The size of the data in bytes.
+		//! @param bufferOffset The offset in the buffer to start writing to (default is 0).
+		//! @return True if the update was successful, false otherwise.
+        void writeUniformBuffer(
+            ComPtr<ID3D11DeviceContext> context,
+            ComPtr<ID3D11Buffer> buffer,
+            void* data,
+            uint32_t dataSize,
+            uint32_t bufferOffset = 0);
+
     private:
         Logger& logger;
     };

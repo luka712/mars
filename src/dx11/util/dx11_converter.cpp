@@ -20,6 +20,7 @@ namespace mars {
 		case BufferUsage::Vertex:
 			return D3D11_USAGE_IMMUTABLE;
 		case BufferUsage::Vertex_CopyDst:
+		case BufferUsage::Uniform:
 			return D3D11_USAGE_DEFAULT;
 		default:
 			logger->error("Unknown buffer usage type.");

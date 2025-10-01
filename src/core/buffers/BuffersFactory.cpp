@@ -21,6 +21,7 @@
 #if _WIN32
 #include "dx11/buffers/dx11_vertex_buffer.h"
 #include "dx11/buffers/dx11_index_buffer.h"
+#include "dx11/buffers/dx11_uniform_buffer.h"
 #endif 
 
 namespace mars {
@@ -109,6 +110,11 @@ namespace mars {
 #if __APPLE__
 		case RenderingBackend::Metal:
 			buffer = new MetalUniformBuffer(framework, data, label, byteSize, bufferUsage);
+			break;
+#endif
+#if _WIN32
+			case RenderingBackend::D3D11:
+			buffer = new DX11UniformBuffer(framework, data, label, byteSize, bufferUsage);
 			break;
 #endif
 		default:

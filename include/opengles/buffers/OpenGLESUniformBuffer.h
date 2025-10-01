@@ -1,12 +1,12 @@
 //
-// Created by luka on 09.02.25.
+// Created by Erkapic Luka on 09.02.25.
 //
 
 #ifndef OPENGLESUNIFORMBUFFER_H
 #define OPENGLESUNIFORMBUFFER_H
 
 #include <Framework.h>
-#include "core/buffers/AUniformBuffer.h"
+#include "core/buffers/a_uniform_buffer.h"
 
 namespace mars
 {
