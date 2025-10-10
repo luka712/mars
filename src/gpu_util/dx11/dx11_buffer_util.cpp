@@ -60,7 +60,7 @@ namespace gpu_util {
 			label);
 	}
 
-	void DX11BufferUtil::writeUniformBuffer(
+	void DX11BufferUtil::updateSubresource(
 		ComPtr<ID3D11DeviceContext> context,
 		ComPtr<ID3D11Buffer> buffer,
 		void* data,

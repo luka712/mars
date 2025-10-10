@@ -1,7 +1,3 @@
-//
-// Created by Erkapic Luka on 27.5.2025.
-//
-
 #ifndef DX11_UTIL_H
 #define DX11_UTIL_H
 
@@ -22,6 +18,7 @@
 #include "gpu_util/dx11/dx11_shader_resource_view_util.h"
 #include "gpu_util/dx11/dx11_sampler_state_util.h"
 #include "gpu_util/dx11/dx11_blend_state_util.h"
+#include "gpu_util/dx11/dx11_rasterizer_state_util.h"
 
 namespace gpu_util {
 
@@ -43,8 +40,9 @@ namespace gpu_util {
 			dx11BufferUtil = new DX11BufferUtil(logger);
 			dx11Texture2DUtil = new DX11Texture2DUtil(logger);
 			dx11ShaderResourceViewUtil = new DX11ShaderResourceViewUtil(logger);
-                                    dx11SamplerStateUtil = new DX11SamplerStateUtil(logger);
-                                    dx11BlendStateUtil = new DX11BlendStateUtil(logger);
+			dx11SamplerStateUtil = new DX11SamplerStateUtil(logger);
+			dx11BlendStateUtil = new DX11BlendStateUtil(logger);
+			dx11RasterizerStateUtil = new DX11RasterizerStateUtil(logger);
 		}
 
 		//! Initialize the MetalUtil.
@@ -104,21 +102,25 @@ namespace gpu_util {
 		//! @return The DX11BufferUtil.
 		static DX11BufferUtil& getBuffer() { return *dx11BufferUtil; }
 
-        //! Gets the DX11Texture2DUtility for working with DirectX 11 textures.
-        //! @return The DX11Texture2DUtility.
-        static DX11Texture2DUtil& getTexture2D() { return *dx11Texture2DUtil; }
+		//! Gets the DX11Texture2DUtility for working with DirectX 11 textures.
+		//! @return The DX11Texture2DUtility.
+		static DX11Texture2DUtil& getTexture2D() { return *dx11Texture2DUtil; }
 
 		//! Gets the DX11ShaderResourceViewUtil for working with DirectX 11 shader resource views.
 		//! @return The DX11ShaderResourceViewUtil.
 		static DX11ShaderResourceViewUtil& getShaderResourceView() { return *dx11ShaderResourceViewUtil; }
 
-                        //! Gets the DX11SamplerStateUtil for working with DirectX 11 sampler states.
-                      //! @return The DX11SamplerStateUtil.
-                      static DX11SamplerStateUtil& getSamplerState() { return *dx11SamplerStateUtil; }
+		//! Gets the DX11SamplerStateUtil for working with DirectX 11 sampler states.
+	  //! @return The DX11SamplerStateUtil.
+		static DX11SamplerStateUtil& getSamplerState() { return *dx11SamplerStateUtil; }
 
-                        //! Gets the DX11BlendStateUtil for working with DirectX 11 blend states.
-                        //! @return The DX11BlendStateUtil.
-                        static DX11BlendStateUtil& getBlendState() { return *dx11BlendStateUtil; }
+		//! Gets the DX11BlendStateUtil for working with DirectX 11 blend states.
+		//! @return The DX11BlendStateUtil.
+		static DX11BlendStateUtil& getBlendState() { return *dx11BlendStateUtil; }
+
+		//! Gets the DX11RasterizerStateUtil for working with DirectX 11 rasterizer states.
+		//! @return The DX11RasterizerStateUtil.
+		static DX11RasterizerStateUtil& getRasterizerState() { return *dx11RasterizerStateUtil; }
 
 	private:
 		static Logger* logger;
@@ -132,10 +134,11 @@ namespace gpu_util {
 		static DX11PixelShaderUtil* dx11PixelShaderUtil;
 		static DX11InputLayoutUtil* dx11InputLayoutUtil;
 		static DX11BufferUtil* dx11BufferUtil;
-        static DX11Texture2DUtil* dx11Texture2DUtil;
+		static DX11Texture2DUtil* dx11Texture2DUtil;
 		static DX11ShaderResourceViewUtil* dx11ShaderResourceViewUtil;
-                        static DX11SamplerStateUtil* dx11SamplerStateUtil;
-                        static DX11BlendStateUtil* dx11BlendStateUtil;
+		static DX11SamplerStateUtil* dx11SamplerStateUtil;
+		static DX11BlendStateUtil* dx11BlendStateUtil;
+		static DX11RasterizerStateUtil* dx11RasterizerStateUtil;
 	};
 }
 

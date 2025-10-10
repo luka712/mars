@@ -60,7 +60,7 @@ mars::DX11UniformBuffer::DX11UniformBuffer(
 void mars::DX11UniformBuffer::update(void* data, uint32_t byteSize)
 {
 	gpu_util::DX11Util::getBuffer()
-		.writeUniformBuffer(deviceContext,buffer, data, byteSize);
+		.updateSubresource(deviceContext,buffer, data, byteSize);
 }
 
 std::string mars::DX11UniformBuffer::printInfo()
@@ -85,4 +85,14 @@ std::string mars::DX11UniformBuffer::printInfo()
 void mars::DX11UniformBuffer::destroy()
 {
 	buffer->Release();
+}
+
+mars::DX11UniformBuffer* mars::toDX11UniformBuffer(AUniformBuffer* uniformBuffer)
+{
+	return dynamic_cast<DX11UniformBuffer*>(uniformBuffer);
+}
+
+std::shared_ptr<mars::DX11UniformBuffer> mars::toDX11UniformBuffer(const std::shared_ptr<AUniformBuffer>& uniformBuffer)
+{
+	return std::shared_ptr<DX11UniformBuffer>();
 }

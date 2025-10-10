@@ -39,6 +39,7 @@ namespace mars {
 		createSwapChain();
 
 		blendState = DX11Util::getBlendState().create(device, true);
+		defaultRasterizerState = DX11Util::getRasterizerState().createRasterizerState(device);
 	}
 
 	void DX11Renderer::createDevice()
@@ -100,6 +101,9 @@ namespace mars {
 			blendState.Get()
 		};
 		deviceContext->OMSetBlendState(blendStates[0], nullptr, 0xFFFFFFFF); // Set blend state with no mask
+
+		// - RASTERIZER STATE
+		deviceContext->RSSetState(defaultRasterizerState.Get());
 	}
 
 	void DX11Renderer::endRenderPass() {

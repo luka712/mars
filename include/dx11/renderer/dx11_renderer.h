@@ -71,6 +71,9 @@ namespace mars {
 		//! The default blend state for the renderer.
 		ComPtr<ID3D11BlendState> blendState;
 
+		//! The default rasterizer state for the renderer.
+		ComPtr<ID3D11RasterizerState> defaultRasterizerState;
+
 		//! Create a new DirectX 11 device and device context.
         void createDevice();
 

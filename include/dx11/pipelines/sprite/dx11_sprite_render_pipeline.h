@@ -56,6 +56,7 @@ namespace mars {
 		ComPtr<ID3D11VertexShader> vertexShader;
 		ComPtr<ID3D11PixelShader> pixelShader;
 		ComPtr<ID3D11InputLayout> inputLayout;
+		ComPtr<ID3D11Buffer> projectionViewBuffer;
 
         DX11Texture2D* texture = nullptr;
 

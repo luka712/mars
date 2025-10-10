@@ -11,6 +11,7 @@
 #include "gpu_util/DX11/DX11_util.h"
 #include <dx11/buffers/dx11_vertex_buffer.h>
 #include <dx11/buffers/dx11_index_buffer.h>
+#include <dx11/buffers/dx11_uniform_buffer.h>
 
 using namespace gpu_util;
 
@@ -26,6 +27,8 @@ namespace mars {
 		device = renderer->getDevice();
 		context = renderer->getDeviceContext();
 		createInputAndShaders();
+
+		projectionViewBuffer = toDX11UniformBuffer(&camera->getProjectionViewBuffer())->getBuffer();
 	}
 
 	ATexture2D* DX11SpriteRenderPipeline::getSpriteTexture()
@@ -77,13 +80,15 @@ namespace mars {
 		context->PSSetShaderResources(0, 1, texture->getView().GetAddressOf());
 		context->PSSetSamplers(0, 1, texture->getSamplerState().GetAddressOf());
 
+		// Set uniforms
+		context->VSSetConstantBuffers(0, 1, projectionViewBuffer.GetAddressOf());
 		// Set shaders
 		context->VSSetShader(vertexShader.Get(), nullptr, 0);
 		context->PSSetShader(pixelShader.Get(), nullptr, 0);
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		context->DrawIndexed(
-			dx11IndexBuffer.getIndicesCount(), // Number of indices to draw
-			0, // Index offset
+			indicesCount,
+			indicesOffset,
 			0 // Vertex offset
 		);
 	}

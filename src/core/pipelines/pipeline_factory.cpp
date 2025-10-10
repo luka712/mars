@@ -21,6 +21,7 @@
 #include "dx11/pipelines/test/dx11_triangle_test_pipeline.h"
 #include "dx11/pipelines/test/dx11_position_color_test_pipeline.h"
 #include "dx11/pipelines/test/dx11_texture_test_pipeline.h"
+#include "dx11/pipelines/sprite/dx11_sprite_render_pipeline.h"
 #endif 
 
 namespace mars {
@@ -34,6 +35,10 @@ namespace mars {
 		switch (framework.getRenderingBackend()) {
 		case RenderingBackend::OpenGLES:
 			return std::make_shared<OpenGLESSpriteRenderPipeline>(framework, camera, culling);
+#if _WIN32
+			case RenderingBackend::D3D11:
+				return std::make_shared<DX11SpriteRenderPipeline>(framework, camera, culling);
+#endif
 		default:
 			const std::string msg = "Rendering backend not supported.";
 			framework.getLogger().error(msg);

@@ -53,7 +53,12 @@ namespace mars {
     }
 
     void DX11VertexBuffer::update(void *data, uint32_t byteSize, uint32_t offset) {
-
+        gpu_util::DX11Util::getBuffer().updateSubresource(
+            renderer.getDeviceContext(),
+            buffer,
+            data,
+            byteSize,
+			offset);
     }
 
     std::string DX11VertexBuffer::printInfo() {

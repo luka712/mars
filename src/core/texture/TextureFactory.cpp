@@ -74,6 +74,10 @@ namespace mars {
             case RenderingBackend::Metal:
                 return std::make_shared<MetalTexture2D>(framework, imageData, label);
 #endif 
+#if _WIN32
+                case RenderingBackend::D3D11:
+					return std::make_shared<DX11Texture2D>(&framework, &imageData, label);
+#endif
             default:
                 const std::string msg = "TextureFactory::createTextureFromImageFile: Rendering backend not supported.";
                 framework.getLogger().error(msg.c_str());

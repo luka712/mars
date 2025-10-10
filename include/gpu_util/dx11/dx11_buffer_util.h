@@ -83,14 +83,14 @@ namespace gpu_util {
             UINT cpuAccessFlags = 0,
             const std::string& label = "");
 
-		//! Write data to a DirectX 11 uniform buffer.
+		//! Write data to a DirectX 11 buffer.
 		//! @param context The DirectX 11 device context to use for the update.
 		//! @param buffer The DirectX 11 buffer to update.
 		//! @param data Pointer to the data to write to the buffer.
 		//! @param dataSize The size of the data in bytes.
 		//! @param bufferOffset The offset in the buffer to start writing to (default is 0).
 		//! @return True if the update was successful, false otherwise.
-        void writeUniformBuffer(
+        void updateSubresource(
             ComPtr<ID3D11DeviceContext> context,
             ComPtr<ID3D11Buffer> buffer,
             void* data,
