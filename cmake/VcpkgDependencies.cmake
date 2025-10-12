@@ -16,7 +16,8 @@ find_package(EnTT CONFIG REQUIRED)
 find_package(box2d CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(boost_optional CONFIG REQUIRED)
-
+# Note that tmxlite does not have a config file.
+set(TMXLITE_LIB ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib/tmxlite-d.lib)
 
 set(PACKAGES_LIBRARIES
         ${PACKAGES}
@@ -32,6 +33,8 @@ set(PACKAGES_LIBRARIES
         box2d::box2d
         sol2::sol2
         Boost::optional
+
+        ${TMXLITE_LIB}
 )
 
 set(PACKAGES_INCLUDE

@@ -105,7 +105,9 @@ add_executable(tests
         tests/tests.cpp
         ${COMMON_SOURCES}
         ${PACKAGES_SOURCES}
-        tests/geometry_tests.cpp)
+        tests/geometry_tests.cpp
+        tests/asset_toolkit/tiled_loader_tests.cpp
+)
 
 # ASSET TOOLKIT TESTS
 file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)

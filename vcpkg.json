@@ -13,7 +13,8 @@
     "sol2",
     "spdlog",
     "tinyxml2",
-    "stb"
+    "stb",
+    "tmxlite"
   ],
   "overrides": [
     {
