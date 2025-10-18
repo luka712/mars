@@ -4,7 +4,7 @@
 #include "asset_toolkit/asset_bundle/AssetBundle.h"
 #include "asset_toolkit/asset_bundle/AssetBundleLoader.h"
 #include "background/Background.h"
-
+#include "tile/TileManager.h"
 
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -18,11 +18,12 @@ int main(int argc, char* argv[]) {
 
 	mars::Framework framework(mars::FrameworkOptions{
 		mars::WindowBounds(1920, 1080),
-		mars::RenderingBackend::OpenGLES,
+		mars::RenderingBackend::D3D11,
 		glm::vec2(1920, 1080)
 		});
 
 	framework.initialize();
+	TileManager::Initialize(framework.getContentManager());
 
 	std::unique_ptr<Background> background = std::make_unique<Background>(framework.getContentManager());
 
@@ -33,6 +34,7 @@ int main(int argc, char* argv[]) {
 	framework.subscribeToRenderEvent([&]() {
 		framework.getSpriteBatch().begin();
 		background->render(framework.getSpriteBatch());
+		TileManager::Draw(framework.getSpriteBatch());
 		framework.getSpriteBatch().end();
 		});
 

@@ -28,12 +28,12 @@ namespace mars {
 
         // Check if content is already loaded by full path.
         if (contentMap.contains(fullPath)) {
-            return contentMap[fullPath];
+            return contentMap.at(fullPath);
         }
 
         // Check if content is already saved by key.
         if (!key.empty() && contentMap.contains(key)) {
-            return contentMap[key];
+            return contentMap.at(key);
         }
 
         // Load the content.
