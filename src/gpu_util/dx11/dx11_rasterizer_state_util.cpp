@@ -2,8 +2,6 @@
 
 #ifdef _WIN32
 
-#endif 
-
 ComPtr<ID3D11RasterizerState> gpu_util::DX11RasterizerStateUtil::createRasterizerState(
 	ComPtr<ID3D11Device>& device,
 	D3D11_FILL_MODE fillMode,
@@ -48,3 +46,5 @@ ComPtr<ID3D11RasterizerState> gpu_util::DX11RasterizerStateUtil::createRasterize
 
 	return rasterizerState;
 }
+
+#endif

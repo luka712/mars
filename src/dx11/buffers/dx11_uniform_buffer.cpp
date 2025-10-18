@@ -2,6 +2,8 @@
 // Created by Erkapic Luka on 1.10.2025.
 //
 
+#if _WIN32
+
 #include "Framework.h"
 #include "dx11/buffers/dx11_uniform_buffer.h"
 #include "gpu_util/dx11/dx11_util.h"
@@ -96,3 +98,5 @@ std::shared_ptr<mars::DX11UniformBuffer> mars::toDX11UniformBuffer(const std::sh
 {
 	return std::shared_ptr<DX11UniformBuffer>();
 }
+
+#endif 

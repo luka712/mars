@@ -7,7 +7,7 @@
 
 #if __APPLE__
 
-#include "core/buffers/AUniformBuffer.h"
+#include "core/buffers/a_uniform_buffer.h"
 #include "metal/metal.h"
 #include "Framework.h"
 #include "metal/renderer/metal_renderer.h"

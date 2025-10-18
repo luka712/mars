@@ -17,7 +17,16 @@ find_package(box2d CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(boost_optional CONFIG REQUIRED)
 # Note that tmxlite does not have a config file.
+if(WIN32)
 set(TMXLITE_LIB ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib/tmxlite-d.lib)
+endif()
+
+if(APPLE)
+    set(TMXLITE_LIB ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib/libtmxlite-s-d.a
+                    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib/libpugixml.a
+                    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib/libzstd.a
+    )
+endif()
 
 set(PACKAGES_LIBRARIES
         ${PACKAGES}
