@@ -42,7 +42,6 @@ set(PACKAGES_LIBRARIES
         box2d::box2d
         sol2::sol2
         Boost::optional
-
         ${TMXLITE_LIB}
 )
 

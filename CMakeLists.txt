@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.30)
 project(mars)
 
 SET(TARGET_NAME mars)
+SET(TESTS_NAME ${TARGET_NAME}_tests)
 
 # C++ STANDARD
 SET(CMAKE_CXX_STANDARD 20)
@@ -12,6 +13,7 @@ SET(CMAKE_OSX_ARCHITECTURES "arm64")
 INCLUDE(cmake/AppleSetup.cmake) # guards are already in file
 INCLUDE(cmake/WindowsSetup.cmake) # guards are already in file
 INCLUDE(cmake/VcpkgDependencies.cmake)
+INCLUDE(cmake/VcpkgTestDependencies.cmake)
 INCLUDE(cmake/VendorDependencies.cmake)
 
 # Questionable to we need this
@@ -67,11 +69,12 @@ include_directories(
 )
 
 # SOURCES
-file(GLOB COMMON_SOURCES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.cpp)
+file(GLOB SRC_FILES src/*.cpp src/**/*.cpp src/**/**/*.cpp src/**/**/**/*.cpp)
+file(GLOB TEST_SRC_FILES tests/*.cpp tests/**/*.cpp tests/**/**/*.cpp tests/**/**/**/*.cpp)
 
 # EXECUTABLE
 add_executable(mars main.cpp
-        ${COMMON_SOURCES}
+        ${SRC_FILES}
         ${PACKAGES_SOURCES}
 )
 
@@ -101,26 +104,25 @@ INCLUDE(cmake/CopyContents.cmake)
 INCLUDE(cmake/CopyContentsAfterBuild.cmake)
 
 # TESTS
-add_executable(tests
-        tests/tests.cpp
-        ${COMMON_SOURCES}
-        ${PACKAGES_SOURCES}
-        tests/geometry_tests.cpp
-        tests/asset_toolkit/tiled_loader_tests.cpp
+add_executable(${TESTS_NAME}
+        ${SRC_FILES}
+        ${TEST_SRC_FILES}
+        ${PACKAGES_SOURCES} # For now, in future mars will be library only }
+        ${TEST_PACKAGES_INCLUDE}
 )
 
-# ASSET TOOLKIT TESTS
-file(GLOB ASSET_TOOLKIT_SOURCES src/asset_toolkit/*.cpp src/asset_toolkit/**/*.cpp src/asset_toolkit/**/**/*.cpp)
-# add_executable(asset_toolkit_tests ${ASSET_TOOLKIT_SOURCES})
-
-target_link_libraries(tests
+target_link_libraries(${TESTS_NAME}
         ${PACKAGES_LIBRARIES}
         ${GLM_LIBRARY}
-        # spdlog::spdlog_header_only
-        tinyxml2::tinyxml2
         EnTT::EnTT
-        ${BOX2D_LIBRARY}
         ${LUA_LIBRARIES}
+        ${TEST_PACKAGES_LIBRARIES}
+
+        # APPLE DEVICES
+        ${APPLE_LIBRARIES}
+
+        # WINDOWS DEVICES
+        ${WINDOWS_LIBRARIES}
 )
 
 # GAMES
@@ -131,7 +133,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/game)
 
 add_executable(game game.cpp
-        ${COMMON_SOURCES}
+        ${SRC_FILES}
         ${GAME_SOURCES}
         ${PACKAGES_SOURCES}
         game/GameConstants.h

@@ -14,7 +14,8 @@
     "spdlog",
     "tinyxml2",
     "stb",
-    "tmxlite"
+    "tmxlite",
+    "catch2"
   ],
   "overrides": [
     {
