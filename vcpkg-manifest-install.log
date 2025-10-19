@@ -1,4 +1,4 @@
-Loading dependency information for 164 packages...
+Loading dependency information for 165 packages...
 Detecting compiler hash for triplet arm64-osx...
 Compiler found: /usr/bin/c++
 The following packages are already installed:
@@ -159,6 +159,7 @@ The following packages are already installed:
   * boost-yap:arm64-osx@1.88.0 -- git+https://github.com/microsoft/vcpkg@647e7e94490ee46f3b669a97becf2b63245d6b74
     box2d:arm64-osx@2.4.1#3 -- git+https://github.com/microsoft/vcpkg@bef68937d8b4101d0df330a399a7fc043f7ec5e5
   * bzip2[core,tool]:arm64-osx@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+    catch2:arm64-osx@3.8.1 -- git+https://github.com/microsoft/vcpkg@663b04662ae30cc321b1b1a0c781c9f4a3d29b93
     entt:arm64-osx@3.15.0 -- git+https://github.com/microsoft/vcpkg@b27478e44a27785f939170cfb8c910d87194b289
   * expat:arm64-osx@2.7.1 -- git+https://github.com/microsoft/vcpkg@37702e8740157c39e52d0d254487c1811b7e1d7c
   * fmt:arm64-osx@11.0.2#1 -- git+https://github.com/microsoft/vcpkg@07a73a7565e5de9eb42e90c16c133bdfdfebbcda
@@ -195,6 +196,20 @@ box2d provides CMake targets:
   # this is heuristically generated, and may not be correct
   find_package(box2d CONFIG REQUIRED)
   target_link_libraries(main PRIVATE box2d::box2d)
+
+catch2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Catch2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
+
+catch2 provides pkg-config modules:
+
+  # A modern, C++-native test framework for C++14 and above (links in default main)
+  catch2-with-main
+
+  # A modern, C++-native, test framework for C++14 and above
+  catch2
 
 entt provides CMake targets:
 
@@ -270,4 +285,4 @@ tmxlite provides pkg-config modules:
   # lightweight C++14 parser for Tiled tmx files
   tmxlite
 
-All requested installations completed successfully in: 1.07 ms
+All requested installations completed successfully in: 1.01 ms

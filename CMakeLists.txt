@@ -137,6 +137,8 @@ add_executable(game game.cpp
         ${GAME_SOURCES}
         ${PACKAGES_SOURCES}
         game/GameConstants.h
+        include/metal/pipelines/sprite/metal_sprite_render_pipeline.h
+        src/metal/pipelines/sprite/metal_sprite_render_pipeline.cpp
 )
 
 # LINK

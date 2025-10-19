@@ -15,6 +15,7 @@
 #include "metal/pipelines/test/metal_triangle_test_pipeline.h"
 #include "metal/pipelines/test/metal_position_color_test_pipeline.h"
 #include "metal/pipelines/test/metal_texture_test_pipeline.h"
+#include "metal/pipelines/sprite/metal_sprite_render_pipeline.h"
 #endif
 
 #if _WIN32
@@ -38,6 +39,10 @@ namespace mars {
 #if _WIN32
 			case RenderingBackend::D3D11:
 				return std::make_shared<DX11SpriteRenderPipeline>(framework, camera, culling);
+#endif
+#if __APPLE__
+            case RenderingBackend::Metal:
+                return std::make_shared<MetalSpriteRenderPipeline>(framework, camera, culling);
 #endif
 		default:
 			const std::string msg = "Rendering backend not supported.";
