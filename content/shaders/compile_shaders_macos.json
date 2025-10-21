@@ -23,6 +23,10 @@
     {
       "input": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/slang/test/texture.slang",
       "output": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/generated/test/texture.metallib"
+    },
+    {
+      "input": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/slang/sprite/sprite.slang",
+      "output": "/Users/lerkapic/Desktop/Projects/mars/content/shaders/generated/sprite/sprite.metallib"
     }
   ],
   "metal": [
